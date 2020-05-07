@@ -430,6 +430,73 @@ class AuthenticationTokenConfiguration extends Enableable {
   Map<String, dynamic> toJson() => _$AuthenticationTokenConfigurationToJson(this);
 }
 
+/// Models an external authenticator.
+///
+/// @author Trevor Smith
+@JsonSerializable()
+class Authenticator {
+  Map<String, dynamic> data;
+  Map<String, String> headers;
+  String httpAuthenticationPassword;
+  String httpAuthenticationUsername;
+  String id;
+  String name;
+  String sslCertificateId;
+  AuthenticatorType type;
+  String uri;
+
+  Authenticator({
+      this.data,
+      this.headers,
+      this.httpAuthenticationPassword,
+      this.httpAuthenticationUsername,
+      this.id,
+      this.name,
+      this.sslCertificateId,
+      this.type,
+      this.uri
+  });
+
+  factory Authenticator.fromJson(Map<String, dynamic> json) => _$AuthenticatorFromJson(json);
+  Map<String, dynamic> toJson() => _$AuthenticatorToJson(this);
+}
+
+/// @author Trevor Smith
+@JsonSerializable()
+class AuthenticatorRequest {
+  Authenticator authenticator;
+
+  AuthenticatorRequest({
+      this.authenticator
+  });
+
+  factory AuthenticatorRequest.fromJson(Map<String, dynamic> json) => _$AuthenticatorRequestFromJson(json);
+  Map<String, dynamic> toJson() => _$AuthenticatorRequestToJson(this);
+}
+
+/// @author Trevor Smith
+@JsonSerializable()
+class AuthenticatorResponse {
+  Authenticator authenticator;
+  List<Authenticator> authenticators;
+
+  AuthenticatorResponse({
+      this.authenticator,
+      this.authenticators
+  });
+
+  factory AuthenticatorResponse.fromJson(Map<String, dynamic> json) => _$AuthenticatorResponseFromJson(json);
+  Map<String, dynamic> toJson() => _$AuthenticatorResponseToJson(this);
+}
+
+/// The types of authenticators.
+///
+/// @author Trevor Smith
+enum AuthenticatorType {
+  @JsonValue('LDAP')
+  LDAP
+}
+
 /// Base-class for all FusionAuth events.
 ///
 /// @author Brian Pontarelli

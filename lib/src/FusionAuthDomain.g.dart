@@ -616,6 +616,100 @@ Map<String, dynamic> _$AuthenticationTokenConfigurationToJson(
   return val;
 }
 
+Authenticator _$AuthenticatorFromJson(Map<String, dynamic> json) {
+  return Authenticator(
+    data: json['data'] as Map<String, dynamic>,
+    headers: (json['headers'] as Map<String, dynamic>)?.map(
+      (k, e) => MapEntry(k, e as String),
+    ),
+    httpAuthenticationPassword: json['httpAuthenticationPassword'] as String,
+    httpAuthenticationUsername: json['httpAuthenticationUsername'] as String,
+    id: json['id'] as String,
+    name: json['name'] as String,
+    sslCertificateId: json['sslCertificateId'] as String,
+    type: _$enumDecodeNullable(_$AuthenticatorTypeEnumMap, json['type']),
+    uri: json['uri'] as String,
+  );
+}
+
+Map<String, dynamic> _$AuthenticatorToJson(Authenticator instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('data', instance.data);
+  writeNotNull('headers', instance.headers);
+  writeNotNull(
+      'httpAuthenticationPassword', instance.httpAuthenticationPassword);
+  writeNotNull(
+      'httpAuthenticationUsername', instance.httpAuthenticationUsername);
+  writeNotNull('id', instance.id);
+  writeNotNull('name', instance.name);
+  writeNotNull('sslCertificateId', instance.sslCertificateId);
+  writeNotNull('type', _$AuthenticatorTypeEnumMap[instance.type]);
+  writeNotNull('uri', instance.uri);
+  return val;
+}
+
+const _$AuthenticatorTypeEnumMap = {
+  AuthenticatorType.LDAP: 'LDAP',
+};
+
+AuthenticatorRequest _$AuthenticatorRequestFromJson(Map<String, dynamic> json) {
+  return AuthenticatorRequest(
+    authenticator: json['authenticator'] == null
+        ? null
+        : Authenticator.fromJson(json['authenticator'] as Map<String, dynamic>),
+  );
+}
+
+Map<String, dynamic> _$AuthenticatorRequestToJson(
+    AuthenticatorRequest instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('authenticator', instance.authenticator);
+  return val;
+}
+
+AuthenticatorResponse _$AuthenticatorResponseFromJson(
+    Map<String, dynamic> json) {
+  return AuthenticatorResponse(
+    authenticator: json['authenticator'] == null
+        ? null
+        : Authenticator.fromJson(json['authenticator'] as Map<String, dynamic>),
+    authenticators: (json['authenticators'] as List)
+        ?.map((e) => e == null
+            ? null
+            : Authenticator.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
+  );
+}
+
+Map<String, dynamic> _$AuthenticatorResponseToJson(
+    AuthenticatorResponse instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('authenticator', instance.authenticator);
+  writeNotNull('authenticators', instance.authenticators);
+  return val;
+}
+
 BaseEvent _$BaseEventFromJson(Map<String, dynamic> json) {
   return BaseEvent(
     createInstant: json['createInstant'] as num,
