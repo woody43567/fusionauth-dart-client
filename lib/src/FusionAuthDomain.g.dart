@@ -625,6 +625,7 @@ Authenticator _$AuthenticatorFromJson(Map<String, dynamic> json) {
     httpAuthenticationPassword: json['httpAuthenticationPassword'] as String,
     httpAuthenticationUsername: json['httpAuthenticationUsername'] as String,
     id: json['id'] as String,
+    insertInstant: json['insertInstant'] as num,
     name: json['name'] as String,
     sslCertificateId: json['sslCertificateId'] as String,
     type: _$enumDecodeNullable(_$AuthenticatorTypeEnumMap, json['type']),
@@ -648,6 +649,7 @@ Map<String, dynamic> _$AuthenticatorToJson(Authenticator instance) {
   writeNotNull(
       'httpAuthenticationUsername', instance.httpAuthenticationUsername);
   writeNotNull('id', instance.id);
+  writeNotNull('insertInstant', instance.insertInstant);
   writeNotNull('name', instance.name);
   writeNotNull('sslCertificateId', instance.sslCertificateId);
   writeNotNull('type', _$AuthenticatorTypeEnumMap[instance.type]);
@@ -656,7 +658,8 @@ Map<String, dynamic> _$AuthenticatorToJson(Authenticator instance) {
 }
 
 const _$AuthenticatorTypeEnumMap = {
-  AuthenticatorType.LDAP: 'LDAP',
+  AuthenticatorType.ldap: 'ldap',
+  AuthenticatorType.generic: 'generic',
 };
 
 AuthenticatorRequest _$AuthenticatorRequestFromJson(Map<String, dynamic> json) {
@@ -687,11 +690,6 @@ AuthenticatorResponse _$AuthenticatorResponseFromJson(
     authenticator: json['authenticator'] == null
         ? null
         : Authenticator.fromJson(json['authenticator'] as Map<String, dynamic>),
-    authenticators: (json['authenticators'] as List)
-        ?.map((e) => e == null
-            ? null
-            : Authenticator.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
   );
 }
 
@@ -706,7 +704,6 @@ Map<String, dynamic> _$AuthenticatorResponseToJson(
   }
 
   writeNotNull('authenticator', instance.authenticator);
-  writeNotNull('authenticators', instance.authenticators);
   return val;
 }
 

@@ -440,6 +440,7 @@ class Authenticator {
   String httpAuthenticationPassword;
   String httpAuthenticationUsername;
   String id;
+  num insertInstant;
   String name;
   String sslCertificateId;
   AuthenticatorType type;
@@ -451,6 +452,7 @@ class Authenticator {
       this.httpAuthenticationPassword,
       this.httpAuthenticationUsername,
       this.id,
+      this.insertInstant,
       this.name,
       this.sslCertificateId,
       this.type,
@@ -478,11 +480,9 @@ class AuthenticatorRequest {
 @JsonSerializable()
 class AuthenticatorResponse {
   Authenticator authenticator;
-  List<Authenticator> authenticators;
 
   AuthenticatorResponse({
-      this.authenticator,
-      this.authenticators
+      this.authenticator
   });
 
   factory AuthenticatorResponse.fromJson(Map<String, dynamic> json) => _$AuthenticatorResponseFromJson(json);
@@ -493,8 +493,10 @@ class AuthenticatorResponse {
 ///
 /// @author Trevor Smith
 enum AuthenticatorType {
-  @JsonValue('LDAP')
-  LDAP
+  @JsonValue('ldap')
+  ldap,
+  @JsonValue('generic')
+  generic
 }
 
 /// Base-class for all FusionAuth events.
