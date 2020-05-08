@@ -480,9 +480,11 @@ class AuthenticatorRequest {
 @JsonSerializable()
 class AuthenticatorResponse {
   Authenticator authenticator;
+  List<Authenticator> authenticators;
 
   AuthenticatorResponse({
-      this.authenticator
+      this.authenticator,
+      this.authenticators
   });
 
   factory AuthenticatorResponse.fromJson(Map<String, dynamic> json) => _$AuthenticatorResponseFromJson(json);

@@ -690,6 +690,11 @@ AuthenticatorResponse _$AuthenticatorResponseFromJson(
     authenticator: json['authenticator'] == null
         ? null
         : Authenticator.fromJson(json['authenticator'] as Map<String, dynamic>),
+    authenticators: (json['authenticators'] as List)
+        ?.map((e) => e == null
+            ? null
+            : Authenticator.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
   );
 }
 
@@ -704,6 +709,7 @@ Map<String, dynamic> _$AuthenticatorResponseToJson(
   }
 
   writeNotNull('authenticator', instance.authenticator);
+  writeNotNull('authenticators', instance.authenticators);
   return val;
 }
 
