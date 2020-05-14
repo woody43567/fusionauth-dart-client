@@ -442,7 +442,7 @@ class Authenticator {
   String id;
   num insertInstant;
   String name;
-  String sslCertificateId;
+  String sslCertificateKeysId;
   AuthenticatorType type;
   String uri;
 
@@ -454,7 +454,7 @@ class Authenticator {
       this.id,
       this.insertInstant,
       this.name,
-      this.sslCertificateId,
+      this.sslCertificateKeysId,
       this.type,
       this.uri
   });

@@ -627,7 +627,7 @@ Authenticator _$AuthenticatorFromJson(Map<String, dynamic> json) {
     id: json['id'] as String,
     insertInstant: json['insertInstant'] as num,
     name: json['name'] as String,
-    sslCertificateId: json['sslCertificateId'] as String,
+    sslCertificateKeysId: json['sslCertificateKeysId'] as String,
     type: _$enumDecodeNullable(_$AuthenticatorTypeEnumMap, json['type']),
     uri: json['uri'] as String,
   );
@@ -651,7 +651,7 @@ Map<String, dynamic> _$AuthenticatorToJson(Authenticator instance) {
   writeNotNull('id', instance.id);
   writeNotNull('insertInstant', instance.insertInstant);
   writeNotNull('name', instance.name);
-  writeNotNull('sslCertificateId', instance.sslCertificateId);
+  writeNotNull('sslCertificateKeysId', instance.sslCertificateKeysId);
   writeNotNull('type', _$AuthenticatorTypeEnumMap[instance.type]);
   writeNotNull('uri', instance.uri);
   return val;
