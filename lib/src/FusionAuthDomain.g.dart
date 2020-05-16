@@ -662,6 +662,37 @@ const _$AuthenticatorTypeEnumMap = {
   AuthenticatorType.generic: 'generic',
 };
 
+AuthenticatorPolicy _$AuthenticatorPolicyFromJson(Map<String, dynamic> json) {
+  return AuthenticatorPolicy(
+    authenticatorId: json['authenticatorId'] as String,
+    data: json['data'] as Map<String, dynamic>,
+    migrateIdentity: json['migrateIdentity'] as bool,
+    run: _$enumDecodeNullable(_$AuthenticatorPolicyTriggerEnumMap, json['run']),
+    sequence: json['sequence'] as num,
+  );
+}
+
+Map<String, dynamic> _$AuthenticatorPolicyToJson(AuthenticatorPolicy instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('authenticatorId', instance.authenticatorId);
+  writeNotNull('data', instance.data);
+  writeNotNull('migrateIdentity', instance.migrateIdentity);
+  writeNotNull('run', _$AuthenticatorPolicyTriggerEnumMap[instance.run]);
+  writeNotNull('sequence', instance.sequence);
+  return val;
+}
+
+const _$AuthenticatorPolicyTriggerEnumMap = {
+  AuthenticatorPolicyTrigger.always: 'always',
+};
+
 AuthenticatorRequest _$AuthenticatorRequestFromJson(Map<String, dynamic> json) {
   return AuthenticatorRequest(
     authenticator: json['authenticator'] == null
@@ -5714,6 +5745,11 @@ Map<String, dynamic> _$TemplatesToJson(Templates instance) {
 
 Tenant _$TenantFromJson(Map<String, dynamic> json) {
   return Tenant(
+    authenticatorPolicies: (json['authenticatorPolicies'] as List)
+        ?.map((e) => e == null
+            ? null
+            : AuthenticatorPolicy.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
     configured: json['configured'] as bool,
     data: json['data'] as Map<String, dynamic>,
     emailConfiguration: json['emailConfiguration'] == null
@@ -5783,6 +5819,7 @@ Map<String, dynamic> _$TenantToJson(Tenant instance) {
     }
   }
 
+  writeNotNull('authenticatorPolicies', instance.authenticatorPolicies);
   writeNotNull('configured', instance.configured);
   writeNotNull('data', instance.data);
   writeNotNull('emailConfiguration', instance.emailConfiguration);

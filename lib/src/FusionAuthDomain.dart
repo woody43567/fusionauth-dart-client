@@ -465,6 +465,33 @@ class Authenticator {
 
 /// @author Trevor Smith
 @JsonSerializable()
+class AuthenticatorPolicy {
+  String authenticatorId;
+  Map<String, dynamic> data;
+  bool migrateIdentity;
+  AuthenticatorPolicyTrigger run;
+  num sequence;
+
+  AuthenticatorPolicy({
+      this.authenticatorId,
+      this.data,
+      this.migrateIdentity,
+      this.run,
+      this.sequence
+  });
+
+  factory AuthenticatorPolicy.fromJson(Map<String, dynamic> json) => _$AuthenticatorPolicyFromJson(json);
+  Map<String, dynamic> toJson() => _$AuthenticatorPolicyToJson(this);
+}
+
+/// @author Trevor Smith
+enum AuthenticatorPolicyTrigger {
+  @JsonValue('always')
+  always
+}
+
+/// @author Trevor Smith
+@JsonSerializable()
 class AuthenticatorRequest {
   Authenticator authenticator;
 
@@ -4073,6 +4100,7 @@ class Templates {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class Tenant {
+  List<AuthenticatorPolicy> authenticatorPolicies;
   bool configured;
   Map<String, dynamic> data;
   EmailConfiguration emailConfiguration;
@@ -4094,6 +4122,7 @@ class Tenant {
   TenantUserDeletePolicy userDeletePolicy;
 
   Tenant({
+      this.authenticatorPolicies,
       this.configured,
       this.data,
       this.emailConfiguration,
