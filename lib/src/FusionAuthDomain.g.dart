@@ -660,6 +660,7 @@ Map<String, dynamic> _$AuthenticatorToJson(Authenticator instance) {
 const _$AuthenticatorTypeEnumMap = {
   AuthenticatorType.ldap: 'ldap',
   AuthenticatorType.generic: 'generic',
+  AuthenticatorType.fusionAuth: 'fusionAuth',
 };
 
 AuthenticatorPolicy _$AuthenticatorPolicyFromJson(Map<String, dynamic> json) {
@@ -1933,6 +1934,29 @@ Map<String, dynamic> _$EventRequestToJson(EventRequest instance) {
   }
 
   writeNotNull('event', instance.event);
+  return val;
+}
+
+ExternalAuthenticationRequest _$ExternalAuthenticationRequestFromJson(
+    Map<String, dynamic> json) {
+  return ExternalAuthenticationRequest(
+    loginId: json['loginId'] as String,
+    password: json['password'] as String,
+  );
+}
+
+Map<String, dynamic> _$ExternalAuthenticationRequestToJson(
+    ExternalAuthenticationRequest instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('loginId', instance.loginId);
+  writeNotNull('password', instance.password);
   return val;
 }
 

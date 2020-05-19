@@ -525,7 +525,9 @@ enum AuthenticatorType {
   @JsonValue('ldap')
   ldap,
   @JsonValue('generic')
-  generic
+  generic,
+  @JsonValue('fusionAuth')
+  fusionAuth
 }
 
 /// Base-class for all FusionAuth events.
@@ -1486,6 +1488,21 @@ enum ExpiryUnit {
   MONTHS,
   @JsonValue('YEARS')
   YEARS
+}
+
+/// @author Trevor Smith
+@JsonSerializable()
+class ExternalAuthenticationRequest {
+  String loginId;
+  String password;
+
+  ExternalAuthenticationRequest({
+      this.loginId,
+      this.password
+  });
+
+  factory ExternalAuthenticationRequest.fromJson(Map<String, dynamic> json) => _$ExternalAuthenticationRequestFromJson(json);
+  Map<String, dynamic> toJson() => _$ExternalAuthenticationRequestToJson(this);
 }
 
 /// @author Daniel DeGroff
