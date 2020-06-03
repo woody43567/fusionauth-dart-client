@@ -435,25 +435,31 @@ class AuthenticationTokenConfiguration extends Enableable {
 /// @author Trevor Smith
 @JsonSerializable()
 class Authenticator {
+  num connectTimeout;
   Map<String, dynamic> data;
   Map<String, String> headers;
   String httpAuthenticationPassword;
   String httpAuthenticationUsername;
   String id;
   num insertInstant;
+  dynamic lambdaConfiguration;
   String name;
+  num readTimeout;
   String sslCertificateKeysId;
   AuthenticatorType type;
   String uri;
 
   Authenticator({
+      this.connectTimeout,
       this.data,
       this.headers,
       this.httpAuthenticationPassword,
       this.httpAuthenticationUsername,
       this.id,
       this.insertInstant,
+      this.lambdaConfiguration,
       this.name,
+      this.readTimeout,
       this.sslCertificateKeysId,
       this.type,
       this.uri
@@ -468,26 +474,20 @@ class Authenticator {
 class AuthenticatorPolicy {
   String authenticatorId;
   Map<String, dynamic> data;
-  bool migrateIdentity;
-  AuthenticatorPolicyTrigger run;
+  ExecutionTrigger executionTrigger;
+  MigrationStrategy migrationStrategy;
   num sequence;
 
   AuthenticatorPolicy({
       this.authenticatorId,
       this.data,
-      this.migrateIdentity,
-      this.run,
+      this.executionTrigger,
+      this.migrationStrategy,
       this.sequence
   });
 
   factory AuthenticatorPolicy.fromJson(Map<String, dynamic> json) => _$AuthenticatorPolicyFromJson(json);
   Map<String, dynamic> toJson() => _$AuthenticatorPolicyToJson(this);
-}
-
-/// @author Trevor Smith
-enum AuthenticatorPolicyTrigger {
-  @JsonValue('always')
-  always
 }
 
 /// @author Trevor Smith
@@ -1472,6 +1472,12 @@ enum EventType {
   UserPasswordBreach,
   @JsonValue('Test')
   Test
+}
+
+/// @author Trevor Smith
+enum ExecutionTrigger {
+  @JsonValue('always')
+  always
 }
 
 /// @author Brian Pontarelli
@@ -2664,7 +2670,9 @@ enum LambdaType {
   @JsonValue('SAMLv2Reconcile')
   SAMLv2Reconcile,
   @JsonValue('SAMLv2Populate')
-  SAMLv2Populate
+  SAMLv2Populate,
+  @JsonValue('LdapReconcile')
+  LdapReconcile
 }
 
 /// A historical state of a user log event. Since events can be modified, this stores the historical state.
@@ -2974,6 +2982,16 @@ class MetaData {
 
   factory MetaData.fromJson(Map<String, dynamic> json) => _$MetaDataFromJson(json);
   Map<String, dynamic> toJson() => _$MetaDataToJson(this);
+}
+
+/// @author Trevor Smith
+enum MigrationStrategy {
+  @JsonValue('createShellUser')
+  createShellUser,
+  @JsonValue('synchronizeUser')
+  synchronizeUser,
+  @JsonValue('migrateIdentity')
+  migrateIdentity
 }
 
 /// @author Daniel DeGroff
@@ -4521,6 +4539,7 @@ class UIConfiguration {
 @JsonSerializable()
 class User extends SecureIdentity {
   bool active;
+  String authenticatorId;
   String birthDate;
   String cleanSpeakId;
   Map<String, dynamic> data;
@@ -4548,6 +4567,7 @@ class User extends SecureIdentity {
 
   User({
       this.active,
+      this.authenticatorId,
       this.birthDate,
       this.cleanSpeakId,
       this.data,
