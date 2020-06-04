@@ -472,6 +472,108 @@ class AuthenticationTokenConfiguration extends Enableable {
   Map<String, dynamic> toJson() => _$AuthenticationTokenConfigurationToJson(this);
 }
 
+/// Models an external authenticator.
+///
+/// @author Trevor Smith
+@JsonSerializable()
+class Authenticator {
+  String authenticationUri;
+  num connectTimeout;
+  Map<String, dynamic> data;
+  Map<String, String> headers;
+  String httpAuthenticationPassword;
+  String httpAuthenticationUsername;
+  String id;
+  num insertInstant;
+  dynamic lambdaConfiguration;
+  String name;
+  num readTimeout;
+  String retrieveUserUri;
+  String sslCertificateKeyId;
+  AuthenticatorType type;
+
+  Authenticator({
+      this.authenticationUri,
+      this.connectTimeout,
+      this.data,
+      this.headers,
+      this.httpAuthenticationPassword,
+      this.httpAuthenticationUsername,
+      this.id,
+      this.insertInstant,
+      this.lambdaConfiguration,
+      this.name,
+      this.readTimeout,
+      this.retrieveUserUri,
+      this.sslCertificateKeyId,
+      this.type
+  });
+
+  factory Authenticator.fromJson(Map<String, dynamic> json) => _$AuthenticatorFromJson(json);
+  Map<String, dynamic> toJson() => _$AuthenticatorToJson(this);
+}
+
+/// @author Trevor Smith
+@JsonSerializable()
+class AuthenticatorPolicy {
+  String authenticatorId;
+  Map<String, dynamic> data;
+  ExecutionTrigger executionTrigger;
+  MigrationStrategy migrationStrategy;
+  num sequence;
+
+  AuthenticatorPolicy({
+      this.authenticatorId,
+      this.data,
+      this.executionTrigger,
+      this.migrationStrategy,
+      this.sequence
+  });
+
+  factory AuthenticatorPolicy.fromJson(Map<String, dynamic> json) => _$AuthenticatorPolicyFromJson(json);
+  Map<String, dynamic> toJson() => _$AuthenticatorPolicyToJson(this);
+}
+
+/// @author Trevor Smith
+@JsonSerializable()
+class AuthenticatorRequest {
+  Authenticator authenticator;
+
+  AuthenticatorRequest({
+      this.authenticator
+  });
+
+  factory AuthenticatorRequest.fromJson(Map<String, dynamic> json) => _$AuthenticatorRequestFromJson(json);
+  Map<String, dynamic> toJson() => _$AuthenticatorRequestToJson(this);
+}
+
+/// @author Trevor Smith
+@JsonSerializable()
+class AuthenticatorResponse {
+  Authenticator authenticator;
+  List<Authenticator> authenticators;
+
+  AuthenticatorResponse({
+      this.authenticator,
+      this.authenticators
+  });
+
+  factory AuthenticatorResponse.fromJson(Map<String, dynamic> json) => _$AuthenticatorResponseFromJson(json);
+  Map<String, dynamic> toJson() => _$AuthenticatorResponseToJson(this);
+}
+
+/// The types of authenticators.
+///
+/// @author Trevor Smith
+enum AuthenticatorType {
+  @JsonValue('ldap')
+  ldap,
+  @JsonValue('generic')
+  generic,
+  @JsonValue('fusionAuth')
+  fusionAuth
+}
+
 /// Base-class for all FusionAuth events.
 ///
 /// @author Brian Pontarelli
@@ -1419,6 +1521,12 @@ enum EventType {
   Test
 }
 
+/// @author Trevor Smith
+enum ExecutionTrigger {
+  @JsonValue('always')
+  always
+}
+
 /// @author Brian Pontarelli
 enum ExpiryUnit {
   @JsonValue('MINUTES')
@@ -1433,6 +1541,21 @@ enum ExpiryUnit {
   MONTHS,
   @JsonValue('YEARS')
   YEARS
+}
+
+/// @author Trevor Smith
+@JsonSerializable()
+class ExternalAuthenticationRequest {
+  String loginId;
+  String password;
+
+  ExternalAuthenticationRequest({
+      this.loginId,
+      this.password
+  });
+
+  factory ExternalAuthenticationRequest.fromJson(Map<String, dynamic> json) => _$ExternalAuthenticationRequestFromJson(json);
+  Map<String, dynamic> toJson() => _$ExternalAuthenticationRequestToJson(this);
 }
 
 /// @author Daniel DeGroff
@@ -2628,7 +2751,9 @@ enum LambdaType {
   @JsonValue('HYPRReconcile')
   HYPRReconcile,
   @JsonValue('TwitterReconcile')
-  TwitterReconcile
+  TwitterReconcile,
+  @JsonValue('LdapReconcile')
+  LdapReconcile
 }
 
 /// A historical state of a user log event. Since events can be modified, this stores the historical state.
@@ -2938,6 +3063,16 @@ class MetaData {
 
   factory MetaData.fromJson(Map<String, dynamic> json) => _$MetaDataFromJson(json);
   Map<String, dynamic> toJson() => _$MetaDataToJson(this);
+}
+
+/// @author Trevor Smith
+enum MigrationStrategy {
+  @JsonValue('createShellUser')
+  createShellUser,
+  @JsonValue('synchronizeUser')
+  synchronizeUser,
+  @JsonValue('migrateIdentity')
+  migrateIdentity
 }
 
 /// @author Daniel DeGroff
@@ -4124,6 +4259,7 @@ class Templates {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class Tenant {
+  List<AuthenticatorPolicy> authenticatorPolicies;
   bool configured;
   Map<String, dynamic> data;
   EmailConfiguration emailConfiguration;
@@ -4145,6 +4281,7 @@ class Tenant {
   TenantUserDeletePolicy userDeletePolicy;
 
   Tenant({
+      this.authenticatorPolicies,
       this.configured,
       this.data,
       this.emailConfiguration,
@@ -4526,6 +4663,7 @@ class UIConfiguration {
 @JsonSerializable()
 class User extends SecureIdentity {
   bool active;
+  String authenticatorId;
   String birthDate;
   String cleanSpeakId;
   Map<String, dynamic> data;
@@ -4553,6 +4691,7 @@ class User extends SecureIdentity {
 
   User({
       this.active,
+      this.authenticatorId,
       this.birthDate,
       this.cleanSpeakId,
       this.data,

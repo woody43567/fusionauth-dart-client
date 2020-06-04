@@ -715,6 +715,153 @@ Map<String, dynamic> _$AuthenticationTokenConfigurationToJson(
   return val;
 }
 
+Authenticator _$AuthenticatorFromJson(Map<String, dynamic> json) {
+  return Authenticator(
+    authenticationUri: json['authenticationUri'] as String,
+    connectTimeout: json['connectTimeout'] as num,
+    data: json['data'] as Map<String, dynamic>,
+    headers: (json['headers'] as Map<String, dynamic>)?.map(
+      (k, e) => MapEntry(k, e as String),
+    ),
+    httpAuthenticationPassword: json['httpAuthenticationPassword'] as String,
+    httpAuthenticationUsername: json['httpAuthenticationUsername'] as String,
+    id: json['id'] as String,
+    insertInstant: json['insertInstant'] as num,
+    lambdaConfiguration: json['lambdaConfiguration'],
+    name: json['name'] as String,
+    readTimeout: json['readTimeout'] as num,
+    retrieveUserUri: json['retrieveUserUri'] as String,
+    sslCertificateKeyId: json['sslCertificateKeyId'] as String,
+    type: _$enumDecodeNullable(_$AuthenticatorTypeEnumMap, json['type']),
+  );
+}
+
+Map<String, dynamic> _$AuthenticatorToJson(Authenticator instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('authenticationUri', instance.authenticationUri);
+  writeNotNull('connectTimeout', instance.connectTimeout);
+  writeNotNull('data', instance.data);
+  writeNotNull('headers', instance.headers);
+  writeNotNull(
+      'httpAuthenticationPassword', instance.httpAuthenticationPassword);
+  writeNotNull(
+      'httpAuthenticationUsername', instance.httpAuthenticationUsername);
+  writeNotNull('id', instance.id);
+  writeNotNull('insertInstant', instance.insertInstant);
+  writeNotNull('lambdaConfiguration', instance.lambdaConfiguration);
+  writeNotNull('name', instance.name);
+  writeNotNull('readTimeout', instance.readTimeout);
+  writeNotNull('retrieveUserUri', instance.retrieveUserUri);
+  writeNotNull('sslCertificateKeyId', instance.sslCertificateKeyId);
+  writeNotNull('type', _$AuthenticatorTypeEnumMap[instance.type]);
+  return val;
+}
+
+const _$AuthenticatorTypeEnumMap = {
+  AuthenticatorType.ldap: 'ldap',
+  AuthenticatorType.generic: 'generic',
+  AuthenticatorType.fusionAuth: 'fusionAuth',
+};
+
+AuthenticatorPolicy _$AuthenticatorPolicyFromJson(Map<String, dynamic> json) {
+  return AuthenticatorPolicy(
+    authenticatorId: json['authenticatorId'] as String,
+    data: json['data'] as Map<String, dynamic>,
+    executionTrigger: _$enumDecodeNullable(
+        _$ExecutionTriggerEnumMap, json['executionTrigger']),
+    migrationStrategy: _$enumDecodeNullable(
+        _$MigrationStrategyEnumMap, json['migrationStrategy']),
+    sequence: json['sequence'] as num,
+  );
+}
+
+Map<String, dynamic> _$AuthenticatorPolicyToJson(AuthenticatorPolicy instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('authenticatorId', instance.authenticatorId);
+  writeNotNull('data', instance.data);
+  writeNotNull(
+      'executionTrigger', _$ExecutionTriggerEnumMap[instance.executionTrigger]);
+  writeNotNull('migrationStrategy',
+      _$MigrationStrategyEnumMap[instance.migrationStrategy]);
+  writeNotNull('sequence', instance.sequence);
+  return val;
+}
+
+const _$ExecutionTriggerEnumMap = {
+  ExecutionTrigger.always: 'always',
+};
+
+const _$MigrationStrategyEnumMap = {
+  MigrationStrategy.createShellUser: 'createShellUser',
+  MigrationStrategy.synchronizeUser: 'synchronizeUser',
+  MigrationStrategy.migrateIdentity: 'migrateIdentity',
+};
+
+AuthenticatorRequest _$AuthenticatorRequestFromJson(Map<String, dynamic> json) {
+  return AuthenticatorRequest(
+    authenticator: json['authenticator'] == null
+        ? null
+        : Authenticator.fromJson(json['authenticator'] as Map<String, dynamic>),
+  );
+}
+
+Map<String, dynamic> _$AuthenticatorRequestToJson(
+    AuthenticatorRequest instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('authenticator', instance.authenticator);
+  return val;
+}
+
+AuthenticatorResponse _$AuthenticatorResponseFromJson(
+    Map<String, dynamic> json) {
+  return AuthenticatorResponse(
+    authenticator: json['authenticator'] == null
+        ? null
+        : Authenticator.fromJson(json['authenticator'] as Map<String, dynamic>),
+    authenticators: (json['authenticators'] as List)
+        ?.map((e) => e == null
+            ? null
+            : Authenticator.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
+  );
+}
+
+Map<String, dynamic> _$AuthenticatorResponseToJson(
+    AuthenticatorResponse instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('authenticator', instance.authenticator);
+  writeNotNull('authenticators', instance.authenticators);
+  return val;
+}
+
 BaseEvent _$BaseEventFromJson(Map<String, dynamic> json) {
   return BaseEvent(
     createInstant: json['createInstant'] as num,
@@ -1895,6 +2042,29 @@ Map<String, dynamic> _$EventRequestToJson(EventRequest instance) {
   }
 
   writeNotNull('event', instance.event);
+  return val;
+}
+
+ExternalAuthenticationRequest _$ExternalAuthenticationRequestFromJson(
+    Map<String, dynamic> json) {
+  return ExternalAuthenticationRequest(
+    loginId: json['loginId'] as String,
+    password: json['password'] as String,
+  );
+}
+
+Map<String, dynamic> _$ExternalAuthenticationRequestToJson(
+    ExternalAuthenticationRequest instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('loginId', instance.loginId);
+  writeNotNull('password', instance.password);
   return val;
 }
 
@@ -3576,6 +3746,7 @@ const _$LambdaTypeEnumMap = {
   LambdaType.GoogleReconcile: 'GoogleReconcile',
   LambdaType.HYPRReconcile: 'HYPRReconcile',
   LambdaType.TwitterReconcile: 'TwitterReconcile',
+  LambdaType.LdapReconcile: 'LdapReconcile',
 };
 
 LambdaRequest _$LambdaRequestFromJson(Map<String, dynamic> json) {
@@ -5798,6 +5969,11 @@ Map<String, dynamic> _$TemplatesToJson(Templates instance) {
 
 Tenant _$TenantFromJson(Map<String, dynamic> json) {
   return Tenant(
+    authenticatorPolicies: (json['authenticatorPolicies'] as List)
+        ?.map((e) => e == null
+            ? null
+            : AuthenticatorPolicy.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
     configured: json['configured'] as bool,
     data: json['data'] as Map<String, dynamic>,
     emailConfiguration: json['emailConfiguration'] == null
@@ -5867,6 +6043,7 @@ Map<String, dynamic> _$TenantToJson(Tenant instance) {
     }
   }
 
+  writeNotNull('authenticatorPolicies', instance.authenticatorPolicies);
   writeNotNull('configured', instance.configured);
   writeNotNull('data', instance.data);
   writeNotNull('emailConfiguration', instance.emailConfiguration);
@@ -6382,6 +6559,7 @@ Map<String, dynamic> _$UIConfigurationToJson(UIConfiguration instance) {
 User _$UserFromJson(Map<String, dynamic> json) {
   return User(
     active: json['active'] as bool,
+    authenticatorId: json['authenticatorId'] as String,
     birthDate: json['birthDate'] as String,
     cleanSpeakId: json['cleanSpeakId'] as String,
     data: json['data'] as Map<String, dynamic>,
@@ -6457,6 +6635,7 @@ Map<String, dynamic> _$UserToJson(User instance) {
   writeNotNull('salt', instance.salt);
   writeNotNull('verified', instance.verified);
   writeNotNull('active', instance.active);
+  writeNotNull('authenticatorId', instance.authenticatorId);
   writeNotNull('birthDate', instance.birthDate);
   writeNotNull('cleanSpeakId', instance.cleanSpeakId);
   writeNotNull('data', instance.data);
