@@ -445,7 +445,7 @@ class Authenticator {
   dynamic lambdaConfiguration;
   String name;
   num readTimeout;
-  String sslCertificateKeysId;
+  String sslCertificateKeyId;
   AuthenticatorType type;
   String uri;
 
@@ -460,7 +460,7 @@ class Authenticator {
       this.lambdaConfiguration,
       this.name,
       this.readTimeout,
-      this.sslCertificateKeysId,
+      this.sslCertificateKeyId,
       this.type,
       this.uri
   });
