@@ -136,6 +136,48 @@ enum Algorithm {
   none
 }
 
+/// @author Daniel DeGroff
+@JsonSerializable()
+class AppleApplicationConfiguration extends BaseIdentityProviderApplicationConfiguration {
+  String buttonText;
+  String keyId;
+  String scope;
+  String servicesId;
+  String teamId;
+
+  AppleApplicationConfiguration({
+      this.buttonText,
+      this.keyId,
+      this.scope,
+      this.servicesId,
+      this.teamId
+  });
+
+  factory AppleApplicationConfiguration.fromJson(Map<String, dynamic> json) => _$AppleApplicationConfigurationFromJson(json);
+  Map<String, dynamic> toJson() => _$AppleApplicationConfigurationToJson(this);
+}
+
+/// @author Daniel DeGroff
+@JsonSerializable()
+class AppleIdentityProvider extends BaseIdentityProvider<AppleApplicationConfiguration> {
+  String buttonText;
+  String keyId;
+  String scope;
+  String servicesId;
+  String teamId;
+
+  AppleIdentityProvider({
+      this.buttonText,
+      this.keyId,
+      this.scope,
+      this.servicesId,
+      this.teamId
+  });
+
+  factory AppleIdentityProvider.fromJson(Map<String, dynamic> json) => _$AppleIdentityProviderFromJson(json);
+  Map<String, dynamic> toJson() => _$AppleIdentityProviderToJson(this);
+}
+
 /// @author Seth Musselman
 @JsonSerializable()
 class Application {
@@ -430,106 +472,6 @@ class AuthenticationTokenConfiguration extends Enableable {
   Map<String, dynamic> toJson() => _$AuthenticationTokenConfigurationToJson(this);
 }
 
-/// Models an external authenticator.
-///
-/// @author Trevor Smith
-@JsonSerializable()
-class Authenticator {
-  num connectTimeout;
-  Map<String, dynamic> data;
-  Map<String, String> headers;
-  String httpAuthenticationPassword;
-  String httpAuthenticationUsername;
-  String id;
-  num insertInstant;
-  dynamic lambdaConfiguration;
-  String name;
-  num readTimeout;
-  String sslCertificateKeyId;
-  AuthenticatorType type;
-  String uri;
-
-  Authenticator({
-      this.connectTimeout,
-      this.data,
-      this.headers,
-      this.httpAuthenticationPassword,
-      this.httpAuthenticationUsername,
-      this.id,
-      this.insertInstant,
-      this.lambdaConfiguration,
-      this.name,
-      this.readTimeout,
-      this.sslCertificateKeyId,
-      this.type,
-      this.uri
-  });
-
-  factory Authenticator.fromJson(Map<String, dynamic> json) => _$AuthenticatorFromJson(json);
-  Map<String, dynamic> toJson() => _$AuthenticatorToJson(this);
-}
-
-/// @author Trevor Smith
-@JsonSerializable()
-class AuthenticatorPolicy {
-  String authenticatorId;
-  Map<String, dynamic> data;
-  ExecutionTrigger executionTrigger;
-  MigrationStrategy migrationStrategy;
-  num sequence;
-
-  AuthenticatorPolicy({
-      this.authenticatorId,
-      this.data,
-      this.executionTrigger,
-      this.migrationStrategy,
-      this.sequence
-  });
-
-  factory AuthenticatorPolicy.fromJson(Map<String, dynamic> json) => _$AuthenticatorPolicyFromJson(json);
-  Map<String, dynamic> toJson() => _$AuthenticatorPolicyToJson(this);
-}
-
-/// @author Trevor Smith
-@JsonSerializable()
-class AuthenticatorRequest {
-  Authenticator authenticator;
-
-  AuthenticatorRequest({
-      this.authenticator
-  });
-
-  factory AuthenticatorRequest.fromJson(Map<String, dynamic> json) => _$AuthenticatorRequestFromJson(json);
-  Map<String, dynamic> toJson() => _$AuthenticatorRequestToJson(this);
-}
-
-/// @author Trevor Smith
-@JsonSerializable()
-class AuthenticatorResponse {
-  Authenticator authenticator;
-  List<Authenticator> authenticators;
-
-  AuthenticatorResponse({
-      this.authenticator,
-      this.authenticators
-  });
-
-  factory AuthenticatorResponse.fromJson(Map<String, dynamic> json) => _$AuthenticatorResponseFromJson(json);
-  Map<String, dynamic> toJson() => _$AuthenticatorResponseToJson(this);
-}
-
-/// The types of authenticators.
-///
-/// @author Trevor Smith
-enum AuthenticatorType {
-  @JsonValue('ldap')
-  ldap,
-  @JsonValue('generic')
-  generic,
-  @JsonValue('fusionAuth')
-  fusionAuth
-}
-
 /// Base-class for all FusionAuth events.
 ///
 /// @author Brian Pontarelli
@@ -572,6 +514,7 @@ class BaseIdentityProvider<D extends BaseIdentityProviderApplicationConfiguratio
   Map<String, dynamic> data;
   bool debug;
   String id;
+  dynamic lambdaConfiguration;
   String name;
   IdentityProviderType type;
 
@@ -580,6 +523,7 @@ class BaseIdentityProvider<D extends BaseIdentityProviderApplicationConfiguratio
       this.data,
       this.debug,
       this.id,
+      this.lambdaConfiguration,
       this.name,
       this.type
   });
@@ -879,6 +823,7 @@ enum ContentStatus {
   REJECTED
 }
 
+/// @author Trevor Smith
 @JsonSerializable()
 class CORSConfiguration extends Enableable {
   bool allowCredentials;
@@ -1474,12 +1419,6 @@ enum EventType {
   Test
 }
 
-/// @author Trevor Smith
-enum ExecutionTrigger {
-  @JsonValue('always')
-  always
-}
-
 /// @author Brian Pontarelli
 enum ExpiryUnit {
   @JsonValue('MINUTES')
@@ -1494,21 +1433,6 @@ enum ExpiryUnit {
   MONTHS,
   @JsonValue('YEARS')
   YEARS
-}
-
-/// @author Trevor Smith
-@JsonSerializable()
-class ExternalAuthenticationRequest {
-  String loginId;
-  String password;
-
-  ExternalAuthenticationRequest({
-      this.loginId,
-      this.password
-  });
-
-  factory ExternalAuthenticationRequest.fromJson(Map<String, dynamic> json) => _$ExternalAuthenticationRequestFromJson(json);
-  Map<String, dynamic> toJson() => _$ExternalAuthenticationRequestToJson(this);
 }
 
 /// @author Daniel DeGroff
@@ -2033,13 +1957,17 @@ class HYPRIdentityProvider extends BaseIdentityProvider<HYPRApplicationConfigura
 
 @JsonSerializable()
 class IdentityProviderDetails {
+  List<String> applicationIds;
   String id;
+  String idpEndpoint;
   String name;
   IdentityProviderOauth2Configuration oauth2;
   IdentityProviderType type;
 
   IdentityProviderDetails({
+      this.applicationIds,
       this.id,
+      this.idpEndpoint,
       this.name,
       this.oauth2,
       this.type
@@ -2169,7 +2097,9 @@ enum IdentityProviderType {
   @JsonValue('SAMLv2')
   SAMLv2,
   @JsonValue('HYPR')
-  HYPR
+  HYPR,
+  @JsonValue('Apple')
+  Apple
 }
 
 /// Import request.
@@ -2351,6 +2281,16 @@ class JSONWebKey {
   Map<String, dynamic> toJson() => _$JSONWebKeyToJson(this);
 }
 
+/// Interface for any object that can provide JSON Web key Information.
+@JsonSerializable()
+class JSONWebKeyInfoProvider {
+
+  JSONWebKeyInfoProvider();
+
+  factory JSONWebKeyInfoProvider.fromJson(Map<String, dynamic> json) => _$JSONWebKeyInfoProviderFromJson(json);
+  Map<String, dynamic> toJson() => _$JSONWebKeyInfoProviderToJson(this);
+}
+
 /// @author Daniel DeGroff
 @JsonSerializable()
 class JWKSResponse {
@@ -2407,13 +2347,19 @@ class JWT {
 class JWTConfiguration extends Enableable {
   String accessTokenKeyId;
   String idTokenKeyId;
+  RefreshTokenExpirationPolicy refreshTokenExpirationPolicy;
+  RefreshTokenRevocationPolicy refreshTokenRevocationPolicy;
   num refreshTokenTimeToLiveInMinutes;
+  RefreshTokenUsagePolicy refreshTokenUsagePolicy;
   num timeToLiveInSeconds;
 
   JWTConfiguration({
       this.accessTokenKeyId,
       this.idTokenKeyId,
+      this.refreshTokenExpirationPolicy,
+      this.refreshTokenRevocationPolicy,
       this.refreshTokenTimeToLiveInMinutes,
+      this.refreshTokenUsagePolicy,
       this.timeToLiveInSeconds
   });
 
@@ -2506,13 +2452,13 @@ class Key {
   String certificate;
   CertificateInformation certificateInformation;
   num expirationInstant;
+  bool hasPrivateKey;
   String id;
   num insertInstant;
   String issuer;
   String kid;
   num length;
   String name;
-  bool pair;
   String privateKey;
   String publicKey;
   String secret;
@@ -2523,13 +2469,13 @@ class Key {
       this.certificate,
       this.certificateInformation,
       this.expirationInstant,
+      this.hasPrivateKey,
       this.id,
       this.insertInstant,
       this.issuer,
       this.kid,
       this.length,
       this.name,
-      this.pair,
       this.privateKey,
       this.publicKey,
       this.secret,
@@ -2671,8 +2617,18 @@ enum LambdaType {
   SAMLv2Reconcile,
   @JsonValue('SAMLv2Populate')
   SAMLv2Populate,
-  @JsonValue('LdapReconcile')
-  LdapReconcile
+  @JsonValue('AppleReconcile')
+  AppleReconcile,
+  @JsonValue('ExternalJWTReconcile')
+  ExternalJWTReconcile,
+  @JsonValue('FacebookReconcile')
+  FacebookReconcile,
+  @JsonValue('GoogleReconcile')
+  GoogleReconcile,
+  @JsonValue('HYPRReconcile')
+  HYPRReconcile,
+  @JsonValue('TwitterReconcile')
+  TwitterReconcile
 }
 
 /// A historical state of a user log event. Since events can be modified, this stores the historical state.
@@ -2982,16 +2938,6 @@ class MetaData {
 
   factory MetaData.fromJson(Map<String, dynamic> json) => _$MetaDataFromJson(json);
   Map<String, dynamic> toJson() => _$MetaDataToJson(this);
-}
-
-/// @author Trevor Smith
-enum MigrationStrategy {
-  @JsonValue('createShellUser')
-  createShellUser,
-  @JsonValue('synchronizeUser')
-  synchronizeUser,
-  @JsonValue('migrateIdentity')
-  migrateIdentity
 }
 
 /// @author Daniel DeGroff
@@ -3316,14 +3262,12 @@ class OpenIdConnectIdentityProvider extends BaseIdentityProvider<OpenIdConnectAp
   String buttonImageURL;
   String buttonText;
   Set<String> domains;
-  dynamic lambdaConfiguration;
   IdentityProviderOauth2Configuration oauth2;
 
   OpenIdConnectIdentityProvider({
       this.buttonImageURL,
       this.buttonText,
       this.domains,
-      this.lambdaConfiguration,
       this.oauth2
   });
 
@@ -3604,10 +3548,12 @@ class RefreshRequest {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class RefreshResponse {
+  String refreshToken;
   List<RefreshToken> refreshTokens;
   String token;
 
   RefreshResponse({
+      this.refreshToken,
       this.refreshTokens,
       this.token
   });
@@ -3639,6 +3585,37 @@ class RefreshToken {
 
   factory RefreshToken.fromJson(Map<String, dynamic> json) => _$RefreshTokenFromJson(json);
   Map<String, dynamic> toJson() => _$RefreshTokenToJson(this);
+}
+
+/// @author Daniel DeGroff
+enum RefreshTokenExpirationPolicy {
+  @JsonValue('Fixed')
+  Fixed,
+  @JsonValue('SlidingWindow')
+  SlidingWindow
+}
+
+/// @author Daniel DeGroff
+@JsonSerializable()
+class RefreshTokenRevocationPolicy {
+  bool onLoginPrevented;
+  bool onPasswordChanged;
+
+  RefreshTokenRevocationPolicy({
+      this.onLoginPrevented,
+      this.onPasswordChanged
+  });
+
+  factory RefreshTokenRevocationPolicy.fromJson(Map<String, dynamic> json) => _$RefreshTokenRevocationPolicyFromJson(json);
+  Map<String, dynamic> toJson() => _$RefreshTokenRevocationPolicyToJson(this);
+}
+
+/// @author Daniel DeGroff
+enum RefreshTokenUsagePolicy {
+  @JsonValue('Reusable')
+  Reusable,
+  @JsonValue('OneTimeUse')
+  OneTimeUse
 }
 
 @JsonSerializable()
@@ -3714,11 +3691,13 @@ class RegistrationRequest {
 /// @author Brian Pontarelli
 @JsonSerializable()
 class RegistrationResponse {
+  String refreshToken;
   UserRegistration registration;
   String token;
   User user;
 
   RegistrationResponse({
+      this.refreshToken,
       this.registration,
       this.token,
       this.user
@@ -3768,6 +3747,18 @@ class Requirable extends Enableable {
 
   factory Requirable.fromJson(Map<String, dynamic> json) => _$RequirableFromJson(json);
   Map<String, dynamic> toJson() => _$RequirableToJson(this);
+}
+
+/// Interface describing the need for CORS configuration.
+///
+/// @author Daniel DeGroff
+@JsonSerializable()
+class RequiresCORSConfiguration {
+
+  RequiresCORSConfiguration();
+
+  factory RequiresCORSConfiguration.fromJson(Map<String, dynamic> json) => _$RequiresCORSConfigurationFromJson(json);
+  Map<String, dynamic> toJson() => _$RequiresCORSConfigurationToJson(this);
 }
 
 /// @author Brian Pontarelli
@@ -3821,7 +3812,6 @@ class SAMLv2IdentityProvider extends BaseIdentityProvider<SAMLv2ApplicationConfi
   String idpEndpoint;
   String issuer;
   String keyId;
-  dynamic lambdaConfiguration;
   bool useNameIdForEmail;
 
   SAMLv2IdentityProvider({
@@ -3832,7 +3822,6 @@ class SAMLv2IdentityProvider extends BaseIdentityProvider<SAMLv2ApplicationConfi
       this.idpEndpoint,
       this.issuer,
       this.keyId,
-      this.lambdaConfiguration,
       this.useNameIdForEmail
   });
 
@@ -4135,7 +4124,6 @@ class Templates {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class Tenant {
-  List<AuthenticatorPolicy> authenticatorPolicies;
   bool configured;
   Map<String, dynamic> data;
   EmailConfiguration emailConfiguration;
@@ -4157,7 +4145,6 @@ class Tenant {
   TenantUserDeletePolicy userDeletePolicy;
 
   Tenant({
-      this.authenticatorPolicies,
       this.configured,
       this.data,
       this.emailConfiguration,
@@ -4539,7 +4526,6 @@ class UIConfiguration {
 @JsonSerializable()
 class User extends SecureIdentity {
   bool active;
-  String authenticatorId;
   String birthDate;
   String cleanSpeakId;
   Map<String, dynamic> data;
@@ -4567,7 +4553,6 @@ class User extends SecureIdentity {
 
   User({
       this.active,
-      this.authenticatorId,
       this.birthDate,
       this.cleanSpeakId,
       this.data,
