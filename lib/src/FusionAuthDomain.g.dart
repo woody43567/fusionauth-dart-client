@@ -718,20 +718,29 @@ Map<String, dynamic> _$AuthenticationTokenConfigurationToJson(
 Authenticator _$AuthenticatorFromJson(Map<String, dynamic> json) {
   return Authenticator(
     authenticationUri: json['authenticationUri'] as String,
+    baseStructure: json['baseStructure'] as String,
     connectTimeout: json['connectTimeout'] as num,
     data: json['data'] as Map<String, dynamic>,
+    debug: json['debug'] as bool,
+    emailAttribute: json['emailAttribute'] as String,
     headers: (json['headers'] as Map<String, dynamic>)?.map(
       (k, e) => MapEntry(k, e as String),
     ),
     httpAuthenticationPassword: json['httpAuthenticationPassword'] as String,
     httpAuthenticationUsername: json['httpAuthenticationUsername'] as String,
     id: json['id'] as String,
+    identifyingAttribute: json['identifyingAttribute'] as String,
     insertInstant: json['insertInstant'] as num,
     lambdaConfiguration: json['lambdaConfiguration'],
     name: json['name'] as String,
     readTimeout: json['readTimeout'] as num,
+    requestedAttributes: (json['requestedAttributes'] as List)
+        ?.map((e) => e as String)
+        ?.toList(),
     retrieveUserUri: json['retrieveUserUri'] as String,
     sslCertificateKeyId: json['sslCertificateKeyId'] as String,
+    systemAccountDn: json['systemAccountDn'] as String,
+    systemAccountPassword: json['systemAccountPassword'] as String,
     type: _$enumDecodeNullable(_$AuthenticatorTypeEnumMap, json['type']),
   );
 }
@@ -746,20 +755,27 @@ Map<String, dynamic> _$AuthenticatorToJson(Authenticator instance) {
   }
 
   writeNotNull('authenticationUri', instance.authenticationUri);
+  writeNotNull('baseStructure', instance.baseStructure);
   writeNotNull('connectTimeout', instance.connectTimeout);
   writeNotNull('data', instance.data);
+  writeNotNull('debug', instance.debug);
+  writeNotNull('emailAttribute', instance.emailAttribute);
   writeNotNull('headers', instance.headers);
   writeNotNull(
       'httpAuthenticationPassword', instance.httpAuthenticationPassword);
   writeNotNull(
       'httpAuthenticationUsername', instance.httpAuthenticationUsername);
   writeNotNull('id', instance.id);
+  writeNotNull('identifyingAttribute', instance.identifyingAttribute);
   writeNotNull('insertInstant', instance.insertInstant);
   writeNotNull('lambdaConfiguration', instance.lambdaConfiguration);
   writeNotNull('name', instance.name);
   writeNotNull('readTimeout', instance.readTimeout);
+  writeNotNull('requestedAttributes', instance.requestedAttributes);
   writeNotNull('retrieveUserUri', instance.retrieveUserUri);
   writeNotNull('sslCertificateKeyId', instance.sslCertificateKeyId);
+  writeNotNull('systemAccountDn', instance.systemAccountDn);
+  writeNotNull('systemAccountPassword', instance.systemAccountPassword);
   writeNotNull('type', _$AuthenticatorTypeEnumMap[instance.type]);
   return val;
 }

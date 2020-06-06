@@ -478,34 +478,48 @@ class AuthenticationTokenConfiguration extends Enableable {
 @JsonSerializable()
 class Authenticator {
   String authenticationUri;
+  String baseStructure;
   num connectTimeout;
   Map<String, dynamic> data;
+  bool debug;
+  String emailAttribute;
   Map<String, String> headers;
   String httpAuthenticationPassword;
   String httpAuthenticationUsername;
   String id;
+  String identifyingAttribute;
   num insertInstant;
   dynamic lambdaConfiguration;
   String name;
   num readTimeout;
+  List<String> requestedAttributes;
   String retrieveUserUri;
   String sslCertificateKeyId;
+  String systemAccountDn;
+  String systemAccountPassword;
   AuthenticatorType type;
 
   Authenticator({
       this.authenticationUri,
+      this.baseStructure,
       this.connectTimeout,
       this.data,
+      this.debug,
+      this.emailAttribute,
       this.headers,
       this.httpAuthenticationPassword,
       this.httpAuthenticationUsername,
       this.id,
+      this.identifyingAttribute,
       this.insertInstant,
       this.lambdaConfiguration,
       this.name,
       this.readTimeout,
+      this.requestedAttributes,
       this.retrieveUserUri,
       this.sslCertificateKeyId,
+      this.systemAccountDn,
+      this.systemAccountPassword,
       this.type
   });
 
@@ -513,7 +527,7 @@ class Authenticator {
   Map<String, dynamic> toJson() => _$AuthenticatorToJson(this);
 }
 
-/// @author Trevor Smith
+// - Why does this implement _InternalJSONColumn, and why does this use @InternalJSONColumn?, does this have it's own table with a data column?
 @JsonSerializable()
 class AuthenticatorPolicy {
   String authenticatorId;
