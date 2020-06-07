@@ -715,169 +715,6 @@ Map<String, dynamic> _$AuthenticationTokenConfigurationToJson(
   return val;
 }
 
-Authenticator _$AuthenticatorFromJson(Map<String, dynamic> json) {
-  return Authenticator(
-    authenticationUri: json['authenticationUri'] as String,
-    baseStructure: json['baseStructure'] as String,
-    connectTimeout: json['connectTimeout'] as num,
-    data: json['data'] as Map<String, dynamic>,
-    debug: json['debug'] as bool,
-    emailAttribute: json['emailAttribute'] as String,
-    headers: (json['headers'] as Map<String, dynamic>)?.map(
-      (k, e) => MapEntry(k, e as String),
-    ),
-    httpAuthenticationPassword: json['httpAuthenticationPassword'] as String,
-    httpAuthenticationUsername: json['httpAuthenticationUsername'] as String,
-    id: json['id'] as String,
-    identifyingAttribute: json['identifyingAttribute'] as String,
-    insertInstant: json['insertInstant'] as num,
-    lambdaConfiguration: json['lambdaConfiguration'],
-    name: json['name'] as String,
-    readTimeout: json['readTimeout'] as num,
-    requestedAttributes: (json['requestedAttributes'] as List)
-        ?.map((e) => e as String)
-        ?.toList(),
-    retrieveUserUri: json['retrieveUserUri'] as String,
-    sslCertificateKeyId: json['sslCertificateKeyId'] as String,
-    systemAccountDn: json['systemAccountDn'] as String,
-    systemAccountPassword: json['systemAccountPassword'] as String,
-    type: _$enumDecodeNullable(_$AuthenticatorTypeEnumMap, json['type']),
-  );
-}
-
-Map<String, dynamic> _$AuthenticatorToJson(Authenticator instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('authenticationUri', instance.authenticationUri);
-  writeNotNull('baseStructure', instance.baseStructure);
-  writeNotNull('connectTimeout', instance.connectTimeout);
-  writeNotNull('data', instance.data);
-  writeNotNull('debug', instance.debug);
-  writeNotNull('emailAttribute', instance.emailAttribute);
-  writeNotNull('headers', instance.headers);
-  writeNotNull(
-      'httpAuthenticationPassword', instance.httpAuthenticationPassword);
-  writeNotNull(
-      'httpAuthenticationUsername', instance.httpAuthenticationUsername);
-  writeNotNull('id', instance.id);
-  writeNotNull('identifyingAttribute', instance.identifyingAttribute);
-  writeNotNull('insertInstant', instance.insertInstant);
-  writeNotNull('lambdaConfiguration', instance.lambdaConfiguration);
-  writeNotNull('name', instance.name);
-  writeNotNull('readTimeout', instance.readTimeout);
-  writeNotNull('requestedAttributes', instance.requestedAttributes);
-  writeNotNull('retrieveUserUri', instance.retrieveUserUri);
-  writeNotNull('sslCertificateKeyId', instance.sslCertificateKeyId);
-  writeNotNull('systemAccountDn', instance.systemAccountDn);
-  writeNotNull('systemAccountPassword', instance.systemAccountPassword);
-  writeNotNull('type', _$AuthenticatorTypeEnumMap[instance.type]);
-  return val;
-}
-
-const _$AuthenticatorTypeEnumMap = {
-  AuthenticatorType.ldap: 'ldap',
-  AuthenticatorType.generic: 'generic',
-  AuthenticatorType.fusionAuth: 'fusionAuth',
-};
-
-AuthenticatorPolicy _$AuthenticatorPolicyFromJson(Map<String, dynamic> json) {
-  return AuthenticatorPolicy(
-    authenticatorId: json['authenticatorId'] as String,
-    data: json['data'] as Map<String, dynamic>,
-    executionTrigger: _$enumDecodeNullable(
-        _$ExecutionTriggerEnumMap, json['executionTrigger']),
-    migrationStrategy: _$enumDecodeNullable(
-        _$MigrationStrategyEnumMap, json['migrationStrategy']),
-    sequence: json['sequence'] as num,
-  );
-}
-
-Map<String, dynamic> _$AuthenticatorPolicyToJson(AuthenticatorPolicy instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('authenticatorId', instance.authenticatorId);
-  writeNotNull('data', instance.data);
-  writeNotNull(
-      'executionTrigger', _$ExecutionTriggerEnumMap[instance.executionTrigger]);
-  writeNotNull('migrationStrategy',
-      _$MigrationStrategyEnumMap[instance.migrationStrategy]);
-  writeNotNull('sequence', instance.sequence);
-  return val;
-}
-
-const _$ExecutionTriggerEnumMap = {
-  ExecutionTrigger.always: 'always',
-};
-
-const _$MigrationStrategyEnumMap = {
-  MigrationStrategy.createShellUser: 'createShellUser',
-  MigrationStrategy.synchronizeUser: 'synchronizeUser',
-  MigrationStrategy.migrateIdentity: 'migrateIdentity',
-};
-
-AuthenticatorRequest _$AuthenticatorRequestFromJson(Map<String, dynamic> json) {
-  return AuthenticatorRequest(
-    authenticator: json['authenticator'] == null
-        ? null
-        : Authenticator.fromJson(json['authenticator'] as Map<String, dynamic>),
-  );
-}
-
-Map<String, dynamic> _$AuthenticatorRequestToJson(
-    AuthenticatorRequest instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('authenticator', instance.authenticator);
-  return val;
-}
-
-AuthenticatorResponse _$AuthenticatorResponseFromJson(
-    Map<String, dynamic> json) {
-  return AuthenticatorResponse(
-    authenticator: json['authenticator'] == null
-        ? null
-        : Authenticator.fromJson(json['authenticator'] as Map<String, dynamic>),
-    authenticators: (json['authenticators'] as List)
-        ?.map((e) => e == null
-            ? null
-            : Authenticator.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
-  );
-}
-
-Map<String, dynamic> _$AuthenticatorResponseToJson(
-    AuthenticatorResponse instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('authenticator', instance.authenticator);
-  writeNotNull('authenticators', instance.authenticators);
-  return val;
-}
-
 BaseEvent _$BaseEventFromJson(Map<String, dynamic> json) {
   return BaseEvent(
     createInstant: json['createInstant'] as num,
@@ -1140,6 +977,162 @@ Map<String, dynamic> _$CleanSpeakConfigurationToJson(
   writeNotNull('applicationIds', instance.applicationIds);
   writeNotNull('url', instance.url);
   writeNotNull('usernameModeration', instance.usernameModeration);
+  return val;
+}
+
+Connector _$ConnectorFromJson(Map<String, dynamic> json) {
+  return Connector(
+    authenticationUri: json['authenticationUri'] as String,
+    baseStructure: json['baseStructure'] as String,
+    connectTimeout: json['connectTimeout'] as num,
+    data: json['data'] as Map<String, dynamic>,
+    debug: json['debug'] as bool,
+    emailAttribute: json['emailAttribute'] as String,
+    headers: (json['headers'] as Map<String, dynamic>)?.map(
+      (k, e) => MapEntry(k, e as String),
+    ),
+    httpAuthenticationPassword: json['httpAuthenticationPassword'] as String,
+    httpAuthenticationUsername: json['httpAuthenticationUsername'] as String,
+    id: json['id'] as String,
+    identifyingAttribute: json['identifyingAttribute'] as String,
+    insertInstant: json['insertInstant'] as num,
+    lambdaConfiguration: json['lambdaConfiguration'],
+    name: json['name'] as String,
+    readTimeout: json['readTimeout'] as num,
+    requestedAttributes: (json['requestedAttributes'] as List)
+        ?.map((e) => e as String)
+        ?.toList(),
+    retrieveUserUri: json['retrieveUserUri'] as String,
+    sslCertificateKeyId: json['sslCertificateKeyId'] as String,
+    systemAccountDn: json['systemAccountDn'] as String,
+    systemAccountPassword: json['systemAccountPassword'] as String,
+    type: _$enumDecodeNullable(_$ConnectorTypeEnumMap, json['type']),
+  );
+}
+
+Map<String, dynamic> _$ConnectorToJson(Connector instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('authenticationUri', instance.authenticationUri);
+  writeNotNull('baseStructure', instance.baseStructure);
+  writeNotNull('connectTimeout', instance.connectTimeout);
+  writeNotNull('data', instance.data);
+  writeNotNull('debug', instance.debug);
+  writeNotNull('emailAttribute', instance.emailAttribute);
+  writeNotNull('headers', instance.headers);
+  writeNotNull(
+      'httpAuthenticationPassword', instance.httpAuthenticationPassword);
+  writeNotNull(
+      'httpAuthenticationUsername', instance.httpAuthenticationUsername);
+  writeNotNull('id', instance.id);
+  writeNotNull('identifyingAttribute', instance.identifyingAttribute);
+  writeNotNull('insertInstant', instance.insertInstant);
+  writeNotNull('lambdaConfiguration', instance.lambdaConfiguration);
+  writeNotNull('name', instance.name);
+  writeNotNull('readTimeout', instance.readTimeout);
+  writeNotNull('requestedAttributes', instance.requestedAttributes);
+  writeNotNull('retrieveUserUri', instance.retrieveUserUri);
+  writeNotNull('sslCertificateKeyId', instance.sslCertificateKeyId);
+  writeNotNull('systemAccountDn', instance.systemAccountDn);
+  writeNotNull('systemAccountPassword', instance.systemAccountPassword);
+  writeNotNull('type', _$ConnectorTypeEnumMap[instance.type]);
+  return val;
+}
+
+const _$ConnectorTypeEnumMap = {
+  ConnectorType.FusionAuth: 'FusionAuth',
+  ConnectorType.Generic: 'Generic',
+  ConnectorType.LDAP: 'LDAP',
+};
+
+ConnectorPolicy _$ConnectorPolicyFromJson(Map<String, dynamic> json) {
+  return ConnectorPolicy(
+    connectorId: json['connectorId'] as String,
+    data: json['data'] as Map<String, dynamic>,
+    executionTrigger: json['executionTrigger'] == null
+        ? null
+        : ExecutionTrigger.fromJson(
+            json['executionTrigger'] as Map<String, dynamic>),
+    migrationStrategy: _$enumDecodeNullable(
+        _$MigrationStrategyEnumMap, json['migrationStrategy']),
+    sequence: json['sequence'] as num,
+  );
+}
+
+Map<String, dynamic> _$ConnectorPolicyToJson(ConnectorPolicy instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('connectorId', instance.connectorId);
+  writeNotNull('data', instance.data);
+  writeNotNull('executionTrigger', instance.executionTrigger);
+  writeNotNull('migrationStrategy',
+      _$MigrationStrategyEnumMap[instance.migrationStrategy]);
+  writeNotNull('sequence', instance.sequence);
+  return val;
+}
+
+const _$MigrationStrategyEnumMap = {
+  MigrationStrategy.CreateShellUser: 'CreateShellUser',
+  MigrationStrategy.SynchronizeUser: 'SynchronizeUser',
+  MigrationStrategy.MigrateIdentity: 'MigrateIdentity',
+};
+
+ConnectorRequest _$ConnectorRequestFromJson(Map<String, dynamic> json) {
+  return ConnectorRequest(
+    connector: json['connector'] == null
+        ? null
+        : Connector.fromJson(json['connector'] as Map<String, dynamic>),
+  );
+}
+
+Map<String, dynamic> _$ConnectorRequestToJson(ConnectorRequest instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('connector', instance.connector);
+  return val;
+}
+
+ConnectorResponse _$ConnectorResponseFromJson(Map<String, dynamic> json) {
+  return ConnectorResponse(
+    connector: json['connector'] == null
+        ? null
+        : Connector.fromJson(json['connector'] as Map<String, dynamic>),
+    connectors: (json['connectors'] as List)
+        ?.map((e) =>
+            e == null ? null : Connector.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
+  );
+}
+
+Map<String, dynamic> _$ConnectorResponseToJson(ConnectorResponse instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('connector', instance.connector);
+  writeNotNull('connectors', instance.connectors);
   return val;
 }
 
@@ -2060,6 +2053,33 @@ Map<String, dynamic> _$EventRequestToJson(EventRequest instance) {
   writeNotNull('event', instance.event);
   return val;
 }
+
+ExecutionTrigger _$ExecutionTriggerFromJson(Map<String, dynamic> json) {
+  return ExecutionTrigger(
+    filterDomains:
+        (json['filterDomains'] as List)?.map((e) => e as String)?.toList(),
+    type: _$enumDecodeNullable(_$ExecutionTriggerTypeEnumMap, json['type']),
+  );
+}
+
+Map<String, dynamic> _$ExecutionTriggerToJson(ExecutionTrigger instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('filterDomains', instance.filterDomains);
+  writeNotNull('type', _$ExecutionTriggerTypeEnumMap[instance.type]);
+  return val;
+}
+
+const _$ExecutionTriggerTypeEnumMap = {
+  ExecutionTriggerType.Always: 'Always',
+  ExecutionTriggerType.FilterByDomain: 'FilterByDomain',
+};
 
 ExternalAuthenticationRequest _$ExternalAuthenticationRequestFromJson(
     Map<String, dynamic> json) {
@@ -5985,12 +6005,12 @@ Map<String, dynamic> _$TemplatesToJson(Templates instance) {
 
 Tenant _$TenantFromJson(Map<String, dynamic> json) {
   return Tenant(
-    authenticatorPolicies: (json['authenticatorPolicies'] as List)
+    configured: json['configured'] as bool,
+    connectorPolicies: (json['connectorPolicies'] as List)
         ?.map((e) => e == null
             ? null
-            : AuthenticatorPolicy.fromJson(e as Map<String, dynamic>))
+            : ConnectorPolicy.fromJson(e as Map<String, dynamic>))
         ?.toList(),
-    configured: json['configured'] as bool,
     data: json['data'] as Map<String, dynamic>,
     emailConfiguration: json['emailConfiguration'] == null
         ? null
@@ -6059,8 +6079,8 @@ Map<String, dynamic> _$TenantToJson(Tenant instance) {
     }
   }
 
-  writeNotNull('authenticatorPolicies', instance.authenticatorPolicies);
   writeNotNull('configured', instance.configured);
+  writeNotNull('connectorPolicies', instance.connectorPolicies);
   writeNotNull('data', instance.data);
   writeNotNull('emailConfiguration', instance.emailConfiguration);
   writeNotNull('eventConfiguration', instance.eventConfiguration);
@@ -6575,9 +6595,9 @@ Map<String, dynamic> _$UIConfigurationToJson(UIConfiguration instance) {
 User _$UserFromJson(Map<String, dynamic> json) {
   return User(
     active: json['active'] as bool,
-    authenticatorId: json['authenticatorId'] as String,
     birthDate: json['birthDate'] as String,
     cleanSpeakId: json['cleanSpeakId'] as String,
+    connectorId: json['connectorId'] as String,
     data: json['data'] as Map<String, dynamic>,
     email: json['email'] as String,
     expiry: json['expiry'] as num,
@@ -6651,9 +6671,9 @@ Map<String, dynamic> _$UserToJson(User instance) {
   writeNotNull('salt', instance.salt);
   writeNotNull('verified', instance.verified);
   writeNotNull('active', instance.active);
-  writeNotNull('authenticatorId', instance.authenticatorId);
   writeNotNull('birthDate', instance.birthDate);
   writeNotNull('cleanSpeakId', instance.cleanSpeakId);
+  writeNotNull('connectorId', instance.connectorId);
   writeNotNull('data', instance.data);
   writeNotNull('email', instance.email);
   writeNotNull('expiry', instance.expiry);
