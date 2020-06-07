@@ -982,7 +982,7 @@ Map<String, dynamic> _$CleanSpeakConfigurationToJson(
 
 Connector _$ConnectorFromJson(Map<String, dynamic> json) {
   return Connector(
-    authenticationUri: json['authenticationUri'] as String,
+    authenticationURL: json['authenticationURL'] as String,
     baseStructure: json['baseStructure'] as String,
     connectTimeout: json['connectTimeout'] as num,
     data: json['data'] as Map<String, dynamic>,
@@ -1002,7 +1002,7 @@ Connector _$ConnectorFromJson(Map<String, dynamic> json) {
     requestedAttributes: (json['requestedAttributes'] as List)
         ?.map((e) => e as String)
         ?.toList(),
-    retrieveUserUri: json['retrieveUserUri'] as String,
+    retrieveUserURL: json['retrieveUserURL'] as String,
     sslCertificateKeyId: json['sslCertificateKeyId'] as String,
     systemAccountDn: json['systemAccountDn'] as String,
     systemAccountPassword: json['systemAccountPassword'] as String,
@@ -1019,7 +1019,7 @@ Map<String, dynamic> _$ConnectorToJson(Connector instance) {
     }
   }
 
-  writeNotNull('authenticationUri', instance.authenticationUri);
+  writeNotNull('authenticationURL', instance.authenticationURL);
   writeNotNull('baseStructure', instance.baseStructure);
   writeNotNull('connectTimeout', instance.connectTimeout);
   writeNotNull('data', instance.data);
@@ -1037,7 +1037,7 @@ Map<String, dynamic> _$ConnectorToJson(Connector instance) {
   writeNotNull('name', instance.name);
   writeNotNull('readTimeout', instance.readTimeout);
   writeNotNull('requestedAttributes', instance.requestedAttributes);
-  writeNotNull('retrieveUserUri', instance.retrieveUserUri);
+  writeNotNull('retrieveUserURL', instance.retrieveUserURL);
   writeNotNull('sslCertificateKeyId', instance.sslCertificateKeyId);
   writeNotNull('systemAccountDn', instance.systemAccountDn);
   writeNotNull('systemAccountPassword', instance.systemAccountPassword);

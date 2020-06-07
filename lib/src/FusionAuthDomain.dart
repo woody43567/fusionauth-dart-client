@@ -743,7 +743,7 @@ enum ClientAuthenticationMethod {
 /// @author Trevor Smith
 @JsonSerializable()
 class Connector {
-  String authenticationUri;
+  String authenticationURL;
   String baseStructure;
   num connectTimeout;
   Map<String, dynamic> data;
@@ -759,14 +759,14 @@ class Connector {
   String name;
   num readTimeout;
   List<String> requestedAttributes;
-  String retrieveUserUri;
+  String retrieveUserURL;
   String sslCertificateKeyId;
   String systemAccountDn;
   String systemAccountPassword;
   ConnectorType type;
 
   Connector({
-      this.authenticationUri,
+      this.authenticationURL,
       this.baseStructure,
       this.connectTimeout,
       this.data,
@@ -782,7 +782,7 @@ class Connector {
       this.name,
       this.readTimeout,
       this.requestedAttributes,
-      this.retrieveUserUri,
+      this.retrieveUserURL,
       this.sslCertificateKeyId,
       this.systemAccountDn,
       this.systemAccountPassword,
