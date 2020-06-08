@@ -197,6 +197,21 @@ class FusionAuthClient {
         .go();
   }
 
+  /// Creates a connector.  You can optionally specify an Id for the connector, if not provided one will be generated.
+  ///
+  /// @param {String} connectorId (Optional) The Id for the connector. If not provided a secure random UUID will be generated.
+  /// @param {ConnectorRequest} request The request object that contains all of the information used to create the connector.
+  /// @returns {Promise<ClientResponse<ConnectorResponse>>}
+  Future<ClientResponse<ConnectorResponse, Errors>> createConnector(String connectorId, ConnectorRequest request) {
+    return _start<ConnectorResponse, Errors>()
+        .withUri('/api/connector')
+        .withUriSegment(connectorId)
+        .withJSONBody(request)
+        .withMethod('POST')
+        .withResponseHandler(defaultResponseHandlerBuilder((d) => ConnectorResponse.fromJson(d)))
+        .go();
+  }
+
   /// Creates a user consent type. You can optionally specify an Id for the consent type, if not provided one will be generated.
   ///
   /// @param {String} consentId (Optional) The Id for the consent. If not provided a secure random UUID will be generated.
@@ -1544,6 +1559,17 @@ class FusionAuthClient {
         .withUriSegment(auditLogId)
         .withMethod('GET')
         .withResponseHandler(defaultResponseHandlerBuilder((d) => AuditLogResponse.fromJson(d)))
+        .go();
+  }
+
+  /// Retrieves all of the connectors.
+  ///
+  /// @returns {Promise<ClientResponse<ConnectorResponse>>}
+  Future<ClientResponse<ConnectorResponse, void>> retrieveConnectors() {
+    return _start<ConnectorResponse, void>()
+        .withUri('/api/connector')
+        .withMethod('GET')
+        .withResponseHandler(defaultResponseHandlerBuilder((d) => ConnectorResponse.fromJson(d)))
         .go();
   }
 

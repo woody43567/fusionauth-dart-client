@@ -1558,9 +1558,7 @@ class ExternalAuthenticationRequest {
   Map<String, dynamic> toJson() => _$ExternalAuthenticationRequestToJson(this);
 }
 
-/// Models an external connector.
-///
-/// @author Trevor Smith
+// TODO : Authenticators : This additional layer seems odd to me. THis 'attribute' of a connector is probably better suited to be an interface.
 @JsonSerializable()
 class ExternalConnector extends BaseConnector {
   num connectTimeout;
@@ -2808,9 +2806,7 @@ enum LambdaType {
   LdapReconcile
 }
 
-/// Models an LDAP connector.
-///
-/// @author Trevor Smith
+// TODO : Authenticators : Naming : LDAPConnector
 @JsonSerializable()
 class LdapConnector extends ExternalConnector {
   String baseStructure;
