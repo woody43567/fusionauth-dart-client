@@ -472,6 +472,31 @@ class AuthenticationTokenConfiguration extends Enableable {
   Map<String, dynamic> toJson() => _$AuthenticationTokenConfigurationToJson(this);
 }
 
+// Do not require a setter for 'type', it is defined by the concrete class and is not mutable
+@JsonSerializable()
+class BaseConnector {
+  String authenticationURL;
+  Map<String, dynamic> data;
+  String id;
+  num insertInstant;
+  String name;
+  String sslCertificateKeyId;
+  ConnectorType type;
+
+  BaseConnector({
+      this.authenticationURL,
+      this.data,
+      this.id,
+      this.insertInstant,
+      this.name,
+      this.sslCertificateKeyId,
+      this.type
+  });
+
+  factory BaseConnector.fromJson(Map<String, dynamic> json) => _$BaseConnectorFromJson(json);
+  Map<String, dynamic> toJson() => _$BaseConnectorToJson(this);
+}
+
 /// Base-class for all FusionAuth events.
 ///
 /// @author Brian Pontarelli
@@ -738,61 +763,6 @@ enum ClientAuthenticationMethod {
   client_secret_post
 }
 
-/// Models an external authenticator.
-///
-/// @author Trevor Smith
-@JsonSerializable()
-class Connector {
-  String authenticationURL;
-  String baseStructure;
-  num connectTimeout;
-  Map<String, dynamic> data;
-  bool debug;
-  String emailAttribute;
-  Map<String, String> headers;
-  String httpAuthenticationPassword;
-  String httpAuthenticationUsername;
-  String id;
-  String identifyingAttribute;
-  num insertInstant;
-  dynamic lambdaConfiguration;
-  String name;
-  num readTimeout;
-  List<String> requestedAttributes;
-  String retrieveUserURL;
-  String sslCertificateKeyId;
-  String systemAccountDn;
-  String systemAccountPassword;
-  ConnectorType type;
-
-  Connector({
-      this.authenticationURL,
-      this.baseStructure,
-      this.connectTimeout,
-      this.data,
-      this.debug,
-      this.emailAttribute,
-      this.headers,
-      this.httpAuthenticationPassword,
-      this.httpAuthenticationUsername,
-      this.id,
-      this.identifyingAttribute,
-      this.insertInstant,
-      this.lambdaConfiguration,
-      this.name,
-      this.readTimeout,
-      this.requestedAttributes,
-      this.retrieveUserURL,
-      this.sslCertificateKeyId,
-      this.systemAccountDn,
-      this.systemAccountPassword,
-      this.type
-  });
-
-  factory Connector.fromJson(Map<String, dynamic> json) => _$ConnectorFromJson(json);
-  Map<String, dynamic> toJson() => _$ConnectorToJson(this);
-}
-
 /// @author Trevor Smith
 @JsonSerializable()
 class ConnectorPolicy {
@@ -817,7 +787,7 @@ class ConnectorPolicy {
 /// @author Trevor Smith
 @JsonSerializable()
 class ConnectorRequest {
-  Connector connector;
+  BaseConnector connector;
 
   ConnectorRequest({
       this.connector
@@ -830,8 +800,8 @@ class ConnectorRequest {
 /// @author Trevor Smith
 @JsonSerializable()
 class ConnectorResponse {
-  Connector connector;
-  List<Connector> connectors;
+  BaseConnector connector;
+  List<BaseConnector> connectors;
 
   ConnectorResponse({
       this.connector,
@@ -1588,6 +1558,25 @@ class ExternalAuthenticationRequest {
   Map<String, dynamic> toJson() => _$ExternalAuthenticationRequestToJson(this);
 }
 
+/// Models an external connector.
+///
+/// @author Trevor Smith
+@JsonSerializable()
+class ExternalConnector extends BaseConnector {
+  num connectTimeout;
+  bool debug;
+  num readTimeout;
+
+  ExternalConnector({
+      this.connectTimeout,
+      this.debug,
+      this.readTimeout
+  });
+
+  factory ExternalConnector.fromJson(Map<String, dynamic> json) => _$ExternalConnectorFromJson(json);
+  Map<String, dynamic> toJson() => _$ExternalConnectorToJson(this);
+}
+
 /// @author Daniel DeGroff
 @JsonSerializable()
 class ExternalIdentifierConfiguration {
@@ -1898,6 +1887,39 @@ class ForgotPasswordResponse {
 
   factory ForgotPasswordResponse.fromJson(Map<String, dynamic> json) => _$ForgotPasswordResponseFromJson(json);
   Map<String, dynamic> toJson() => _$ForgotPasswordResponseToJson(this);
+}
+
+/// Models the FusionAuth connector.
+///
+/// @author Trevor Smith
+@JsonSerializable()
+class FusionAuthConnector extends BaseConnector {
+
+  FusionAuthConnector();
+
+  factory FusionAuthConnector.fromJson(Map<String, dynamic> json) => _$FusionAuthConnectorFromJson(json);
+  Map<String, dynamic> toJson() => _$FusionAuthConnectorToJson(this);
+}
+
+/// Models a generic connector.
+///
+/// @author Trevor Smith
+@JsonSerializable()
+class GenericConnector extends ExternalConnector {
+  Map<String, String> headers;
+  String httpAuthenticationPassword;
+  String httpAuthenticationUsername;
+  String retrieveUserURL;
+
+  GenericConnector({
+      this.headers,
+      this.httpAuthenticationPassword,
+      this.httpAuthenticationUsername,
+      this.retrieveUserURL
+  });
+
+  factory GenericConnector.fromJson(Map<String, dynamic> json) => _$GenericConnectorFromJson(json);
+  Map<String, dynamic> toJson() => _$GenericConnectorToJson(this);
 }
 
 /// @author Daniel DeGroff
@@ -2784,6 +2806,33 @@ enum LambdaType {
   TwitterReconcile,
   @JsonValue('LdapReconcile')
   LdapReconcile
+}
+
+/// Models an LDAP connector.
+///
+/// @author Trevor Smith
+@JsonSerializable()
+class LdapConnector extends ExternalConnector {
+  String baseStructure;
+  String emailAttribute;
+  String identifyingAttribute;
+  dynamic lambdaConfiguration;
+  List<String> requestedAttributes;
+  String systemAccountDn;
+  String systemAccountPassword;
+
+  LdapConnector({
+      this.baseStructure,
+      this.emailAttribute,
+      this.identifyingAttribute,
+      this.lambdaConfiguration,
+      this.requestedAttributes,
+      this.systemAccountDn,
+      this.systemAccountPassword
+  });
+
+  factory LdapConnector.fromJson(Map<String, dynamic> json) => _$LdapConnectorFromJson(json);
+  Map<String, dynamic> toJson() => _$LdapConnectorToJson(this);
 }
 
 /// A historical state of a user log event. Since events can be modified, this stores the historical state.
