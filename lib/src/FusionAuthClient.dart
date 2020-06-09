@@ -1562,6 +1562,19 @@ class FusionAuthClient {
         .go();
   }
 
+  /// Retrieves the connector with the given Id.
+  ///
+  /// @param {String} connectorId The Id of the connector.
+  /// @returns {Promise<ClientResponse<ConnectorResponse>>}
+  Future<ClientResponse<ConnectorResponse, void>> retrieveConnector(String connectorId) {
+    return _start<ConnectorResponse, void>()
+        .withUri('/api/connector')
+        .withUriSegment(connectorId)
+        .withMethod('GET')
+        .withResponseHandler(defaultResponseHandlerBuilder((d) => ConnectorResponse.fromJson(d)))
+        .go();
+  }
+
   /// Retrieves all of the connectors.
   ///
   /// @returns {Promise<ClientResponse<ConnectorResponse>>}
@@ -2660,6 +2673,21 @@ class FusionAuthClient {
         .withJSONBody(request)
         .withMethod('PUT')
         .withResponseHandler(defaultResponseHandlerBuilder((d) => ApplicationResponse.fromJson(d)))
+        .go();
+  }
+
+  /// Updates the connector with the given Id.
+  ///
+  /// @param {String} connectorId The Id of the connector to update.
+  /// @param {ConnectorRequest} request The request object that contains all of the new connector information.
+  /// @returns {Promise<ClientResponse<ConnectorResponse>>}
+  Future<ClientResponse<ConnectorResponse, Errors>> updateConnector(String connectorId, ConnectorRequest request) {
+    return _start<ConnectorResponse, Errors>()
+        .withUri('/api/connector')
+        .withUriSegment(connectorId)
+        .withJSONBody(request)
+        .withMethod('PUT')
+        .withResponseHandler(defaultResponseHandlerBuilder((d) => ConnectorResponse.fromJson(d)))
         .go();
   }
 
