@@ -3865,7 +3865,7 @@ const _$LambdaTypeEnumMap = {
   LambdaType.GoogleReconcile: 'GoogleReconcile',
   LambdaType.HYPRReconcile: 'HYPRReconcile',
   LambdaType.TwitterReconcile: 'TwitterReconcile',
-  LambdaType.LdapReconcile: 'LdapReconcile',
+  LambdaType.LDAPConnectorReconcile: 'LDAPConnectorReconcile',
 };
 
 LambdaRequest _$LambdaRequestFromJson(Map<String, dynamic> json) {

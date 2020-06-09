@@ -2804,8 +2804,8 @@ enum LambdaType {
   HYPRReconcile,
   @JsonValue('TwitterReconcile')
   TwitterReconcile,
-  @JsonValue('LdapReconcile')
-  LdapReconcile
+  @JsonValue('LDAPConnectorReconcile')
+  LDAPConnectorReconcile
 }
 
 /// Models an LDAP connector.
