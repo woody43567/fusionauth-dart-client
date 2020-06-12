@@ -3915,8 +3915,8 @@ Map<String, dynamic> _$LambdaResponseToJson(LambdaResponse instance) {
   return val;
 }
 
-LdapConnector _$LdapConnectorFromJson(Map<String, dynamic> json) {
-  return LdapConnector(
+LDAPConnector _$LDAPConnectorFromJson(Map<String, dynamic> json) {
+  return LDAPConnector(
     baseStructure: json['baseStructure'] as String,
     emailAttribute: json['emailAttribute'] as String,
     identifyingAttribute: json['identifyingAttribute'] as String,
@@ -3939,7 +3939,7 @@ LdapConnector _$LdapConnectorFromJson(Map<String, dynamic> json) {
     ..readTimeout = json['readTimeout'] as num;
 }
 
-Map<String, dynamic> _$LdapConnectorToJson(LdapConnector instance) {
+Map<String, dynamic> _$LDAPConnectorToJson(LDAPConnector instance) {
   final val = <String, dynamic>{};
 
   void writeNotNull(String key, dynamic value) {

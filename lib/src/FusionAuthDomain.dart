@@ -2812,7 +2812,7 @@ enum LambdaType {
 ///
 /// @author Trevor Smith
 @JsonSerializable()
-class LdapConnector extends ExternalConnector {
+class LDAPConnector extends ExternalConnector {
   String baseStructure;
   String emailAttribute;
   String identifyingAttribute;
@@ -2821,7 +2821,7 @@ class LdapConnector extends ExternalConnector {
   String systemAccountDn;
   String systemAccountPassword;
 
-  LdapConnector({
+  LDAPConnector({
       this.baseStructure,
       this.emailAttribute,
       this.identifyingAttribute,
@@ -2831,8 +2831,8 @@ class LdapConnector extends ExternalConnector {
       this.systemAccountPassword
   });
 
-  factory LdapConnector.fromJson(Map<String, dynamic> json) => _$LdapConnectorFromJson(json);
-  Map<String, dynamic> toJson() => _$LdapConnectorToJson(this);
+  factory LDAPConnector.fromJson(Map<String, dynamic> json) => _$LDAPConnectorFromJson(json);
+  Map<String, dynamic> toJson() => _$LDAPConnectorToJson(this);
 }
 
 /// A historical state of a user log event. Since events can be modified, this stores the historical state.
