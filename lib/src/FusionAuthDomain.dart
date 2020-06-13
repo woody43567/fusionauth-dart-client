@@ -3146,8 +3146,8 @@ class MetaData {
 
 /// @author Trevor Smith
 enum MigrationStrategy {
-  @JsonValue('CreateShellUser')
-  CreateShellUser,
+  @JsonValue('ShellUser')
+  ShellUser,
   @JsonValue('SynchronizeUser')
   SynchronizeUser,
   @JsonValue('MigrateIdentity')
