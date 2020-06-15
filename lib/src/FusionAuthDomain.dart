@@ -475,21 +475,17 @@ class AuthenticationTokenConfiguration extends Enableable {
 // Do not require a setter for 'type', it is defined by the concrete class and is not mutable
 @JsonSerializable()
 class BaseConnector {
-  String authenticationURL;
   Map<String, dynamic> data;
   String id;
   num insertInstant;
   String name;
-  String sslCertificateKeyId;
   ConnectorType type;
 
   BaseConnector({
-      this.authenticationURL,
       this.data,
       this.id,
       this.insertInstant,
       this.name,
-      this.sslCertificateKeyId,
       this.type
   });
 
@@ -1558,20 +1554,13 @@ class ExternalAuthenticationRequest {
   Map<String, dynamic> toJson() => _$ExternalAuthenticationRequestToJson(this);
 }
 
-/// Models an external connector.
+/// Interface for all external connectors.
 ///
 /// @author Trevor Smith
 @JsonSerializable()
-class ExternalConnector extends BaseConnector {
-  num connectTimeout;
-  bool debug;
-  num readTimeout;
+class ExternalConnector {
 
-  ExternalConnector({
-      this.connectTimeout,
-      this.debug,
-      this.readTimeout
-  });
+  ExternalConnector();
 
   factory ExternalConnector.fromJson(Map<String, dynamic> json) => _$ExternalConnectorFromJson(json);
   Map<String, dynamic> toJson() => _$ExternalConnectorToJson(this);
@@ -1905,17 +1894,27 @@ class FusionAuthConnector extends BaseConnector {
 ///
 /// @author Trevor Smith
 @JsonSerializable()
-class GenericConnector extends ExternalConnector {
+class GenericConnector extends BaseConnector {
+  String authenticationURL;
+  num connectTimeout;
+  bool debug;
   Map<String, String> headers;
   String httpAuthenticationPassword;
   String httpAuthenticationUsername;
+  num readTimeout;
   String retrieveUserURL;
+  String sslCertificateKeyId;
 
   GenericConnector({
+      this.authenticationURL,
+      this.connectTimeout,
+      this.debug,
       this.headers,
       this.httpAuthenticationPassword,
       this.httpAuthenticationUsername,
-      this.retrieveUserURL
+      this.readTimeout,
+      this.retrieveUserURL,
+      this.sslCertificateKeyId
   });
 
   factory GenericConnector.fromJson(Map<String, dynamic> json) => _$GenericConnectorFromJson(json);
@@ -2812,21 +2811,29 @@ enum LambdaType {
 ///
 /// @author Trevor Smith
 @JsonSerializable()
-class LDAPConnector extends ExternalConnector {
+class LDAPConnector extends BaseConnector {
+  String authenticationURL;
   String baseStructure;
+  num connectTimeout;
+  bool debug;
   String emailAttribute;
   String identifyingAttribute;
   dynamic lambdaConfiguration;
+  num readTimeout;
   List<String> requestedAttributes;
   LDAPSecurityMethod securityMethod;
   String systemAccountDn;
   String systemAccountPassword;
 
   LDAPConnector({
+      this.authenticationURL,
       this.baseStructure,
+      this.connectTimeout,
+      this.debug,
       this.emailAttribute,
       this.identifyingAttribute,
       this.lambdaConfiguration,
+      this.readTimeout,
       this.requestedAttributes,
       this.securityMethod,
       this.systemAccountDn,

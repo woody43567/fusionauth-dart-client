@@ -717,12 +717,10 @@ Map<String, dynamic> _$AuthenticationTokenConfigurationToJson(
 
 BaseConnector _$BaseConnectorFromJson(Map<String, dynamic> json) {
   return BaseConnector(
-    authenticationURL: json['authenticationURL'] as String,
     data: json['data'] as Map<String, dynamic>,
     id: json['id'] as String,
     insertInstant: json['insertInstant'] as num,
     name: json['name'] as String,
-    sslCertificateKeyId: json['sslCertificateKeyId'] as String,
     type: _$enumDecodeNullable(_$ConnectorTypeEnumMap, json['type']),
   );
 }
@@ -736,12 +734,10 @@ Map<String, dynamic> _$BaseConnectorToJson(BaseConnector instance) {
     }
   }
 
-  writeNotNull('authenticationURL', instance.authenticationURL);
   writeNotNull('data', instance.data);
   writeNotNull('id', instance.id);
   writeNotNull('insertInstant', instance.insertInstant);
   writeNotNull('name', instance.name);
-  writeNotNull('sslCertificateKeyId', instance.sslCertificateKeyId);
   writeNotNull('type', _$ConnectorTypeEnumMap[instance.type]);
   return val;
 }
@@ -2072,41 +2068,11 @@ Map<String, dynamic> _$ExternalAuthenticationRequestToJson(
 }
 
 ExternalConnector _$ExternalConnectorFromJson(Map<String, dynamic> json) {
-  return ExternalConnector(
-    connectTimeout: json['connectTimeout'] as num,
-    debug: json['debug'] as bool,
-    readTimeout: json['readTimeout'] as num,
-  )
-    ..authenticationURL = json['authenticationURL'] as String
-    ..data = json['data'] as Map<String, dynamic>
-    ..id = json['id'] as String
-    ..insertInstant = json['insertInstant'] as num
-    ..name = json['name'] as String
-    ..sslCertificateKeyId = json['sslCertificateKeyId'] as String
-    ..type = _$enumDecodeNullable(_$ConnectorTypeEnumMap, json['type']);
+  return ExternalConnector();
 }
 
-Map<String, dynamic> _$ExternalConnectorToJson(ExternalConnector instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('authenticationURL', instance.authenticationURL);
-  writeNotNull('data', instance.data);
-  writeNotNull('id', instance.id);
-  writeNotNull('insertInstant', instance.insertInstant);
-  writeNotNull('name', instance.name);
-  writeNotNull('sslCertificateKeyId', instance.sslCertificateKeyId);
-  writeNotNull('type', _$ConnectorTypeEnumMap[instance.type]);
-  writeNotNull('connectTimeout', instance.connectTimeout);
-  writeNotNull('debug', instance.debug);
-  writeNotNull('readTimeout', instance.readTimeout);
-  return val;
-}
+Map<String, dynamic> _$ExternalConnectorToJson(ExternalConnector instance) =>
+    <String, dynamic>{};
 
 ExternalIdentifierConfiguration _$ExternalIdentifierConfigurationFromJson(
     Map<String, dynamic> json) {
@@ -2636,12 +2602,10 @@ Map<String, dynamic> _$ForgotPasswordResponseToJson(
 
 FusionAuthConnector _$FusionAuthConnectorFromJson(Map<String, dynamic> json) {
   return FusionAuthConnector()
-    ..authenticationURL = json['authenticationURL'] as String
     ..data = json['data'] as Map<String, dynamic>
     ..id = json['id'] as String
     ..insertInstant = json['insertInstant'] as num
     ..name = json['name'] as String
-    ..sslCertificateKeyId = json['sslCertificateKeyId'] as String
     ..type = _$enumDecodeNullable(_$ConnectorTypeEnumMap, json['type']);
 }
 
@@ -2654,35 +2618,33 @@ Map<String, dynamic> _$FusionAuthConnectorToJson(FusionAuthConnector instance) {
     }
   }
 
-  writeNotNull('authenticationURL', instance.authenticationURL);
   writeNotNull('data', instance.data);
   writeNotNull('id', instance.id);
   writeNotNull('insertInstant', instance.insertInstant);
   writeNotNull('name', instance.name);
-  writeNotNull('sslCertificateKeyId', instance.sslCertificateKeyId);
   writeNotNull('type', _$ConnectorTypeEnumMap[instance.type]);
   return val;
 }
 
 GenericConnector _$GenericConnectorFromJson(Map<String, dynamic> json) {
   return GenericConnector(
+    authenticationURL: json['authenticationURL'] as String,
+    connectTimeout: json['connectTimeout'] as num,
+    debug: json['debug'] as bool,
     headers: (json['headers'] as Map<String, dynamic>)?.map(
       (k, e) => MapEntry(k, e as String),
     ),
     httpAuthenticationPassword: json['httpAuthenticationPassword'] as String,
     httpAuthenticationUsername: json['httpAuthenticationUsername'] as String,
+    readTimeout: json['readTimeout'] as num,
     retrieveUserURL: json['retrieveUserURL'] as String,
+    sslCertificateKeyId: json['sslCertificateKeyId'] as String,
   )
-    ..authenticationURL = json['authenticationURL'] as String
     ..data = json['data'] as Map<String, dynamic>
     ..id = json['id'] as String
     ..insertInstant = json['insertInstant'] as num
     ..name = json['name'] as String
-    ..sslCertificateKeyId = json['sslCertificateKeyId'] as String
-    ..type = _$enumDecodeNullable(_$ConnectorTypeEnumMap, json['type'])
-    ..connectTimeout = json['connectTimeout'] as num
-    ..debug = json['debug'] as bool
-    ..readTimeout = json['readTimeout'] as num;
+    ..type = _$enumDecodeNullable(_$ConnectorTypeEnumMap, json['type']);
 }
 
 Map<String, dynamic> _$GenericConnectorToJson(GenericConnector instance) {
@@ -2694,22 +2656,22 @@ Map<String, dynamic> _$GenericConnectorToJson(GenericConnector instance) {
     }
   }
 
-  writeNotNull('authenticationURL', instance.authenticationURL);
   writeNotNull('data', instance.data);
   writeNotNull('id', instance.id);
   writeNotNull('insertInstant', instance.insertInstant);
   writeNotNull('name', instance.name);
-  writeNotNull('sslCertificateKeyId', instance.sslCertificateKeyId);
   writeNotNull('type', _$ConnectorTypeEnumMap[instance.type]);
+  writeNotNull('authenticationURL', instance.authenticationURL);
   writeNotNull('connectTimeout', instance.connectTimeout);
   writeNotNull('debug', instance.debug);
-  writeNotNull('readTimeout', instance.readTimeout);
   writeNotNull('headers', instance.headers);
   writeNotNull(
       'httpAuthenticationPassword', instance.httpAuthenticationPassword);
   writeNotNull(
       'httpAuthenticationUsername', instance.httpAuthenticationUsername);
+  writeNotNull('readTimeout', instance.readTimeout);
   writeNotNull('retrieveUserURL', instance.retrieveUserURL);
+  writeNotNull('sslCertificateKeyId', instance.sslCertificateKeyId);
   return val;
 }
 
@@ -3917,10 +3879,14 @@ Map<String, dynamic> _$LambdaResponseToJson(LambdaResponse instance) {
 
 LDAPConnector _$LDAPConnectorFromJson(Map<String, dynamic> json) {
   return LDAPConnector(
+    authenticationURL: json['authenticationURL'] as String,
     baseStructure: json['baseStructure'] as String,
+    connectTimeout: json['connectTimeout'] as num,
+    debug: json['debug'] as bool,
     emailAttribute: json['emailAttribute'] as String,
     identifyingAttribute: json['identifyingAttribute'] as String,
     lambdaConfiguration: json['lambdaConfiguration'],
+    readTimeout: json['readTimeout'] as num,
     requestedAttributes: (json['requestedAttributes'] as List)
         ?.map((e) => e as String)
         ?.toList(),
@@ -3929,16 +3895,11 @@ LDAPConnector _$LDAPConnectorFromJson(Map<String, dynamic> json) {
     systemAccountDn: json['systemAccountDn'] as String,
     systemAccountPassword: json['systemAccountPassword'] as String,
   )
-    ..authenticationURL = json['authenticationURL'] as String
     ..data = json['data'] as Map<String, dynamic>
     ..id = json['id'] as String
     ..insertInstant = json['insertInstant'] as num
     ..name = json['name'] as String
-    ..sslCertificateKeyId = json['sslCertificateKeyId'] as String
-    ..type = _$enumDecodeNullable(_$ConnectorTypeEnumMap, json['type'])
-    ..connectTimeout = json['connectTimeout'] as num
-    ..debug = json['debug'] as bool
-    ..readTimeout = json['readTimeout'] as num;
+    ..type = _$enumDecodeNullable(_$ConnectorTypeEnumMap, json['type']);
 }
 
 Map<String, dynamic> _$LDAPConnectorToJson(LDAPConnector instance) {
@@ -3950,20 +3911,19 @@ Map<String, dynamic> _$LDAPConnectorToJson(LDAPConnector instance) {
     }
   }
 
-  writeNotNull('authenticationURL', instance.authenticationURL);
   writeNotNull('data', instance.data);
   writeNotNull('id', instance.id);
   writeNotNull('insertInstant', instance.insertInstant);
   writeNotNull('name', instance.name);
-  writeNotNull('sslCertificateKeyId', instance.sslCertificateKeyId);
   writeNotNull('type', _$ConnectorTypeEnumMap[instance.type]);
+  writeNotNull('authenticationURL', instance.authenticationURL);
+  writeNotNull('baseStructure', instance.baseStructure);
   writeNotNull('connectTimeout', instance.connectTimeout);
   writeNotNull('debug', instance.debug);
-  writeNotNull('readTimeout', instance.readTimeout);
-  writeNotNull('baseStructure', instance.baseStructure);
   writeNotNull('emailAttribute', instance.emailAttribute);
   writeNotNull('identifyingAttribute', instance.identifyingAttribute);
   writeNotNull('lambdaConfiguration', instance.lambdaConfiguration);
+  writeNotNull('readTimeout', instance.readTimeout);
   writeNotNull('requestedAttributes', instance.requestedAttributes);
   writeNotNull(
       'securityMethod', _$LDAPSecurityMethodEnumMap[instance.securityMethod]);
