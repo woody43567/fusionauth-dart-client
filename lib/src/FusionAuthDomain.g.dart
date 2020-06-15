@@ -1050,7 +1050,7 @@ Map<String, dynamic> _$ConnectorPolicyToJson(ConnectorPolicy instance) {
 }
 
 const _$MigrationStrategyEnumMap = {
-  MigrationStrategy.CreateShellUser: 'CreateShellUser',
+  MigrationStrategy.ShellUser: 'ShellUser',
   MigrationStrategy.SynchronizeUser: 'SynchronizeUser',
   MigrationStrategy.MigrateIdentity: 'MigrateIdentity',
 };
@@ -3924,6 +3924,8 @@ LDAPConnector _$LDAPConnectorFromJson(Map<String, dynamic> json) {
     requestedAttributes: (json['requestedAttributes'] as List)
         ?.map((e) => e as String)
         ?.toList(),
+    securityMethod: _$enumDecodeNullable(
+        _$LDAPSecurityMethodEnumMap, json['securityMethod']),
     systemAccountDn: json['systemAccountDn'] as String,
     systemAccountPassword: json['systemAccountPassword'] as String,
   )
@@ -3963,10 +3965,18 @@ Map<String, dynamic> _$LDAPConnectorToJson(LDAPConnector instance) {
   writeNotNull('identifyingAttribute', instance.identifyingAttribute);
   writeNotNull('lambdaConfiguration', instance.lambdaConfiguration);
   writeNotNull('requestedAttributes', instance.requestedAttributes);
+  writeNotNull(
+      'securityMethod', _$LDAPSecurityMethodEnumMap[instance.securityMethod]);
   writeNotNull('systemAccountDn', instance.systemAccountDn);
   writeNotNull('systemAccountPassword', instance.systemAccountPassword);
   return val;
 }
+
+const _$LDAPSecurityMethodEnumMap = {
+  LDAPSecurityMethod.None: 'None',
+  LDAPSecurityMethod.LDAPS: 'LDAPS',
+  LDAPSecurityMethod.StartTLS: 'StartTLS',
+};
 
 LogHistory _$LogHistoryFromJson(Map<String, dynamic> json) {
   return LogHistory(

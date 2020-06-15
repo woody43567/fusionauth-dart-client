@@ -2818,6 +2818,7 @@ class LDAPConnector extends ExternalConnector {
   String identifyingAttribute;
   dynamic lambdaConfiguration;
   List<String> requestedAttributes;
+  LDAPSecurityMethod securityMethod;
   String systemAccountDn;
   String systemAccountPassword;
 
@@ -2827,12 +2828,22 @@ class LDAPConnector extends ExternalConnector {
       this.identifyingAttribute,
       this.lambdaConfiguration,
       this.requestedAttributes,
+      this.securityMethod,
       this.systemAccountDn,
       this.systemAccountPassword
   });
 
   factory LDAPConnector.fromJson(Map<String, dynamic> json) => _$LDAPConnectorFromJson(json);
   Map<String, dynamic> toJson() => _$LDAPConnectorToJson(this);
+}
+
+enum LDAPSecurityMethod {
+  @JsonValue('None')
+  None,
+  @JsonValue('LDAPS')
+  LDAPS,
+  @JsonValue('StartTLS')
+  StartTLS
 }
 
 /// A historical state of a user log event. Since events can be modified, this stores the historical state.
