@@ -1146,6 +1146,21 @@ class FusionAuthClient {
         .go();
   }
 
+  /// Updates, via PATCH, the connector with the given Id.
+  ///
+  /// @param {String} connectorId The Id of the connector to update.
+  /// @param {ConnectorRequest} request The request that contains just the new connector information.
+  /// @returns {Promise<ClientResponse<ConnectorResponse>>}
+  Future<ClientResponse<ConnectorResponse, Errors>> patchConnector(String connectorId, ConnectorRequest request) {
+    return _start<ConnectorResponse, Errors>()
+        .withUri('/api/connector')
+        .withUriSegment(connectorId)
+        .withJSONBody(request)
+        .withMethod('PATCH')
+        .withResponseHandler(defaultResponseHandlerBuilder((d) => ConnectorResponse.fromJson(d)))
+        .go();
+  }
+
   /// Updates, via PATCH, the consent with the given Id.
   ///
   /// @param {String} consentId The Id of the consent to update.
