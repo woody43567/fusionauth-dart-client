@@ -2020,7 +2020,7 @@ Map<String, dynamic> _$EventRequestToJson(EventRequest instance) {
 ExecutionTrigger _$ExecutionTriggerFromJson(Map<String, dynamic> json) {
   return ExecutionTrigger(
     filterDomains:
-        (json['filterDomains'] as List)?.map((e) => e as String)?.toList(),
+        (json['filterDomains'] as List)?.map((e) => e as String)?.toSet(),
     type: _$enumDecodeNullable(_$ExecutionTriggerTypeEnumMap, json['type']),
   );
 }
@@ -2034,7 +2034,7 @@ Map<String, dynamic> _$ExecutionTriggerToJson(ExecutionTrigger instance) {
     }
   }
 
-  writeNotNull('filterDomains', instance.filterDomains);
+  writeNotNull('filterDomains', instance.filterDomains?.toList());
   writeNotNull('type', _$ExecutionTriggerTypeEnumMap[instance.type]);
   return val;
 }

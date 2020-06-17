@@ -1504,7 +1504,7 @@ enum EventType {
 // TODO : Authenticators : Is this a trigger or just a policy?
 @JsonSerializable()
 class ExecutionTrigger {
-  List<String> filterDomains;
+  Set<String> filterDomains;
   ExecutionTriggerType type;
 
   ExecutionTrigger({
