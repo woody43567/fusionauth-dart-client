@@ -3892,7 +3892,7 @@ LDAPConnector _$LDAPConnectorFromJson(Map<String, dynamic> json) {
         ?.toList(),
     securityMethod: _$enumDecodeNullable(
         _$LDAPSecurityMethodEnumMap, json['securityMethod']),
-    systemAccountDn: json['systemAccountDn'] as String,
+    systemAccountDN: json['systemAccountDN'] as String,
     systemAccountPassword: json['systemAccountPassword'] as String,
   )
     ..data = json['data'] as Map<String, dynamic>
@@ -3927,7 +3927,7 @@ Map<String, dynamic> _$LDAPConnectorToJson(LDAPConnector instance) {
   writeNotNull('requestedAttributes', instance.requestedAttributes);
   writeNotNull(
       'securityMethod', _$LDAPSecurityMethodEnumMap[instance.securityMethod]);
-  writeNotNull('systemAccountDn', instance.systemAccountDn);
+  writeNotNull('systemAccountDN', instance.systemAccountDN);
   writeNotNull('systemAccountPassword', instance.systemAccountPassword);
   return val;
 }

@@ -2809,7 +2809,7 @@ class LDAPConnector extends BaseConnector {
   num readTimeout;
   List<String> requestedAttributes;
   LDAPSecurityMethod securityMethod;
-  String systemAccountDn;
+  String systemAccountDN;
   String systemAccountPassword;
 
   LDAPConnector({
@@ -2822,7 +2822,7 @@ class LDAPConnector extends BaseConnector {
       this.readTimeout,
       this.requestedAttributes,
       this.securityMethod,
-      this.systemAccountDn,
+      this.systemAccountDN,
       this.systemAccountPassword
   });
 
