@@ -476,6 +476,7 @@ class AuthenticationTokenConfiguration extends Enableable {
 @JsonSerializable()
 class BaseConnector {
   Map<String, dynamic> data;
+  bool debug;
   String id;
   num insertInstant;
   String name;
@@ -483,6 +484,7 @@ class BaseConnector {
 
   BaseConnector({
       this.data,
+      this.debug,
       this.id,
       this.insertInstant,
       this.name,
@@ -808,7 +810,7 @@ class ConnectorResponse {
   Map<String, dynamic> toJson() => _$ConnectorResponseToJson(this);
 }
 
-/// The types of connectors.
+/// The types of connectors. This enum is stored as an ordinal on the <code>identities</code> table, order must be maintained.
 ///
 /// @author Trevor Smith
 enum ConnectorType {
@@ -1554,18 +1556,6 @@ class ExternalAuthenticationRequest {
   Map<String, dynamic> toJson() => _$ExternalAuthenticationRequestToJson(this);
 }
 
-/// Interface for all external connectors.
-///
-/// @author Trevor Smith
-@JsonSerializable()
-class ExternalConnector {
-
-  ExternalConnector();
-
-  factory ExternalConnector.fromJson(Map<String, dynamic> json) => _$ExternalConnectorFromJson(json);
-  Map<String, dynamic> toJson() => _$ExternalConnectorToJson(this);
-}
-
 /// @author Daniel DeGroff
 @JsonSerializable()
 class ExternalIdentifierConfiguration {
@@ -1897,7 +1887,6 @@ class FusionAuthConnector extends BaseConnector {
 class GenericConnector extends BaseConnector {
   String authenticationURL;
   num connectTimeout;
-  bool debug;
   Map<String, String> headers;
   String httpAuthenticationPassword;
   String httpAuthenticationUsername;
@@ -1908,7 +1897,6 @@ class GenericConnector extends BaseConnector {
   GenericConnector({
       this.authenticationURL,
       this.connectTimeout,
-      this.debug,
       this.headers,
       this.httpAuthenticationPassword,
       this.httpAuthenticationUsername,
@@ -2815,7 +2803,6 @@ class LDAPConnector extends BaseConnector {
   String authenticationURL;
   String baseStructure;
   num connectTimeout;
-  bool debug;
   String emailAttribute;
   String identifyingAttribute;
   dynamic lambdaConfiguration;
@@ -2829,7 +2816,6 @@ class LDAPConnector extends BaseConnector {
       this.authenticationURL,
       this.baseStructure,
       this.connectTimeout,
-      this.debug,
       this.emailAttribute,
       this.identifyingAttribute,
       this.lambdaConfiguration,
