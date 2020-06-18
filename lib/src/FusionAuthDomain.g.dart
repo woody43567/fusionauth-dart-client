@@ -718,6 +718,7 @@ Map<String, dynamic> _$AuthenticationTokenConfigurationToJson(
 BaseConnector _$BaseConnectorFromJson(Map<String, dynamic> json) {
   return BaseConnector(
     data: json['data'] as Map<String, dynamic>,
+    debug: json['debug'] as bool,
     id: json['id'] as String,
     insertInstant: json['insertInstant'] as num,
     name: json['name'] as String,
@@ -735,6 +736,7 @@ Map<String, dynamic> _$BaseConnectorToJson(BaseConnector instance) {
   }
 
   writeNotNull('data', instance.data);
+  writeNotNull('debug', instance.debug);
   writeNotNull('id', instance.id);
   writeNotNull('insertInstant', instance.insertInstant);
   writeNotNull('name', instance.name);
@@ -2067,13 +2069,6 @@ Map<String, dynamic> _$ExternalAuthenticationRequestToJson(
   return val;
 }
 
-ExternalConnector _$ExternalConnectorFromJson(Map<String, dynamic> json) {
-  return ExternalConnector();
-}
-
-Map<String, dynamic> _$ExternalConnectorToJson(ExternalConnector instance) =>
-    <String, dynamic>{};
-
 ExternalIdentifierConfiguration _$ExternalIdentifierConfigurationFromJson(
     Map<String, dynamic> json) {
   return ExternalIdentifierConfiguration(
@@ -2603,6 +2598,7 @@ Map<String, dynamic> _$ForgotPasswordResponseToJson(
 FusionAuthConnector _$FusionAuthConnectorFromJson(Map<String, dynamic> json) {
   return FusionAuthConnector()
     ..data = json['data'] as Map<String, dynamic>
+    ..debug = json['debug'] as bool
     ..id = json['id'] as String
     ..insertInstant = json['insertInstant'] as num
     ..name = json['name'] as String
@@ -2619,6 +2615,7 @@ Map<String, dynamic> _$FusionAuthConnectorToJson(FusionAuthConnector instance) {
   }
 
   writeNotNull('data', instance.data);
+  writeNotNull('debug', instance.debug);
   writeNotNull('id', instance.id);
   writeNotNull('insertInstant', instance.insertInstant);
   writeNotNull('name', instance.name);
@@ -2630,7 +2627,6 @@ GenericConnector _$GenericConnectorFromJson(Map<String, dynamic> json) {
   return GenericConnector(
     authenticationURL: json['authenticationURL'] as String,
     connectTimeout: json['connectTimeout'] as num,
-    debug: json['debug'] as bool,
     headers: (json['headers'] as Map<String, dynamic>)?.map(
       (k, e) => MapEntry(k, e as String),
     ),
@@ -2641,6 +2637,7 @@ GenericConnector _$GenericConnectorFromJson(Map<String, dynamic> json) {
     sslCertificateKeyId: json['sslCertificateKeyId'] as String,
   )
     ..data = json['data'] as Map<String, dynamic>
+    ..debug = json['debug'] as bool
     ..id = json['id'] as String
     ..insertInstant = json['insertInstant'] as num
     ..name = json['name'] as String
@@ -2657,13 +2654,13 @@ Map<String, dynamic> _$GenericConnectorToJson(GenericConnector instance) {
   }
 
   writeNotNull('data', instance.data);
+  writeNotNull('debug', instance.debug);
   writeNotNull('id', instance.id);
   writeNotNull('insertInstant', instance.insertInstant);
   writeNotNull('name', instance.name);
   writeNotNull('type', _$ConnectorTypeEnumMap[instance.type]);
   writeNotNull('authenticationURL', instance.authenticationURL);
   writeNotNull('connectTimeout', instance.connectTimeout);
-  writeNotNull('debug', instance.debug);
   writeNotNull('headers', instance.headers);
   writeNotNull(
       'httpAuthenticationPassword', instance.httpAuthenticationPassword);
@@ -3882,7 +3879,6 @@ LDAPConnector _$LDAPConnectorFromJson(Map<String, dynamic> json) {
     authenticationURL: json['authenticationURL'] as String,
     baseStructure: json['baseStructure'] as String,
     connectTimeout: json['connectTimeout'] as num,
-    debug: json['debug'] as bool,
     emailAttribute: json['emailAttribute'] as String,
     identifyingAttribute: json['identifyingAttribute'] as String,
     lambdaConfiguration: json['lambdaConfiguration'],
@@ -3896,6 +3892,7 @@ LDAPConnector _$LDAPConnectorFromJson(Map<String, dynamic> json) {
     systemAccountPassword: json['systemAccountPassword'] as String,
   )
     ..data = json['data'] as Map<String, dynamic>
+    ..debug = json['debug'] as bool
     ..id = json['id'] as String
     ..insertInstant = json['insertInstant'] as num
     ..name = json['name'] as String
@@ -3912,6 +3909,7 @@ Map<String, dynamic> _$LDAPConnectorToJson(LDAPConnector instance) {
   }
 
   writeNotNull('data', instance.data);
+  writeNotNull('debug', instance.debug);
   writeNotNull('id', instance.id);
   writeNotNull('insertInstant', instance.insertInstant);
   writeNotNull('name', instance.name);
@@ -3919,7 +3917,6 @@ Map<String, dynamic> _$LDAPConnectorToJson(LDAPConnector instance) {
   writeNotNull('authenticationURL', instance.authenticationURL);
   writeNotNull('baseStructure', instance.baseStructure);
   writeNotNull('connectTimeout', instance.connectTimeout);
-  writeNotNull('debug', instance.debug);
   writeNotNull('emailAttribute', instance.emailAttribute);
   writeNotNull('identifyingAttribute', instance.identifyingAttribute);
   writeNotNull('lambdaConfiguration', instance.lambdaConfiguration);
