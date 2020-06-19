@@ -763,36 +763,17 @@ enum ClientAuthenticationMethod {
 
 /// @author Trevor Smith
 @JsonSerializable()
-class ConnectorIdentityCount {
-  String connectorId;
-  num count;
-  String tenantId;
-
-  ConnectorIdentityCount({
-      this.connectorId,
-      this.count,
-      this.tenantId
-  });
-
-  factory ConnectorIdentityCount.fromJson(Map<String, dynamic> json) => _$ConnectorIdentityCountFromJson(json);
-  Map<String, dynamic> toJson() => _$ConnectorIdentityCountToJson(this);
-}
-
-/// @author Trevor Smith
-@JsonSerializable()
 class ConnectorPolicy {
   String connectorId;
   Map<String, dynamic> data;
   ExecutionTrigger executionTrigger;
   MigrationStrategy migrationStrategy;
-  num sequence;
 
   ConnectorPolicy({
       this.connectorId,
       this.data,
       this.executionTrigger,
-      this.migrationStrategy,
-      this.sequence
+      this.migrationStrategy
   });
 
   factory ConnectorPolicy.fromJson(Map<String, dynamic> json) => _$ConnectorPolicyFromJson(json);
