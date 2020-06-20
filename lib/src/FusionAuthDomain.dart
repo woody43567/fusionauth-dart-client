@@ -1501,7 +1501,7 @@ enum EventType {
   Test
 }
 
-// TODO : Authenticators : Is this a trigger or just a policy?
+/// @author Trevor Smith
 @JsonSerializable()
 class ExecutionTrigger {
   Set<String> filterDomains;
@@ -1537,21 +1537,6 @@ enum ExpiryUnit {
   MONTHS,
   @JsonValue('YEARS')
   YEARS
-}
-
-/// @author Trevor Smith
-@JsonSerializable()
-class ExternalAuthenticationRequest {
-  String loginId;
-  String password;
-
-  ExternalAuthenticationRequest({
-      this.loginId,
-      this.password
-  });
-
-  factory ExternalAuthenticationRequest.fromJson(Map<String, dynamic> json) => _$ExternalAuthenticationRequestFromJson(json);
-  Map<String, dynamic> toJson() => _$ExternalAuthenticationRequestToJson(this);
 }
 
 /// @author Daniel DeGroff

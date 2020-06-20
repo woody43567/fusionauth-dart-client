@@ -1025,7 +1025,6 @@ ConnectorPolicy _$ConnectorPolicyFromJson(Map<String, dynamic> json) {
             json['executionTrigger'] as Map<String, dynamic>),
     migrationStrategy: _$enumDecodeNullable(
         _$MigrationStrategyEnumMap, json['migrationStrategy']),
-    sequence: json['sequence'] as num,
   );
 }
 
@@ -1043,7 +1042,6 @@ Map<String, dynamic> _$ConnectorPolicyToJson(ConnectorPolicy instance) {
   writeNotNull('executionTrigger', instance.executionTrigger);
   writeNotNull('migrationStrategy',
       _$MigrationStrategyEnumMap[instance.migrationStrategy]);
-  writeNotNull('sequence', instance.sequence);
   return val;
 }
 
@@ -2045,29 +2043,6 @@ const _$ExecutionTriggerTypeEnumMap = {
   ExecutionTriggerType.Always: 'Always',
   ExecutionTriggerType.FilterByDomain: 'FilterByDomain',
 };
-
-ExternalAuthenticationRequest _$ExternalAuthenticationRequestFromJson(
-    Map<String, dynamic> json) {
-  return ExternalAuthenticationRequest(
-    loginId: json['loginId'] as String,
-    password: json['password'] as String,
-  );
-}
-
-Map<String, dynamic> _$ExternalAuthenticationRequestToJson(
-    ExternalAuthenticationRequest instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('loginId', instance.loginId);
-  writeNotNull('password', instance.password);
-  return val;
-}
 
 ExternalIdentifierConfiguration _$ExternalIdentifierConfigurationFromJson(
     Map<String, dynamic> json) {
