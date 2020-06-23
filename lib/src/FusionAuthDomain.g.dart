@@ -1017,14 +1017,10 @@ Map<String, dynamic> _$CleanSpeakConfigurationToJson(
 
 ConnectorPolicy _$ConnectorPolicyFromJson(Map<String, dynamic> json) {
   return ConnectorPolicy(
+    action: _$enumDecodeNullable(_$ConnectorUserActionEnumMap, json['action']),
     connectorId: json['connectorId'] as String,
     data: json['data'] as Map<String, dynamic>,
-    executionTrigger: json['executionTrigger'] == null
-        ? null
-        : ExecutionTrigger.fromJson(
-            json['executionTrigger'] as Map<String, dynamic>),
-    migrationStrategy: _$enumDecodeNullable(
-        _$MigrationStrategyEnumMap, json['migrationStrategy']),
+    domains: (json['domains'] as List)?.map((e) => e as String)?.toSet(),
   );
 }
 
@@ -1037,18 +1033,17 @@ Map<String, dynamic> _$ConnectorPolicyToJson(ConnectorPolicy instance) {
     }
   }
 
+  writeNotNull('action', _$ConnectorUserActionEnumMap[instance.action]);
   writeNotNull('connectorId', instance.connectorId);
   writeNotNull('data', instance.data);
-  writeNotNull('executionTrigger', instance.executionTrigger);
-  writeNotNull('migrationStrategy',
-      _$MigrationStrategyEnumMap[instance.action]);
+  writeNotNull('domains', instance.domains?.toList());
   return val;
 }
 
-const _$MigrationStrategyEnumMap = {
-  MigrationStrategy.ShellUser: 'ShellUser',
-  MigrationStrategy.SynchronizeUser: 'SynchronizeUser',
-  MigrationStrategy.MigrateIdentity: 'MigrateIdentity',
+const _$ConnectorUserActionEnumMap = {
+  ConnectorUserAction.Shadow: 'Shadow',
+  ConnectorUserAction.Synchronize: 'Synchronize',
+  ConnectorUserAction.Migrate: 'Migrate',
 };
 
 ConnectorRequest _$ConnectorRequestFromJson(Map<String, dynamic> json) {
@@ -2016,33 +2011,6 @@ Map<String, dynamic> _$EventRequestToJson(EventRequest instance) {
   writeNotNull('event', instance.event);
   return val;
 }
-
-ExecutionTrigger _$ExecutionTriggerFromJson(Map<String, dynamic> json) {
-  return ExecutionTrigger(
-    filterDomains:
-        (json['filterDomains'] as List)?.map((e) => e as String)?.toSet(),
-    type: _$enumDecodeNullable(_$ExecutionTriggerTypeEnumMap, json['type']),
-  );
-}
-
-Map<String, dynamic> _$ExecutionTriggerToJson(ExecutionTrigger instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('filterDomains', instance.filterDomains?.toList());
-  writeNotNull('type', _$ExecutionTriggerTypeEnumMap[instance.type]);
-  return val;
-}
-
-const _$ExecutionTriggerTypeEnumMap = {
-  ExecutionTriggerType.Always: 'Always',
-  ExecutionTriggerType.FilterByDomain: 'FilterByDomain',
-};
 
 ExternalIdentifierConfiguration _$ExternalIdentifierConfigurationFromJson(
     Map<String, dynamic> json) {

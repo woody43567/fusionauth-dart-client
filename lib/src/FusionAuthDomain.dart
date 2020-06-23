@@ -764,16 +764,16 @@ enum ClientAuthenticationMethod {
 /// @author Trevor Smith
 @JsonSerializable()
 class ConnectorPolicy {
+  ConnectorUserAction action;
   String connectorId;
   Map<String, dynamic> data;
-  ExecutionTrigger executionTrigger;
-  MigrationStrategy migrationStrategy;
+  Set<String> domains;
 
   ConnectorPolicy({
+      this.action,
       this.connectorId,
       this.data,
-      this.executionTrigger,
-      this.action
+      this.domains
   });
 
   factory ConnectorPolicy.fromJson(Map<String, dynamic> json) => _$ConnectorPolicyFromJson(json);
@@ -818,6 +818,16 @@ enum ConnectorType {
   Generic,
   @JsonValue('LDAP')
   LDAP
+}
+
+/// @author Trevor Smith
+enum ConnectorUserAction {
+  @JsonValue('Shadow')
+  Shadow,
+  @JsonValue('Synchronize')
+  Synchronize,
+  @JsonValue('Migrate')
+  Migrate
 }
 
 /// Models a consent.
@@ -1499,28 +1509,6 @@ enum EventType {
   UserPasswordBreach,
   @JsonValue('Test')
   Test
-}
-
-/// @author Trevor Smith
-@JsonSerializable()
-class ExecutionTrigger {
-  Set<String> filterDomains;
-  ExecutionTriggerType type;
-
-  ExecutionTrigger({
-      this.filterDomains,
-      this.type
-  });
-
-  factory ExecutionTrigger.fromJson(Map<String, dynamic> json) => _$ExecutionTriggerFromJson(json);
-  Map<String, dynamic> toJson() => _$ExecutionTriggerToJson(this);
-}
-
-enum ExecutionTriggerType {
-  @JsonValue('Always')
-  Always,
-  @JsonValue('FilterByDomain')
-  FilterByDomain
 }
 
 /// @author Brian Pontarelli
@@ -3129,16 +3117,6 @@ class MetaData {
 
   factory MetaData.fromJson(Map<String, dynamic> json) => _$MetaDataFromJson(json);
   Map<String, dynamic> toJson() => _$MetaDataToJson(this);
-}
-
-/// @author Trevor Smith
-enum MigrationStrategy {
-  @JsonValue('ShellUser')
-  ShellUser,
-  @JsonValue('SynchronizeUser')
-  SynchronizeUser,
-  @JsonValue('MigrateIdentity')
-  MigrateIdentity
 }
 
 /// @author Daniel DeGroff
