@@ -5313,6 +5313,7 @@ class UserLoginFailedEvent extends BaseEvent {
 class UserLoginSuccessEvent extends BaseEvent {
   String applicationId;
   String authenticationType;
+  String connectorId;
   String identityProviderId;
   String identityProviderName;
   User user;
@@ -5320,6 +5321,7 @@ class UserLoginSuccessEvent extends BaseEvent {
   UserLoginSuccessEvent({
       this.applicationId,
       this.authenticationType,
+      this.connectorId,
       this.identityProviderId,
       this.identityProviderName,
       this.user

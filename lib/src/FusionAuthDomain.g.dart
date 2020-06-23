@@ -7512,6 +7512,7 @@ UserLoginSuccessEvent _$UserLoginSuccessEventFromJson(
   return UserLoginSuccessEvent(
     applicationId: json['applicationId'] as String,
     authenticationType: json['authenticationType'] as String,
+    connectorId: json['connectorId'] as String,
     identityProviderId: json['identityProviderId'] as String,
     identityProviderName: json['identityProviderName'] as String,
     user: json['user'] == null
@@ -7538,6 +7539,7 @@ Map<String, dynamic> _$UserLoginSuccessEventToJson(
   writeNotNull('tenantId', instance.tenantId);
   writeNotNull('applicationId', instance.applicationId);
   writeNotNull('authenticationType', instance.authenticationType);
+  writeNotNull('connectorId', instance.connectorId);
   writeNotNull('identityProviderId', instance.identityProviderId);
   writeNotNull('identityProviderName', instance.identityProviderName);
   writeNotNull('user', instance.user);
