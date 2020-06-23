@@ -773,7 +773,7 @@ class ConnectorPolicy {
       this.connectorId,
       this.data,
       this.executionTrigger,
-      this.migrationStrategy
+      this.action
   });
 
   factory ConnectorPolicy.fromJson(Map<String, dynamic> json) => _$ConnectorPolicyFromJson(json);

@@ -1041,7 +1041,7 @@ Map<String, dynamic> _$ConnectorPolicyToJson(ConnectorPolicy instance) {
   writeNotNull('data', instance.data);
   writeNotNull('executionTrigger', instance.executionTrigger);
   writeNotNull('migrationStrategy',
-      _$MigrationStrategyEnumMap[instance.migrationStrategy]);
+      _$MigrationStrategyEnumMap[instance.action]);
   return val;
 }
 
