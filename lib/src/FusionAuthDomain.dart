@@ -126,6 +126,12 @@ enum Algorithm {
   HS384,
   @JsonValue('HS512')
   HS512,
+  @JsonValue('PS256')
+  PS256,
+  @JsonValue('PS384')
+  PS384,
+  @JsonValue('PS512')
+  PS512,
   @JsonValue('RS256')
   RS256,
   @JsonValue('RS384')
@@ -1837,6 +1843,189 @@ class ForgotPasswordResponse {
 
   factory ForgotPasswordResponse.fromJson(Map<String, dynamic> json) => _$ForgotPasswordResponseFromJson(json);
   Map<String, dynamic> toJson() => _$ForgotPasswordResponseToJson(this);
+}
+
+/// @author Daniel DeGroff
+@JsonSerializable()
+class Form {
+  Map<String, dynamic> data;
+  String id;
+  num insertInstant;
+  String name;
+  List<String> steps;
+  FormType type;
+
+  Form({
+      this.data,
+      this.id,
+      this.insertInstant,
+      this.name,
+      this.steps,
+      this.type
+  });
+
+  factory Form.fromJson(Map<String, dynamic> json) => _$FormFromJson(json);
+  Map<String, dynamic> toJson() => _$FormToJson(this);
+}
+
+/// @author Daniel DeGroff
+enum FormControl {
+  @JsonValue('Checkbox')
+  Checkbox,
+  @JsonValue('Number')
+  Number,
+  @JsonValue('Password')
+  Password,
+  @JsonValue('Radio')
+  Radio,
+  @JsonValue('Select')
+  Select,
+  @JsonValue('TextArea')
+  TextArea,
+  @JsonValue('Text')
+  Text
+}
+
+/// @author Daniel DeGroff
+enum FormDataType {
+  @JsonValue('Boolean')
+  Boolean,
+  @JsonValue('Consent')
+  Consent,
+  @JsonValue('Date')
+  Date,
+  @JsonValue('Email')
+  Email,
+  @JsonValue('Number')
+  Number,
+  @JsonValue('String')
+  String,
+  @JsonValue('TermsAndConditions')
+  TermsAndConditions
+}
+
+/// @author Daniel DeGroff
+@JsonSerializable()
+class FormField {
+  List<FormFieldAdminPolicy> admin;
+  bool confirm;
+  FormControl control;
+  Map<String, dynamic> data;
+  String description;
+  String id;
+  num insertInstant;
+  String key;
+  String name;
+  List<String> options;
+  bool required;
+  FormDataType type;
+  FormFieldValidator validator;
+
+  FormField({
+      this.admin,
+      this.confirm,
+      this.control,
+      this.data,
+      this.description,
+      this.id,
+      this.insertInstant,
+      this.key,
+      this.name,
+      this.options,
+      this.required,
+      this.type,
+      this.validator
+  });
+
+  factory FormField.fromJson(Map<String, dynamic> json) => _$FormFieldFromJson(json);
+  Map<String, dynamic> toJson() => _$FormFieldToJson(this);
+}
+
+/// @author Daniel DeGroff
+enum FormFieldAdminPolicy {
+  @JsonValue('Edit')
+  Edit,
+  @JsonValue('View')
+  View
+}
+
+/// Form field response.
+///
+/// @author Brett Guy
+@JsonSerializable()
+class FormFieldResponse {
+  FormField formField;
+
+  FormFieldResponse({
+      this.formField
+  });
+
+  factory FormFieldResponse.fromJson(Map<String, dynamic> json) => _$FormFieldResponseFromJson(json);
+  Map<String, dynamic> toJson() => _$FormFieldResponseToJson(this);
+}
+
+/// @author Daniel DeGroff
+@JsonSerializable()
+class FormFieldValidator extends Enableable {
+  String expression;
+
+  FormFieldValidator({
+      this.expression
+  });
+
+  factory FormFieldValidator.fromJson(Map<String, dynamic> json) => _$FormFieldValidatorFromJson(json);
+  Map<String, dynamic> toJson() => _$FormFieldValidatorToJson(this);
+}
+
+/// Form response.
+///
+/// @author Daniel DeGroff
+@JsonSerializable()
+class FormRequest {
+  Form form;
+
+  FormRequest({
+      this.form
+  });
+
+  factory FormRequest.fromJson(Map<String, dynamic> json) => _$FormRequestFromJson(json);
+  Map<String, dynamic> toJson() => _$FormRequestToJson(this);
+}
+
+/// Form response.
+///
+/// @author Daniel DeGroff
+@JsonSerializable()
+class FormResponse {
+  Form form;
+  List<Form> forms;
+
+  FormResponse({
+      this.form,
+      this.forms
+  });
+
+  factory FormResponse.fromJson(Map<String, dynamic> json) => _$FormResponseFromJson(json);
+  Map<String, dynamic> toJson() => _$FormResponseToJson(this);
+}
+
+/// @author Daniel DeGroff
+@JsonSerializable()
+class FormStep {
+  List<FormField> fields;
+
+  FormStep({
+      this.fields
+  });
+
+  factory FormStep.fromJson(Map<String, dynamic> json) => _$FormStepFromJson(json);
+  Map<String, dynamic> toJson() => _$FormStepToJson(this);
+}
+
+/// @author Daniel DeGroff
+enum FormType {
+  @JsonValue('Registration')
+  Registration
 }
 
 /// Models the FusionAuth connector.

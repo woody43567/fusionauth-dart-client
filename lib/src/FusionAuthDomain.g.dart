@@ -2538,6 +2538,223 @@ Map<String, dynamic> _$ForgotPasswordResponseToJson(
   return val;
 }
 
+Form _$FormFromJson(Map<String, dynamic> json) {
+  return Form(
+    data: json['data'] as Map<String, dynamic>,
+    id: json['id'] as String,
+    insertInstant: json['insertInstant'] as num,
+    name: json['name'] as String,
+    steps: (json['steps'] as List)?.map((e) => e as String)?.toList(),
+    type: _$enumDecodeNullable(_$FormTypeEnumMap, json['type']),
+  );
+}
+
+Map<String, dynamic> _$FormToJson(Form instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('data', instance.data);
+  writeNotNull('id', instance.id);
+  writeNotNull('insertInstant', instance.insertInstant);
+  writeNotNull('name', instance.name);
+  writeNotNull('steps', instance.steps);
+  writeNotNull('type', _$FormTypeEnumMap[instance.type]);
+  return val;
+}
+
+const _$FormTypeEnumMap = {
+  FormType.Registration: 'Registration',
+};
+
+FormField _$FormFieldFromJson(Map<String, dynamic> json) {
+  return FormField(
+    admin: (json['admin'] as List)
+        ?.map((e) => _$enumDecodeNullable(_$FormFieldAdminPolicyEnumMap, e))
+        ?.toList(),
+    confirm: json['confirm'] as bool,
+    control: _$enumDecodeNullable(_$FormControlEnumMap, json['control']),
+    data: json['data'] as Map<String, dynamic>,
+    description: json['description'] as String,
+    id: json['id'] as String,
+    insertInstant: json['insertInstant'] as num,
+    key: json['key'] as String,
+    name: json['name'] as String,
+    options: (json['options'] as List)?.map((e) => e as String)?.toList(),
+    required: json['required'] as bool,
+    type: _$enumDecodeNullable(_$FormDataTypeEnumMap, json['type']),
+    validator: json['validator'] == null
+        ? null
+        : FormFieldValidator.fromJson(
+            json['validator'] as Map<String, dynamic>),
+  );
+}
+
+Map<String, dynamic> _$FormFieldToJson(FormField instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('admin',
+      instance.admin?.map((e) => _$FormFieldAdminPolicyEnumMap[e])?.toList());
+  writeNotNull('confirm', instance.confirm);
+  writeNotNull('control', _$FormControlEnumMap[instance.control]);
+  writeNotNull('data', instance.data);
+  writeNotNull('description', instance.description);
+  writeNotNull('id', instance.id);
+  writeNotNull('insertInstant', instance.insertInstant);
+  writeNotNull('key', instance.key);
+  writeNotNull('name', instance.name);
+  writeNotNull('options', instance.options);
+  writeNotNull('required', instance.required);
+  writeNotNull('type', _$FormDataTypeEnumMap[instance.type]);
+  writeNotNull('validator', instance.validator);
+  return val;
+}
+
+const _$FormFieldAdminPolicyEnumMap = {
+  FormFieldAdminPolicy.Edit: 'Edit',
+  FormFieldAdminPolicy.View: 'View',
+};
+
+const _$FormControlEnumMap = {
+  FormControl.Checkbox: 'Checkbox',
+  FormControl.Number: 'Number',
+  FormControl.Password: 'Password',
+  FormControl.Radio: 'Radio',
+  FormControl.Select: 'Select',
+  FormControl.TextArea: 'TextArea',
+  FormControl.Text: 'Text',
+};
+
+const _$FormDataTypeEnumMap = {
+  FormDataType.Boolean: 'Boolean',
+  FormDataType.Consent: 'Consent',
+  FormDataType.Date: 'Date',
+  FormDataType.Email: 'Email',
+  FormDataType.Number: 'Number',
+  FormDataType.String: 'String',
+  FormDataType.TermsAndConditions: 'TermsAndConditions',
+};
+
+FormFieldResponse _$FormFieldResponseFromJson(Map<String, dynamic> json) {
+  return FormFieldResponse(
+    formField: json['formField'] == null
+        ? null
+        : FormField.fromJson(json['formField'] as Map<String, dynamic>),
+  );
+}
+
+Map<String, dynamic> _$FormFieldResponseToJson(FormFieldResponse instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('formField', instance.formField);
+  return val;
+}
+
+FormFieldValidator _$FormFieldValidatorFromJson(Map<String, dynamic> json) {
+  return FormFieldValidator(
+    expression: json['expression'] as String,
+  )..enabled = json['enabled'] as bool;
+}
+
+Map<String, dynamic> _$FormFieldValidatorToJson(FormFieldValidator instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('enabled', instance.enabled);
+  writeNotNull('expression', instance.expression);
+  return val;
+}
+
+FormRequest _$FormRequestFromJson(Map<String, dynamic> json) {
+  return FormRequest(
+    form: json['form'] == null
+        ? null
+        : Form.fromJson(json['form'] as Map<String, dynamic>),
+  );
+}
+
+Map<String, dynamic> _$FormRequestToJson(FormRequest instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('form', instance.form);
+  return val;
+}
+
+FormResponse _$FormResponseFromJson(Map<String, dynamic> json) {
+  return FormResponse(
+    form: json['form'] == null
+        ? null
+        : Form.fromJson(json['form'] as Map<String, dynamic>),
+    forms: (json['forms'] as List)
+        ?.map(
+            (e) => e == null ? null : Form.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
+  );
+}
+
+Map<String, dynamic> _$FormResponseToJson(FormResponse instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('form', instance.form);
+  writeNotNull('forms', instance.forms);
+  return val;
+}
+
+FormStep _$FormStepFromJson(Map<String, dynamic> json) {
+  return FormStep(
+    fields: (json['fields'] as List)
+        ?.map((e) =>
+            e == null ? null : FormField.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
+  );
+}
+
+Map<String, dynamic> _$FormStepToJson(FormStep instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('fields', instance.fields);
+  return val;
+}
+
 FusionAuthConnector _$FusionAuthConnectorFromJson(Map<String, dynamic> json) {
   return FusionAuthConnector()
     ..data = json['data'] as Map<String, dynamic>
@@ -3365,6 +3582,9 @@ const _$AlgorithmEnumMap = {
   Algorithm.HS256: 'HS256',
   Algorithm.HS384: 'HS384',
   Algorithm.HS512: 'HS512',
+  Algorithm.PS256: 'PS256',
+  Algorithm.PS384: 'PS384',
+  Algorithm.PS512: 'PS512',
   Algorithm.RS256: 'RS256',
   Algorithm.RS384: 'RS384',
   Algorithm.RS512: 'RS512',
