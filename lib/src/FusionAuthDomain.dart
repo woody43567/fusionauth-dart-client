@@ -1852,7 +1852,7 @@ class Form {
   String id;
   num insertInstant;
   String name;
-  List<String> steps;
+  List<FormStep> steps;
   FormType type;
 
   Form({
@@ -2031,7 +2031,7 @@ class FormResponse {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class FormStep {
-  List<FormField> fields;
+  List<String> fields;
 
   FormStep({
       this.fields
