@@ -2577,6 +2577,7 @@ FormField _$FormFieldFromJson(Map<String, dynamic> json) {
         ?.map((e) => _$enumDecodeNullable(_$FormFieldAdminPolicyEnumMap, e))
         ?.toList(),
     confirm: json['confirm'] as bool,
+    consentId: json['consentId'] as String,
     control: _$enumDecodeNullable(_$FormControlEnumMap, json['control']),
     data: json['data'] as Map<String, dynamic>,
     description: json['description'] as String,
@@ -2606,6 +2607,7 @@ Map<String, dynamic> _$FormFieldToJson(FormField instance) {
   writeNotNull('admin',
       instance.admin?.map((e) => _$FormFieldAdminPolicyEnumMap[e])?.toList());
   writeNotNull('confirm', instance.confirm);
+  writeNotNull('consentId', instance.consentId);
   writeNotNull('control', _$FormControlEnumMap[instance.control]);
   writeNotNull('data', instance.data);
   writeNotNull('description', instance.description);
@@ -2642,14 +2644,43 @@ const _$FormDataTypeEnumMap = {
   FormDataType.Email: 'Email',
   FormDataType.Number: 'Number',
   FormDataType.String: 'String',
-  FormDataType.TermsAndConditions: 'TermsAndConditions',
 };
+
+FormFieldRequest _$FormFieldRequestFromJson(Map<String, dynamic> json) {
+  return FormFieldRequest(
+    field: json['field'] == null
+        ? null
+        : FormField.fromJson(json['field'] as Map<String, dynamic>),
+    fields: (json['fields'] as List)
+        ?.map((e) =>
+            e == null ? null : FormField.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
+  );
+}
+
+Map<String, dynamic> _$FormFieldRequestToJson(FormFieldRequest instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('field', instance.field);
+  writeNotNull('fields', instance.fields);
+  return val;
+}
 
 FormFieldResponse _$FormFieldResponseFromJson(Map<String, dynamic> json) {
   return FormFieldResponse(
-    formField: json['formField'] == null
+    field: json['field'] == null
         ? null
-        : FormField.fromJson(json['formField'] as Map<String, dynamic>),
+        : FormField.fromJson(json['field'] as Map<String, dynamic>),
+    fields: (json['fields'] as List)
+        ?.map((e) =>
+            e == null ? null : FormField.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
   );
 }
 
@@ -2662,7 +2693,8 @@ Map<String, dynamic> _$FormFieldResponseToJson(FormFieldResponse instance) {
     }
   }
 
-  writeNotNull('formField', instance.formField);
+  writeNotNull('field', instance.field);
+  writeNotNull('fields', instance.fields);
   return val;
 }
 
@@ -3895,6 +3927,9 @@ const _$KeyAlgorithmEnumMap = {
   KeyAlgorithm.HS256: 'HS256',
   KeyAlgorithm.HS384: 'HS384',
   KeyAlgorithm.HS512: 'HS512',
+  KeyAlgorithm.PS256: 'PS256',
+  KeyAlgorithm.PS384: 'PS384',
+  KeyAlgorithm.PS512: 'PS512',
   KeyAlgorithm.RS256: 'RS256',
   KeyAlgorithm.RS384: 'RS384',
   KeyAlgorithm.RS512: 'RS512',

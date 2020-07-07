@@ -1899,9 +1899,7 @@ enum FormDataType {
   @JsonValue('Number')
   Number,
   @JsonValue('String')
-  String,
-  @JsonValue('TermsAndConditions')
-  TermsAndConditions
+  String
 }
 
 /// @author Daniel DeGroff
@@ -1909,6 +1907,7 @@ enum FormDataType {
 class FormField {
   List<FormFieldAdminPolicy> admin;
   bool confirm;
+  String consentId;
   FormControl control;
   Map<String, dynamic> data;
   String description;
@@ -1924,6 +1923,7 @@ class FormField {
   FormField({
       this.admin,
       this.confirm,
+      this.consentId,
       this.control,
       this.data,
       this.description,
@@ -1949,15 +1949,34 @@ enum FormFieldAdminPolicy {
   View
 }
 
+/// The FormField API request object.
+///
+/// @author Brett Guy
+@JsonSerializable()
+class FormFieldRequest {
+  FormField field;
+  List<FormField> fields;
+
+  FormFieldRequest({
+      this.field,
+      this.fields
+  });
+
+  factory FormFieldRequest.fromJson(Map<String, dynamic> json) => _$FormFieldRequestFromJson(json);
+  Map<String, dynamic> toJson() => _$FormFieldRequestToJson(this);
+}
+
 /// Form field response.
 ///
 /// @author Brett Guy
 @JsonSerializable()
 class FormFieldResponse {
-  FormField formField;
+  FormField field;
+  List<FormField> fields;
 
   FormFieldResponse({
-      this.formField
+      this.field,
+      this.fields
   });
 
   factory FormFieldResponse.fromJson(Map<String, dynamic> json) => _$FormFieldResponseFromJson(json);
@@ -2821,6 +2840,12 @@ enum KeyAlgorithm {
   HS384,
   @JsonValue('HS512')
   HS512,
+  @JsonValue('PS256')
+  PS256,
+  @JsonValue('PS384')
+  PS384,
+  @JsonValue('PS512')
+  PS512,
   @JsonValue('RS256')
   RS256,
   @JsonValue('RS384')
