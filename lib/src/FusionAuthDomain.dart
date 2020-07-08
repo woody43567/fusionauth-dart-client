@@ -1882,36 +1882,36 @@ class Form {
 
 /// @author Daniel DeGroff
 enum FormControl {
-  @JsonValue('Checkbox')
-  Checkbox,
-  @JsonValue('Number')
-  Number,
-  @JsonValue('Password')
-  Password,
-  @JsonValue('Radio')
-  Radio,
-  @JsonValue('Select')
-  Select,
-  @JsonValue('TextArea')
-  TextArea,
-  @JsonValue('Text')
-  Text
+  @JsonValue('checkbox')
+  checkbox,
+  @JsonValue('number')
+  number,
+  @JsonValue('password')
+  password,
+  @JsonValue('radio')
+  radio,
+  @JsonValue('select')
+  select,
+  @JsonValue('textarea')
+  textarea,
+  @JsonValue('text')
+  text
 }
 
 /// @author Daniel DeGroff
 enum FormDataType {
-  @JsonValue('Boolean')
-  Boolean,
-  @JsonValue('Consent')
-  Consent,
-  @JsonValue('Date')
-  Date,
-  @JsonValue('Email')
-  Email,
-  @JsonValue('Number')
-  Number,
-  @JsonValue('String')
-  String
+  @JsonValue('bool')
+  bool,
+  @JsonValue('consent')
+  consent,
+  @JsonValue('date')
+  date,
+  @JsonValue('email')
+  email,
+  @JsonValue('number')
+  number,
+  @JsonValue('string')
+  string
 }
 
 /// @author Daniel DeGroff
@@ -4027,24 +4027,26 @@ enum RefreshTokenUsagePolicy {
 class RegistrationConfiguration extends Enableable {
   Requirable birthDate;
   bool confirmPassword;
-  CustomRegistration custom;
   Requirable firstName;
+  String formId;
   Requirable fullName;
   Requirable lastName;
   LoginIdType loginIdType;
   Requirable middleName;
   Requirable mobilePhone;
+  RegistrationType type;
 
   RegistrationConfiguration({
       this.birthDate,
       this.confirmPassword,
-      this.custom,
       this.firstName,
+      this.formId,
       this.fullName,
       this.lastName,
       this.loginIdType,
       this.middleName,
-      this.mobilePhone
+      this.mobilePhone,
+      this.type
   });
 
   factory RegistrationConfiguration.fromJson(Map<String, dynamic> json) => _$RegistrationConfigurationFromJson(json);
@@ -4112,6 +4114,13 @@ class RegistrationResponse {
 
   factory RegistrationResponse.fromJson(Map<String, dynamic> json) => _$RegistrationResponseFromJson(json);
   Map<String, dynamic> toJson() => _$RegistrationResponseToJson(this);
+}
+
+enum RegistrationType {
+  @JsonValue('basic')
+  basic,
+  @JsonValue('advanced')
+  advanced
 }
 
 /// @author Daniel DeGroff

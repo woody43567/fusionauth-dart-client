@@ -2661,12 +2661,12 @@ const _$FormControlEnumMap = {
 };
 
 const _$FormDataTypeEnumMap = {
-  FormDataType.Boolean: 'Boolean',
-  FormDataType.Consent: 'Consent',
+  FormDataType.bool: 'Boolean',
+  FormDataType.consent: 'Consent',
   FormDataType.Date: 'Date',
   FormDataType.Email: 'Email',
   FormDataType.Number: 'Number',
-  FormDataType.String: 'String',
+  FormDataType.string: 'String',
 };
 
 FormFieldRequest _$FormFieldRequestFromJson(Map<String, dynamic> json) {
