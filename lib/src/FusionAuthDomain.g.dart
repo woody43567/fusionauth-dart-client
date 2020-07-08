@@ -1251,6 +1251,26 @@ Map<String, dynamic> _$CountToJson(Count instance) {
   return val;
 }
 
+CustomRegistration _$CustomRegistrationFromJson(Map<String, dynamic> json) {
+  return CustomRegistration(
+    formId: json['formId'] as String,
+  )..enabled = json['enabled'] as bool;
+}
+
+Map<String, dynamic> _$CustomRegistrationToJson(CustomRegistration instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('enabled', instance.enabled);
+  writeNotNull('formId', instance.formId);
+  return val;
+}
+
 DailyActiveUserReportResponse _$DailyActiveUserReportResponseFromJson(
     Map<String, dynamic> json) {
   return DailyActiveUserReportResponse(
@@ -2544,7 +2564,10 @@ Form _$FormFromJson(Map<String, dynamic> json) {
     id: json['id'] as String,
     insertInstant: json['insertInstant'] as num,
     name: json['name'] as String,
-    steps: (json['steps'] as List)?.map((e) => e as String)?.toList(),
+    steps: (json['steps'] as List)
+        ?.map((e) =>
+            e == null ? null : FormStep.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
     type: _$enumDecodeNullable(_$FormTypeEnumMap, json['type']),
   );
 }
@@ -2767,10 +2790,7 @@ Map<String, dynamic> _$FormResponseToJson(FormResponse instance) {
 
 FormStep _$FormStepFromJson(Map<String, dynamic> json) {
   return FormStep(
-    fields: (json['fields'] as List)
-        ?.map((e) =>
-            e == null ? null : FormField.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
+    fields: (json['fields'] as List)?.map((e) => e as String)?.toList(),
   );
 }
 
@@ -5545,6 +5565,9 @@ RegistrationConfiguration _$RegistrationConfigurationFromJson(
         ? null
         : Requirable.fromJson(json['birthDate'] as Map<String, dynamic>),
     confirmPassword: json['confirmPassword'] as bool,
+    custom: json['custom'] == null
+        ? null
+        : CustomRegistration.fromJson(json['custom'] as Map<String, dynamic>),
     firstName: json['firstName'] == null
         ? null
         : Requirable.fromJson(json['firstName'] as Map<String, dynamic>),
@@ -5578,6 +5601,7 @@ Map<String, dynamic> _$RegistrationConfigurationToJson(
   writeNotNull('enabled', instance.enabled);
   writeNotNull('birthDate', instance.birthDate);
   writeNotNull('confirmPassword', instance.confirmPassword);
+  writeNotNull('custom', instance.custom);
   writeNotNull('firstName', instance.firstName);
   writeNotNull('fullName', instance.fullName);
   writeNotNull('lastName', instance.lastName);
