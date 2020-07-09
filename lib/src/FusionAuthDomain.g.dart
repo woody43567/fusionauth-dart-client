@@ -2591,7 +2591,7 @@ Map<String, dynamic> _$FormToJson(Form instance) {
 }
 
 const _$FormTypeEnumMap = {
-  FormType.Registration: 'Registration',
+  FormType.registration: 'registration',
 };
 
 FormField _$FormFieldFromJson(Map<String, dynamic> json) {
@@ -2651,22 +2651,22 @@ const _$FormFieldAdminPolicyEnumMap = {
 };
 
 const _$FormControlEnumMap = {
-  FormControl.Checkbox: 'Checkbox',
-  FormControl.Number: 'Number',
-  FormControl.Password: 'Password',
-  FormControl.Radio: 'Radio',
-  FormControl.Select: 'Select',
-  FormControl.TextArea: 'TextArea',
-  FormControl.Text: 'Text',
+  FormControl.checkbox: 'checkbox',
+  FormControl.number: 'number',
+  FormControl.password: 'password',
+  FormControl.radio: 'radio',
+  FormControl.select: 'select',
+  FormControl.textarea: 'textarea',
+  FormControl.text: 'text',
 };
 
 const _$FormDataTypeEnumMap = {
-  FormDataType.bool: 'Boolean',
-  FormDataType.consent: 'Consent',
-  FormDataType.Date: 'Date',
-  FormDataType.Email: 'Email',
-  FormDataType.Number: 'Number',
-  FormDataType.string: 'String',
+  FormDataType.bool: 'bool',
+  FormDataType.consent: 'consent',
+  FormDataType.date: 'date',
+  FormDataType.email: 'email',
+  FormDataType.number: 'number',
+  FormDataType.string: 'string',
 };
 
 FormFieldRequest _$FormFieldRequestFromJson(Map<String, dynamic> json) {
@@ -5565,12 +5565,10 @@ RegistrationConfiguration _$RegistrationConfigurationFromJson(
         ? null
         : Requirable.fromJson(json['birthDate'] as Map<String, dynamic>),
     confirmPassword: json['confirmPassword'] as bool,
-    custom: json['custom'] == null
-        ? null
-        : CustomRegistration.fromJson(json['custom'] as Map<String, dynamic>),
     firstName: json['firstName'] == null
         ? null
         : Requirable.fromJson(json['firstName'] as Map<String, dynamic>),
+    formId: json['formId'] as String,
     fullName: json['fullName'] == null
         ? null
         : Requirable.fromJson(json['fullName'] as Map<String, dynamic>),
@@ -5585,6 +5583,7 @@ RegistrationConfiguration _$RegistrationConfigurationFromJson(
     mobilePhone: json['mobilePhone'] == null
         ? null
         : Requirable.fromJson(json['mobilePhone'] as Map<String, dynamic>),
+    type: _$enumDecodeNullable(_$RegistrationTypeEnumMap, json['type']),
   )..enabled = json['enabled'] as bool;
 }
 
@@ -5601,19 +5600,25 @@ Map<String, dynamic> _$RegistrationConfigurationToJson(
   writeNotNull('enabled', instance.enabled);
   writeNotNull('birthDate', instance.birthDate);
   writeNotNull('confirmPassword', instance.confirmPassword);
-  writeNotNull('custom', instance.custom);
   writeNotNull('firstName', instance.firstName);
+  writeNotNull('formId', instance.formId);
   writeNotNull('fullName', instance.fullName);
   writeNotNull('lastName', instance.lastName);
   writeNotNull('loginIdType', _$LoginIdTypeEnumMap[instance.loginIdType]);
   writeNotNull('middleName', instance.middleName);
   writeNotNull('mobilePhone', instance.mobilePhone);
+  writeNotNull('type', _$RegistrationTypeEnumMap[instance.type]);
   return val;
 }
 
 const _$LoginIdTypeEnumMap = {
   LoginIdType.email: 'email',
   LoginIdType.username: 'username',
+};
+
+const _$RegistrationTypeEnumMap = {
+  RegistrationType.basic: 'basic',
+  RegistrationType.advanced: 'advanced',
 };
 
 RegistrationReportResponse _$RegistrationReportResponseFromJson(

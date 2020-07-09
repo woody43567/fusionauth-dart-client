@@ -2055,8 +2055,8 @@ class FormStep {
 
 /// @author Daniel DeGroff
 enum FormType {
-  @JsonValue('Registration')
-  Registration
+  @JsonValue('registration')
+  registration
 }
 
 /// Models the FusionAuth connector.
