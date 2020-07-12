@@ -192,8 +192,10 @@ class Application {
   CleanSpeakConfiguration cleanSpeakConfiguration;
   Map<String, dynamic> data;
   String id;
+  num insertInstant;
   JWTConfiguration jwtConfiguration;
   dynamic lambdaConfiguration;
+  num lastUpdateInstant;
   LoginConfiguration loginConfiguration;
   String name;
   OAuth2Configuration oauthConfiguration;
@@ -212,8 +214,10 @@ class Application {
       this.cleanSpeakConfiguration,
       this.data,
       this.id,
+      this.insertInstant,
       this.jwtConfiguration,
       this.lambdaConfiguration,
+      this.lastUpdateInstant,
       this.loginConfiguration,
       this.name,
       this.oauthConfiguration,
@@ -303,15 +307,19 @@ class ApplicationResponse {
 class ApplicationRole {
   String description;
   String id;
+  num insertInstant;
   bool isDefault;
   bool isSuperRole;
+  num lastUpdateInstant;
   String name;
 
   ApplicationRole({
       this.description,
       this.id,
+      this.insertInstant,
       this.isDefault,
       this.isSuperRole,
+      this.lastUpdateInstant,
       this.name
   });
 
@@ -485,6 +493,7 @@ class BaseConnector {
   bool debug;
   String id;
   num insertInstant;
+  num lastUpdateInstant;
   String name;
   ConnectorType type;
 
@@ -493,6 +502,7 @@ class BaseConnector {
       this.debug,
       this.id,
       this.insertInstant,
+      this.lastUpdateInstant,
       this.name,
       this.type
   });
@@ -543,7 +553,9 @@ class BaseIdentityProvider<D extends BaseIdentityProviderApplicationConfiguratio
   Map<String, dynamic> data;
   bool debug;
   String id;
+  num insertInstant;
   dynamic lambdaConfiguration;
+  num lastUpdateInstant;
   String name;
   IdentityProviderType type;
 
@@ -552,7 +564,9 @@ class BaseIdentityProvider<D extends BaseIdentityProviderApplicationConfiguratio
       this.data,
       this.debug,
       this.id,
+      this.insertInstant,
       this.lambdaConfiguration,
+      this.lastUpdateInstant,
       this.name,
       this.type
   });
@@ -847,6 +861,8 @@ class Consent {
   num defaultMinimumAgeForSelfConsent;
   EmailPlus emailPlus;
   String id;
+  num insertInstant;
+  num lastUpdateInstant;
   bool multipleValuesAllowed;
   String name;
   List<String> values;
@@ -858,6 +874,8 @@ class Consent {
       this.defaultMinimumAgeForSelfConsent,
       this.emailPlus,
       this.id,
+      this.insertInstant,
+      this.lastUpdateInstant,
       this.multipleValuesAllowed,
       this.name,
       this.values
@@ -1215,6 +1233,8 @@ class EmailTemplate {
   String defaultTextTemplate;
   String fromEmail;
   String id;
+  num insertInstant;
+  num lastUpdateInstant;
   Map<String, String> localizedFromNames;
   Map<String, String> localizedHtmlTemplates;
   Map<String, String> localizedSubjects;
@@ -1228,6 +1248,8 @@ class EmailTemplate {
       this.defaultTextTemplate,
       this.fromEmail,
       this.id,
+      this.insertInstant,
+      this.lastUpdateInstant,
       this.localizedFromNames,
       this.localizedHtmlTemplates,
       this.localizedSubjects,
@@ -1698,10 +1720,14 @@ class FailedAuthenticationConfiguration {
 @JsonSerializable()
 class Family {
   String id;
+  num insertInstant;
+  num lastUpdateInstant;
   List<FamilyMember> members;
 
   Family({
       this.id,
+      this.insertInstant,
+      this.lastUpdateInstant,
       this.members
   });
 
@@ -1863,6 +1889,7 @@ class Form {
   Map<String, dynamic> data;
   String id;
   num insertInstant;
+  num lastUpdateInstant;
   String name;
   List<FormStep> steps;
   FormType type;
@@ -1871,6 +1898,7 @@ class Form {
       this.data,
       this.id,
       this.insertInstant,
+      this.lastUpdateInstant,
       this.name,
       this.steps,
       this.type
@@ -1926,6 +1954,7 @@ class FormField {
   String id;
   num insertInstant;
   String key;
+  num lastUpdateInstant;
   String name;
   List<String> options;
   bool required;
@@ -1942,6 +1971,7 @@ class FormField {
       this.id,
       this.insertInstant,
       this.key,
+      this.lastUpdateInstant,
       this.name,
       this.options,
       this.required,
@@ -2169,6 +2199,8 @@ enum GrantType {
 class Group {
   Map<String, dynamic> data;
   String id;
+  num insertInstant;
+  num lastUpdateInstant;
   String name;
   Map<String, List<ApplicationRole>> roles;
   String tenantId;
@@ -2176,6 +2208,8 @@ class Group {
   Group({
       this.data,
       this.id,
+      this.insertInstant,
+      this.lastUpdateInstant,
       this.name,
       this.roles,
       this.tenantId
@@ -2810,6 +2844,7 @@ class Key {
   num insertInstant;
   String issuer;
   String kid;
+  num lastUpdateInstant;
   num length;
   String name;
   String privateKey;
@@ -2827,6 +2862,7 @@ class Key {
       this.insertInstant,
       this.issuer,
       this.kid,
+      this.lastUpdateInstant,
       this.length,
       this.name,
       this.privateKey,
@@ -2916,6 +2952,7 @@ class Lambda extends Enableable {
   bool debug;
   String id;
   num insertInstant;
+  num lastUpdateInstant;
   String name;
   LambdaType type;
 
@@ -2924,6 +2961,7 @@ class Lambda extends Enableable {
       this.debug,
       this.id,
       this.insertInstant,
+      this.lastUpdateInstant,
       this.name,
       this.type
   });
@@ -4418,6 +4456,8 @@ class SystemConfiguration {
   CORSConfiguration corsConfiguration;
   Map<String, dynamic> data;
   EventLogConfiguration eventLogConfiguration;
+  num insertInstant;
+  num lastUpdateInstant;
   LoginRecordConfiguration loginRecordConfiguration;
   String reportTimezone;
   UIConfiguration uiConfiguration;
@@ -4429,6 +4469,8 @@ class SystemConfiguration {
       this.corsConfiguration,
       this.data,
       this.eventLogConfiguration,
+      this.insertInstant,
+      this.lastUpdateInstant,
       this.loginRecordConfiguration,
       this.reportTimezone,
       this.uiConfiguration
@@ -4550,8 +4592,10 @@ class Tenant {
   FamilyConfiguration familyConfiguration;
   num httpSessionMaxInactiveInterval;
   String id;
+  num insertInstant;
   String issuer;
   JWTConfiguration jwtConfiguration;
+  num lastUpdateInstant;
   String logoutURL;
   MaximumPasswordAge maximumPasswordAge;
   MinimumPasswordAge minimumPasswordAge;
@@ -4572,8 +4616,10 @@ class Tenant {
       this.familyConfiguration,
       this.httpSessionMaxInactiveInterval,
       this.id,
+      this.insertInstant,
       this.issuer,
       this.jwtConfiguration,
+      this.lastUpdateInstant,
       this.logoutURL,
       this.maximumPasswordAge,
       this.minimumPasswordAge,
@@ -4956,6 +5002,7 @@ class User extends SecureIdentity {
   num insertInstant;
   num lastLoginInstant;
   String lastName;
+  num lastUpdateInstant;
   List<GroupMember> memberships;
   String middleName;
   String mobilePhone;
@@ -4984,6 +5031,7 @@ class User extends SecureIdentity {
       this.insertInstant,
       this.lastLoginInstant,
       this.lastName,
+      this.lastUpdateInstant,
       this.memberships,
       this.middleName,
       this.mobilePhone,
@@ -5013,6 +5061,8 @@ class UserAction {
   String endEmailTemplateId;
   String id;
   bool includeEmailInEventJSON;
+  num insertInstant;
+  num lastUpdateInstant;
   Map<String, String> localizedNames;
   String modifyEmailTemplateId;
   String name;
@@ -5031,6 +5081,8 @@ class UserAction {
       this.endEmailTemplateId,
       this.id,
       this.includeEmailInEventJSON,
+      this.insertInstant,
+      this.lastUpdateInstant,
       this.localizedNames,
       this.modifyEmailTemplateId,
       this.name,
@@ -5106,12 +5158,12 @@ class UserActionLog {
   String actionerUserId;
   List<String> applicationIds;
   String comment;
-  num createInstant;
   bool emailUserOnEnd;
   bool endEventSent;
   num expiry;
   LogHistory history;
   String id;
+  num insertInstant;
   String localizedName;
   String localizedOption;
   String localizedReason;
@@ -5127,12 +5179,12 @@ class UserActionLog {
       this.actionerUserId,
       this.applicationIds,
       this.comment,
-      this.createInstant,
       this.emailUserOnEnd,
       this.endEventSent,
       this.expiry,
       this.history,
       this.id,
+      this.insertInstant,
       this.localizedName,
       this.localizedOption,
       this.localizedReason,
@@ -5186,12 +5238,16 @@ enum UserActionPhase {
 class UserActionReason {
   String code;
   String id;
+  num insertInstant;
+  num lastUpdateInstant;
   Map<String, String> localizedTexts;
   String text;
 
   UserActionReason({
       this.code,
       this.id,
+      this.insertInstant,
+      this.lastUpdateInstant,
       this.localizedTexts,
       this.text
   });
@@ -5286,15 +5342,15 @@ class UserBulkCreateEvent extends BaseEvent {
 class UserComment {
   String comment;
   String commenterId;
-  num createInstant;
   String id;
+  num insertInstant;
   String userId;
 
   UserComment({
       this.comment,
       this.commenterId,
-      this.createInstant,
       this.id,
+      this.insertInstant,
       this.userId
   });
 
@@ -5600,6 +5656,7 @@ class UserRegistration {
   String id;
   num insertInstant;
   num lastLoginInstant;
+  num lastUpdateInstant;
   List<String> preferredLanguages;
   Set<String> roles;
   String timezone;
@@ -5616,6 +5673,7 @@ class UserRegistration {
       this.id,
       this.insertInstant,
       this.lastLoginInstant,
+      this.lastUpdateInstant,
       this.preferredLanguages,
       this.roles,
       this.timezone,
@@ -5843,6 +5901,8 @@ class Webhook {
   String httpAuthenticationPassword;
   String httpAuthenticationUsername;
   String id;
+  num insertInstant;
+  num lastUpdateInstant;
   num readTimeout;
   String sslCertificate;
   String url;
@@ -5858,6 +5918,8 @@ class Webhook {
       this.httpAuthenticationPassword,
       this.httpAuthenticationUsername,
       this.id,
+      this.insertInstant,
+      this.lastUpdateInstant,
       this.readTimeout,
       this.sslCertificate,
       this.url
