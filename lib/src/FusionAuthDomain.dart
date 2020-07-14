@@ -1786,6 +1786,7 @@ class FamilyEmailRequest {
 class FamilyMember {
   Map<String, dynamic> data;
   num insertInstant;
+  num lastUpdateInstant;
   bool owner;
   FamilyRole role;
   String userId;
@@ -1793,6 +1794,7 @@ class FamilyMember {
   FamilyMember({
       this.data,
       this.insertInstant,
+      this.lastUpdateInstant,
       this.owner,
       this.role,
       this.userId

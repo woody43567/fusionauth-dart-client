@@ -2466,6 +2466,7 @@ FamilyMember _$FamilyMemberFromJson(Map<String, dynamic> json) {
   return FamilyMember(
     data: json['data'] as Map<String, dynamic>,
     insertInstant: json['insertInstant'] as num,
+    lastUpdateInstant: json['lastUpdateInstant'] as num,
     owner: json['owner'] as bool,
     role: _$enumDecodeNullable(_$FamilyRoleEnumMap, json['role']),
     userId: json['userId'] as String,
@@ -2483,6 +2484,7 @@ Map<String, dynamic> _$FamilyMemberToJson(FamilyMember instance) {
 
   writeNotNull('data', instance.data);
   writeNotNull('insertInstant', instance.insertInstant);
+  writeNotNull('lastUpdateInstant', instance.lastUpdateInstant);
   writeNotNull('owner', instance.owner);
   writeNotNull('role', _$FamilyRoleEnumMap[instance.role]);
   writeNotNull('userId', instance.userId);
