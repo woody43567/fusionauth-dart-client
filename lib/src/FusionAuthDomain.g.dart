@@ -3692,9 +3692,6 @@ const _$AlgorithmEnumMap = {
   Algorithm.HS256: 'HS256',
   Algorithm.HS384: 'HS384',
   Algorithm.HS512: 'HS512',
-  Algorithm.PS256: 'PS256',
-  Algorithm.PS384: 'PS384',
-  Algorithm.PS512: 'PS512',
   Algorithm.RS256: 'RS256',
   Algorithm.RS384: 'RS384',
   Algorithm.RS512: 'RS512',
@@ -6087,15 +6084,24 @@ SecureIdentity _$SecureIdentityFromJson(Map<String, dynamic> json) {
         json['breachedPasswordLastCheckedInstant'] as num,
     breachedPasswordStatus: _$enumDecodeNullable(
         _$BreachedPasswordStatusEnumMap, json['breachedPasswordStatus']),
+    connectorId: json['connectorId'] as String,
     encryptionScheme: json['encryptionScheme'] as String,
     factor: json['factor'] as num,
     id: json['id'] as String,
+    lastLoginInstant: json['lastLoginInstant'] as num,
     password: json['password'] as String,
     passwordChangeReason: _$enumDecodeNullable(
         _$ChangePasswordReasonEnumMap, json['passwordChangeReason']),
     passwordChangeRequired: json['passwordChangeRequired'] as bool,
     passwordLastUpdateInstant: json['passwordLastUpdateInstant'] as num,
     salt: json['salt'] as String,
+    twoFactorDelivery: _$enumDecodeNullable(
+        _$TwoFactorDeliveryEnumMap, json['twoFactorDelivery']),
+    twoFactorEnabled: json['twoFactorEnabled'] as bool,
+    twoFactorSecret: json['twoFactorSecret'] as String,
+    username: json['username'] as String,
+    usernameStatus:
+        _$enumDecodeNullable(_$ContentStatusEnumMap, json['usernameStatus']),
     verified: json['verified'] as bool,
   );
 }
@@ -6113,15 +6119,24 @@ Map<String, dynamic> _$SecureIdentityToJson(SecureIdentity instance) {
       instance.breachedPasswordLastCheckedInstant);
   writeNotNull('breachedPasswordStatus',
       _$BreachedPasswordStatusEnumMap[instance.breachedPasswordStatus]);
+  writeNotNull('connectorId', instance.connectorId);
   writeNotNull('encryptionScheme', instance.encryptionScheme);
   writeNotNull('factor', instance.factor);
   writeNotNull('id', instance.id);
+  writeNotNull('lastLoginInstant', instance.lastLoginInstant);
   writeNotNull('password', instance.password);
   writeNotNull('passwordChangeReason',
       _$ChangePasswordReasonEnumMap[instance.passwordChangeReason]);
   writeNotNull('passwordChangeRequired', instance.passwordChangeRequired);
   writeNotNull('passwordLastUpdateInstant', instance.passwordLastUpdateInstant);
   writeNotNull('salt', instance.salt);
+  writeNotNull('twoFactorDelivery',
+      _$TwoFactorDeliveryEnumMap[instance.twoFactorDelivery]);
+  writeNotNull('twoFactorEnabled', instance.twoFactorEnabled);
+  writeNotNull('twoFactorSecret', instance.twoFactorSecret);
+  writeNotNull('username', instance.username);
+  writeNotNull(
+      'usernameStatus', _$ContentStatusEnumMap[instance.usernameStatus]);
   writeNotNull('verified', instance.verified);
   return val;
 }
@@ -6132,6 +6147,17 @@ const _$BreachedPasswordStatusEnumMap = {
   BreachedPasswordStatus.SubAddressMatch: 'SubAddressMatch',
   BreachedPasswordStatus.PasswordOnly: 'PasswordOnly',
   BreachedPasswordStatus.CommonPassword: 'CommonPassword',
+};
+
+const _$TwoFactorDeliveryEnumMap = {
+  TwoFactorDelivery.None: 'None',
+  TwoFactorDelivery.TextMessage: 'TextMessage',
+};
+
+const _$ContentStatusEnumMap = {
+  ContentStatus.ACTIVE: 'ACTIVE',
+  ContentStatus.PENDING: 'PENDING',
+  ContentStatus.REJECTED: 'REJECTED',
 };
 
 SendRequest _$SendRequestFromJson(Map<String, dynamic> json) {
@@ -6954,11 +6980,6 @@ Map<String, dynamic> _$TwoFactorRequestToJson(TwoFactorRequest instance) {
   return val;
 }
 
-const _$TwoFactorDeliveryEnumMap = {
-  TwoFactorDelivery.None: 'None',
-  TwoFactorDelivery.TextMessage: 'TextMessage',
-};
-
 TwoFactorSendRequest _$TwoFactorSendRequestFromJson(Map<String, dynamic> json) {
   return TwoFactorSendRequest(
     mobilePhone: json['mobilePhone'] as String,
@@ -7011,7 +7032,6 @@ User _$UserFromJson(Map<String, dynamic> json) {
     active: json['active'] as bool,
     birthDate: json['birthDate'] as String,
     cleanSpeakId: json['cleanSpeakId'] as String,
-    connectorId: json['connectorId'] as String,
     data: json['data'] as Map<String, dynamic>,
     email: json['email'] as String,
     expiry: json['expiry'] as num,
@@ -7019,7 +7039,6 @@ User _$UserFromJson(Map<String, dynamic> json) {
     fullName: json['fullName'] as String,
     imageUrl: json['imageUrl'] as String,
     insertInstant: json['insertInstant'] as num,
-    lastLoginInstant: json['lastLoginInstant'] as num,
     lastName: json['lastName'] as String,
     lastUpdateInstant: json['lastUpdateInstant'] as num,
     memberships: (json['memberships'] as List)
@@ -7038,27 +7057,29 @@ User _$UserFromJson(Map<String, dynamic> json) {
         ?.toList(),
     tenantId: json['tenantId'] as String,
     timezone: json['timezone'] as String,
-    twoFactorDelivery: _$enumDecodeNullable(
-        _$TwoFactorDeliveryEnumMap, json['twoFactorDelivery']),
-    twoFactorEnabled: json['twoFactorEnabled'] as bool,
-    twoFactorSecret: json['twoFactorSecret'] as String,
-    username: json['username'] as String,
-    usernameStatus:
-        _$enumDecodeNullable(_$ContentStatusEnumMap, json['usernameStatus']),
   )
     ..breachedPasswordLastCheckedInstant =
         json['breachedPasswordLastCheckedInstant'] as num
     ..breachedPasswordStatus = _$enumDecodeNullable(
         _$BreachedPasswordStatusEnumMap, json['breachedPasswordStatus'])
+    ..connectorId = json['connectorId'] as String
     ..encryptionScheme = json['encryptionScheme'] as String
     ..factor = json['factor'] as num
     ..id = json['id'] as String
+    ..lastLoginInstant = json['lastLoginInstant'] as num
     ..password = json['password'] as String
     ..passwordChangeReason = _$enumDecodeNullable(
         _$ChangePasswordReasonEnumMap, json['passwordChangeReason'])
     ..passwordChangeRequired = json['passwordChangeRequired'] as bool
     ..passwordLastUpdateInstant = json['passwordLastUpdateInstant'] as num
     ..salt = json['salt'] as String
+    ..twoFactorDelivery = _$enumDecodeNullable(
+        _$TwoFactorDeliveryEnumMap, json['twoFactorDelivery'])
+    ..twoFactorEnabled = json['twoFactorEnabled'] as bool
+    ..twoFactorSecret = json['twoFactorSecret'] as String
+    ..username = json['username'] as String
+    ..usernameStatus =
+        _$enumDecodeNullable(_$ContentStatusEnumMap, json['usernameStatus'])
     ..verified = json['verified'] as bool;
 }
 
@@ -7075,20 +7096,28 @@ Map<String, dynamic> _$UserToJson(User instance) {
       instance.breachedPasswordLastCheckedInstant);
   writeNotNull('breachedPasswordStatus',
       _$BreachedPasswordStatusEnumMap[instance.breachedPasswordStatus]);
+  writeNotNull('connectorId', instance.connectorId);
   writeNotNull('encryptionScheme', instance.encryptionScheme);
   writeNotNull('factor', instance.factor);
   writeNotNull('id', instance.id);
+  writeNotNull('lastLoginInstant', instance.lastLoginInstant);
   writeNotNull('password', instance.password);
   writeNotNull('passwordChangeReason',
       _$ChangePasswordReasonEnumMap[instance.passwordChangeReason]);
   writeNotNull('passwordChangeRequired', instance.passwordChangeRequired);
   writeNotNull('passwordLastUpdateInstant', instance.passwordLastUpdateInstant);
   writeNotNull('salt', instance.salt);
+  writeNotNull('twoFactorDelivery',
+      _$TwoFactorDeliveryEnumMap[instance.twoFactorDelivery]);
+  writeNotNull('twoFactorEnabled', instance.twoFactorEnabled);
+  writeNotNull('twoFactorSecret', instance.twoFactorSecret);
+  writeNotNull('username', instance.username);
+  writeNotNull(
+      'usernameStatus', _$ContentStatusEnumMap[instance.usernameStatus]);
   writeNotNull('verified', instance.verified);
   writeNotNull('active', instance.active);
   writeNotNull('birthDate', instance.birthDate);
   writeNotNull('cleanSpeakId', instance.cleanSpeakId);
-  writeNotNull('connectorId', instance.connectorId);
   writeNotNull('data', instance.data);
   writeNotNull('email', instance.email);
   writeNotNull('expiry', instance.expiry);
@@ -7096,7 +7125,6 @@ Map<String, dynamic> _$UserToJson(User instance) {
   writeNotNull('fullName', instance.fullName);
   writeNotNull('imageUrl', instance.imageUrl);
   writeNotNull('insertInstant', instance.insertInstant);
-  writeNotNull('lastLoginInstant', instance.lastLoginInstant);
   writeNotNull('lastName', instance.lastName);
   writeNotNull('lastUpdateInstant', instance.lastUpdateInstant);
   writeNotNull('memberships', instance.memberships);
@@ -7107,21 +7135,8 @@ Map<String, dynamic> _$UserToJson(User instance) {
   writeNotNull('registrations', instance.registrations);
   writeNotNull('tenantId', instance.tenantId);
   writeNotNull('timezone', instance.timezone);
-  writeNotNull('twoFactorDelivery',
-      _$TwoFactorDeliveryEnumMap[instance.twoFactorDelivery]);
-  writeNotNull('twoFactorEnabled', instance.twoFactorEnabled);
-  writeNotNull('twoFactorSecret', instance.twoFactorSecret);
-  writeNotNull('username', instance.username);
-  writeNotNull(
-      'usernameStatus', _$ContentStatusEnumMap[instance.usernameStatus]);
   return val;
 }
-
-const _$ContentStatusEnumMap = {
-  ContentStatus.ACTIVE: 'ACTIVE',
-  ContentStatus.PENDING: 'PENDING',
-  ContentStatus.REJECTED: 'REJECTED',
-};
 
 UserAction _$UserActionFromJson(Map<String, dynamic> json) {
   return UserAction(

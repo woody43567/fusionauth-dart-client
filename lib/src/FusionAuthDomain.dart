@@ -126,12 +126,6 @@ enum Algorithm {
   HS384,
   @JsonValue('HS512')
   HS512,
-  @JsonValue('PS256')
-  PS256,
-  @JsonValue('PS384')
-  PS384,
-  @JsonValue('PS512')
-  PS512,
   @JsonValue('RS256')
   RS256,
   @JsonValue('RS384')
@@ -4364,27 +4358,41 @@ enum SecureGeneratorType {
 class SecureIdentity {
   num breachedPasswordLastCheckedInstant;
   BreachedPasswordStatus breachedPasswordStatus;
+  String connectorId;
   String encryptionScheme;
   num factor;
   String id;
+  num lastLoginInstant;
   String password;
   ChangePasswordReason passwordChangeReason;
   bool passwordChangeRequired;
   num passwordLastUpdateInstant;
   String salt;
+  TwoFactorDelivery twoFactorDelivery;
+  bool twoFactorEnabled;
+  String twoFactorSecret;
+  String username;
+  ContentStatus usernameStatus;
   bool verified;
 
   SecureIdentity({
       this.breachedPasswordLastCheckedInstant,
       this.breachedPasswordStatus,
+      this.connectorId,
       this.encryptionScheme,
       this.factor,
       this.id,
+      this.lastLoginInstant,
       this.password,
       this.passwordChangeReason,
       this.passwordChangeRequired,
       this.passwordLastUpdateInstant,
       this.salt,
+      this.twoFactorDelivery,
+      this.twoFactorEnabled,
+      this.twoFactorSecret,
+      this.username,
+      this.usernameStatus,
       this.verified
   });
 
@@ -4994,7 +5002,6 @@ class User extends SecureIdentity {
   bool active;
   String birthDate;
   String cleanSpeakId;
-  String connectorId;
   Map<String, dynamic> data;
   String email;
   num expiry;
@@ -5002,7 +5009,6 @@ class User extends SecureIdentity {
   String fullName;
   String imageUrl;
   num insertInstant;
-  num lastLoginInstant;
   String lastName;
   num lastUpdateInstant;
   List<GroupMember> memberships;
@@ -5013,17 +5019,11 @@ class User extends SecureIdentity {
   List<UserRegistration> registrations;
   String tenantId;
   String timezone;
-  TwoFactorDelivery twoFactorDelivery;
-  bool twoFactorEnabled;
-  String twoFactorSecret;
-  String username;
-  ContentStatus usernameStatus;
 
   User({
       this.active,
       this.birthDate,
       this.cleanSpeakId,
-      this.connectorId,
       this.data,
       this.email,
       this.expiry,
@@ -5031,7 +5031,6 @@ class User extends SecureIdentity {
       this.fullName,
       this.imageUrl,
       this.insertInstant,
-      this.lastLoginInstant,
       this.lastName,
       this.lastUpdateInstant,
       this.memberships,
@@ -5041,12 +5040,7 @@ class User extends SecureIdentity {
       this.preferredLanguages,
       this.registrations,
       this.tenantId,
-      this.timezone,
-      this.twoFactorDelivery,
-      this.twoFactorEnabled,
-      this.twoFactorSecret,
-      this.username,
-      this.usernameStatus
+      this.timezone
   });
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
