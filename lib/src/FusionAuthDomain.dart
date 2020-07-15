@@ -126,6 +126,12 @@ enum Algorithm {
   HS384,
   @JsonValue('HS512')
   HS512,
+  @JsonValue('PS256')
+  PS256,
+  @JsonValue('PS384')
+  PS384,
+  @JsonValue('PS512')
+  PS512,
   @JsonValue('RS256')
   RS256,
   @JsonValue('RS384')
