@@ -727,8 +727,9 @@ Map<String, dynamic> _$AuthenticationTokenConfigurationToJson(
   return val;
 }
 
-BaseConnector _$BaseConnectorFromJson(Map<String, dynamic> json) {
-  return BaseConnector(
+BaseConnectorConfiguration _$BaseConnectorConfigurationFromJson(
+    Map<String, dynamic> json) {
+  return BaseConnectorConfiguration(
     data: json['data'] as Map<String, dynamic>,
     debug: json['debug'] as bool,
     id: json['id'] as String,
@@ -739,7 +740,8 @@ BaseConnector _$BaseConnectorFromJson(Map<String, dynamic> json) {
   );
 }
 
-Map<String, dynamic> _$BaseConnectorToJson(BaseConnector instance) {
+Map<String, dynamic> _$BaseConnectorConfigurationToJson(
+    BaseConnectorConfiguration instance) {
   final val = <String, dynamic>{};
 
   void writeNotNull(String key, dynamic value) {
@@ -1066,7 +1068,8 @@ ConnectorRequest _$ConnectorRequestFromJson(Map<String, dynamic> json) {
   return ConnectorRequest(
     connector: json['connector'] == null
         ? null
-        : BaseConnector.fromJson(json['connector'] as Map<String, dynamic>),
+        : BaseConnectorConfiguration.fromJson(
+            json['connector'] as Map<String, dynamic>),
   );
 }
 
@@ -1087,11 +1090,12 @@ ConnectorResponse _$ConnectorResponseFromJson(Map<String, dynamic> json) {
   return ConnectorResponse(
     connector: json['connector'] == null
         ? null
-        : BaseConnector.fromJson(json['connector'] as Map<String, dynamic>),
+        : BaseConnectorConfiguration.fromJson(
+            json['connector'] as Map<String, dynamic>),
     connectors: (json['connectors'] as List)
         ?.map((e) => e == null
             ? null
-            : BaseConnector.fromJson(e as Map<String, dynamic>))
+            : BaseConnectorConfiguration.fromJson(e as Map<String, dynamic>))
         ?.toList(),
   );
 }
@@ -2636,9 +2640,6 @@ const _$FormTypeEnumMap = {
 
 FormField _$FormFieldFromJson(Map<String, dynamic> json) {
   return FormField(
-    admin: (json['admin'] as List)
-        ?.map((e) => _$enumDecodeNullable(_$FormFieldAdminPolicyEnumMap, e))
-        ?.toList(),
     confirm: json['confirm'] as bool,
     consentId: json['consentId'] as String,
     control: _$enumDecodeNullable(_$FormControlEnumMap, json['control']),
@@ -2668,8 +2669,6 @@ Map<String, dynamic> _$FormFieldToJson(FormField instance) {
     }
   }
 
-  writeNotNull('admin',
-      instance.admin?.map((e) => _$FormFieldAdminPolicyEnumMap[e])?.toList());
   writeNotNull('confirm', instance.confirm);
   writeNotNull('consentId', instance.consentId);
   writeNotNull('control', _$FormControlEnumMap[instance.control]);
@@ -2686,11 +2685,6 @@ Map<String, dynamic> _$FormFieldToJson(FormField instance) {
   writeNotNull('validator', instance.validator);
   return val;
 }
-
-const _$FormFieldAdminPolicyEnumMap = {
-  FormFieldAdminPolicy.Edit: 'Edit',
-  FormFieldAdminPolicy.View: 'View',
-};
 
 const _$FormControlEnumMap = {
   FormControl.checkbox: 'checkbox',
@@ -2849,8 +2843,9 @@ Map<String, dynamic> _$FormStepToJson(FormStep instance) {
   return val;
 }
 
-FusionAuthConnector _$FusionAuthConnectorFromJson(Map<String, dynamic> json) {
-  return FusionAuthConnector()
+FusionAuthConnectorConfiguration _$FusionAuthConnectorConfigurationFromJson(
+    Map<String, dynamic> json) {
+  return FusionAuthConnectorConfiguration()
     ..data = json['data'] as Map<String, dynamic>
     ..debug = json['debug'] as bool
     ..id = json['id'] as String
@@ -2860,7 +2855,8 @@ FusionAuthConnector _$FusionAuthConnectorFromJson(Map<String, dynamic> json) {
     ..type = _$enumDecodeNullable(_$ConnectorTypeEnumMap, json['type']);
 }
 
-Map<String, dynamic> _$FusionAuthConnectorToJson(FusionAuthConnector instance) {
+Map<String, dynamic> _$FusionAuthConnectorConfigurationToJson(
+    FusionAuthConnectorConfiguration instance) {
   final val = <String, dynamic>{};
 
   void writeNotNull(String key, dynamic value) {
@@ -2879,8 +2875,9 @@ Map<String, dynamic> _$FusionAuthConnectorToJson(FusionAuthConnector instance) {
   return val;
 }
 
-GenericConnector _$GenericConnectorFromJson(Map<String, dynamic> json) {
-  return GenericConnector(
+GenericConnectorConfiguration _$GenericConnectorConfigurationFromJson(
+    Map<String, dynamic> json) {
+  return GenericConnectorConfiguration(
     authenticationURL: json['authenticationURL'] as String,
     connectTimeout: json['connectTimeout'] as num,
     headers: (json['headers'] as Map<String, dynamic>)?.map(
@@ -2901,7 +2898,8 @@ GenericConnector _$GenericConnectorFromJson(Map<String, dynamic> json) {
     ..type = _$enumDecodeNullable(_$ConnectorTypeEnumMap, json['type']);
 }
 
-Map<String, dynamic> _$GenericConnectorToJson(GenericConnector instance) {
+Map<String, dynamic> _$GenericConnectorConfigurationToJson(
+    GenericConnectorConfiguration instance) {
   final val = <String, dynamic>{};
 
   void writeNotNull(String key, dynamic value) {
@@ -4154,8 +4152,9 @@ Map<String, dynamic> _$LambdaResponseToJson(LambdaResponse instance) {
   return val;
 }
 
-LDAPConnector _$LDAPConnectorFromJson(Map<String, dynamic> json) {
-  return LDAPConnector(
+LDAPConnectorConfiguration _$LDAPConnectorConfigurationFromJson(
+    Map<String, dynamic> json) {
+  return LDAPConnectorConfiguration(
     authenticationURL: json['authenticationURL'] as String,
     baseStructure: json['baseStructure'] as String,
     connectTimeout: json['connectTimeout'] as num,
@@ -4180,7 +4179,8 @@ LDAPConnector _$LDAPConnectorFromJson(Map<String, dynamic> json) {
     ..type = _$enumDecodeNullable(_$ConnectorTypeEnumMap, json['type']);
 }
 
-Map<String, dynamic> _$LDAPConnectorToJson(LDAPConnector instance) {
+Map<String, dynamic> _$LDAPConnectorConfigurationToJson(
+    LDAPConnectorConfiguration instance) {
   final val = <String, dynamic>{};
 
   void writeNotNull(String key, dynamic value) {

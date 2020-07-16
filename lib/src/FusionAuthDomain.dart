@@ -488,7 +488,7 @@ class AuthenticationTokenConfiguration extends Enableable {
 
 // Do not require a setter for 'type', it is defined by the concrete class and is not mutable
 @JsonSerializable()
-class BaseConnector {
+class BaseConnectorConfiguration {
   Map<String, dynamic> data;
   bool debug;
   String id;
@@ -497,7 +497,7 @@ class BaseConnector {
   String name;
   ConnectorType type;
 
-  BaseConnector({
+  BaseConnectorConfiguration({
       this.data,
       this.debug,
       this.id,
@@ -507,8 +507,8 @@ class BaseConnector {
       this.type
   });
 
-  factory BaseConnector.fromJson(Map<String, dynamic> json) => _$BaseConnectorFromJson(json);
-  Map<String, dynamic> toJson() => _$BaseConnectorToJson(this);
+  factory BaseConnectorConfiguration.fromJson(Map<String, dynamic> json) => _$BaseConnectorConfigurationFromJson(json);
+  Map<String, dynamic> toJson() => _$BaseConnectorConfigurationToJson(this);
 }
 
 /// Base-class for all FusionAuth events.
@@ -803,7 +803,7 @@ class ConnectorPolicy {
 /// @author Trevor Smith
 @JsonSerializable()
 class ConnectorRequest {
-  BaseConnector connector;
+  BaseConnectorConfiguration connector;
 
   ConnectorRequest({
       this.connector
@@ -816,8 +816,8 @@ class ConnectorRequest {
 /// @author Trevor Smith
 @JsonSerializable()
 class ConnectorResponse {
-  BaseConnector connector;
-  List<BaseConnector> connectors;
+  BaseConnectorConfiguration connector;
+  List<BaseConnectorConfiguration> connectors;
 
   ConnectorResponse({
       this.connector,
@@ -1947,7 +1947,6 @@ enum FormDataType {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class FormField {
-  List<FormFieldAdminPolicy> admin;
   bool confirm;
   String consentId;
   FormControl control;
@@ -1964,7 +1963,6 @@ class FormField {
   FormFieldValidator validator;
 
   FormField({
-      this.admin,
       this.confirm,
       this.consentId,
       this.control,
@@ -2095,19 +2093,19 @@ enum FormType {
 ///
 /// @author Trevor Smith
 @JsonSerializable()
-class FusionAuthConnector extends BaseConnector {
+class FusionAuthConnectorConfiguration extends BaseConnectorConfiguration {
 
-  FusionAuthConnector();
+  FusionAuthConnectorConfiguration();
 
-  factory FusionAuthConnector.fromJson(Map<String, dynamic> json) => _$FusionAuthConnectorFromJson(json);
-  Map<String, dynamic> toJson() => _$FusionAuthConnectorToJson(this);
+  factory FusionAuthConnectorConfiguration.fromJson(Map<String, dynamic> json) => _$FusionAuthConnectorConfigurationFromJson(json);
+  Map<String, dynamic> toJson() => _$FusionAuthConnectorConfigurationToJson(this);
 }
 
 /// Models a generic connector.
 ///
 /// @author Trevor Smith
 @JsonSerializable()
-class GenericConnector extends BaseConnector {
+class GenericConnectorConfiguration extends BaseConnectorConfiguration {
   String authenticationURL;
   num connectTimeout;
   Map<String, String> headers;
@@ -2117,7 +2115,7 @@ class GenericConnector extends BaseConnector {
   String retrieveUserURL;
   String sslCertificateKeyId;
 
-  GenericConnector({
+  GenericConnectorConfiguration({
       this.authenticationURL,
       this.connectTimeout,
       this.headers,
@@ -2128,8 +2126,8 @@ class GenericConnector extends BaseConnector {
       this.sslCertificateKeyId
   });
 
-  factory GenericConnector.fromJson(Map<String, dynamic> json) => _$GenericConnectorFromJson(json);
-  Map<String, dynamic> toJson() => _$GenericConnectorToJson(this);
+  factory GenericConnectorConfiguration.fromJson(Map<String, dynamic> json) => _$GenericConnectorConfigurationFromJson(json);
+  Map<String, dynamic> toJson() => _$GenericConnectorConfigurationToJson(this);
 }
 
 /// @author Daniel DeGroff
@@ -3036,7 +3034,7 @@ enum LambdaType {
 ///
 /// @author Trevor Smith
 @JsonSerializable()
-class LDAPConnector extends BaseConnector {
+class LDAPConnectorConfiguration extends BaseConnectorConfiguration {
   String authenticationURL;
   String baseStructure;
   num connectTimeout;
@@ -3049,7 +3047,7 @@ class LDAPConnector extends BaseConnector {
   String systemAccountDN;
   String systemAccountPassword;
 
-  LDAPConnector({
+  LDAPConnectorConfiguration({
       this.authenticationURL,
       this.baseStructure,
       this.connectTimeout,
@@ -3063,8 +3061,8 @@ class LDAPConnector extends BaseConnector {
       this.systemAccountPassword
   });
 
-  factory LDAPConnector.fromJson(Map<String, dynamic> json) => _$LDAPConnectorFromJson(json);
-  Map<String, dynamic> toJson() => _$LDAPConnectorToJson(this);
+  factory LDAPConnectorConfiguration.fromJson(Map<String, dynamic> json) => _$LDAPConnectorConfigurationFromJson(json);
+  Map<String, dynamic> toJson() => _$LDAPConnectorConfigurationToJson(this);
 }
 
 enum LDAPSecurityMethod {
