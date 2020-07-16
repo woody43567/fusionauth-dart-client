@@ -3690,9 +3690,6 @@ const _$AlgorithmEnumMap = {
   Algorithm.HS256: 'HS256',
   Algorithm.HS384: 'HS384',
   Algorithm.HS512: 'HS512',
-  Algorithm.PS256: 'PS256',
-  Algorithm.PS384: 'PS384',
-  Algorithm.PS512: 'PS512',
   Algorithm.RS256: 'RS256',
   Algorithm.RS384: 'RS384',
   Algorithm.RS512: 'RS512',
@@ -4158,7 +4155,7 @@ LDAPConnectorConfiguration _$LDAPConnectorConfigurationFromJson(
     authenticationURL: json['authenticationURL'] as String,
     baseStructure: json['baseStructure'] as String,
     connectTimeout: json['connectTimeout'] as num,
-    emailAttribute: json['emailAttribute'] as String,
+    loginIdAttribute: json['loginIdAttribute'] as String,
     identifyingAttribute: json['identifyingAttribute'] as String,
     lambdaConfiguration: json['lambdaConfiguration'],
     readTimeout: json['readTimeout'] as num,
@@ -4199,7 +4196,7 @@ Map<String, dynamic> _$LDAPConnectorConfigurationToJson(
   writeNotNull('authenticationURL', instance.authenticationURL);
   writeNotNull('baseStructure', instance.baseStructure);
   writeNotNull('connectTimeout', instance.connectTimeout);
-  writeNotNull('emailAttribute', instance.emailAttribute);
+  writeNotNull('loginIdAttribute', instance.loginIdAttribute);
   writeNotNull('identifyingAttribute', instance.identifyingAttribute);
   writeNotNull('lambdaConfiguration', instance.lambdaConfiguration);
   writeNotNull('readTimeout', instance.readTimeout);

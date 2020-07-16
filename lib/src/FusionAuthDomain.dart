@@ -3032,7 +3032,7 @@ class LDAPConnectorConfiguration extends BaseConnectorConfiguration {
   String authenticationURL;
   String baseStructure;
   num connectTimeout;
-  String emailAttribute;
+  String loginIdAttribute;
   String identifyingAttribute;
   dynamic lambdaConfiguration;
   num readTimeout;
@@ -3045,7 +3045,7 @@ class LDAPConnectorConfiguration extends BaseConnectorConfiguration {
       this.authenticationURL,
       this.baseStructure,
       this.connectTimeout,
-      this.emailAttribute,
+      this.loginIdAttribute,
       this.identifyingAttribute,
       this.lambdaConfiguration,
       this.readTimeout,
