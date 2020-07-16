@@ -4002,9 +4002,6 @@ const _$KeyAlgorithmEnumMap = {
   KeyAlgorithm.HS256: 'HS256',
   KeyAlgorithm.HS384: 'HS384',
   KeyAlgorithm.HS512: 'HS512',
-  KeyAlgorithm.PS256: 'PS256',
-  KeyAlgorithm.PS384: 'PS384',
-  KeyAlgorithm.PS512: 'PS512',
   KeyAlgorithm.RS256: 'RS256',
   KeyAlgorithm.RS384: 'RS384',
   KeyAlgorithm.RS512: 'RS512',
@@ -4155,9 +4152,9 @@ LDAPConnectorConfiguration _$LDAPConnectorConfigurationFromJson(
     authenticationURL: json['authenticationURL'] as String,
     baseStructure: json['baseStructure'] as String,
     connectTimeout: json['connectTimeout'] as num,
-    loginIdAttribute: json['loginIdAttribute'] as String,
     identifyingAttribute: json['identifyingAttribute'] as String,
     lambdaConfiguration: json['lambdaConfiguration'],
+    loginIdAttribute: json['loginIdAttribute'] as String,
     readTimeout: json['readTimeout'] as num,
     requestedAttributes: (json['requestedAttributes'] as List)
         ?.map((e) => e as String)
@@ -4196,9 +4193,9 @@ Map<String, dynamic> _$LDAPConnectorConfigurationToJson(
   writeNotNull('authenticationURL', instance.authenticationURL);
   writeNotNull('baseStructure', instance.baseStructure);
   writeNotNull('connectTimeout', instance.connectTimeout);
-  writeNotNull('loginIdAttribute', instance.loginIdAttribute);
   writeNotNull('identifyingAttribute', instance.identifyingAttribute);
   writeNotNull('lambdaConfiguration', instance.lambdaConfiguration);
+  writeNotNull('loginIdAttribute', instance.loginIdAttribute);
   writeNotNull('readTimeout', instance.readTimeout);
   writeNotNull('requestedAttributes', instance.requestedAttributes);
   writeNotNull(
