@@ -778,16 +778,16 @@ enum ClientAuthenticationMethod {
 /// @author Trevor Smith
 @JsonSerializable()
 class ConnectorPolicy {
-  ConnectorUserAction action;
   String connectorId;
   Map<String, dynamic> data;
   Set<String> domains;
+  bool migrate;
 
   ConnectorPolicy({
-      this.action,
       this.connectorId,
       this.data,
-      this.domains
+      this.domains,
+      this.migrate
   });
 
   factory ConnectorPolicy.fromJson(Map<String, dynamic> json) => _$ConnectorPolicyFromJson(json);
@@ -832,16 +832,6 @@ enum ConnectorType {
   Generic,
   @JsonValue('LDAP')
   LDAP
-}
-
-/// @author Trevor Smith
-enum ConnectorUserAction {
-  @JsonValue('Shadow')
-  Shadow,
-  @JsonValue('Synchronize')
-  Synchronize,
-  @JsonValue('Migrate')
-  Migrate
 }
 
 /// Models a consent.
@@ -2106,7 +2096,6 @@ class GenericConnectorConfiguration extends BaseConnectorConfiguration {
   String httpAuthenticationPassword;
   String httpAuthenticationUsername;
   num readTimeout;
-  String retrieveUserURL;
   String sslCertificateKeyId;
 
   GenericConnectorConfiguration({
@@ -2116,7 +2105,6 @@ class GenericConnectorConfiguration extends BaseConnectorConfiguration {
       this.httpAuthenticationPassword,
       this.httpAuthenticationUsername,
       this.readTimeout,
-      this.retrieveUserURL,
       this.sslCertificateKeyId
   });
 

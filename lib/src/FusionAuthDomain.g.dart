@@ -1035,10 +1035,10 @@ Map<String, dynamic> _$CleanSpeakConfigurationToJson(
 
 ConnectorPolicy _$ConnectorPolicyFromJson(Map<String, dynamic> json) {
   return ConnectorPolicy(
-    action: _$enumDecodeNullable(_$ConnectorUserActionEnumMap, json['action']),
     connectorId: json['connectorId'] as String,
     data: json['data'] as Map<String, dynamic>,
     domains: (json['domains'] as List)?.map((e) => e as String)?.toSet(),
+    migrate: json['migrate'] as bool,
   );
 }
 
@@ -1051,18 +1051,12 @@ Map<String, dynamic> _$ConnectorPolicyToJson(ConnectorPolicy instance) {
     }
   }
 
-  writeNotNull('action', _$ConnectorUserActionEnumMap[instance.action]);
   writeNotNull('connectorId', instance.connectorId);
   writeNotNull('data', instance.data);
   writeNotNull('domains', instance.domains?.toList());
+  writeNotNull('migrate', instance.migrate);
   return val;
 }
-
-const _$ConnectorUserActionEnumMap = {
-  ConnectorUserAction.Shadow: 'Shadow',
-  ConnectorUserAction.Synchronize: 'Synchronize',
-  ConnectorUserAction.Migrate: 'Migrate',
-};
 
 ConnectorRequest _$ConnectorRequestFromJson(Map<String, dynamic> json) {
   return ConnectorRequest(
@@ -2886,7 +2880,6 @@ GenericConnectorConfiguration _$GenericConnectorConfigurationFromJson(
     httpAuthenticationPassword: json['httpAuthenticationPassword'] as String,
     httpAuthenticationUsername: json['httpAuthenticationUsername'] as String,
     readTimeout: json['readTimeout'] as num,
-    retrieveUserURL: json['retrieveUserURL'] as String,
     sslCertificateKeyId: json['sslCertificateKeyId'] as String,
   )
     ..data = json['data'] as Map<String, dynamic>
@@ -2923,7 +2916,6 @@ Map<String, dynamic> _$GenericConnectorConfigurationToJson(
   writeNotNull(
       'httpAuthenticationUsername', instance.httpAuthenticationUsername);
   writeNotNull('readTimeout', instance.readTimeout);
-  writeNotNull('retrieveUserURL', instance.retrieveUserURL);
   writeNotNull('sslCertificateKeyId', instance.sslCertificateKeyId);
   return val;
 }
