@@ -308,6 +308,7 @@ Application _$ApplicationFromJson(Map<String, dynamic> json) {
         ? null
         : ApplicationRegistrationDeletePolicy.fromJson(
             json['registrationDeletePolicy'] as Map<String, dynamic>),
+    registrationEditFormId: json['registrationEditFormId'] as String,
     roles: (json['roles'] as List)
         ?.map((e) => e == null
             ? null
@@ -348,6 +349,7 @@ Map<String, dynamic> _$ApplicationToJson(Application instance) {
   writeNotNull('passwordlessConfiguration', instance.passwordlessConfiguration);
   writeNotNull('registrationConfiguration', instance.registrationConfiguration);
   writeNotNull('registrationDeletePolicy', instance.registrationDeletePolicy);
+  writeNotNull('registrationEditFormId', instance.registrationEditFormId);
   writeNotNull('roles', instance.roles);
   writeNotNull('samlv2Configuration', instance.samlv2Configuration);
   writeNotNull('tenantId', instance.tenantId);
@@ -2610,6 +2612,8 @@ Map<String, dynamic> _$FormToJson(Form instance) {
 
 const _$FormTypeEnumMap = {
   FormType.registration: 'registration',
+  FormType.adminRegistrationEdit: 'adminRegistrationEdit',
+  FormType.adminUserEdit: 'adminUserEdit',
 };
 
 FormField _$FormFieldFromJson(Map<String, dynamic> json) {
@@ -2800,6 +2804,7 @@ Map<String, dynamic> _$FormResponseToJson(FormResponse instance) {
 
 FormStep _$FormStepFromJson(Map<String, dynamic> json) {
   return FormStep(
+    description: json['description'] as String,
     fields: (json['fields'] as List)?.map((e) => e as String)?.toList(),
   );
 }
@@ -2813,6 +2818,7 @@ Map<String, dynamic> _$FormStepToJson(FormStep instance) {
     }
   }
 
+  writeNotNull('description', instance.description);
   writeNotNull('fields', instance.fields);
   return val;
 }
@@ -6472,6 +6478,7 @@ Tenant _$TenantFromJson(Map<String, dynamic> json) {
         ? null
         : TenantUserDeletePolicy.fromJson(
             json['userDeletePolicy'] as Map<String, dynamic>),
+    userEditFormId: json['userEditFormId'] as String,
   );
 }
 
@@ -6510,6 +6517,7 @@ Map<String, dynamic> _$TenantToJson(Tenant instance) {
   writeNotNull('passwordValidationRules', instance.passwordValidationRules);
   writeNotNull('themeId', instance.themeId);
   writeNotNull('userDeletePolicy', instance.userDeletePolicy);
+  writeNotNull('userEditFormId', instance.userEditFormId);
   return val;
 }
 

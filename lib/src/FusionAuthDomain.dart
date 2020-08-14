@@ -196,6 +196,7 @@ class Application {
   PasswordlessConfiguration passwordlessConfiguration;
   RegistrationConfiguration registrationConfiguration;
   ApplicationRegistrationDeletePolicy registrationDeletePolicy;
+  String registrationEditFormId;
   List<ApplicationRole> roles;
   SAMLv2Configuration samlv2Configuration;
   String tenantId;
@@ -218,6 +219,7 @@ class Application {
       this.passwordlessConfiguration,
       this.registrationConfiguration,
       this.registrationDeletePolicy,
+      this.registrationEditFormId,
       this.roles,
       this.samlv2Configuration,
       this.tenantId,
@@ -2045,9 +2047,11 @@ class FormResponse {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class FormStep {
+  String description;
   List<String> fields;
 
   FormStep({
+      this.description,
       this.fields
   });
 
@@ -2058,7 +2062,11 @@ class FormStep {
 /// @author Daniel DeGroff
 enum FormType {
   @JsonValue('registration')
-  registration
+  registration,
+  @JsonValue('adminRegistrationEdit')
+  adminRegistrationEdit,
+  @JsonValue('adminUserEdit')
+  adminUserEdit
 }
 
 /// Models the FusionAuth connector.
@@ -4584,6 +4592,7 @@ class Tenant {
   PasswordValidationRules passwordValidationRules;
   String themeId;
   TenantUserDeletePolicy userDeletePolicy;
+  String userEditFormId;
 
   Tenant({
       this.configured,
@@ -4607,7 +4616,8 @@ class Tenant {
       this.passwordEncryptionConfiguration,
       this.passwordValidationRules,
       this.themeId,
-      this.userDeletePolicy
+      this.userDeletePolicy,
+      this.userEditFormId
   });
 
   factory Tenant.fromJson(Map<String, dynamic> json) => _$TenantFromJson(json);
