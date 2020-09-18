@@ -2848,7 +2848,6 @@ Map<String, dynamic> _$FormResponseToJson(FormResponse instance) {
 
 FormStep _$FormStepFromJson(Map<String, dynamic> json) {
   return FormStep(
-    description: json['description'] as String,
     fields: (json['fields'] as List)?.map((e) => e as String)?.toList(),
   );
 }
@@ -2862,7 +2861,6 @@ Map<String, dynamic> _$FormStepToJson(FormStep instance) {
     }
   }
 
-  writeNotNull('description', instance.description);
   writeNotNull('fields', instance.fields);
   return val;
 }
@@ -5740,6 +5738,30 @@ const _$RegistrationTypeEnumMap = {
   RegistrationType.basic: 'basic',
   RegistrationType.advanced: 'advanced',
 };
+
+RegistrationEditRequest _$RegistrationEditRequestFromJson(
+    Map<String, dynamic> json) {
+  return RegistrationEditRequest(
+    userRegistration: json['userRegistration'] == null
+        ? null
+        : UserRegistration.fromJson(
+            json['userRegistration'] as Map<String, dynamic>),
+  );
+}
+
+Map<String, dynamic> _$RegistrationEditRequestToJson(
+    RegistrationEditRequest instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('userRegistration', instance.userRegistration);
+  return val;
+}
 
 RegistrationReportResponse _$RegistrationReportResponseFromJson(
     Map<String, dynamic> json) {

@@ -2071,11 +2071,9 @@ class FormResponse {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class FormStep {
-  String description;
   List<String> fields;
 
   FormStep({
-      this.description,
       this.fields
   });
 
@@ -4110,6 +4108,19 @@ class RegistrationConfiguration extends Enableable {
 
   factory RegistrationConfiguration.fromJson(Map<String, dynamic> json) => _$RegistrationConfigurationFromJson(json);
   Map<String, dynamic> toJson() => _$RegistrationConfigurationToJson(this);
+}
+
+/// @author Brett Guy
+@JsonSerializable()
+class RegistrationEditRequest {
+  UserRegistration userRegistration;
+
+  RegistrationEditRequest({
+      this.userRegistration
+  });
+
+  factory RegistrationEditRequest.fromJson(Map<String, dynamic> json) => _$RegistrationEditRequestFromJson(json);
+  Map<String, dynamic> toJson() => _$RegistrationEditRequestToJson(this);
 }
 
 /// Response for the registration report.
