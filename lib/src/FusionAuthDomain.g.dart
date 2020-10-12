@@ -312,7 +312,7 @@ Application _$ApplicationFromJson(Map<String, dynamic> json) {
         ? null
         : ApplicationRegistrationDeletePolicy.fromJson(
             json['registrationDeletePolicy'] as Map<String, dynamic>),
-    registrationEditFormId: json['registrationEditFormId'] as String,
+    formConfiguration.registrationFormId: json['formConfiguration.registrationFormId'] as String,
     roles: (json['roles'] as List)
         ?.map((e) => e == null
             ? null
@@ -354,7 +354,7 @@ Map<String, dynamic> _$ApplicationToJson(Application instance) {
   writeNotNull('passwordlessConfiguration', instance.passwordlessConfiguration);
   writeNotNull('registrationConfiguration', instance.registrationConfiguration);
   writeNotNull('registrationDeletePolicy', instance.registrationDeletePolicy);
-  writeNotNull('registrationEditFormId', instance.registrationEditFormId);
+  writeNotNull('formConfiguration.registrationFormId', instance.formConfiguration.registrationFormId);
   writeNotNull('roles', instance.roles);
   writeNotNull('samlv2Configuration', instance.samlv2Configuration);
   writeNotNull('tenantId', instance.tenantId);

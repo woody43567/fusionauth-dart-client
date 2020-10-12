@@ -197,7 +197,7 @@ class Application {
   PasswordlessConfiguration passwordlessConfiguration;
   RegistrationConfiguration registrationConfiguration;
   ApplicationRegistrationDeletePolicy registrationDeletePolicy;
-  String registrationEditFormId;
+  String formConfiguration.registrationFormId;
   List<ApplicationRole> roles;
   SAMLv2Configuration samlv2Configuration;
   String tenantId;
@@ -221,7 +221,7 @@ class Application {
       this.passwordlessConfiguration,
       this.registrationConfiguration,
       this.registrationDeletePolicy,
-      this.registrationEditFormId,
+      this.formConfiguration.registrationFormId,
       this.roles,
       this.samlv2Configuration,
       this.tenantId,
