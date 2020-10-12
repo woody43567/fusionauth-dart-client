@@ -186,6 +186,7 @@ class Application {
   CleanSpeakConfiguration cleanSpeakConfiguration;
   Map<String, dynamic> data;
   ApplicationEmailConfiguration emailConfiguration;
+  ApplicationFormConfiguration formConfiguration;
   String id;
   num insertInstant;
   JWTConfiguration jwtConfiguration;
@@ -197,7 +198,6 @@ class Application {
   PasswordlessConfiguration passwordlessConfiguration;
   RegistrationConfiguration registrationConfiguration;
   ApplicationRegistrationDeletePolicy registrationDeletePolicy;
-  String formConfiguration.registrationFormId;
   List<ApplicationRole> roles;
   SAMLv2Configuration samlv2Configuration;
   String tenantId;
@@ -210,6 +210,7 @@ class Application {
       this.cleanSpeakConfiguration,
       this.data,
       this.emailConfiguration,
+      this.formConfiguration,
       this.id,
       this.insertInstant,
       this.jwtConfiguration,
@@ -221,7 +222,6 @@ class Application {
       this.passwordlessConfiguration,
       this.registrationConfiguration,
       this.registrationDeletePolicy,
-      this.formConfiguration.registrationFormId,
       this.roles,
       this.samlv2Configuration,
       this.tenantId,
@@ -261,6 +261,19 @@ class ApplicationEvent {
 
   factory ApplicationEvent.fromJson(Map<String, dynamic> json) => _$ApplicationEventFromJson(json);
   Map<String, dynamic> toJson() => _$ApplicationEventToJson(this);
+}
+
+/// @author Daniel DeGroff
+@JsonSerializable()
+class ApplicationFormConfiguration {
+  String registrationFormId;
+
+  ApplicationFormConfiguration({
+      this.registrationFormId
+  });
+
+  factory ApplicationFormConfiguration.fromJson(Map<String, dynamic> json) => _$ApplicationFormConfigurationFromJson(json);
+  Map<String, dynamic> toJson() => _$ApplicationFormConfigurationToJson(this);
 }
 
 /// A Application-level policy for deleting Users.
@@ -2085,10 +2098,10 @@ class FormStep {
 enum FormType {
   @JsonValue('registration')
   registration,
-  @JsonValue('adminRegistrationEdit')
-  adminRegistrationEdit,
-  @JsonValue('adminUserEdit')
-  adminUserEdit
+  @JsonValue('adminRegistration')
+  adminRegistration,
+  @JsonValue('adminUser')
+  adminUser
 }
 
 /// Models the FusionAuth connector.
@@ -4632,6 +4645,7 @@ class Tenant {
   ExternalIdentifierConfiguration externalIdentifierConfiguration;
   FailedAuthenticationConfiguration failedAuthenticationConfiguration;
   FamilyConfiguration familyConfiguration;
+  TenantFormConfiguration formConfiguration;
   num httpSessionMaxInactiveInterval;
   String id;
   num insertInstant;
@@ -4646,7 +4660,6 @@ class Tenant {
   PasswordValidationRules passwordValidationRules;
   String themeId;
   TenantUserDeletePolicy userDeletePolicy;
-  String userEditFormId;
 
   Tenant({
       this.configured,
@@ -4657,6 +4670,7 @@ class Tenant {
       this.externalIdentifierConfiguration,
       this.failedAuthenticationConfiguration,
       this.familyConfiguration,
+      this.formConfiguration,
       this.httpSessionMaxInactiveInterval,
       this.id,
       this.insertInstant,
@@ -4670,8 +4684,7 @@ class Tenant {
       this.passwordEncryptionConfiguration,
       this.passwordValidationRules,
       this.themeId,
-      this.userDeletePolicy,
-      this.userEditFormId
+      this.userDeletePolicy
   });
 
   factory Tenant.fromJson(Map<String, dynamic> json) => _$TenantFromJson(json);
@@ -4686,6 +4699,19 @@ class Tenantable {
 
   factory Tenantable.fromJson(Map<String, dynamic> json) => _$TenantableFromJson(json);
   Map<String, dynamic> toJson() => _$TenantableToJson(this);
+}
+
+/// @author Daniel DeGroff
+@JsonSerializable()
+class TenantFormConfiguration {
+  String userFormId;
+
+  TenantFormConfiguration({
+      this.userFormId
+  });
+
+  factory TenantFormConfiguration.fromJson(Map<String, dynamic> json) => _$TenantFormConfigurationFromJson(json);
+  Map<String, dynamic> toJson() => _$TenantFormConfigurationToJson(this);
 }
 
 /// @author Daniel DeGroff
