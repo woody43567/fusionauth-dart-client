@@ -266,10 +266,10 @@ class ApplicationEvent {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class ApplicationFormConfiguration {
-  String registrationFormId;
+  String adminRegistrationFormId;
 
   ApplicationFormConfiguration({
-      this.registrationFormId
+      this.adminRegistrationFormId
   });
 
   factory ApplicationFormConfiguration.fromJson(Map<String, dynamic> json) => _$ApplicationFormConfigurationFromJson(json);
