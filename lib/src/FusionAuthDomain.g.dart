@@ -6654,7 +6654,7 @@ Map<String, dynamic> _$TenantableToJson(Tenantable instance) =>
 TenantFormConfiguration _$TenantFormConfigurationFromJson(
     Map<String, dynamic> json) {
   return TenantFormConfiguration(
-    userFormId: json['userFormId'] as String,
+    adminUserFormId: json['adminUserFormId'] as String,
   );
 }
 
@@ -6668,7 +6668,7 @@ Map<String, dynamic> _$TenantFormConfigurationToJson(
     }
   }
 
-  writeNotNull('userFormId', instance.userFormId);
+  writeNotNull('adminUserFormId', instance.adminUserFormId);
   return val;
 }
 

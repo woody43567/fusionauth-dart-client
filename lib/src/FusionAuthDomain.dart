@@ -4704,10 +4704,10 @@ class Tenantable {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class TenantFormConfiguration {
-  String userFormId;
+  String adminUserFormId;
 
   TenantFormConfiguration({
-      this.userFormId
+      this.adminUserFormId
   });
 
   factory TenantFormConfiguration.fromJson(Map<String, dynamic> json) => _$TenantFormConfigurationFromJson(json);
