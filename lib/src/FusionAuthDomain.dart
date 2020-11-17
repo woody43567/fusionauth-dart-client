@@ -644,6 +644,31 @@ class BaseLoginRequest {
   Map<String, dynamic> toJson() => _$BaseLoginRequestToJson(this);
 }
 
+/// @author Brett Guy
+@JsonSerializable()
+class BaseMessengerConfiguration {
+  Map<String, dynamic> data;
+  bool debug;
+  String id;
+  num insertInstant;
+  num lastUpdateInstant;
+  String name;
+  MessengerType type;
+
+  BaseMessengerConfiguration({
+      this.data,
+      this.debug,
+      this.id,
+      this.insertInstant,
+      this.lastUpdateInstant,
+      this.name,
+      this.type
+  });
+
+  factory BaseMessengerConfiguration.fromJson(Map<String, dynamic> json) => _$BaseMessengerConfigurationFromJson(json);
+  Map<String, dynamic> toJson() => _$BaseMessengerConfigurationToJson(this);
+}
+
 /// @author Brian Pontarelli
 @JsonSerializable()
 class BaseSearchCriteria {
@@ -1211,6 +1236,31 @@ class EmailConfiguration {
 
   factory EmailConfiguration.fromJson(Map<String, dynamic> json) => _$EmailConfigurationFromJson(json);
   Map<String, dynamic> toJson() => _$EmailConfigurationToJson(this);
+}
+
+/// @author Brett Guy
+@JsonSerializable()
+class EmailMessengerConfiguration extends BaseMessengerConfiguration {
+  String defaultFromEmail;
+  String defaultFromName;
+  String host;
+  String password;
+  num port;
+  EmailSecurityType security;
+  String username;
+
+  EmailMessengerConfiguration({
+      this.defaultFromEmail,
+      this.defaultFromName,
+      this.host,
+      this.password,
+      this.port,
+      this.security,
+      this.username
+  });
+
+  factory EmailMessengerConfiguration.fromJson(Map<String, dynamic> json) => _$EmailMessengerConfigurationFromJson(json);
+  Map<String, dynamic> toJson() => _$EmailMessengerConfigurationToJson(this);
 }
 
 @JsonSerializable()
@@ -3401,6 +3451,46 @@ class MemberResponse {
   Map<String, dynamic> toJson() => _$MemberResponseToJson(this);
 }
 
+/// @author Brett Guy
+@JsonSerializable()
+class MessengerRequest {
+  BaseMessengerConfiguration messenger;
+
+  MessengerRequest({
+      this.messenger
+  });
+
+  factory MessengerRequest.fromJson(Map<String, dynamic> json) => _$MessengerRequestFromJson(json);
+  Map<String, dynamic> toJson() => _$MessengerRequestToJson(this);
+}
+
+/// @author Brett Guy
+@JsonSerializable()
+class MessengerResponse {
+  BaseMessengerConfiguration messenger;
+  List<BaseMessengerConfiguration> messengers;
+
+  MessengerResponse({
+      this.messenger,
+      this.messengers
+  });
+
+  factory MessengerResponse.fromJson(Map<String, dynamic> json) => _$MessengerResponseFromJson(json);
+  Map<String, dynamic> toJson() => _$MessengerResponseToJson(this);
+}
+
+/// @author Brett Guy
+enum MessengerType {
+  @JsonValue('Generic')
+  Generic,
+  @JsonValue('REST')
+  REST,
+  @JsonValue('Twilio')
+  Twilio,
+  @JsonValue('Email')
+  Email
+}
+
 @JsonSerializable()
 class MetaData {
   DeviceInfo device;
@@ -4976,6 +5066,27 @@ class TwilioConfiguration extends Enableable {
 
   factory TwilioConfiguration.fromJson(Map<String, dynamic> json) => _$TwilioConfigurationFromJson(json);
   Map<String, dynamic> toJson() => _$TwilioConfigurationToJson(this);
+}
+
+/// @author Brett Guy
+@JsonSerializable()
+class TwilioMessengerConfiguration extends BaseMessengerConfiguration {
+  String accountSid;
+  String authToken;
+  String fromPhoneNumber;
+  String messagingServiceSid;
+  String url;
+
+  TwilioMessengerConfiguration({
+      this.accountSid,
+      this.authToken,
+      this.fromPhoneNumber,
+      this.messagingServiceSid,
+      this.url
+  });
+
+  factory TwilioMessengerConfiguration.fromJson(Map<String, dynamic> json) => _$TwilioMessengerConfigurationFromJson(json);
+  Map<String, dynamic> toJson() => _$TwilioMessengerConfigurationToJson(this);
 }
 
 /// @author Daniel DeGroff

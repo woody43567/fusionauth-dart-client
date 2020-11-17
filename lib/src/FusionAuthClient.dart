@@ -346,6 +346,21 @@ class FusionAuthClient {
         .go();
   }
 
+  /// Creates a messenger.  You can optionally specify an Id for the messenger, if not provided one will be generated.
+  ///
+  /// @param {String} messengerId (Optional) The Id for the messenger. If not provided a secure random UUID will be generated.
+  /// @param {MessengerRequest} request The request object that contains all of the information used to create the messenger.
+  /// @returns {Promise<ClientResponse<MessengerResponse>>}
+  Future<ClientResponse<MessengerResponse, Errors>> createMessenger(String messengerId, MessengerRequest request) {
+    return _start<MessengerResponse, Errors>()
+        .withUri('/api/messenger')
+        .withUriSegment(messengerId)
+        .withJSONBody(request)
+        .withMethod('POST')
+        .withResponseHandler(defaultResponseHandlerBuilder((d) => MessengerResponse.fromJson(d)))
+        .go();
+  }
+
   /// Creates a tenant. You can optionally specify an Id for the tenant, if not provided one will be generated.
   ///
   /// @param {String} tenantId (Optional) The Id for the tenant. If not provided a secure random UUID will be generated.
@@ -669,6 +684,18 @@ class FusionAuthClient {
     return _start<void, Errors>()
         .withUri('/api/lambda')
         .withUriSegment(lambdaId)
+        .withMethod('DELETE')
+        .go();
+  }
+
+  /// Deletes the messenger for the given Id.
+  ///
+  /// @param {String} messengerId The Id of the messenger to delete.
+  /// @returns {Promise<ClientResponse<void>>}
+  Future<ClientResponse<void, Errors>> deleteMessenger(String messengerId) {
+    return _start<void, Errors>()
+        .withUri('/api/messenger')
+        .withUriSegment(messengerId)
         .withMethod('DELETE')
         .go();
   }
@@ -1366,6 +1393,21 @@ class FusionAuthClient {
         .withJSONBody(request)
         .withMethod('PATCH')
         .withResponseHandler(defaultResponseHandlerBuilder((d) => LambdaResponse.fromJson(d)))
+        .go();
+  }
+
+  /// Updates, via PATCH, the messenger with the given Id.
+  ///
+  /// @param {String} messengerId The Id of the messenger to update.
+  /// @param {MessengerRequest} request The request that contains just the new messenger information.
+  /// @returns {Promise<ClientResponse<MessengerResponse>>}
+  Future<ClientResponse<MessengerResponse, Errors>> patchMessenger(String messengerId, MessengerRequest request) {
+    return _start<MessengerResponse, Errors>()
+        .withUri('/api/messenger')
+        .withUriSegment(messengerId)
+        .withJSONBody(request)
+        .withMethod('PATCH')
+        .withResponseHandler(defaultResponseHandlerBuilder((d) => MessengerResponse.fromJson(d)))
         .go();
   }
 
@@ -2139,6 +2181,30 @@ class FusionAuthClient {
         .withParameter('end', end)
         .withMethod('GET')
         .withResponseHandler(defaultResponseHandlerBuilder((d) => LoginReportResponse.fromJson(d)))
+        .go();
+  }
+
+  /// Retrieves the messenger with the given Id.
+  ///
+  /// @param {String} messengerId The Id of the messenger.
+  /// @returns {Promise<ClientResponse<MessengerResponse>>}
+  Future<ClientResponse<MessengerResponse, void>> retrieveMessenger(String messengerId) {
+    return _start<MessengerResponse, void>()
+        .withUri('/api/messenger')
+        .withUriSegment(messengerId)
+        .withMethod('GET')
+        .withResponseHandler(defaultResponseHandlerBuilder((d) => MessengerResponse.fromJson(d)))
+        .go();
+  }
+
+  /// Retrieves all of the messenger.
+  ///
+  /// @returns {Promise<ClientResponse<MessengerResponse>>}
+  Future<ClientResponse<MessengerResponse, void>> retrieveMessenger() {
+    return _start<MessengerResponse, void>()
+        .withUri('/api/messenger')
+        .withMethod('GET')
+        .withResponseHandler(defaultResponseHandlerBuilder((d) => MessengerResponse.fromJson(d)))
         .go();
   }
 
@@ -3045,6 +3111,21 @@ class FusionAuthClient {
         .withJSONBody(request)
         .withMethod('PUT')
         .withResponseHandler(defaultResponseHandlerBuilder((d) => LambdaResponse.fromJson(d)))
+        .go();
+  }
+
+  /// Updates the messenger with the given Id.
+  ///
+  /// @param {String} messengerId The Id of the messenger to update.
+  /// @param {MessengerRequest} request The request object that contains all of the new messenger information.
+  /// @returns {Promise<ClientResponse<MessengerResponse>>}
+  Future<ClientResponse<MessengerResponse, Errors>> updateMessenger(String messengerId, MessengerRequest request) {
+    return _start<MessengerResponse, Errors>()
+        .withUri('/api/messenger')
+        .withUriSegment(messengerId)
+        .withJSONBody(request)
+        .withMethod('PUT')
+        .withResponseHandler(defaultResponseHandlerBuilder((d) => MessengerResponse.fromJson(d)))
         .go();
   }
 
