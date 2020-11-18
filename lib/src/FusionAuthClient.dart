@@ -2197,10 +2197,10 @@ class FusionAuthClient {
         .go();
   }
 
-  /// Retrieves all of the messenger.
+  /// Retrieves all of the messengers.
   ///
   /// @returns {Promise<ClientResponse<MessengerResponse>>}
-  Future<ClientResponse<MessengerResponse, void>> retrieveMessenger() {
+  Future<ClientResponse<MessengerResponse, void>> retrieveMessengers() {
     return _start<MessengerResponse, void>()
         .withUri('/api/messenger')
         .withMethod('GET')

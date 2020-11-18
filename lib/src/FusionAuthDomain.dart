@@ -5071,14 +5071,14 @@ class TwilioConfiguration extends Enableable {
 /// @author Brett Guy
 @JsonSerializable()
 class TwilioMessengerConfiguration extends BaseMessengerConfiguration {
-  String accountSid;
+  String accountSID;
   String authToken;
   String fromPhoneNumber;
   String messagingServiceSid;
   String url;
 
   TwilioMessengerConfiguration({
-      this.accountSid,
+      this.accountSID,
       this.authToken,
       this.fromPhoneNumber,
       this.messagingServiceSid,
