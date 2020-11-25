@@ -2623,12 +2623,10 @@ class IntegrationResponse {
 class Integrations {
   CleanSpeakConfiguration cleanspeak;
   KafkaConfiguration kafka;
-  TwilioConfiguration twilio;
 
   Integrations({
       this.cleanspeak,
-      this.kafka,
-      this.twilio
+      this.kafka
   });
 
   factory Integrations.fromJson(Map<String, dynamic> json) => _$IntegrationsFromJson(json);
@@ -5043,29 +5041,6 @@ enum TransactionType {
   SuperMajority,
   @JsonValue('AbsoluteMajority')
   AbsoluteMajority
-}
-
-/// Twilio Service Configuration.
-///
-/// @author Daniel DeGroff
-@JsonSerializable()
-class TwilioConfiguration extends Enableable {
-  String accountSID;
-  String authToken;
-  String fromPhoneNumber;
-  String messagingServiceSid;
-  String url;
-
-  TwilioConfiguration({
-      this.accountSID,
-      this.authToken,
-      this.fromPhoneNumber,
-      this.messagingServiceSid,
-      this.url
-  });
-
-  factory TwilioConfiguration.fromJson(Map<String, dynamic> json) => _$TwilioConfigurationFromJson(json);
-  Map<String, dynamic> toJson() => _$TwilioConfigurationToJson(this);
 }
 
 /// @author Brett Guy
