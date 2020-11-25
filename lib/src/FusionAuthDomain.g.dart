@@ -953,6 +953,46 @@ Map<String, dynamic> _$BaseLoginRequestToJson(BaseLoginRequest instance) {
   return val;
 }
 
+BaseMessengerConfiguration _$BaseMessengerConfigurationFromJson(
+    Map<String, dynamic> json) {
+  return BaseMessengerConfiguration(
+    data: json['data'] as Map<String, dynamic>,
+    debug: json['debug'] as bool,
+    id: json['id'] as String,
+    insertInstant: json['insertInstant'] as num,
+    lastUpdateInstant: json['lastUpdateInstant'] as num,
+    name: json['name'] as String,
+    type: _$enumDecodeNullable(_$MessengerTypeEnumMap, json['type']),
+  );
+}
+
+Map<String, dynamic> _$BaseMessengerConfigurationToJson(
+    BaseMessengerConfiguration instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('data', instance.data);
+  writeNotNull('debug', instance.debug);
+  writeNotNull('id', instance.id);
+  writeNotNull('insertInstant', instance.insertInstant);
+  writeNotNull('lastUpdateInstant', instance.lastUpdateInstant);
+  writeNotNull('name', instance.name);
+  writeNotNull('type', _$MessengerTypeEnumMap[instance.type]);
+  return val;
+}
+
+const _$MessengerTypeEnumMap = {
+  MessengerType.Generic: 'Generic',
+  MessengerType.REST: 'REST',
+  MessengerType.Twilio: 'Twilio',
+  MessengerType.Email: 'Email',
+};
+
 BaseSearchCriteria _$BaseSearchCriteriaFromJson(Map<String, dynamic> json) {
   return BaseSearchCriteria(
     numberOfResults: json['numberOfResults'] as num,
@@ -1613,6 +1653,54 @@ const _$EmailSecurityTypeEnumMap = {
   EmailSecurityType.SSL: 'SSL',
   EmailSecurityType.TLS: 'TLS',
 };
+
+EmailMessengerConfiguration _$EmailMessengerConfigurationFromJson(
+    Map<String, dynamic> json) {
+  return EmailMessengerConfiguration(
+    defaultFromEmail: json['defaultFromEmail'] as String,
+    defaultFromName: json['defaultFromName'] as String,
+    host: json['host'] as String,
+    password: json['password'] as String,
+    port: json['port'] as num,
+    security:
+        _$enumDecodeNullable(_$EmailSecurityTypeEnumMap, json['security']),
+    username: json['username'] as String,
+  )
+    ..data = json['data'] as Map<String, dynamic>
+    ..debug = json['debug'] as bool
+    ..id = json['id'] as String
+    ..insertInstant = json['insertInstant'] as num
+    ..lastUpdateInstant = json['lastUpdateInstant'] as num
+    ..name = json['name'] as String
+    ..type = _$enumDecodeNullable(_$MessengerTypeEnumMap, json['type']);
+}
+
+Map<String, dynamic> _$EmailMessengerConfigurationToJson(
+    EmailMessengerConfiguration instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('data', instance.data);
+  writeNotNull('debug', instance.debug);
+  writeNotNull('id', instance.id);
+  writeNotNull('insertInstant', instance.insertInstant);
+  writeNotNull('lastUpdateInstant', instance.lastUpdateInstant);
+  writeNotNull('name', instance.name);
+  writeNotNull('type', _$MessengerTypeEnumMap[instance.type]);
+  writeNotNull('defaultFromEmail', instance.defaultFromEmail);
+  writeNotNull('defaultFromName', instance.defaultFromName);
+  writeNotNull('host', instance.host);
+  writeNotNull('password', instance.password);
+  writeNotNull('port', instance.port);
+  writeNotNull('security', _$EmailSecurityTypeEnumMap[instance.security]);
+  writeNotNull('username', instance.username);
+  return val;
+}
 
 EmailPlus _$EmailPlusFromJson(Map<String, dynamic> json) {
   return EmailPlus(
@@ -3590,9 +3678,6 @@ Integrations _$IntegrationsFromJson(Map<String, dynamic> json) {
     kafka: json['kafka'] == null
         ? null
         : KafkaConfiguration.fromJson(json['kafka'] as Map<String, dynamic>),
-    twilio: json['twilio'] == null
-        ? null
-        : TwilioConfiguration.fromJson(json['twilio'] as Map<String, dynamic>),
   );
 }
 
@@ -3607,7 +3692,6 @@ Map<String, dynamic> _$IntegrationsToJson(Integrations instance) {
 
   writeNotNull('cleanspeak', instance.cleanspeak);
   writeNotNull('kafka', instance.kafka);
-  writeNotNull('twilio', instance.twilio);
   return val;
 }
 
@@ -4710,6 +4794,56 @@ Map<String, dynamic> _$MemberResponseToJson(MemberResponse instance) {
   }
 
   writeNotNull('members', instance.members);
+  return val;
+}
+
+MessengerRequest _$MessengerRequestFromJson(Map<String, dynamic> json) {
+  return MessengerRequest(
+    messenger: json['messenger'] == null
+        ? null
+        : BaseMessengerConfiguration.fromJson(
+            json['messenger'] as Map<String, dynamic>),
+  );
+}
+
+Map<String, dynamic> _$MessengerRequestToJson(MessengerRequest instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('messenger', instance.messenger);
+  return val;
+}
+
+MessengerResponse _$MessengerResponseFromJson(Map<String, dynamic> json) {
+  return MessengerResponse(
+    messenger: json['messenger'] == null
+        ? null
+        : BaseMessengerConfiguration.fromJson(
+            json['messenger'] as Map<String, dynamic>),
+    messengers: (json['messengers'] as List)
+        ?.map((e) => e == null
+            ? null
+            : BaseMessengerConfiguration.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
+  );
+}
+
+Map<String, dynamic> _$MessengerResponseToJson(MessengerResponse instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('messenger', instance.messenger);
+  writeNotNull('messengers', instance.messengers);
   return val;
 }
 
@@ -5975,6 +6109,8 @@ SAMLv2Configuration _$SAMLv2ConfigurationFromJson(Map<String, dynamic> json) {
     requireSignedRequests: json['requireSignedRequests'] as bool,
     xmlSignatureC14nMethod: _$enumDecodeNullable(
         _$CanonicalizationMethodEnumMap, json['xmlSignatureC14nMethod']),
+    xmlSignatureLocation: _$enumDecodeNullable(
+        _$XMLSignatureLocationEnumMap, json['xmlSignatureLocation']),
   )..enabled = json['enabled'] as bool;
 }
 
@@ -5999,6 +6135,8 @@ Map<String, dynamic> _$SAMLv2ConfigurationToJson(SAMLv2Configuration instance) {
   writeNotNull('requireSignedRequests', instance.requireSignedRequests);
   writeNotNull('xmlSignatureC14nMethod',
       _$CanonicalizationMethodEnumMap[instance.xmlSignatureC14nMethod]);
+  writeNotNull('xmlSignatureLocation',
+      _$XMLSignatureLocationEnumMap[instance.xmlSignatureLocation]);
   return val;
 }
 
@@ -6007,6 +6145,11 @@ const _$CanonicalizationMethodEnumMap = {
   CanonicalizationMethod.exclusive_with_comments: 'exclusive_with_comments',
   CanonicalizationMethod.inclusive: 'inclusive',
   CanonicalizationMethod.inclusive_with_comments: 'inclusive_with_comments',
+};
+
+const _$XMLSignatureLocationEnumMap = {
+  XMLSignatureLocation.Assertion: 'Assertion',
+  XMLSignatureLocation.Response: 'Response',
 };
 
 SAMLv2IdentityProvider _$SAMLv2IdentityProviderFromJson(
@@ -6937,17 +7080,26 @@ Map<String, dynamic> _$TotalsReportResponseToJson(
   return val;
 }
 
-TwilioConfiguration _$TwilioConfigurationFromJson(Map<String, dynamic> json) {
-  return TwilioConfiguration(
+TwilioMessengerConfiguration _$TwilioMessengerConfigurationFromJson(
+    Map<String, dynamic> json) {
+  return TwilioMessengerConfiguration(
     accountSID: json['accountSID'] as String,
     authToken: json['authToken'] as String,
     fromPhoneNumber: json['fromPhoneNumber'] as String,
     messagingServiceSid: json['messagingServiceSid'] as String,
     url: json['url'] as String,
-  )..enabled = json['enabled'] as bool;
+  )
+    ..data = json['data'] as Map<String, dynamic>
+    ..debug = json['debug'] as bool
+    ..id = json['id'] as String
+    ..insertInstant = json['insertInstant'] as num
+    ..lastUpdateInstant = json['lastUpdateInstant'] as num
+    ..name = json['name'] as String
+    ..type = _$enumDecodeNullable(_$MessengerTypeEnumMap, json['type']);
 }
 
-Map<String, dynamic> _$TwilioConfigurationToJson(TwilioConfiguration instance) {
+Map<String, dynamic> _$TwilioMessengerConfigurationToJson(
+    TwilioMessengerConfiguration instance) {
   final val = <String, dynamic>{};
 
   void writeNotNull(String key, dynamic value) {
@@ -6956,7 +7108,13 @@ Map<String, dynamic> _$TwilioConfigurationToJson(TwilioConfiguration instance) {
     }
   }
 
-  writeNotNull('enabled', instance.enabled);
+  writeNotNull('data', instance.data);
+  writeNotNull('debug', instance.debug);
+  writeNotNull('id', instance.id);
+  writeNotNull('insertInstant', instance.insertInstant);
+  writeNotNull('lastUpdateInstant', instance.lastUpdateInstant);
+  writeNotNull('name', instance.name);
+  writeNotNull('type', _$MessengerTypeEnumMap[instance.type]);
   writeNotNull('accountSID', instance.accountSID);
   writeNotNull('authToken', instance.authToken);
   writeNotNull('fromPhoneNumber', instance.fromPhoneNumber);
