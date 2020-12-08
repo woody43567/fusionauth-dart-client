@@ -3824,9 +3824,6 @@ const _$AlgorithmEnumMap = {
   Algorithm.HS256: 'HS256',
   Algorithm.HS384: 'HS384',
   Algorithm.HS512: 'HS512',
-  Algorithm.PS256: 'PS256',
-  Algorithm.PS384: 'PS384',
-  Algorithm.PS512: 'PS512',
   Algorithm.RS256: 'RS256',
   Algorithm.RS384: 'RS384',
   Algorithm.RS512: 'RS512',
@@ -4797,6 +4794,111 @@ Map<String, dynamic> _$MemberResponseToJson(MemberResponse instance) {
   return val;
 }
 
+Message _$MessageFromJson(Map<String, dynamic> json) {
+  return Message(
+    text: json['text'] as String,
+  );
+}
+
+Map<String, dynamic> _$MessageToJson(Message instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('text', instance.text);
+  return val;
+}
+
+MessageTemplate _$MessageTemplateFromJson(Map<String, dynamic> json) {
+  return MessageTemplate(
+    defaultTemplate: json['defaultTemplate'] as String,
+    id: json['id'] as String,
+    insertInstant: json['insertInstant'] as num,
+    lastUpdateInstant: json['lastUpdateInstant'] as num,
+    localizedTemplates:
+        (json['localizedTemplates'] as Map<String, dynamic>)?.map(
+      (k, e) => MapEntry(k, e as String),
+    ),
+    name: json['name'] as String,
+  );
+}
+
+Map<String, dynamic> _$MessageTemplateToJson(MessageTemplate instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('defaultTemplate', instance.defaultTemplate);
+  writeNotNull('id', instance.id);
+  writeNotNull('insertInstant', instance.insertInstant);
+  writeNotNull('lastUpdateInstant', instance.lastUpdateInstant);
+  writeNotNull('localizedTemplates', instance.localizedTemplates);
+  writeNotNull('name', instance.name);
+  return val;
+}
+
+MessageTemplateRequest _$MessageTemplateRequestFromJson(
+    Map<String, dynamic> json) {
+  return MessageTemplateRequest(
+    messageTemplate: json['messageTemplate'] == null
+        ? null
+        : MessageTemplate.fromJson(
+            json['messageTemplate'] as Map<String, dynamic>),
+  );
+}
+
+Map<String, dynamic> _$MessageTemplateRequestToJson(
+    MessageTemplateRequest instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('messageTemplate', instance.messageTemplate);
+  return val;
+}
+
+MessageTemplateResponse _$MessageTemplateResponseFromJson(
+    Map<String, dynamic> json) {
+  return MessageTemplateResponse(
+    messageTemplate: json['messageTemplate'] == null
+        ? null
+        : MessageTemplate.fromJson(
+            json['messageTemplate'] as Map<String, dynamic>),
+    messageTemplates: (json['messageTemplates'] as List)
+        ?.map((e) => e == null
+            ? null
+            : MessageTemplate.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
+  );
+}
+
+Map<String, dynamic> _$MessageTemplateResponseToJson(
+    MessageTemplateResponse instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('messageTemplate', instance.messageTemplate);
+  writeNotNull('messageTemplates', instance.messageTemplates);
+  return val;
+}
+
 MessengerRequest _$MessengerRequestFromJson(Map<String, dynamic> json) {
   return MessengerRequest(
     messenger: json['messenger'] == null
@@ -5586,6 +5688,59 @@ Map<String, dynamic> _$PendingResponseToJson(PendingResponse instance) {
   }
 
   writeNotNull('users', instance.users);
+  return val;
+}
+
+PreviewMessageTemplateRequest _$PreviewMessageTemplateRequestFromJson(
+    Map<String, dynamic> json) {
+  return PreviewMessageTemplateRequest(
+    locale: json['locale'] as String,
+    messageTemplate: json['messageTemplate'] == null
+        ? null
+        : MessageTemplate.fromJson(
+            json['messageTemplate'] as Map<String, dynamic>),
+  );
+}
+
+Map<String, dynamic> _$PreviewMessageTemplateRequestToJson(
+    PreviewMessageTemplateRequest instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('locale', instance.locale);
+  writeNotNull('messageTemplate', instance.messageTemplate);
+  return val;
+}
+
+PreviewMessageTemplateResponse _$PreviewMessageTemplateResponseFromJson(
+    Map<String, dynamic> json) {
+  return PreviewMessageTemplateResponse(
+    errors: json['errors'] == null
+        ? null
+        : Errors.fromJson(json['errors'] as Map<String, dynamic>),
+    message: json['message'] == null
+        ? null
+        : Message.fromJson(json['message'] as Map<String, dynamic>),
+  );
+}
+
+Map<String, dynamic> _$PreviewMessageTemplateResponseToJson(
+    PreviewMessageTemplateResponse instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('errors', instance.errors);
+  writeNotNull('message', instance.message);
   return val;
 }
 

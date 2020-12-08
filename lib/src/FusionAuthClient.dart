@@ -346,6 +346,21 @@ class FusionAuthClient {
         .go();
   }
 
+  /// Creates an message template. You can optionally specify an Id for the template, if not provided one will be generated.
+  ///
+  /// @param {String} messageTemplateId (Optional) The Id for the template. If not provided a secure random UUID will be generated.
+  /// @param {MessageTemplateRequest} request The request object that contains all of the information used to create the message template.
+  /// @returns {Promise<ClientResponse<MessageTemplateResponse>>}
+  Future<ClientResponse<MessageTemplateResponse, Errors>> createMessageTemplate(String messageTemplateId, MessageTemplateRequest request) {
+    return _start<MessageTemplateResponse, Errors>()
+        .withUri('/api/message/template')
+        .withUriSegment(messageTemplateId)
+        .withJSONBody(request)
+        .withMethod('POST')
+        .withResponseHandler(defaultResponseHandlerBuilder((d) => MessageTemplateResponse.fromJson(d)))
+        .go();
+  }
+
   /// Creates a messenger.  You can optionally specify an Id for the messenger, if not provided one will be generated.
   ///
   /// @param {String} messengerId (Optional) The Id for the messenger. If not provided a secure random UUID will be generated.
@@ -684,6 +699,18 @@ class FusionAuthClient {
     return _start<void, Errors>()
         .withUri('/api/lambda')
         .withUriSegment(lambdaId)
+        .withMethod('DELETE')
+        .go();
+  }
+
+  /// Deletes the message template for the given Id.
+  ///
+  /// @param {String} messageTemplateId The Id of the message template to delete.
+  /// @returns {Promise<ClientResponse<void>>}
+  Future<ClientResponse<void, Errors>> deleteMessageTemplate(String messageTemplateId) {
+    return _start<void, Errors>()
+        .withUri('/api/message/template')
+        .withUriSegment(messageTemplateId)
         .withMethod('DELETE')
         .go();
   }
@@ -1393,6 +1420,21 @@ class FusionAuthClient {
         .withJSONBody(request)
         .withMethod('PATCH')
         .withResponseHandler(defaultResponseHandlerBuilder((d) => LambdaResponse.fromJson(d)))
+        .go();
+  }
+
+  /// Updates, via PATCH, the message template with the given Id.
+  ///
+  /// @param {String} messageTemplateId The Id of the message template to update.
+  /// @param {MessageTemplateRequest} request The request that contains just the new message template information.
+  /// @returns {Promise<ClientResponse<MessageTemplateResponse>>}
+  Future<ClientResponse<MessageTemplateResponse, Errors>> patchMessageTemplate(String messageTemplateId, MessageTemplateRequest request) {
+    return _start<MessageTemplateResponse, Errors>()
+        .withUri('/api/message/template')
+        .withUriSegment(messageTemplateId)
+        .withJSONBody(request)
+        .withMethod('PATCH')
+        .withResponseHandler(defaultResponseHandlerBuilder((d) => MessageTemplateResponse.fromJson(d)))
         .go();
   }
 
@@ -2181,6 +2223,43 @@ class FusionAuthClient {
         .withParameter('end', end)
         .withMethod('GET')
         .withResponseHandler(defaultResponseHandlerBuilder((d) => LoginReportResponse.fromJson(d)))
+        .go();
+  }
+
+  /// Retrieves the message template for the given Id. If you don't specify the id, this will return all of the message templates.
+  ///
+  /// @param {String} messageTemplateId (Optional) The Id of the message template.
+  /// @returns {Promise<ClientResponse<MessageTemplateResponse>>}
+  Future<ClientResponse<MessageTemplateResponse, void>> retrieveMessageTemplate(String messageTemplateId) {
+    return _start<MessageTemplateResponse, void>()
+        .withUri('/api/message/template')
+        .withUriSegment(messageTemplateId)
+        .withMethod('GET')
+        .withResponseHandler(defaultResponseHandlerBuilder((d) => MessageTemplateResponse.fromJson(d)))
+        .go();
+  }
+
+  /// Creates a preview of the message template provided in the request, normalized to a given locale.
+  ///
+  /// @param {PreviewMessageTemplateRequest} request The request that contains the email template and optionally a locale to render it in.
+  /// @returns {Promise<ClientResponse<PreviewMessageTemplateResponse>>}
+  Future<ClientResponse<PreviewMessageTemplateResponse, Errors>> retrieveMessageTemplatePreview(PreviewMessageTemplateRequest request) {
+    return _start<PreviewMessageTemplateResponse, Errors>()
+        .withUri('/api/message/template/preview')
+        .withJSONBody(request)
+        .withMethod('POST')
+        .withResponseHandler(defaultResponseHandlerBuilder((d) => PreviewMessageTemplateResponse.fromJson(d)))
+        .go();
+  }
+
+  /// Retrieves all of the message templates.
+  ///
+  /// @returns {Promise<ClientResponse<MessageTemplateResponse>>}
+  Future<ClientResponse<MessageTemplateResponse, void>> retrieveMessageTemplates() {
+    return _start<MessageTemplateResponse, void>()
+        .withUri('/api/message/template')
+        .withMethod('GET')
+        .withResponseHandler(defaultResponseHandlerBuilder((d) => MessageTemplateResponse.fromJson(d)))
         .go();
   }
 
@@ -3111,6 +3190,21 @@ class FusionAuthClient {
         .withJSONBody(request)
         .withMethod('PUT')
         .withResponseHandler(defaultResponseHandlerBuilder((d) => LambdaResponse.fromJson(d)))
+        .go();
+  }
+
+  /// Updates the message template with the given Id.
+  ///
+  /// @param {String} messageTemplateId The Id of the message template to update.
+  /// @param {MessageTemplateRequest} request The request that contains all of the new message template information.
+  /// @returns {Promise<ClientResponse<MessageTemplateResponse>>}
+  Future<ClientResponse<MessageTemplateResponse, Errors>> updateMessageTemplate(String messageTemplateId, MessageTemplateRequest request) {
+    return _start<MessageTemplateResponse, Errors>()
+        .withUri('/api/message/template')
+        .withUriSegment(messageTemplateId)
+        .withJSONBody(request)
+        .withMethod('PUT')
+        .withResponseHandler(defaultResponseHandlerBuilder((d) => MessageTemplateResponse.fromJson(d)))
         .go();
   }
 
