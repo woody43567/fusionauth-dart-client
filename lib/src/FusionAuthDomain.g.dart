@@ -988,7 +988,6 @@ Map<String, dynamic> _$BaseMessengerConfigurationToJson(
 
 const _$MessengerTypeEnumMap = {
   MessengerType.Generic: 'Generic',
-  MessengerType.REST: 'REST',
   MessengerType.Twilio: 'Twilio',
   MessengerType.Email: 'Email',
 };
@@ -3057,6 +3056,41 @@ Map<String, dynamic> _$GenericConnectorConfigurationToJson(
       'httpAuthenticationUsername', instance.httpAuthenticationUsername);
   writeNotNull('readTimeout', instance.readTimeout);
   writeNotNull('sslCertificateKeyId', instance.sslCertificateKeyId);
+  return val;
+}
+
+GenericMessengerConfiguration _$GenericMessengerConfigurationFromJson(
+    Map<String, dynamic> json) {
+  return GenericMessengerConfiguration(
+    url: json['url'] as String,
+  )
+    ..data = json['data'] as Map<String, dynamic>
+    ..debug = json['debug'] as bool
+    ..id = json['id'] as String
+    ..insertInstant = json['insertInstant'] as num
+    ..lastUpdateInstant = json['lastUpdateInstant'] as num
+    ..name = json['name'] as String
+    ..type = _$enumDecodeNullable(_$MessengerTypeEnumMap, json['type']);
+}
+
+Map<String, dynamic> _$GenericMessengerConfigurationToJson(
+    GenericMessengerConfiguration instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('data', instance.data);
+  writeNotNull('debug', instance.debug);
+  writeNotNull('id', instance.id);
+  writeNotNull('insertInstant', instance.insertInstant);
+  writeNotNull('lastUpdateInstant', instance.lastUpdateInstant);
+  writeNotNull('name', instance.name);
+  writeNotNull('type', _$MessengerTypeEnumMap[instance.type]);
+  writeNotNull('url', instance.url);
   return val;
 }
 

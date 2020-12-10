@@ -2196,6 +2196,19 @@ class GenericConnectorConfiguration extends BaseConnectorConfiguration {
   Map<String, dynamic> toJson() => _$GenericConnectorConfigurationToJson(this);
 }
 
+/// @author Brett Guy
+@JsonSerializable()
+class GenericMessengerConfiguration extends BaseMessengerConfiguration {
+  String url;
+
+  GenericMessengerConfiguration({
+      this.url
+  });
+
+  factory GenericMessengerConfiguration.fromJson(Map<String, dynamic> json) => _$GenericMessengerConfigurationFromJson(json);
+  Map<String, dynamic> toJson() => _$GenericMessengerConfigurationToJson(this);
+}
+
 /// @author Daniel DeGroff
 @JsonSerializable()
 class GoogleApplicationConfiguration extends BaseIdentityProviderApplicationConfiguration {
@@ -3544,8 +3557,6 @@ class MessengerResponse {
 enum MessengerType {
   @JsonValue('Generic')
   Generic,
-  @JsonValue('REST')
-  REST,
   @JsonValue('Twilio')
   Twilio,
   @JsonValue('Email')
