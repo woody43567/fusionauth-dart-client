@@ -325,6 +325,7 @@ Application _$ApplicationFromJson(Map<String, dynamic> json) {
         ? null
         : SAMLv2Configuration.fromJson(
             json['samlv2Configuration'] as Map<String, dynamic>),
+    state: _$enumDecodeNullable(_$ObjectStateEnumMap, json['state']),
     tenantId: json['tenantId'] as String,
     verificationEmailTemplateId: json['verificationEmailTemplateId'] as String,
     verifyRegistration: json['verifyRegistration'] as bool,
@@ -360,12 +361,19 @@ Map<String, dynamic> _$ApplicationToJson(Application instance) {
   writeNotNull('registrationDeletePolicy', instance.registrationDeletePolicy);
   writeNotNull('roles', instance.roles);
   writeNotNull('samlv2Configuration', instance.samlv2Configuration);
+  writeNotNull('state', _$ObjectStateEnumMap[instance.state]);
   writeNotNull('tenantId', instance.tenantId);
   writeNotNull(
       'verificationEmailTemplateId', instance.verificationEmailTemplateId);
   writeNotNull('verifyRegistration', instance.verifyRegistration);
   return val;
 }
+
+const _$ObjectStateEnumMap = {
+  ObjectState.Active: 'Active',
+  ObjectState.Inactive: 'Inactive',
+  ObjectState.PendingDelete: 'PendingDelete',
+};
 
 ApplicationEmailConfiguration _$ApplicationEmailConfigurationFromJson(
     Map<String, dynamic> json) {
@@ -6936,6 +6944,7 @@ Tenant _$TenantFromJson(Map<String, dynamic> json) {
         ? null
         : PasswordValidationRules.fromJson(
             json['passwordValidationRules'] as Map<String, dynamic>),
+    state: _$enumDecodeNullable(_$ObjectStateEnumMap, json['state']),
     themeId: json['themeId'] as String,
     userDeletePolicy: json['userDeletePolicy'] == null
         ? null
@@ -6978,6 +6987,7 @@ Map<String, dynamic> _$TenantToJson(Tenant instance) {
   writeNotNull('passwordEncryptionConfiguration',
       instance.passwordEncryptionConfiguration);
   writeNotNull('passwordValidationRules', instance.passwordValidationRules);
+  writeNotNull('state', _$ObjectStateEnumMap[instance.state]);
   writeNotNull('themeId', instance.themeId);
   writeNotNull('userDeletePolicy', instance.userDeletePolicy);
   return val;

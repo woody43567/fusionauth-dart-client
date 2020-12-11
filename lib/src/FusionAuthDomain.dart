@@ -200,6 +200,7 @@ class Application {
   ApplicationRegistrationDeletePolicy registrationDeletePolicy;
   List<ApplicationRole> roles;
   SAMLv2Configuration samlv2Configuration;
+  ObjectState state;
   String tenantId;
   String verificationEmailTemplateId;
   bool verifyRegistration;
@@ -224,6 +225,7 @@ class Application {
       this.registrationDeletePolicy,
       this.roles,
       this.samlv2Configuration,
+      this.state,
       this.tenantId,
       this.verificationEmailTemplateId,
       this.verifyRegistration
@@ -3826,6 +3828,16 @@ class OAuthResponse {
   Map<String, dynamic> toJson() => _$OAuthResponseToJson(this);
 }
 
+/// @author Daniel DeGroff
+enum ObjectState {
+  @JsonValue('Active')
+  Active,
+  @JsonValue('Inactive')
+  Inactive,
+  @JsonValue('PendingDelete')
+  PendingDelete
+}
+
 /// OpenID Connect Configuration as described by the <a href="https://openid.net/specs/openid-connect-discovery-1_0.html#ProviderMetadata">OpenID
 /// Provider Metadata</a>.
 ///
@@ -4887,6 +4899,7 @@ class Tenant {
   String name;
   PasswordEncryptionConfiguration passwordEncryptionConfiguration;
   PasswordValidationRules passwordValidationRules;
+  ObjectState state;
   String themeId;
   TenantUserDeletePolicy userDeletePolicy;
 
@@ -4912,6 +4925,7 @@ class Tenant {
       this.name,
       this.passwordEncryptionConfiguration,
       this.passwordValidationRules,
+      this.state,
       this.themeId,
       this.userDeletePolicy
   });
