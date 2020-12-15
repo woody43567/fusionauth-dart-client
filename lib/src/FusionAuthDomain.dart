@@ -640,7 +640,7 @@ class BaseLoginRequest {
   Map<String, dynamic> toJson() => _$BaseLoginRequestToJson(this);
 }
 
-/// @author Brett Guy
+// Do not require a setter for 'type', it is defined by the concrete class and is not mutable
 @JsonSerializable()
 class BaseMessengerConfiguration {
   Map<String, dynamic> data;
@@ -1234,7 +1234,7 @@ class EmailConfiguration {
   Map<String, dynamic> toJson() => _$EmailConfigurationToJson(this);
 }
 
-/// @author Brett Guy
+// thinking?
 @JsonSerializable()
 class EmailMessengerConfiguration extends BaseMessengerConfiguration {
   String defaultFromEmail;
@@ -3513,6 +3513,7 @@ class MessageTemplateRequest {
   Map<String, dynamic> toJson() => _$MessageTemplateRequestToJson(this);
 }
 
+/// @author Michael Sleevi
 @JsonSerializable()
 class MessageTemplateResponse {
   MessageTemplate messageTemplate;
@@ -4113,6 +4114,7 @@ class PreviewMessageTemplateRequest {
   Map<String, dynamic> toJson() => _$PreviewMessageTemplateRequestToJson(this);
 }
 
+/// @author Michael Sleevi
 @JsonSerializable()
 class PreviewMessageTemplateResponse {
   Errors errors;
