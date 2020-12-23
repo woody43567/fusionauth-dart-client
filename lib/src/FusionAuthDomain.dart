@@ -1234,6 +1234,62 @@ class EmailConfiguration {
   Map<String, dynamic> toJson() => _$EmailConfigurationToJson(this);
 }
 
+@JsonSerializable()
+class EmailMessage {
+  List<Attachment> attachments;
+  List<EmailAddress> bcc;
+  List<EmailAddress> cc;
+  EmailAddress from;
+  String html;
+  EmailAddress replyTo;
+  String subject;
+  String text;
+  List<EmailAddress> to;
+
+  EmailMessage({
+      this.attachments,
+      this.bcc,
+      this.cc,
+      this.from,
+      this.html,
+      this.replyTo,
+      this.subject,
+      this.text,
+      this.to
+  });
+
+  factory EmailMessage.fromJson(Map<String, dynamic> json) => _$EmailMessageFromJson(json);
+  Map<String, dynamic> toJson() => _$EmailMessageToJson(this);
+}
+
+@JsonSerializable()
+class EmailMessageTemplate extends MessageTemplate {
+  String defaultFromName;
+  String defaultHtmlTemplate;
+  String defaultSubject;
+  String defaultTextTemplate;
+  String fromEmail;
+  Map<String, String> localizedFromNames;
+  Map<String, String> localizedHtmlTemplates;
+  Map<String, String> localizedSubjects;
+  Map<String, String> localizedTextTemplates;
+
+  EmailMessageTemplate({
+      this.defaultFromName,
+      this.defaultHtmlTemplate,
+      this.defaultSubject,
+      this.defaultTextTemplate,
+      this.fromEmail,
+      this.localizedFromNames,
+      this.localizedHtmlTemplates,
+      this.localizedSubjects,
+      this.localizedTextTemplates
+  });
+
+  factory EmailMessageTemplate.fromJson(Map<String, dynamic> json) => _$EmailMessageTemplateFromJson(json);
+  Map<String, dynamic> toJson() => _$EmailMessageTemplateToJson(this);
+}
+
 // thinking?
 @JsonSerializable()
 class EmailMessengerConfiguration extends BaseMessengerConfiguration {
@@ -3458,16 +3514,10 @@ class MemberResponse {
   Map<String, dynamic> toJson() => _$MemberResponseToJson(this);
 }
 
-/// An incredible simplified view of a message
-///
-/// @author Michael Sleevi
 @JsonSerializable()
 class Message {
-  String text;
 
-  Message({
-      this.text
-  });
+  Message();
 
   factory Message.fromJson(Map<String, dynamic> json) => _$MessageFromJson(json);
   Map<String, dynamic> toJson() => _$MessageToJson(this);
@@ -3478,20 +3528,20 @@ class Message {
 /// @author Michael Sleevi
 @JsonSerializable()
 class MessageTemplate {
-  String defaultTemplate;
+  Map<String, dynamic> data;
   String id;
   num insertInstant;
   num lastUpdateInstant;
-  Map<String, String> localizedTemplates;
   String name;
+  MessageType type;
 
   MessageTemplate({
-      this.defaultTemplate,
+      this.data,
       this.id,
       this.insertInstant,
       this.lastUpdateInstant,
-      this.localizedTemplates,
-      this.name
+      this.name,
+      this.type
   });
 
   factory MessageTemplate.fromJson(Map<String, dynamic> json) => _$MessageTemplateFromJson(json);
@@ -3526,6 +3576,13 @@ class MessageTemplateResponse {
 
   factory MessageTemplateResponse.fromJson(Map<String, dynamic> json) => _$MessageTemplateResponseFromJson(json);
   Map<String, dynamic> toJson() => _$MessageTemplateResponseToJson(this);
+}
+
+enum MessageType {
+  @JsonValue('SMS')
+  SMS,
+  @JsonValue('Email')
+  Email
 }
 
 /// @author Brett Guy
@@ -4710,6 +4767,35 @@ class SendResponse {
 
   factory SendResponse.fromJson(Map<String, dynamic> json) => _$SendResponseFromJson(json);
   Map<String, dynamic> toJson() => _$SendResponseToJson(this);
+}
+
+/// @author Michael Sleevi
+@JsonSerializable()
+class SMSMessage {
+  String phoneNumber;
+  String textMessage;
+
+  SMSMessage({
+      this.phoneNumber,
+      this.textMessage
+  });
+
+  factory SMSMessage.fromJson(Map<String, dynamic> json) => _$SMSMessageFromJson(json);
+  Map<String, dynamic> toJson() => _$SMSMessageToJson(this);
+}
+
+@JsonSerializable()
+class SMSMessageTemplate extends MessageTemplate {
+  String defaultTemplate;
+  Map<String, String> localizedTemplates;
+
+  SMSMessageTemplate({
+      this.defaultTemplate,
+      this.localizedTemplates
+  });
+
+  factory SMSMessageTemplate.fromJson(Map<String, dynamic> json) => _$SMSMessageTemplateFromJson(json);
+  Map<String, dynamic> toJson() => _$SMSMessageTemplateToJson(this);
 }
 
 /// @author Daniel DeGroff

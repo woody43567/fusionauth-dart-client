@@ -1661,6 +1661,121 @@ const _$EmailSecurityTypeEnumMap = {
   EmailSecurityType.TLS: 'TLS',
 };
 
+EmailMessage _$EmailMessageFromJson(Map<String, dynamic> json) {
+  return EmailMessage(
+    attachments: (json['attachments'] as List)
+        ?.map((e) =>
+            e == null ? null : Attachment.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
+    bcc: (json['bcc'] as List)
+        ?.map((e) =>
+            e == null ? null : EmailAddress.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
+    cc: (json['cc'] as List)
+        ?.map((e) =>
+            e == null ? null : EmailAddress.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
+    from: json['from'] == null
+        ? null
+        : EmailAddress.fromJson(json['from'] as Map<String, dynamic>),
+    html: json['html'] as String,
+    replyTo: json['replyTo'] == null
+        ? null
+        : EmailAddress.fromJson(json['replyTo'] as Map<String, dynamic>),
+    subject: json['subject'] as String,
+    text: json['text'] as String,
+    to: (json['to'] as List)
+        ?.map((e) =>
+            e == null ? null : EmailAddress.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
+  );
+}
+
+Map<String, dynamic> _$EmailMessageToJson(EmailMessage instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('attachments', instance.attachments);
+  writeNotNull('bcc', instance.bcc);
+  writeNotNull('cc', instance.cc);
+  writeNotNull('from', instance.from);
+  writeNotNull('html', instance.html);
+  writeNotNull('replyTo', instance.replyTo);
+  writeNotNull('subject', instance.subject);
+  writeNotNull('text', instance.text);
+  writeNotNull('to', instance.to);
+  return val;
+}
+
+EmailMessageTemplate _$EmailMessageTemplateFromJson(Map<String, dynamic> json) {
+  return EmailMessageTemplate(
+    defaultFromName: json['defaultFromName'] as String,
+    defaultHtmlTemplate: json['defaultHtmlTemplate'] as String,
+    defaultSubject: json['defaultSubject'] as String,
+    defaultTextTemplate: json['defaultTextTemplate'] as String,
+    fromEmail: json['fromEmail'] as String,
+    localizedFromNames:
+        (json['localizedFromNames'] as Map<String, dynamic>)?.map(
+      (k, e) => MapEntry(k, e as String),
+    ),
+    localizedHtmlTemplates:
+        (json['localizedHtmlTemplates'] as Map<String, dynamic>)?.map(
+      (k, e) => MapEntry(k, e as String),
+    ),
+    localizedSubjects: (json['localizedSubjects'] as Map<String, dynamic>)?.map(
+      (k, e) => MapEntry(k, e as String),
+    ),
+    localizedTextTemplates:
+        (json['localizedTextTemplates'] as Map<String, dynamic>)?.map(
+      (k, e) => MapEntry(k, e as String),
+    ),
+  )
+    ..data = json['data'] as Map<String, dynamic>
+    ..id = json['id'] as String
+    ..insertInstant = json['insertInstant'] as num
+    ..lastUpdateInstant = json['lastUpdateInstant'] as num
+    ..name = json['name'] as String
+    ..type = _$enumDecodeNullable(_$MessageTypeEnumMap, json['type']);
+}
+
+Map<String, dynamic> _$EmailMessageTemplateToJson(
+    EmailMessageTemplate instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('data', instance.data);
+  writeNotNull('id', instance.id);
+  writeNotNull('insertInstant', instance.insertInstant);
+  writeNotNull('lastUpdateInstant', instance.lastUpdateInstant);
+  writeNotNull('name', instance.name);
+  writeNotNull('type', _$MessageTypeEnumMap[instance.type]);
+  writeNotNull('defaultFromName', instance.defaultFromName);
+  writeNotNull('defaultHtmlTemplate', instance.defaultHtmlTemplate);
+  writeNotNull('defaultSubject', instance.defaultSubject);
+  writeNotNull('defaultTextTemplate', instance.defaultTextTemplate);
+  writeNotNull('fromEmail', instance.fromEmail);
+  writeNotNull('localizedFromNames', instance.localizedFromNames);
+  writeNotNull('localizedHtmlTemplates', instance.localizedHtmlTemplates);
+  writeNotNull('localizedSubjects', instance.localizedSubjects);
+  writeNotNull('localizedTextTemplates', instance.localizedTextTemplates);
+  return val;
+}
+
+const _$MessageTypeEnumMap = {
+  MessageType.SMS: 'SMS',
+  MessageType.Email: 'Email',
+};
+
 EmailMessengerConfiguration _$EmailMessengerConfigurationFromJson(
     Map<String, dynamic> json) {
   return EmailMessengerConfiguration(
@@ -4837,35 +4952,19 @@ Map<String, dynamic> _$MemberResponseToJson(MemberResponse instance) {
 }
 
 Message _$MessageFromJson(Map<String, dynamic> json) {
-  return Message(
-    text: json['text'] as String,
-  );
+  return Message();
 }
 
-Map<String, dynamic> _$MessageToJson(Message instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('text', instance.text);
-  return val;
-}
+Map<String, dynamic> _$MessageToJson(Message instance) => <String, dynamic>{};
 
 MessageTemplate _$MessageTemplateFromJson(Map<String, dynamic> json) {
   return MessageTemplate(
-    defaultTemplate: json['defaultTemplate'] as String,
+    data: json['data'] as Map<String, dynamic>,
     id: json['id'] as String,
     insertInstant: json['insertInstant'] as num,
     lastUpdateInstant: json['lastUpdateInstant'] as num,
-    localizedTemplates:
-        (json['localizedTemplates'] as Map<String, dynamic>)?.map(
-      (k, e) => MapEntry(k, e as String),
-    ),
     name: json['name'] as String,
+    type: _$enumDecodeNullable(_$MessageTypeEnumMap, json['type']),
   );
 }
 
@@ -4878,12 +4977,12 @@ Map<String, dynamic> _$MessageTemplateToJson(MessageTemplate instance) {
     }
   }
 
-  writeNotNull('defaultTemplate', instance.defaultTemplate);
+  writeNotNull('data', instance.data);
   writeNotNull('id', instance.id);
   writeNotNull('insertInstant', instance.insertInstant);
   writeNotNull('lastUpdateInstant', instance.lastUpdateInstant);
-  writeNotNull('localizedTemplates', instance.localizedTemplates);
   writeNotNull('name', instance.name);
+  writeNotNull('type', _$MessageTypeEnumMap[instance.type]);
   return val;
 }
 
@@ -6649,6 +6748,63 @@ Map<String, dynamic> _$SendResponseToJson(SendResponse instance) {
   }
 
   writeNotNull('results', instance.results);
+  return val;
+}
+
+SMSMessage _$SMSMessageFromJson(Map<String, dynamic> json) {
+  return SMSMessage(
+    phoneNumber: json['phoneNumber'] as String,
+    textMessage: json['textMessage'] as String,
+  );
+}
+
+Map<String, dynamic> _$SMSMessageToJson(SMSMessage instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('phoneNumber', instance.phoneNumber);
+  writeNotNull('textMessage', instance.textMessage);
+  return val;
+}
+
+SMSMessageTemplate _$SMSMessageTemplateFromJson(Map<String, dynamic> json) {
+  return SMSMessageTemplate(
+    defaultTemplate: json['defaultTemplate'] as String,
+    localizedTemplates:
+        (json['localizedTemplates'] as Map<String, dynamic>)?.map(
+      (k, e) => MapEntry(k, e as String),
+    ),
+  )
+    ..data = json['data'] as Map<String, dynamic>
+    ..id = json['id'] as String
+    ..insertInstant = json['insertInstant'] as num
+    ..lastUpdateInstant = json['lastUpdateInstant'] as num
+    ..name = json['name'] as String
+    ..type = _$enumDecodeNullable(_$MessageTypeEnumMap, json['type']);
+}
+
+Map<String, dynamic> _$SMSMessageTemplateToJson(SMSMessageTemplate instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('data', instance.data);
+  writeNotNull('id', instance.id);
+  writeNotNull('insertInstant', instance.insertInstant);
+  writeNotNull('lastUpdateInstant', instance.lastUpdateInstant);
+  writeNotNull('name', instance.name);
+  writeNotNull('type', _$MessageTypeEnumMap[instance.type]);
+  writeNotNull('defaultTemplate', instance.defaultTemplate);
+  writeNotNull('localizedTemplates', instance.localizedTemplates);
   return val;
 }
 
