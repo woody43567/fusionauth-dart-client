@@ -3667,6 +3667,38 @@ class MonthlyActiveUserReportResponse {
   Map<String, dynamic> toJson() => _$MonthlyActiveUserReportResponseToJson(this);
 }
 
+@JsonSerializable()
+class MultiFactorConfiguration {
+  List<MessageType> availableTypes;
+  List<MessageType> currentTypes;
+  List<MultiFactorTypeConfiguration> templates;
+
+  MultiFactorConfiguration({
+      this.availableTypes,
+      this.currentTypes,
+      this.templates
+  });
+
+  factory MultiFactorConfiguration.fromJson(Map<String, dynamic> json) => _$MultiFactorConfigurationFromJson(json);
+  Map<String, dynamic> toJson() => _$MultiFactorConfigurationToJson(this);
+}
+
+@JsonSerializable()
+class MultiFactorTypeConfiguration {
+  String messengerId;
+  String templateId;
+  MessageType type;
+
+  MultiFactorTypeConfiguration({
+      this.messengerId,
+      this.templateId,
+      this.type
+  });
+
+  factory MultiFactorTypeConfiguration.fromJson(Map<String, dynamic> json) => _$MultiFactorTypeConfigurationFromJson(json);
+  Map<String, dynamic> toJson() => _$MultiFactorTypeConfigurationToJson(this);
+}
+
 /// Helper methods for normalizing values.
 ///
 /// @author Brian Pontarelli
@@ -4984,6 +5016,7 @@ class Tenant {
   String logoutURL;
   MaximumPasswordAge maximumPasswordAge;
   MinimumPasswordAge minimumPasswordAge;
+  MultiFactorConfiguration multiFactorConfiguration;
   String name;
   PasswordEncryptionConfiguration passwordEncryptionConfiguration;
   PasswordValidationRules passwordValidationRules;
@@ -5010,6 +5043,7 @@ class Tenant {
       this.logoutURL,
       this.maximumPasswordAge,
       this.minimumPasswordAge,
+      this.multiFactorConfiguration,
       this.name,
       this.passwordEncryptionConfiguration,
       this.passwordValidationRules,
