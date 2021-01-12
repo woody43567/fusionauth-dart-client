@@ -5162,49 +5162,14 @@ Map<String, dynamic> _$MonthlyActiveUserReportResponseToJson(
 MultiFactorConfiguration _$MultiFactorConfigurationFromJson(
     Map<String, dynamic> json) {
   return MultiFactorConfiguration(
-    availableTypes: (json['availableTypes'] as List)
-        ?.map((e) => _$enumDecodeNullable(_$MessageTypeEnumMap, e))
-        ?.toList(),
-    currentTypes: (json['currentTypes'] as List)
-        ?.map((e) => _$enumDecodeNullable(_$MessageTypeEnumMap, e))
-        ?.toList(),
-    templates: (json['templates'] as List)
-        ?.map((e) => e == null
-            ? null
-            : MultiFactorTypeConfiguration.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
-  );
-}
-
-Map<String, dynamic> _$MultiFactorConfigurationToJson(
-    MultiFactorConfiguration instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('availableTypes',
-      instance.availableTypes?.map((e) => _$MessageTypeEnumMap[e])?.toList());
-  writeNotNull('currentTypes',
-      instance.currentTypes?.map((e) => _$MessageTypeEnumMap[e])?.toList());
-  writeNotNull('templates', instance.templates);
-  return val;
-}
-
-MultiFactorTypeConfiguration _$MultiFactorTypeConfigurationFromJson(
-    Map<String, dynamic> json) {
-  return MultiFactorTypeConfiguration(
     messengerId: json['messengerId'] as String,
     templateId: json['templateId'] as String,
     type: _$enumDecodeNullable(_$MessageTypeEnumMap, json['type']),
   );
 }
 
-Map<String, dynamic> _$MultiFactorTypeConfigurationToJson(
-    MultiFactorTypeConfiguration instance) {
+Map<String, dynamic> _$MultiFactorConfigurationToJson(
+    MultiFactorConfiguration instance) {
   final val = <String, dynamic>{};
 
   void writeNotNull(String key, dynamic value) {
@@ -7150,10 +7115,11 @@ Tenant _$TenantFromJson(Map<String, dynamic> json) {
         ? null
         : MinimumPasswordAge.fromJson(
             json['minimumPasswordAge'] as Map<String, dynamic>),
-    multiFactorConfiguration: json['multiFactorConfiguration'] == null
-        ? null
-        : MultiFactorConfiguration.fromJson(
-            json['multiFactorConfiguration'] as Map<String, dynamic>),
+    multiFactorConfigurations: (json['multiFactorConfigurations'] as List)
+        ?.map((e) => e == null
+            ? null
+            : MultiFactorConfiguration.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
     name: json['name'] as String,
     passwordEncryptionConfiguration: json['passwordEncryptionConfiguration'] ==
             null
@@ -7203,7 +7169,7 @@ Map<String, dynamic> _$TenantToJson(Tenant instance) {
   writeNotNull('logoutURL', instance.logoutURL);
   writeNotNull('maximumPasswordAge', instance.maximumPasswordAge);
   writeNotNull('minimumPasswordAge', instance.minimumPasswordAge);
-  writeNotNull('multiFactorConfiguration', instance.multiFactorConfiguration);
+  writeNotNull('multiFactorConfigurations', instance.multiFactorConfigurations);
   writeNotNull('name', instance.name);
   writeNotNull('passwordEncryptionConfiguration',
       instance.passwordEncryptionConfiguration);
