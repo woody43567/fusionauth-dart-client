@@ -6994,10 +6994,12 @@ Map<String, dynamic> _$SystemLogsExportRequestToJson(
 
 Templates _$TemplatesFromJson(Map<String, dynamic> json) {
   return Templates(
+    accountIndex: json['accountIndex'] as String,
     emailComplete: json['emailComplete'] as String,
     emailSend: json['emailSend'] as String,
     emailVerify: json['emailVerify'] as String,
     helpers: json['helpers'] as String,
+    index: json['index'] as String,
     oauth2Authorize: json['oauth2Authorize'] as String,
     oauth2ChildRegistrationNotAllowed:
         json['oauth2ChildRegistrationNotAllowed'] as String,
@@ -7031,10 +7033,12 @@ Map<String, dynamic> _$TemplatesToJson(Templates instance) {
     }
   }
 
+  writeNotNull('accountIndex', instance.accountIndex);
   writeNotNull('emailComplete', instance.emailComplete);
   writeNotNull('emailSend', instance.emailSend);
   writeNotNull('emailVerify', instance.emailVerify);
   writeNotNull('helpers', instance.helpers);
+  writeNotNull('index', instance.index);
   writeNotNull('oauth2Authorize', instance.oauth2Authorize);
   writeNotNull('oauth2ChildRegistrationNotAllowed',
       instance.oauth2ChildRegistrationNotAllowed);

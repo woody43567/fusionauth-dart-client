@@ -4925,10 +4925,12 @@ class SystemLogsExportRequest extends BaseExportRequest {
 
 @JsonSerializable()
 class Templates {
+  String accountIndex;
   String emailComplete;
   String emailSend;
   String emailVerify;
   String helpers;
+  String index;
   String oauth2Authorize;
   String oauth2ChildRegistrationNotAllowed;
   String oauth2ChildRegistrationNotAllowedComplete;
@@ -4950,10 +4952,12 @@ class Templates {
   String registrationVerify;
 
   Templates({
+      this.accountIndex,
       this.emailComplete,
       this.emailSend,
       this.emailVerify,
       this.helpers,
+      this.index,
       this.oauth2Authorize,
       this.oauth2ChildRegistrationNotAllowed,
       this.oauth2ChildRegistrationNotAllowedComplete,
