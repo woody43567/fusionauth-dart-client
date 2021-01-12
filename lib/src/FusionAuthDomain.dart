@@ -2257,9 +2257,21 @@ class GenericConnectorConfiguration extends BaseConnectorConfiguration {
 /// @author Brett Guy
 @JsonSerializable()
 class GenericMessengerConfiguration extends BaseMessengerConfiguration {
+  num connectTimeout;
+  Map<String, String> headers;
+  String httpAuthenticationPassword;
+  String httpAuthenticationUsername;
+  num readTimeout;
+  String sslCertificate;
   String url;
 
   GenericMessengerConfiguration({
+      this.connectTimeout,
+      this.headers,
+      this.httpAuthenticationPassword,
+      this.httpAuthenticationUsername,
+      this.readTimeout,
+      this.sslCertificate,
       this.url
   });
 
@@ -2969,6 +2981,21 @@ class KafkaConfiguration extends Enableable {
   Map<String, dynamic> toJson() => _$KafkaConfigurationToJson(this);
 }
 
+/// @author Brett Guy
+@JsonSerializable()
+class KafkaMessengerConfiguration extends BaseMessengerConfiguration {
+  String defaultTopic;
+  Map<String, String> producer;
+
+  KafkaMessengerConfiguration({
+      this.defaultTopic,
+      this.producer
+  });
+
+  factory KafkaMessengerConfiguration.fromJson(Map<String, dynamic> json) => _$KafkaMessengerConfigurationFromJson(json);
+  Map<String, dynamic> toJson() => _$KafkaMessengerConfigurationToJson(this);
+}
+
 /// Domain for a public key, key pair or an HMAC secret. This is used by KeyMaster to manage keys for JWTs, SAML, etc.
 ///
 /// @author Brian Pontarelli
@@ -3620,7 +3647,9 @@ enum MessengerType {
   @JsonValue('Twilio')
   Twilio,
   @JsonValue('Email')
-  Email
+  Email,
+  @JsonValue('Kafka')
+  Kafka
 }
 
 @JsonSerializable()

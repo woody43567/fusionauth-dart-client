@@ -998,6 +998,7 @@ const _$MessengerTypeEnumMap = {
   MessengerType.Generic: 'Generic',
   MessengerType.Twilio: 'Twilio',
   MessengerType.Email: 'Email',
+  MessengerType.Kafka: 'Kafka',
 };
 
 BaseSearchCriteria _$BaseSearchCriteriaFromJson(Map<String, dynamic> json) {
@@ -3185,6 +3186,14 @@ Map<String, dynamic> _$GenericConnectorConfigurationToJson(
 GenericMessengerConfiguration _$GenericMessengerConfigurationFromJson(
     Map<String, dynamic> json) {
   return GenericMessengerConfiguration(
+    connectTimeout: json['connectTimeout'] as num,
+    headers: (json['headers'] as Map<String, dynamic>)?.map(
+      (k, e) => MapEntry(k, e as String),
+    ),
+    httpAuthenticationPassword: json['httpAuthenticationPassword'] as String,
+    httpAuthenticationUsername: json['httpAuthenticationUsername'] as String,
+    readTimeout: json['readTimeout'] as num,
+    sslCertificate: json['sslCertificate'] as String,
     url: json['url'] as String,
   )
     ..data = json['data'] as Map<String, dynamic>
@@ -3213,6 +3222,14 @@ Map<String, dynamic> _$GenericMessengerConfigurationToJson(
   writeNotNull('lastUpdateInstant', instance.lastUpdateInstant);
   writeNotNull('name', instance.name);
   writeNotNull('type', _$MessengerTypeEnumMap[instance.type]);
+  writeNotNull('connectTimeout', instance.connectTimeout);
+  writeNotNull('headers', instance.headers);
+  writeNotNull(
+      'httpAuthenticationPassword', instance.httpAuthenticationPassword);
+  writeNotNull(
+      'httpAuthenticationUsername', instance.httpAuthenticationUsername);
+  writeNotNull('readTimeout', instance.readTimeout);
+  writeNotNull('sslCertificate', instance.sslCertificate);
   writeNotNull('url', instance.url);
   return val;
 }
@@ -4229,6 +4246,45 @@ Map<String, dynamic> _$KafkaConfigurationToJson(KafkaConfiguration instance) {
   }
 
   writeNotNull('enabled', instance.enabled);
+  writeNotNull('defaultTopic', instance.defaultTopic);
+  writeNotNull('producer', instance.producer);
+  return val;
+}
+
+KafkaMessengerConfiguration _$KafkaMessengerConfigurationFromJson(
+    Map<String, dynamic> json) {
+  return KafkaMessengerConfiguration(
+    defaultTopic: json['defaultTopic'] as String,
+    producer: (json['producer'] as Map<String, dynamic>)?.map(
+      (k, e) => MapEntry(k, e as String),
+    ),
+  )
+    ..data = json['data'] as Map<String, dynamic>
+    ..debug = json['debug'] as bool
+    ..id = json['id'] as String
+    ..insertInstant = json['insertInstant'] as num
+    ..lastUpdateInstant = json['lastUpdateInstant'] as num
+    ..name = json['name'] as String
+    ..type = _$enumDecodeNullable(_$MessengerTypeEnumMap, json['type']);
+}
+
+Map<String, dynamic> _$KafkaMessengerConfigurationToJson(
+    KafkaMessengerConfiguration instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('data', instance.data);
+  writeNotNull('debug', instance.debug);
+  writeNotNull('id', instance.id);
+  writeNotNull('insertInstant', instance.insertInstant);
+  writeNotNull('lastUpdateInstant', instance.lastUpdateInstant);
+  writeNotNull('name', instance.name);
+  writeNotNull('type', _$MessengerTypeEnumMap[instance.type]);
   writeNotNull('defaultTopic', instance.defaultTopic);
   writeNotNull('producer', instance.producer);
   return val;
