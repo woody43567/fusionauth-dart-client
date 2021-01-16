@@ -193,6 +193,7 @@ class Application {
   dynamic lambdaConfiguration;
   num lastUpdateInstant;
   LoginConfiguration loginConfiguration;
+  ApplicationMultiFactorConfiguration multiFactorConfiguration;
   String name;
   OAuth2Configuration oauthConfiguration;
   PasswordlessConfiguration passwordlessConfiguration;
@@ -218,6 +219,7 @@ class Application {
       this.lambdaConfiguration,
       this.lastUpdateInstant,
       this.loginConfiguration,
+      this.multiFactorConfiguration,
       this.name,
       this.oauthConfiguration,
       this.passwordlessConfiguration,
@@ -276,6 +278,16 @@ class ApplicationFormConfiguration {
 
   factory ApplicationFormConfiguration.fromJson(Map<String, dynamic> json) => _$ApplicationFormConfigurationFromJson(json);
   Map<String, dynamic> toJson() => _$ApplicationFormConfigurationToJson(this);
+}
+
+/// @author Daniel DeGroff
+@JsonSerializable()
+class ApplicationMultiFactorConfiguration extends TenantMultiFactorConfiguration {
+
+  ApplicationMultiFactorConfiguration();
+
+  factory ApplicationMultiFactorConfiguration.fromJson(Map<String, dynamic> json) => _$ApplicationMultiFactorConfigurationFromJson(json);
+  Map<String, dynamic> toJson() => _$ApplicationMultiFactorConfigurationToJson(this);
 }
 
 /// A Application-level policy for deleting Users.
@@ -1234,6 +1246,7 @@ class EmailConfiguration {
   Map<String, dynamic> toJson() => _$EmailConfigurationToJson(this);
 }
 
+/// @author Mikey Sleevi
 @JsonSerializable()
 class EmailMessage {
   List<Attachment> attachments;
@@ -1262,6 +1275,7 @@ class EmailMessage {
   Map<String, dynamic> toJson() => _$EmailMessageToJson(this);
 }
 
+/// @author Mikey Sleevi
 @JsonSerializable()
 class EmailMessageTemplate extends MessageTemplate {
   String defaultFromName;
@@ -2623,6 +2637,7 @@ class IdentityProviderStartLoginResponse {
   Map<String, dynamic> toJson() => _$IdentityProviderStartLoginResponseToJson(this);
 }
 
+/// @author Daniel DeGroff
 enum IdentityProviderType {
   @JsonValue('ExternalJWT')
   ExternalJWT,
@@ -3583,6 +3598,7 @@ class MemberResponse {
   Map<String, dynamic> toJson() => _$MemberResponseToJson(this);
 }
 
+/// @author Mikey Sleevi
 @JsonSerializable()
 class Message {
 
@@ -3647,6 +3663,7 @@ class MessageTemplateResponse {
   Map<String, dynamic> toJson() => _$MessageTemplateResponseToJson(this);
 }
 
+/// @author Mikey Sleevi
 enum MessageType {
   @JsonValue('SMS')
   SMS,
@@ -3736,22 +3753,6 @@ class MonthlyActiveUserReportResponse {
 
   factory MonthlyActiveUserReportResponse.fromJson(Map<String, dynamic> json) => _$MonthlyActiveUserReportResponseFromJson(json);
   Map<String, dynamic> toJson() => _$MonthlyActiveUserReportResponseToJson(this);
-}
-
-@JsonSerializable()
-class MultiFactorConfiguration {
-  String messengerId;
-  String templateId;
-  MessageType type;
-
-  MultiFactorConfiguration({
-      this.messengerId,
-      this.templateId,
-      this.type
-  });
-
-  factory MultiFactorConfiguration.fromJson(Map<String, dynamic> json) => _$MultiFactorConfigurationFromJson(json);
-  Map<String, dynamic> toJson() => _$MultiFactorConfigurationToJson(this);
 }
 
 /// Helper methods for normalizing values.
@@ -4871,6 +4872,7 @@ class SMSMessage {
   Map<String, dynamic> toJson() => _$SMSMessageToJson(this);
 }
 
+/// @author Michael Sleevi
 @JsonSerializable()
 class SMSMessageTemplate extends MessageTemplate {
   String defaultTemplate;
@@ -5074,8 +5076,9 @@ class Tenant {
   num lastUpdateInstant;
   String logoutURL;
   MaximumPasswordAge maximumPasswordAge;
+  TenantMessengerConfiguration messengerConfiguration;
   MinimumPasswordAge minimumPasswordAge;
-  List<MultiFactorConfiguration> multiFactorConfigurations;
+  TenantMultiFactorConfiguration multiFactorConfiguration;
   String name;
   PasswordEncryptionConfiguration passwordEncryptionConfiguration;
   PasswordValidationRules passwordValidationRules;
@@ -5101,8 +5104,9 @@ class Tenant {
       this.lastUpdateInstant,
       this.logoutURL,
       this.maximumPasswordAge,
+      this.messengerConfiguration,
       this.minimumPasswordAge,
-      this.multiFactorConfigurations,
+      this.multiFactorConfiguration,
       this.name,
       this.passwordEncryptionConfiguration,
       this.passwordValidationRules,
@@ -5136,6 +5140,29 @@ class TenantFormConfiguration {
 
   factory TenantFormConfiguration.fromJson(Map<String, dynamic> json) => _$TenantFormConfigurationFromJson(json);
   Map<String, dynamic> toJson() => _$TenantFormConfigurationToJson(this);
+}
+
+/// @author Daniel DeGroff
+@JsonSerializable()
+class TenantMessengerConfiguration {
+
+  TenantMessengerConfiguration();
+
+  factory TenantMessengerConfiguration.fromJson(Map<String, dynamic> json) => _$TenantMessengerConfigurationFromJson(json);
+  Map<String, dynamic> toJson() => _$TenantMessengerConfigurationToJson(this);
+}
+
+/// @author Mikey Sleevi
+@JsonSerializable()
+class TenantMultiFactorConfiguration {
+  String smsMessageTemplateId;
+
+  TenantMultiFactorConfiguration({
+      this.smsMessageTemplateId
+  });
+
+  factory TenantMultiFactorConfiguration.fromJson(Map<String, dynamic> json) => _$TenantMultiFactorConfigurationFromJson(json);
+  Map<String, dynamic> toJson() => _$TenantMultiFactorConfigurationToJson(this);
 }
 
 /// @author Daniel DeGroff
