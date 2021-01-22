@@ -300,6 +300,10 @@ Application _$ApplicationFromJson(Map<String, dynamic> json) {
         ? null
         : LoginConfiguration.fromJson(
             json['loginConfiguration'] as Map<String, dynamic>),
+    multiFactorConfiguration: json['multiFactorConfiguration'] == null
+        ? null
+        : ApplicationMultiFactorConfiguration.fromJson(
+            json['multiFactorConfiguration'] as Map<String, dynamic>),
     name: json['name'] as String,
     oauthConfiguration: json['oauthConfiguration'] == null
         ? null
@@ -355,6 +359,7 @@ Map<String, dynamic> _$ApplicationToJson(Application instance) {
   writeNotNull('lambdaConfiguration', instance.lambdaConfiguration);
   writeNotNull('lastUpdateInstant', instance.lastUpdateInstant);
   writeNotNull('loginConfiguration', instance.loginConfiguration);
+  writeNotNull('multiFactorConfiguration', instance.multiFactorConfiguration);
   writeNotNull('name', instance.name);
   writeNotNull('oauthConfiguration', instance.oauthConfiguration);
   writeNotNull('passwordlessConfiguration', instance.passwordlessConfiguration);
@@ -420,6 +425,7 @@ ApplicationFormConfiguration _$ApplicationFormConfigurationFromJson(
     Map<String, dynamic> json) {
   return ApplicationFormConfiguration(
     adminRegistrationFormId: json['adminRegistrationFormId'] as String,
+    selfServiceUserFormId: json['selfServiceUserFormId'] as String,
   );
 }
 
@@ -434,6 +440,27 @@ Map<String, dynamic> _$ApplicationFormConfigurationToJson(
   }
 
   writeNotNull('adminRegistrationFormId', instance.adminRegistrationFormId);
+  writeNotNull('selfServiceUserFormId', instance.selfServiceUserFormId);
+  return val;
+}
+
+ApplicationMultiFactorConfiguration
+    _$ApplicationMultiFactorConfigurationFromJson(Map<String, dynamic> json) {
+  return ApplicationMultiFactorConfiguration()
+    ..smsMessageTemplateId = json['smsMessageTemplateId'] as String;
+}
+
+Map<String, dynamic> _$ApplicationMultiFactorConfigurationToJson(
+    ApplicationMultiFactorConfiguration instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('smsMessageTemplateId', instance.smsMessageTemplateId);
   return val;
 }
 
@@ -971,6 +998,7 @@ BaseMessengerConfiguration _$BaseMessengerConfigurationFromJson(
     insertInstant: json['insertInstant'] as num,
     lastUpdateInstant: json['lastUpdateInstant'] as num,
     name: json['name'] as String,
+    transport: json['transport'] as String,
     type: _$enumDecodeNullable(_$MessengerTypeEnumMap, json['type']),
   );
 }
@@ -991,6 +1019,7 @@ Map<String, dynamic> _$BaseMessengerConfigurationToJson(
   writeNotNull('insertInstant', instance.insertInstant);
   writeNotNull('lastUpdateInstant', instance.lastUpdateInstant);
   writeNotNull('name', instance.name);
+  writeNotNull('transport', instance.transport);
   writeNotNull('type', _$MessengerTypeEnumMap[instance.type]);
   return val;
 }
@@ -1796,6 +1825,7 @@ EmailMessengerConfiguration _$EmailMessengerConfigurationFromJson(
     ..insertInstant = json['insertInstant'] as num
     ..lastUpdateInstant = json['lastUpdateInstant'] as num
     ..name = json['name'] as String
+    ..transport = json['transport'] as String
     ..type = _$enumDecodeNullable(_$MessengerTypeEnumMap, json['type']);
 }
 
@@ -1815,6 +1845,7 @@ Map<String, dynamic> _$EmailMessengerConfigurationToJson(
   writeNotNull('insertInstant', instance.insertInstant);
   writeNotNull('lastUpdateInstant', instance.lastUpdateInstant);
   writeNotNull('name', instance.name);
+  writeNotNull('transport', instance.transport);
   writeNotNull('type', _$MessengerTypeEnumMap[instance.type]);
   writeNotNull('defaultFromEmail', instance.defaultFromEmail);
   writeNotNull('defaultFromName', instance.defaultFromName);
@@ -2894,6 +2925,7 @@ const _$FormTypeEnumMap = {
   FormType.registration: 'registration',
   FormType.adminRegistration: 'adminRegistration',
   FormType.adminUser: 'adminUser',
+  FormType.selfServiceUser: 'selfServiceUser',
 };
 
 FormField _$FormFieldFromJson(Map<String, dynamic> json) {
@@ -3203,6 +3235,7 @@ GenericMessengerConfiguration _$GenericMessengerConfigurationFromJson(
     ..insertInstant = json['insertInstant'] as num
     ..lastUpdateInstant = json['lastUpdateInstant'] as num
     ..name = json['name'] as String
+    ..transport = json['transport'] as String
     ..type = _$enumDecodeNullable(_$MessengerTypeEnumMap, json['type']);
 }
 
@@ -3222,6 +3255,7 @@ Map<String, dynamic> _$GenericMessengerConfigurationToJson(
   writeNotNull('insertInstant', instance.insertInstant);
   writeNotNull('lastUpdateInstant', instance.lastUpdateInstant);
   writeNotNull('name', instance.name);
+  writeNotNull('transport', instance.transport);
   writeNotNull('type', _$MessengerTypeEnumMap[instance.type]);
   writeNotNull('connectTimeout', instance.connectTimeout);
   writeNotNull('headers', instance.headers);
@@ -4266,6 +4300,7 @@ KafkaMessengerConfiguration _$KafkaMessengerConfigurationFromJson(
     ..insertInstant = json['insertInstant'] as num
     ..lastUpdateInstant = json['lastUpdateInstant'] as num
     ..name = json['name'] as String
+    ..transport = json['transport'] as String
     ..type = _$enumDecodeNullable(_$MessengerTypeEnumMap, json['type']);
 }
 
@@ -4285,6 +4320,7 @@ Map<String, dynamic> _$KafkaMessengerConfigurationToJson(
   writeNotNull('insertInstant', instance.insertInstant);
   writeNotNull('lastUpdateInstant', instance.lastUpdateInstant);
   writeNotNull('name', instance.name);
+  writeNotNull('transport', instance.transport);
   writeNotNull('type', _$MessengerTypeEnumMap[instance.type]);
   writeNotNull('defaultTopic', instance.defaultTopic);
   writeNotNull('producer', instance.producer);
@@ -5302,31 +5338,6 @@ Map<String, dynamic> _$MonthlyActiveUserReportResponseToJson(
 
   writeNotNull('monthlyActiveUsers', instance.monthlyActiveUsers);
   writeNotNull('total', instance.total);
-  return val;
-}
-
-MultiFactorConfiguration _$MultiFactorConfigurationFromJson(
-    Map<String, dynamic> json) {
-  return MultiFactorConfiguration(
-    messengerId: json['messengerId'] as String,
-    templateId: json['templateId'] as String,
-    type: _$enumDecodeNullable(_$MessageTypeEnumMap, json['type']),
-  );
-}
-
-Map<String, dynamic> _$MultiFactorConfigurationToJson(
-    MultiFactorConfiguration instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('messengerId', instance.messengerId);
-  writeNotNull('templateId', instance.templateId);
-  writeNotNull('type', _$MessageTypeEnumMap[instance.type]);
   return val;
 }
 
@@ -7261,15 +7272,18 @@ Tenant _$TenantFromJson(Map<String, dynamic> json) {
         ? null
         : MaximumPasswordAge.fromJson(
             json['maximumPasswordAge'] as Map<String, dynamic>),
+    messengerConfiguration: json['messengerConfiguration'] == null
+        ? null
+        : TenantMessengerConfiguration.fromJson(
+            json['messengerConfiguration'] as Map<String, dynamic>),
     minimumPasswordAge: json['minimumPasswordAge'] == null
         ? null
         : MinimumPasswordAge.fromJson(
             json['minimumPasswordAge'] as Map<String, dynamic>),
-    multiFactorConfigurations: (json['multiFactorConfigurations'] as List)
-        ?.map((e) => e == null
-            ? null
-            : MultiFactorConfiguration.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
+    multiFactorConfiguration: json['multiFactorConfiguration'] == null
+        ? null
+        : TenantMultiFactorConfiguration.fromJson(
+            json['multiFactorConfiguration'] as Map<String, dynamic>),
     name: json['name'] as String,
     passwordEncryptionConfiguration: json['passwordEncryptionConfiguration'] ==
             null
@@ -7318,8 +7332,9 @@ Map<String, dynamic> _$TenantToJson(Tenant instance) {
   writeNotNull('lastUpdateInstant', instance.lastUpdateInstant);
   writeNotNull('logoutURL', instance.logoutURL);
   writeNotNull('maximumPasswordAge', instance.maximumPasswordAge);
+  writeNotNull('messengerConfiguration', instance.messengerConfiguration);
   writeNotNull('minimumPasswordAge', instance.minimumPasswordAge);
-  writeNotNull('multiFactorConfigurations', instance.multiFactorConfigurations);
+  writeNotNull('multiFactorConfiguration', instance.multiFactorConfiguration);
   writeNotNull('name', instance.name);
   writeNotNull('passwordEncryptionConfiguration',
       instance.passwordEncryptionConfiguration);
@@ -7355,6 +7370,50 @@ Map<String, dynamic> _$TenantFormConfigurationToJson(
   }
 
   writeNotNull('adminUserFormId', instance.adminUserFormId);
+  return val;
+}
+
+TenantMessengerConfiguration _$TenantMessengerConfigurationFromJson(
+    Map<String, dynamic> json) {
+  return TenantMessengerConfiguration(
+    transports: (json['transports'] as Map<String, dynamic>)?.map(
+      (k, e) => MapEntry(k, e as String),
+    ),
+  );
+}
+
+Map<String, dynamic> _$TenantMessengerConfigurationToJson(
+    TenantMessengerConfiguration instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('transports', instance.transports);
+  return val;
+}
+
+TenantMultiFactorConfiguration _$TenantMultiFactorConfigurationFromJson(
+    Map<String, dynamic> json) {
+  return TenantMultiFactorConfiguration(
+    smsMessageTemplateId: json['smsMessageTemplateId'] as String,
+  );
+}
+
+Map<String, dynamic> _$TenantMultiFactorConfigurationToJson(
+    TenantMultiFactorConfiguration instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('smsMessageTemplateId', instance.smsMessageTemplateId);
   return val;
 }
 
@@ -7616,6 +7675,13 @@ Map<String, dynamic> _$TotalsReportResponseToJson(
   return val;
 }
 
+Transport _$TransportFromJson(Map<String, dynamic> json) {
+  return Transport();
+}
+
+Map<String, dynamic> _$TransportToJson(Transport instance) =>
+    <String, dynamic>{};
+
 TwilioMessengerConfiguration _$TwilioMessengerConfigurationFromJson(
     Map<String, dynamic> json) {
   return TwilioMessengerConfiguration(
@@ -7631,6 +7697,7 @@ TwilioMessengerConfiguration _$TwilioMessengerConfigurationFromJson(
     ..insertInstant = json['insertInstant'] as num
     ..lastUpdateInstant = json['lastUpdateInstant'] as num
     ..name = json['name'] as String
+    ..transport = json['transport'] as String
     ..type = _$enumDecodeNullable(_$MessengerTypeEnumMap, json['type']);
 }
 
@@ -7650,6 +7717,7 @@ Map<String, dynamic> _$TwilioMessengerConfigurationToJson(
   writeNotNull('insertInstant', instance.insertInstant);
   writeNotNull('lastUpdateInstant', instance.lastUpdateInstant);
   writeNotNull('name', instance.name);
+  writeNotNull('transport', instance.transport);
   writeNotNull('type', _$MessengerTypeEnumMap[instance.type]);
   writeNotNull('accountSID', instance.accountSID);
   writeNotNull('authToken', instance.authToken);

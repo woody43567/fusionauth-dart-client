@@ -271,9 +271,11 @@ class ApplicationEvent {
 @JsonSerializable()
 class ApplicationFormConfiguration {
   String adminRegistrationFormId;
+  String selfServiceUserFormId;
 
   ApplicationFormConfiguration({
-      this.adminRegistrationFormId
+      this.adminRegistrationFormId,
+      this.selfServiceUserFormId
   });
 
   factory ApplicationFormConfiguration.fromJson(Map<String, dynamic> json) => _$ApplicationFormConfigurationFromJson(json);
@@ -661,6 +663,7 @@ class BaseMessengerConfiguration {
   num insertInstant;
   num lastUpdateInstant;
   String name;
+  String transport;
   MessengerType type;
 
   BaseMessengerConfiguration({
@@ -670,6 +673,7 @@ class BaseMessengerConfiguration {
       this.insertInstant,
       this.lastUpdateInstant,
       this.name,
+      this.transport,
       this.type
   });
 
@@ -2226,7 +2230,9 @@ enum FormType {
   @JsonValue('adminRegistration')
   adminRegistration,
   @JsonValue('adminUser')
-  adminUser
+  adminUser,
+  @JsonValue('selfServiceUser')
+  selfServiceUser
 }
 
 /// Models the FusionAuth connector.
@@ -5145,8 +5151,11 @@ class TenantFormConfiguration {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class TenantMessengerConfiguration {
+  Map<String, String> transports;
 
-  TenantMessengerConfiguration();
+  TenantMessengerConfiguration({
+      this.transports
+  });
 
   factory TenantMessengerConfiguration.fromJson(Map<String, dynamic> json) => _$TenantMessengerConfigurationFromJson(json);
   Map<String, dynamic> toJson() => _$TenantMessengerConfigurationToJson(this);
@@ -5366,6 +5375,16 @@ enum TransactionType {
   SuperMajority,
   @JsonValue('AbsoluteMajority')
   AbsoluteMajority
+}
+
+/// @author Daniel DeGroff
+@JsonSerializable()
+class Transport {
+
+  Transport();
+
+  factory Transport.fromJson(Map<String, dynamic> json) => _$TransportFromJson(json);
+  Map<String, dynamic> toJson() => _$TransportToJson(this);
 }
 
 /// @author Brett Guy
