@@ -5021,6 +5021,7 @@ class Templates {
   String oauth2Passwordless;
   String oauth2Register;
   String oauth2TwoFactor;
+  String oauth2TwoFactorOptions;
   String oauth2Wait;
   String passwordChange;
   String passwordComplete;
@@ -5048,6 +5049,7 @@ class Templates {
       this.oauth2Passwordless,
       this.oauth2Register,
       this.oauth2TwoFactor,
+      this.oauth2TwoFactorOptions,
       this.oauth2Wait,
       this.passwordChange,
       this.passwordComplete,
@@ -5375,16 +5377,6 @@ enum TransactionType {
   SuperMajority,
   @JsonValue('AbsoluteMajority')
   AbsoluteMajority
-}
-
-/// @author Daniel DeGroff
-@JsonSerializable()
-class Transport {
-
-  Transport();
-
-  factory Transport.fromJson(Map<String, dynamic> json) => _$TransportFromJson(json);
-  Map<String, dynamic> toJson() => _$TransportToJson(this);
 }
 
 /// @author Brett Guy

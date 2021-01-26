@@ -7170,6 +7170,7 @@ Templates _$TemplatesFromJson(Map<String, dynamic> json) {
     oauth2Passwordless: json['oauth2Passwordless'] as String,
     oauth2Register: json['oauth2Register'] as String,
     oauth2TwoFactor: json['oauth2TwoFactor'] as String,
+    oauth2TwoFactorOptions: json['oauth2TwoFactorOptions'] as String,
     oauth2Wait: json['oauth2Wait'] as String,
     passwordChange: json['passwordChange'] as String,
     passwordComplete: json['passwordComplete'] as String,
@@ -7210,6 +7211,7 @@ Map<String, dynamic> _$TemplatesToJson(Templates instance) {
   writeNotNull('oauth2Passwordless', instance.oauth2Passwordless);
   writeNotNull('oauth2Register', instance.oauth2Register);
   writeNotNull('oauth2TwoFactor', instance.oauth2TwoFactor);
+  writeNotNull('oauth2TwoFactorOptions', instance.oauth2TwoFactorOptions);
   writeNotNull('oauth2Wait', instance.oauth2Wait);
   writeNotNull('passwordChange', instance.passwordChange);
   writeNotNull('passwordComplete', instance.passwordComplete);
@@ -7674,13 +7676,6 @@ Map<String, dynamic> _$TotalsReportResponseToJson(
   writeNotNull('totalGlobalRegistrations', instance.totalGlobalRegistrations);
   return val;
 }
-
-Transport _$TransportFromJson(Map<String, dynamic> json) {
-  return Transport();
-}
-
-Map<String, dynamic> _$TransportToJson(Transport instance) =>
-    <String, dynamic>{};
 
 TwilioMessengerConfiguration _$TwilioMessengerConfigurationFromJson(
     Map<String, dynamic> json) {
