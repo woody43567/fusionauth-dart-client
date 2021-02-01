@@ -1316,6 +1316,7 @@ class EmailMessengerConfiguration extends BaseMessengerConfiguration {
   String host;
   String password;
   num port;
+  String properties;
   EmailSecurityType security;
   String username;
 
@@ -1325,6 +1326,7 @@ class EmailMessengerConfiguration extends BaseMessengerConfiguration {
       this.host,
       this.password,
       this.port,
+      this.properties,
       this.security,
       this.username
   });
@@ -1723,6 +1725,8 @@ class ExternalIdentifierConfiguration {
   SecureGeneratorConfiguration setupPasswordIdGenerator;
   num setupPasswordIdTimeToLiveInSeconds;
   num twoFactorIdTimeToLiveInSeconds;
+  SecureGeneratorConfiguration twoFactorOneTimeCodeIdGenerator;
+  num twoFactorOneTimeCodeIdTimeToLiveInSeconds;
   num twoFactorTrustIdTimeToLiveInSeconds;
 
   ExternalIdentifierConfiguration({
@@ -1743,6 +1747,8 @@ class ExternalIdentifierConfiguration {
       this.setupPasswordIdGenerator,
       this.setupPasswordIdTimeToLiveInSeconds,
       this.twoFactorIdTimeToLiveInSeconds,
+      this.twoFactorOneTimeCodeIdGenerator,
+      this.twoFactorOneTimeCodeIdTimeToLiveInSeconds,
       this.twoFactorTrustIdTimeToLiveInSeconds
   });
 

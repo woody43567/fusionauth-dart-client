@@ -1815,6 +1815,7 @@ EmailMessengerConfiguration _$EmailMessengerConfigurationFromJson(
     host: json['host'] as String,
     password: json['password'] as String,
     port: json['port'] as num,
+    properties: json['properties'] as String,
     security:
         _$enumDecodeNullable(_$EmailSecurityTypeEnumMap, json['security']),
     username: json['username'] as String,
@@ -1852,6 +1853,7 @@ Map<String, dynamic> _$EmailMessengerConfigurationToJson(
   writeNotNull('host', instance.host);
   writeNotNull('password', instance.password);
   writeNotNull('port', instance.port);
+  writeNotNull('properties', instance.properties);
   writeNotNull('security', _$EmailSecurityTypeEnumMap[instance.security]);
   writeNotNull('username', instance.username);
   return val;
@@ -2391,6 +2393,13 @@ ExternalIdentifierConfiguration _$ExternalIdentifierConfigurationFromJson(
         json['setupPasswordIdTimeToLiveInSeconds'] as num,
     twoFactorIdTimeToLiveInSeconds:
         json['twoFactorIdTimeToLiveInSeconds'] as num,
+    twoFactorOneTimeCodeIdGenerator: json['twoFactorOneTimeCodeIdGenerator'] ==
+            null
+        ? null
+        : SecureGeneratorConfiguration.fromJson(
+            json['twoFactorOneTimeCodeIdGenerator'] as Map<String, dynamic>),
+    twoFactorOneTimeCodeIdTimeToLiveInSeconds:
+        json['twoFactorOneTimeCodeIdTimeToLiveInSeconds'] as num,
     twoFactorTrustIdTimeToLiveInSeconds:
         json['twoFactorTrustIdTimeToLiveInSeconds'] as num,
   );
@@ -2437,6 +2446,10 @@ Map<String, dynamic> _$ExternalIdentifierConfigurationToJson(
       instance.setupPasswordIdTimeToLiveInSeconds);
   writeNotNull('twoFactorIdTimeToLiveInSeconds',
       instance.twoFactorIdTimeToLiveInSeconds);
+  writeNotNull('twoFactorOneTimeCodeIdGenerator',
+      instance.twoFactorOneTimeCodeIdGenerator);
+  writeNotNull('twoFactorOneTimeCodeIdTimeToLiveInSeconds',
+      instance.twoFactorOneTimeCodeIdTimeToLiveInSeconds);
   writeNotNull('twoFactorTrustIdTimeToLiveInSeconds',
       instance.twoFactorTrustIdTimeToLiveInSeconds);
   return val;
