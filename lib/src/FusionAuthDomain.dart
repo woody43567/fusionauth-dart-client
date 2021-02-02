@@ -5010,6 +5010,7 @@ class SystemLogsExportRequest extends BaseExportRequest {
 
 @JsonSerializable()
 class Templates {
+  String accountEdit;
   String accountIndex;
   String emailComplete;
   String emailSend;
@@ -5038,6 +5039,7 @@ class Templates {
   String registrationVerify;
 
   Templates({
+      this.accountEdit,
       this.accountIndex,
       this.emailComplete,
       this.emailSend,
@@ -5172,9 +5174,11 @@ class TenantMessengerConfiguration {
 /// @author Mikey Sleevi
 @JsonSerializable()
 class TenantMultiFactorConfiguration {
+  String emailMessageTemplateId;
   String smsMessageTemplateId;
 
   TenantMultiFactorConfiguration({
+      this.emailMessageTemplateId,
       this.smsMessageTemplateId
   });
 

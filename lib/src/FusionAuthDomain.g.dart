@@ -447,6 +447,7 @@ Map<String, dynamic> _$ApplicationFormConfigurationToJson(
 ApplicationMultiFactorConfiguration
     _$ApplicationMultiFactorConfigurationFromJson(Map<String, dynamic> json) {
   return ApplicationMultiFactorConfiguration()
+    ..emailMessageTemplateId = json['emailMessageTemplateId'] as String
     ..smsMessageTemplateId = json['smsMessageTemplateId'] as String;
 }
 
@@ -460,6 +461,7 @@ Map<String, dynamic> _$ApplicationMultiFactorConfigurationToJson(
     }
   }
 
+  writeNotNull('emailMessageTemplateId', instance.emailMessageTemplateId);
   writeNotNull('smsMessageTemplateId', instance.smsMessageTemplateId);
   return val;
 }
@@ -7164,6 +7166,7 @@ Map<String, dynamic> _$SystemLogsExportRequestToJson(
 
 Templates _$TemplatesFromJson(Map<String, dynamic> json) {
   return Templates(
+    accountEdit: json['accountEdit'] as String,
     accountIndex: json['accountIndex'] as String,
     emailComplete: json['emailComplete'] as String,
     emailSend: json['emailSend'] as String,
@@ -7204,6 +7207,7 @@ Map<String, dynamic> _$TemplatesToJson(Templates instance) {
     }
   }
 
+  writeNotNull('accountEdit', instance.accountEdit);
   writeNotNull('accountIndex', instance.accountIndex);
   writeNotNull('emailComplete', instance.emailComplete);
   writeNotNull('emailSend', instance.emailSend);
@@ -7414,6 +7418,7 @@ Map<String, dynamic> _$TenantMessengerConfigurationToJson(
 TenantMultiFactorConfiguration _$TenantMultiFactorConfigurationFromJson(
     Map<String, dynamic> json) {
   return TenantMultiFactorConfiguration(
+    emailMessageTemplateId: json['emailMessageTemplateId'] as String,
     smsMessageTemplateId: json['smsMessageTemplateId'] as String,
   );
 }
@@ -7428,6 +7433,7 @@ Map<String, dynamic> _$TenantMultiFactorConfigurationToJson(
     }
   }
 
+  writeNotNull('emailMessageTemplateId', instance.emailMessageTemplateId);
   writeNotNull('smsMessageTemplateId', instance.smsMessageTemplateId);
   return val;
 }
