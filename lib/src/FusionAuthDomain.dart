@@ -284,9 +284,14 @@ class ApplicationFormConfiguration {
 
 /// @author Daniel DeGroff
 @JsonSerializable()
-class ApplicationMultiFactorConfiguration extends TenantMultiFactorConfiguration {
+class ApplicationMultiFactorConfiguration {
+  MultiFactorEmailTemplate email;
+  MultiFactorSMSTemplate sms;
 
-  ApplicationMultiFactorConfiguration();
+  ApplicationMultiFactorConfiguration({
+      this.email,
+      this.sms
+  });
 
   factory ApplicationMultiFactorConfiguration.fromJson(Map<String, dynamic> json) => _$ApplicationMultiFactorConfigurationFromJson(json);
   Map<String, dynamic> toJson() => _$ApplicationMultiFactorConfigurationToJson(this);
@@ -1248,91 +1253,6 @@ class EmailConfiguration {
 
   factory EmailConfiguration.fromJson(Map<String, dynamic> json) => _$EmailConfigurationFromJson(json);
   Map<String, dynamic> toJson() => _$EmailConfigurationToJson(this);
-}
-
-/// @author Mikey Sleevi
-@JsonSerializable()
-class EmailMessage {
-  List<Attachment> attachments;
-  List<EmailAddress> bcc;
-  List<EmailAddress> cc;
-  EmailAddress from;
-  String html;
-  EmailAddress replyTo;
-  String subject;
-  String text;
-  List<EmailAddress> to;
-
-  EmailMessage({
-      this.attachments,
-      this.bcc,
-      this.cc,
-      this.from,
-      this.html,
-      this.replyTo,
-      this.subject,
-      this.text,
-      this.to
-  });
-
-  factory EmailMessage.fromJson(Map<String, dynamic> json) => _$EmailMessageFromJson(json);
-  Map<String, dynamic> toJson() => _$EmailMessageToJson(this);
-}
-
-/// @author Mikey Sleevi
-@JsonSerializable()
-class EmailMessageTemplate extends MessageTemplate {
-  String defaultFromName;
-  String defaultHtmlTemplate;
-  String defaultSubject;
-  String defaultTextTemplate;
-  String fromEmail;
-  Map<String, String> localizedFromNames;
-  Map<String, String> localizedHtmlTemplates;
-  Map<String, String> localizedSubjects;
-  Map<String, String> localizedTextTemplates;
-
-  EmailMessageTemplate({
-      this.defaultFromName,
-      this.defaultHtmlTemplate,
-      this.defaultSubject,
-      this.defaultTextTemplate,
-      this.fromEmail,
-      this.localizedFromNames,
-      this.localizedHtmlTemplates,
-      this.localizedSubjects,
-      this.localizedTextTemplates
-  });
-
-  factory EmailMessageTemplate.fromJson(Map<String, dynamic> json) => _$EmailMessageTemplateFromJson(json);
-  Map<String, dynamic> toJson() => _$EmailMessageTemplateToJson(this);
-}
-
-// thinking?
-@JsonSerializable()
-class EmailMessengerConfiguration extends BaseMessengerConfiguration {
-  String defaultFromEmail;
-  String defaultFromName;
-  String host;
-  String password;
-  num port;
-  String properties;
-  EmailSecurityType security;
-  String username;
-
-  EmailMessengerConfiguration({
-      this.defaultFromEmail,
-      this.defaultFromName,
-      this.host,
-      this.password,
-      this.port,
-      this.properties,
-      this.security,
-      this.username
-  });
-
-  factory EmailMessengerConfiguration.fromJson(Map<String, dynamic> json) => _$EmailMessengerConfigurationFromJson(json);
-  Map<String, dynamic> toJson() => _$EmailMessengerConfigurationToJson(this);
 }
 
 @JsonSerializable()
@@ -3678,9 +3598,7 @@ class MessageTemplateResponse {
 /// @author Mikey Sleevi
 enum MessageType {
   @JsonValue('SMS')
-  SMS,
-  @JsonValue('Email')
-  Email
+  SMS
 }
 
 /// @author Brett Guy
@@ -3715,12 +3633,10 @@ class MessengerResponse {
 enum MessengerType {
   @JsonValue('Generic')
   Generic,
-  @JsonValue('Twilio')
-  Twilio,
-  @JsonValue('Email')
-  Email,
   @JsonValue('Kafka')
-  Kafka
+  Kafka,
+  @JsonValue('Twilio')
+  Twilio
 }
 
 @JsonSerializable()
@@ -3765,6 +3681,56 @@ class MonthlyActiveUserReportResponse {
 
   factory MonthlyActiveUserReportResponse.fromJson(Map<String, dynamic> json) => _$MonthlyActiveUserReportResponseFromJson(json);
   Map<String, dynamic> toJson() => _$MonthlyActiveUserReportResponseToJson(this);
+}
+
+@JsonSerializable()
+class MultiFactorEmailTemplate {
+  String templateId;
+
+  MultiFactorEmailTemplate({
+      this.templateId
+  });
+
+  factory MultiFactorEmailTemplate.fromJson(Map<String, dynamic> json) => _$MultiFactorEmailTemplateFromJson(json);
+  Map<String, dynamic> toJson() => _$MultiFactorEmailTemplateToJson(this);
+}
+
+@JsonSerializable()
+class MultiFactorEmailTransport extends Enableable {
+  String templateId;
+
+  MultiFactorEmailTransport({
+      this.templateId
+  });
+
+  factory MultiFactorEmailTransport.fromJson(Map<String, dynamic> json) => _$MultiFactorEmailTransportFromJson(json);
+  Map<String, dynamic> toJson() => _$MultiFactorEmailTransportToJson(this);
+}
+
+@JsonSerializable()
+class MultiFactorSMSTemplate {
+  String templateId;
+
+  MultiFactorSMSTemplate({
+      this.templateId
+  });
+
+  factory MultiFactorSMSTemplate.fromJson(Map<String, dynamic> json) => _$MultiFactorSMSTemplateFromJson(json);
+  Map<String, dynamic> toJson() => _$MultiFactorSMSTemplateToJson(this);
+}
+
+@JsonSerializable()
+class MultiFactorSMSTransport extends Enableable {
+  String messengerId;
+  String templateId;
+
+  MultiFactorSMSTransport({
+      this.messengerId,
+      this.templateId
+  });
+
+  factory MultiFactorSMSTransport.fromJson(Map<String, dynamic> json) => _$MultiFactorSMSTransportFromJson(json);
+  Map<String, dynamic> toJson() => _$MultiFactorSMSTransportToJson(this);
 }
 
 /// Helper methods for normalizing values.
@@ -5092,7 +5058,6 @@ class Tenant {
   num lastUpdateInstant;
   String logoutURL;
   MaximumPasswordAge maximumPasswordAge;
-  TenantMessengerConfiguration messengerConfiguration;
   MinimumPasswordAge minimumPasswordAge;
   TenantMultiFactorConfiguration multiFactorConfiguration;
   String name;
@@ -5120,7 +5085,6 @@ class Tenant {
       this.lastUpdateInstant,
       this.logoutURL,
       this.maximumPasswordAge,
-      this.messengerConfiguration,
       this.minimumPasswordAge,
       this.multiFactorConfiguration,
       this.name,
@@ -5158,28 +5122,15 @@ class TenantFormConfiguration {
   Map<String, dynamic> toJson() => _$TenantFormConfigurationToJson(this);
 }
 
-/// @author Daniel DeGroff
-@JsonSerializable()
-class TenantMessengerConfiguration {
-  Map<String, String> transports;
-
-  TenantMessengerConfiguration({
-      this.transports
-  });
-
-  factory TenantMessengerConfiguration.fromJson(Map<String, dynamic> json) => _$TenantMessengerConfigurationFromJson(json);
-  Map<String, dynamic> toJson() => _$TenantMessengerConfigurationToJson(this);
-}
-
 /// @author Mikey Sleevi
 @JsonSerializable()
 class TenantMultiFactorConfiguration {
-  String emailMessageTemplateId;
-  String smsMessageTemplateId;
+  MultiFactorEmailTransport email;
+  MultiFactorSMSTransport sms;
 
   TenantMultiFactorConfiguration({
-      this.emailMessageTemplateId,
-      this.smsMessageTemplateId
+      this.email,
+      this.sms
   });
 
   factory TenantMultiFactorConfiguration.fromJson(Map<String, dynamic> json) => _$TenantMultiFactorConfigurationFromJson(json);
@@ -5460,11 +5411,13 @@ class TwoFactorLoginRequest extends BaseLoginRequest {
   String code;
   bool trustComputer;
   String twoFactorId;
+  String userId;
 
   TwoFactorLoginRequest({
       this.code,
       this.trustComputer,
-      this.twoFactorId
+      this.twoFactorId,
+      this.userId
   });
 
   factory TwoFactorLoginRequest.fromJson(Map<String, dynamic> json) => _$TwoFactorLoginRequestFromJson(json);

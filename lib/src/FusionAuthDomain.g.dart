@@ -446,9 +446,15 @@ Map<String, dynamic> _$ApplicationFormConfigurationToJson(
 
 ApplicationMultiFactorConfiguration
     _$ApplicationMultiFactorConfigurationFromJson(Map<String, dynamic> json) {
-  return ApplicationMultiFactorConfiguration()
-    ..emailMessageTemplateId = json['emailMessageTemplateId'] as String
-    ..smsMessageTemplateId = json['smsMessageTemplateId'] as String;
+  return ApplicationMultiFactorConfiguration(
+    email: json['email'] == null
+        ? null
+        : MultiFactorEmailTemplate.fromJson(
+            json['email'] as Map<String, dynamic>),
+    sms: json['sms'] == null
+        ? null
+        : MultiFactorSMSTemplate.fromJson(json['sms'] as Map<String, dynamic>),
+  );
 }
 
 Map<String, dynamic> _$ApplicationMultiFactorConfigurationToJson(
@@ -461,8 +467,8 @@ Map<String, dynamic> _$ApplicationMultiFactorConfigurationToJson(
     }
   }
 
-  writeNotNull('emailMessageTemplateId', instance.emailMessageTemplateId);
-  writeNotNull('smsMessageTemplateId', instance.smsMessageTemplateId);
+  writeNotNull('email', instance.email);
+  writeNotNull('sms', instance.sms);
   return val;
 }
 
@@ -1028,9 +1034,8 @@ Map<String, dynamic> _$BaseMessengerConfigurationToJson(
 
 const _$MessengerTypeEnumMap = {
   MessengerType.Generic: 'Generic',
-  MessengerType.Twilio: 'Twilio',
-  MessengerType.Email: 'Email',
   MessengerType.Kafka: 'Kafka',
+  MessengerType.Twilio: 'Twilio',
 };
 
 BaseSearchCriteria _$BaseSearchCriteriaFromJson(Map<String, dynamic> json) {
@@ -1693,173 +1698,6 @@ const _$EmailSecurityTypeEnumMap = {
   EmailSecurityType.SSL: 'SSL',
   EmailSecurityType.TLS: 'TLS',
 };
-
-EmailMessage _$EmailMessageFromJson(Map<String, dynamic> json) {
-  return EmailMessage(
-    attachments: (json['attachments'] as List)
-        ?.map((e) =>
-            e == null ? null : Attachment.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
-    bcc: (json['bcc'] as List)
-        ?.map((e) =>
-            e == null ? null : EmailAddress.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
-    cc: (json['cc'] as List)
-        ?.map((e) =>
-            e == null ? null : EmailAddress.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
-    from: json['from'] == null
-        ? null
-        : EmailAddress.fromJson(json['from'] as Map<String, dynamic>),
-    html: json['html'] as String,
-    replyTo: json['replyTo'] == null
-        ? null
-        : EmailAddress.fromJson(json['replyTo'] as Map<String, dynamic>),
-    subject: json['subject'] as String,
-    text: json['text'] as String,
-    to: (json['to'] as List)
-        ?.map((e) =>
-            e == null ? null : EmailAddress.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
-  );
-}
-
-Map<String, dynamic> _$EmailMessageToJson(EmailMessage instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('attachments', instance.attachments);
-  writeNotNull('bcc', instance.bcc);
-  writeNotNull('cc', instance.cc);
-  writeNotNull('from', instance.from);
-  writeNotNull('html', instance.html);
-  writeNotNull('replyTo', instance.replyTo);
-  writeNotNull('subject', instance.subject);
-  writeNotNull('text', instance.text);
-  writeNotNull('to', instance.to);
-  return val;
-}
-
-EmailMessageTemplate _$EmailMessageTemplateFromJson(Map<String, dynamic> json) {
-  return EmailMessageTemplate(
-    defaultFromName: json['defaultFromName'] as String,
-    defaultHtmlTemplate: json['defaultHtmlTemplate'] as String,
-    defaultSubject: json['defaultSubject'] as String,
-    defaultTextTemplate: json['defaultTextTemplate'] as String,
-    fromEmail: json['fromEmail'] as String,
-    localizedFromNames:
-        (json['localizedFromNames'] as Map<String, dynamic>)?.map(
-      (k, e) => MapEntry(k, e as String),
-    ),
-    localizedHtmlTemplates:
-        (json['localizedHtmlTemplates'] as Map<String, dynamic>)?.map(
-      (k, e) => MapEntry(k, e as String),
-    ),
-    localizedSubjects: (json['localizedSubjects'] as Map<String, dynamic>)?.map(
-      (k, e) => MapEntry(k, e as String),
-    ),
-    localizedTextTemplates:
-        (json['localizedTextTemplates'] as Map<String, dynamic>)?.map(
-      (k, e) => MapEntry(k, e as String),
-    ),
-  )
-    ..data = json['data'] as Map<String, dynamic>
-    ..id = json['id'] as String
-    ..insertInstant = json['insertInstant'] as num
-    ..lastUpdateInstant = json['lastUpdateInstant'] as num
-    ..name = json['name'] as String
-    ..type = _$enumDecodeNullable(_$MessageTypeEnumMap, json['type']);
-}
-
-Map<String, dynamic> _$EmailMessageTemplateToJson(
-    EmailMessageTemplate instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('data', instance.data);
-  writeNotNull('id', instance.id);
-  writeNotNull('insertInstant', instance.insertInstant);
-  writeNotNull('lastUpdateInstant', instance.lastUpdateInstant);
-  writeNotNull('name', instance.name);
-  writeNotNull('type', _$MessageTypeEnumMap[instance.type]);
-  writeNotNull('defaultFromName', instance.defaultFromName);
-  writeNotNull('defaultHtmlTemplate', instance.defaultHtmlTemplate);
-  writeNotNull('defaultSubject', instance.defaultSubject);
-  writeNotNull('defaultTextTemplate', instance.defaultTextTemplate);
-  writeNotNull('fromEmail', instance.fromEmail);
-  writeNotNull('localizedFromNames', instance.localizedFromNames);
-  writeNotNull('localizedHtmlTemplates', instance.localizedHtmlTemplates);
-  writeNotNull('localizedSubjects', instance.localizedSubjects);
-  writeNotNull('localizedTextTemplates', instance.localizedTextTemplates);
-  return val;
-}
-
-const _$MessageTypeEnumMap = {
-  MessageType.SMS: 'SMS',
-  MessageType.Email: 'Email',
-};
-
-EmailMessengerConfiguration _$EmailMessengerConfigurationFromJson(
-    Map<String, dynamic> json) {
-  return EmailMessengerConfiguration(
-    defaultFromEmail: json['defaultFromEmail'] as String,
-    defaultFromName: json['defaultFromName'] as String,
-    host: json['host'] as String,
-    password: json['password'] as String,
-    port: json['port'] as num,
-    properties: json['properties'] as String,
-    security:
-        _$enumDecodeNullable(_$EmailSecurityTypeEnumMap, json['security']),
-    username: json['username'] as String,
-  )
-    ..data = json['data'] as Map<String, dynamic>
-    ..debug = json['debug'] as bool
-    ..id = json['id'] as String
-    ..insertInstant = json['insertInstant'] as num
-    ..lastUpdateInstant = json['lastUpdateInstant'] as num
-    ..name = json['name'] as String
-    ..transport = json['transport'] as String
-    ..type = _$enumDecodeNullable(_$MessengerTypeEnumMap, json['type']);
-}
-
-Map<String, dynamic> _$EmailMessengerConfigurationToJson(
-    EmailMessengerConfiguration instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('data', instance.data);
-  writeNotNull('debug', instance.debug);
-  writeNotNull('id', instance.id);
-  writeNotNull('insertInstant', instance.insertInstant);
-  writeNotNull('lastUpdateInstant', instance.lastUpdateInstant);
-  writeNotNull('name', instance.name);
-  writeNotNull('transport', instance.transport);
-  writeNotNull('type', _$MessengerTypeEnumMap[instance.type]);
-  writeNotNull('defaultFromEmail', instance.defaultFromEmail);
-  writeNotNull('defaultFromName', instance.defaultFromName);
-  writeNotNull('host', instance.host);
-  writeNotNull('password', instance.password);
-  writeNotNull('port', instance.port);
-  writeNotNull('properties', instance.properties);
-  writeNotNull('security', _$EmailSecurityTypeEnumMap[instance.security]);
-  writeNotNull('username', instance.username);
-  return val;
-}
 
 EmailPlus _$EmailPlusFromJson(Map<String, dynamic> json) {
   return EmailPlus(
@@ -5183,6 +5021,10 @@ Map<String, dynamic> _$MessageTemplateToJson(MessageTemplate instance) {
   return val;
 }
 
+const _$MessageTypeEnumMap = {
+  MessageType.SMS: 'SMS',
+};
+
 MessageTemplateRequest _$MessageTemplateRequestFromJson(
     Map<String, dynamic> json) {
   return MessageTemplateRequest(
@@ -5353,6 +5195,94 @@ Map<String, dynamic> _$MonthlyActiveUserReportResponseToJson(
 
   writeNotNull('monthlyActiveUsers', instance.monthlyActiveUsers);
   writeNotNull('total', instance.total);
+  return val;
+}
+
+MultiFactorEmailTemplate _$MultiFactorEmailTemplateFromJson(
+    Map<String, dynamic> json) {
+  return MultiFactorEmailTemplate(
+    templateId: json['templateId'] as String,
+  );
+}
+
+Map<String, dynamic> _$MultiFactorEmailTemplateToJson(
+    MultiFactorEmailTemplate instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('templateId', instance.templateId);
+  return val;
+}
+
+MultiFactorEmailTransport _$MultiFactorEmailTransportFromJson(
+    Map<String, dynamic> json) {
+  return MultiFactorEmailTransport(
+    templateId: json['templateId'] as String,
+  )..enabled = json['enabled'] as bool;
+}
+
+Map<String, dynamic> _$MultiFactorEmailTransportToJson(
+    MultiFactorEmailTransport instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('enabled', instance.enabled);
+  writeNotNull('templateId', instance.templateId);
+  return val;
+}
+
+MultiFactorSMSTemplate _$MultiFactorSMSTemplateFromJson(
+    Map<String, dynamic> json) {
+  return MultiFactorSMSTemplate(
+    templateId: json['templateId'] as String,
+  );
+}
+
+Map<String, dynamic> _$MultiFactorSMSTemplateToJson(
+    MultiFactorSMSTemplate instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('templateId', instance.templateId);
+  return val;
+}
+
+MultiFactorSMSTransport _$MultiFactorSMSTransportFromJson(
+    Map<String, dynamic> json) {
+  return MultiFactorSMSTransport(
+    messengerId: json['messengerId'] as String,
+    templateId: json['templateId'] as String,
+  )..enabled = json['enabled'] as bool;
+}
+
+Map<String, dynamic> _$MultiFactorSMSTransportToJson(
+    MultiFactorSMSTransport instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('enabled', instance.enabled);
+  writeNotNull('messengerId', instance.messengerId);
+  writeNotNull('templateId', instance.templateId);
   return val;
 }
 
@@ -7291,10 +7221,6 @@ Tenant _$TenantFromJson(Map<String, dynamic> json) {
         ? null
         : MaximumPasswordAge.fromJson(
             json['maximumPasswordAge'] as Map<String, dynamic>),
-    messengerConfiguration: json['messengerConfiguration'] == null
-        ? null
-        : TenantMessengerConfiguration.fromJson(
-            json['messengerConfiguration'] as Map<String, dynamic>),
     minimumPasswordAge: json['minimumPasswordAge'] == null
         ? null
         : MinimumPasswordAge.fromJson(
@@ -7351,7 +7277,6 @@ Map<String, dynamic> _$TenantToJson(Tenant instance) {
   writeNotNull('lastUpdateInstant', instance.lastUpdateInstant);
   writeNotNull('logoutURL', instance.logoutURL);
   writeNotNull('maximumPasswordAge', instance.maximumPasswordAge);
-  writeNotNull('messengerConfiguration', instance.messengerConfiguration);
   writeNotNull('minimumPasswordAge', instance.minimumPasswordAge);
   writeNotNull('multiFactorConfiguration', instance.multiFactorConfiguration);
   writeNotNull('name', instance.name);
@@ -7392,34 +7317,16 @@ Map<String, dynamic> _$TenantFormConfigurationToJson(
   return val;
 }
 
-TenantMessengerConfiguration _$TenantMessengerConfigurationFromJson(
-    Map<String, dynamic> json) {
-  return TenantMessengerConfiguration(
-    transports: (json['transports'] as Map<String, dynamic>)?.map(
-      (k, e) => MapEntry(k, e as String),
-    ),
-  );
-}
-
-Map<String, dynamic> _$TenantMessengerConfigurationToJson(
-    TenantMessengerConfiguration instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('transports', instance.transports);
-  return val;
-}
-
 TenantMultiFactorConfiguration _$TenantMultiFactorConfigurationFromJson(
     Map<String, dynamic> json) {
   return TenantMultiFactorConfiguration(
-    emailMessageTemplateId: json['emailMessageTemplateId'] as String,
-    smsMessageTemplateId: json['smsMessageTemplateId'] as String,
+    email: json['email'] == null
+        ? null
+        : MultiFactorEmailTransport.fromJson(
+            json['email'] as Map<String, dynamic>),
+    sms: json['sms'] == null
+        ? null
+        : MultiFactorSMSTransport.fromJson(json['sms'] as Map<String, dynamic>),
   );
 }
 
@@ -7433,8 +7340,8 @@ Map<String, dynamic> _$TenantMultiFactorConfigurationToJson(
     }
   }
 
-  writeNotNull('emailMessageTemplateId', instance.emailMessageTemplateId);
-  writeNotNull('smsMessageTemplateId', instance.smsMessageTemplateId);
+  writeNotNull('email', instance.email);
+  writeNotNull('sms', instance.sms);
   return val;
 }
 
