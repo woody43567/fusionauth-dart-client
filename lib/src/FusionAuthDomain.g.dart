@@ -7738,6 +7738,7 @@ TwoFactorLoginRequest _$TwoFactorLoginRequestFromJson(
     code: json['code'] as String,
     trustComputer: json['trustComputer'] as bool,
     twoFactorId: json['twoFactorId'] as String,
+    userId: json['userId'] as String,
   )
     ..applicationId = json['applicationId'] as String
     ..ipAddress = json['ipAddress'] as String
@@ -7764,6 +7765,7 @@ Map<String, dynamic> _$TwoFactorLoginRequestToJson(
   writeNotNull('code', instance.code);
   writeNotNull('trustComputer', instance.trustComputer);
   writeNotNull('twoFactorId', instance.twoFactorId);
+  writeNotNull('userId', instance.userId);
   return val;
 }
 
