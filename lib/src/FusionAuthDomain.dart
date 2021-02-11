@@ -3829,6 +3829,8 @@ enum OAuthErrorReason {
   access_token_failed_processing,
   @JsonValue('refresh_token_not_found')
   refresh_token_not_found,
+  @JsonValue('refresh_token_type_not_supported')
+  refresh_token_type_not_supported,
   @JsonValue('invalid_client_id')
   invalid_client_id,
   @JsonValue('invalid_user_credentials')
@@ -3939,7 +3941,9 @@ enum OAuthErrorType {
   @JsonValue('authorization_pending')
   authorization_pending,
   @JsonValue('expired_token')
-  expired_token
+  expired_token,
+  @JsonValue('unsupported_token_type')
+  unsupported_token_type
 }
 
 /// @author Daniel DeGroff
@@ -6285,12 +6289,14 @@ class UserResponse {
 /// @author Brian Pontarelli
 @JsonSerializable()
 class UserSearchCriteria extends BaseSearchCriteria {
+  bool accurateTotal;
   List<String> ids;
   String query;
   String queryString;
   List<SortField> sortFields;
 
   UserSearchCriteria({
+      this.accurateTotal,
       this.ids,
       this.query,
       this.queryString,
