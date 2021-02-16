@@ -286,10 +286,12 @@ class ApplicationFormConfiguration {
 @JsonSerializable()
 class ApplicationMultiFactorConfiguration {
   MultiFactorEmailTemplate email;
+  bool required;
   MultiFactorSMSTemplate sms;
 
   ApplicationMultiFactorConfiguration({
       this.email,
+      this.required,
       this.sms
   });
 
@@ -2893,6 +2895,25 @@ class JWTRefreshEvent extends BaseEvent {
   Map<String, dynamic> toJson() => _$JWTRefreshEventToJson(this);
 }
 
+/// API response for refreshing a JWT with a Refresh Token.
+/// <p>
+/// Using a different response object from RefreshTokenResponse because the retrieve response will return an object for refreshToken, and this is a string.
+///
+/// @author Daniel DeGroff
+@JsonSerializable()
+class JWTRefreshResponse {
+  String refreshToken;
+  String token;
+
+  JWTRefreshResponse({
+      this.refreshToken,
+      this.token
+  });
+
+  factory JWTRefreshResponse.fromJson(Map<String, dynamic> json) => _$JWTRefreshResponseFromJson(json);
+  Map<String, dynamic> toJson() => _$JWTRefreshResponseToJson(this);
+}
+
 /// Models the Refresh Token Revoke Event (and can be converted to JSON). This event might be for a single token, a user
 /// or an entire application.
 ///
@@ -3697,9 +3718,11 @@ class MultiFactorEmailTemplate {
 
 @JsonSerializable()
 class MultiFactorEmailTransport extends Enableable {
+  bool sendToUnverified;
   String templateId;
 
   MultiFactorEmailTransport({
+      this.sendToUnverified,
       this.templateId
   });
 
@@ -3731,6 +3754,22 @@ class MultiFactorSMSTransport extends Enableable {
 
   factory MultiFactorSMSTransport.fromJson(Map<String, dynamic> json) => _$MultiFactorSMSTransportFromJson(json);
   Map<String, dynamic> toJson() => _$MultiFactorSMSTransportToJson(this);
+}
+
+@JsonSerializable()
+class MultiFactorTOTP extends Enableable {
+  TOTPAlgorithm algorithm;
+  num codeLength;
+  num timeStep;
+
+  MultiFactorTOTP({
+      this.algorithm,
+      this.codeLength,
+      this.timeStep
+  });
+
+  factory MultiFactorTOTP.fromJson(Map<String, dynamic> json) => _$MultiFactorTOTPFromJson(json);
+  Map<String, dynamic> toJson() => _$MultiFactorTOTPToJson(this);
 }
 
 /// Helper methods for normalizing values.
@@ -4357,15 +4396,8 @@ class RefreshRequest {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class RefreshResponse {
-  String refreshToken;
-  List<RefreshToken> refreshTokens;
-  String token;
 
-  RefreshResponse({
-      this.refreshToken,
-      this.refreshTokens,
-      this.token
-  });
+  RefreshResponse();
 
   factory RefreshResponse.fromJson(Map<String, dynamic> json) => _$RefreshResponseFromJson(json);
   Map<String, dynamic> toJson() => _$RefreshResponseToJson(this);
@@ -4423,6 +4455,23 @@ class RefreshTokenImportRequest {
 
   factory RefreshTokenImportRequest.fromJson(Map<String, dynamic> json) => _$RefreshTokenImportRequestFromJson(json);
   Map<String, dynamic> toJson() => _$RefreshTokenImportRequestToJson(this);
+}
+
+/// API response for retrieving Refresh Tokens
+///
+/// @author Daniel DeGroff
+@JsonSerializable()
+class RefreshTokenResponse {
+  RefreshToken refreshToken;
+  List<RefreshToken> refreshTokens;
+
+  RefreshTokenResponse({
+      this.refreshToken,
+      this.refreshTokens
+  });
+
+  factory RefreshTokenResponse.fromJson(Map<String, dynamic> json) => _$RefreshTokenResponseFromJson(json);
+  Map<String, dynamic> toJson() => _$RefreshTokenResponseToJson(this);
 }
 
 /// @author Daniel DeGroff
@@ -5131,10 +5180,12 @@ class TenantFormConfiguration {
 class TenantMultiFactorConfiguration {
   MultiFactorEmailTransport email;
   MultiFactorSMSTransport sms;
+  MultiFactorTOTP totp;
 
   TenantMultiFactorConfiguration({
       this.email,
-      this.sms
+      this.sms,
+      this.totp
   });
 
   factory TenantMultiFactorConfiguration.fromJson(Map<String, dynamic> json) => _$TenantMultiFactorConfigurationFromJson(json);
@@ -5328,6 +5379,15 @@ class TotalsReportResponse {
   Map<String, dynamic> toJson() => _$TotalsReportResponseToJson(this);
 }
 
+enum TOTPAlgorithm {
+  @JsonValue('HmacSHA1')
+  HmacSHA1,
+  @JsonValue('HmacSHA256')
+  HmacSHA256,
+  @JsonValue('HmacSHA512')
+  HmacSHA512
+}
+
 /// The transaction types for Webhooks and other event systems within FusionAuth.
 ///
 /// @author Brian Pontarelli
@@ -5462,6 +5522,40 @@ class TwoFactorSendRequest {
 
   factory TwoFactorSendRequest.fromJson(Map<String, dynamic> json) => _$TwoFactorSendRequestFromJson(json);
   Map<String, dynamic> toJson() => _$TwoFactorSendRequestToJson(this);
+}
+
+/// @author Brett Guy
+@JsonSerializable()
+class TwoFactorStartRequest {
+  String applicationId;
+  String code;
+  String loginId;
+  Map<String, dynamic> state;
+
+  TwoFactorStartRequest({
+      this.applicationId,
+      this.code,
+      this.loginId,
+      this.state
+  });
+
+  factory TwoFactorStartRequest.fromJson(Map<String, dynamic> json) => _$TwoFactorStartRequestFromJson(json);
+  Map<String, dynamic> toJson() => _$TwoFactorStartRequestToJson(this);
+}
+
+/// @author Daniel DeGroff
+@JsonSerializable()
+class TwoFactorStartResponse {
+  String code;
+  String twoFactorId;
+
+  TwoFactorStartResponse({
+      this.code,
+      this.twoFactorId
+  });
+
+  factory TwoFactorStartResponse.fromJson(Map<String, dynamic> json) => _$TwoFactorStartResponseFromJson(json);
+  Map<String, dynamic> toJson() => _$TwoFactorStartResponseToJson(this);
 }
 
 @JsonSerializable()

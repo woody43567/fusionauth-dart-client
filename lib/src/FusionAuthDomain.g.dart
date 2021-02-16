@@ -4076,6 +4076,27 @@ Map<String, dynamic> _$JWTRefreshEventToJson(JWTRefreshEvent instance) {
   return val;
 }
 
+JWTRefreshResponse _$JWTRefreshResponseFromJson(Map<String, dynamic> json) {
+  return JWTRefreshResponse(
+    refreshToken: json['refreshToken'] as String,
+    token: json['token'] as String,
+  );
+}
+
+Map<String, dynamic> _$JWTRefreshResponseToJson(JWTRefreshResponse instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('refreshToken', instance.refreshToken);
+  writeNotNull('token', instance.token);
+  return val;
+}
+
 JWTRefreshTokenRevokeEvent _$JWTRefreshTokenRevokeEventFromJson(
     Map<String, dynamic> json) {
   return JWTRefreshTokenRevokeEvent(
@@ -6156,30 +6177,11 @@ Map<String, dynamic> _$RefreshRequestToJson(RefreshRequest instance) {
 }
 
 RefreshResponse _$RefreshResponseFromJson(Map<String, dynamic> json) {
-  return RefreshResponse(
-    refreshToken: json['refreshToken'] as String,
-    refreshTokens: (json['refreshTokens'] as List)
-        ?.map((e) =>
-            e == null ? null : RefreshToken.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
-    token: json['token'] as String,
-  );
+  return RefreshResponse();
 }
 
-Map<String, dynamic> _$RefreshResponseToJson(RefreshResponse instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('refreshToken', instance.refreshToken);
-  writeNotNull('refreshTokens', instance.refreshTokens);
-  writeNotNull('token', instance.token);
-  return val;
-}
+Map<String, dynamic> _$RefreshResponseToJson(RefreshResponse instance) =>
+    <String, dynamic>{};
 
 RefreshToken _$RefreshTokenFromJson(Map<String, dynamic> json) {
   return RefreshToken(
@@ -6239,6 +6241,33 @@ Map<String, dynamic> _$RefreshTokenImportRequestToJson(
 
   writeNotNull('refreshTokens', instance.refreshTokens);
   writeNotNull('validateDbConstraints', instance.validateDbConstraints);
+  return val;
+}
+
+RefreshTokenResponse _$RefreshTokenResponseFromJson(Map<String, dynamic> json) {
+  return RefreshTokenResponse(
+    refreshToken: json['refreshToken'] == null
+        ? null
+        : RefreshToken.fromJson(json['refreshToken'] as Map<String, dynamic>),
+    refreshTokens: (json['refreshTokens'] as List)
+        ?.map((e) =>
+            e == null ? null : RefreshToken.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
+  );
+}
+
+Map<String, dynamic> _$RefreshTokenResponseToJson(
+    RefreshTokenResponse instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('refreshToken', instance.refreshToken);
+  writeNotNull('refreshTokens', instance.refreshTokens);
   return val;
 }
 
@@ -7819,6 +7848,56 @@ Map<String, dynamic> _$TwoFactorSendRequestToJson(
   writeNotNull('mobilePhone', instance.mobilePhone);
   writeNotNull('secret', instance.secret);
   writeNotNull('userId', instance.userId);
+  return val;
+}
+
+TwoFactorStartRequest _$TwoFactorStartRequestFromJson(
+    Map<String, dynamic> json) {
+  return TwoFactorStartRequest(
+    applicationId: json['applicationId'] as String,
+    code: json['code'] as String,
+    loginId: json['loginId'] as String,
+    state: json['state'] as Map<String, dynamic>,
+  );
+}
+
+Map<String, dynamic> _$TwoFactorStartRequestToJson(
+    TwoFactorStartRequest instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('applicationId', instance.applicationId);
+  writeNotNull('code', instance.code);
+  writeNotNull('loginId', instance.loginId);
+  writeNotNull('state', instance.state);
+  return val;
+}
+
+TwoFactorStartResponse _$TwoFactorStartResponseFromJson(
+    Map<String, dynamic> json) {
+  return TwoFactorStartResponse(
+    code: json['code'] as String,
+    twoFactorId: json['twoFactorId'] as String,
+  );
+}
+
+Map<String, dynamic> _$TwoFactorStartResponseToJson(
+    TwoFactorStartResponse instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('code', instance.code);
+  writeNotNull('twoFactorId', instance.twoFactorId);
   return val;
 }
 
