@@ -1334,6 +1334,121 @@ class Enableable {
   Map<String, dynamic> toJson() => _$EnableableToJson(this);
 }
 
+/// Models an entity that a user can be granted permissions to. Or an entity that can be granted permissions to another entity.
+///
+/// @author Brian Pontarelli
+@JsonSerializable()
+class Entity {
+  String clientSecret;
+  Map<String, dynamic> data;
+  String id;
+  num insertInstant;
+  num lastUpdateInstant;
+  String name;
+  String parentId;
+  String tenantId;
+  EntityType type;
+
+  Entity({
+      this.clientSecret,
+      this.data,
+      this.id,
+      this.insertInstant,
+      this.lastUpdateInstant,
+      this.name,
+      this.parentId,
+      this.tenantId,
+      this.type
+  });
+
+  factory Entity.fromJson(Map<String, dynamic> json) => _$EntityFromJson(json);
+  Map<String, dynamic> toJson() => _$EntityToJson(this);
+}
+
+/// Models an entity type that has a specific set of permissions. These are global objects and can be used across tenants.
+///
+/// @author Brian Pontarelli
+@JsonSerializable()
+class EntityType {
+  Map<String, dynamic> data;
+  String id;
+  num insertInstant;
+  num lastUpdateInstant;
+  String name;
+  List<EntityTypePermission> permissions;
+
+  EntityType({
+      this.data,
+      this.id,
+      this.insertInstant,
+      this.lastUpdateInstant,
+      this.name,
+      this.permissions
+  });
+
+  factory EntityType.fromJson(Map<String, dynamic> json) => _$EntityTypeFromJson(json);
+  Map<String, dynamic> toJson() => _$EntityTypeToJson(this);
+}
+
+/// Models a specific entity type permission. This permission can be granted to users or other entities.
+///
+/// @author Brian Pontarelli
+@JsonSerializable()
+class EntityTypePermission {
+  Map<String, dynamic> data;
+  String description;
+  String id;
+  num insertInstant;
+  bool isDefault;
+  num lastUpdateInstant;
+  String name;
+
+  EntityTypePermission({
+      this.data,
+      this.description,
+      this.id,
+      this.insertInstant,
+      this.isDefault,
+      this.lastUpdateInstant,
+      this.name
+  });
+
+  factory EntityTypePermission.fromJson(Map<String, dynamic> json) => _$EntityTypePermissionFromJson(json);
+  Map<String, dynamic> toJson() => _$EntityTypePermissionToJson(this);
+}
+
+/// Entity Type API request object.
+///
+/// @author Brian Pontarelli
+@JsonSerializable()
+class EntityTypeRequest {
+  EntityType type;
+
+  EntityTypeRequest({
+      this.type
+  });
+
+  factory EntityTypeRequest.fromJson(Map<String, dynamic> json) => _$EntityTypeRequestFromJson(json);
+  Map<String, dynamic> toJson() => _$EntityTypeRequestToJson(this);
+}
+
+/// Entity Type API response object.
+///
+/// @author Brian Pontarelli
+@JsonSerializable()
+class EntityTypeResponse {
+  EntityType type;
+  List<EntityType> types;
+
+  EntityTypeResponse({
+      this.type,
+      this.types
+  });
+
+  factory EntityTypeResponse.fromJson(Map<String, dynamic> json) => _$EntityTypeResponseFromJson(json);
+  Map<String, dynamic> toJson() => _$EntityTypeResponseToJson(this);
+}
+
 /// Defines an error.
 ///
 /// @author Brian Pontarelli
@@ -5733,6 +5848,31 @@ class UserEmailVerifiedEvent extends BaseEvent {
 
   factory UserEmailVerifiedEvent.fromJson(Map<String, dynamic> json) => _$UserEmailVerifiedEventFromJson(json);
   Map<String, dynamic> toJson() => _$UserEmailVerifiedEventToJson(this);
+}
+
+/// Models the grant of zero or more permissions to a user for an entity.
+///
+/// @author Brian Pontarelli
+@JsonSerializable()
+class UserEntityGrant {
+  Map<String, dynamic> data;
+  String entityId;
+  num insertInstant;
+  num lastUpdateInstant;
+  Set<String> permissions;
+  String userId;
+
+  UserEntityGrant({
+      this.data,
+      this.entityId,
+      this.insertInstant,
+      this.lastUpdateInstant,
+      this.permissions,
+      this.userId
+  });
+
+  factory UserEntityGrant.fromJson(Map<String, dynamic> json) => _$UserEntityGrantFromJson(json);
+  Map<String, dynamic> toJson() => _$UserEntityGrantToJson(this);
 }
 
 /// Models the User Login Failed Event.

@@ -1798,6 +1798,155 @@ Map<String, dynamic> _$EnableableToJson(Enableable instance) {
   return val;
 }
 
+Entity _$EntityFromJson(Map<String, dynamic> json) {
+  return Entity(
+    clientSecret: json['clientSecret'] as String,
+    data: json['data'] as Map<String, dynamic>,
+    id: json['id'] as String,
+    insertInstant: json['insertInstant'] as num,
+    lastUpdateInstant: json['lastUpdateInstant'] as num,
+    name: json['name'] as String,
+    parentId: json['parentId'] as String,
+    tenantId: json['tenantId'] as String,
+    type: json['type'] == null
+        ? null
+        : EntityType.fromJson(json['type'] as Map<String, dynamic>),
+  );
+}
+
+Map<String, dynamic> _$EntityToJson(Entity instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('clientSecret', instance.clientSecret);
+  writeNotNull('data', instance.data);
+  writeNotNull('id', instance.id);
+  writeNotNull('insertInstant', instance.insertInstant);
+  writeNotNull('lastUpdateInstant', instance.lastUpdateInstant);
+  writeNotNull('name', instance.name);
+  writeNotNull('parentId', instance.parentId);
+  writeNotNull('tenantId', instance.tenantId);
+  writeNotNull('type', instance.type);
+  return val;
+}
+
+EntityType _$EntityTypeFromJson(Map<String, dynamic> json) {
+  return EntityType(
+    data: json['data'] as Map<String, dynamic>,
+    id: json['id'] as String,
+    insertInstant: json['insertInstant'] as num,
+    lastUpdateInstant: json['lastUpdateInstant'] as num,
+    name: json['name'] as String,
+    permissions: (json['permissions'] as List)
+        ?.map((e) => e == null
+            ? null
+            : EntityTypePermission.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
+  );
+}
+
+Map<String, dynamic> _$EntityTypeToJson(EntityType instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('data', instance.data);
+  writeNotNull('id', instance.id);
+  writeNotNull('insertInstant', instance.insertInstant);
+  writeNotNull('lastUpdateInstant', instance.lastUpdateInstant);
+  writeNotNull('name', instance.name);
+  writeNotNull('permissions', instance.permissions);
+  return val;
+}
+
+EntityTypePermission _$EntityTypePermissionFromJson(Map<String, dynamic> json) {
+  return EntityTypePermission(
+    data: json['data'] as Map<String, dynamic>,
+    description: json['description'] as String,
+    id: json['id'] as String,
+    insertInstant: json['insertInstant'] as num,
+    isDefault: json['isDefault'] as bool,
+    lastUpdateInstant: json['lastUpdateInstant'] as num,
+    name: json['name'] as String,
+  );
+}
+
+Map<String, dynamic> _$EntityTypePermissionToJson(
+    EntityTypePermission instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('data', instance.data);
+  writeNotNull('description', instance.description);
+  writeNotNull('id', instance.id);
+  writeNotNull('insertInstant', instance.insertInstant);
+  writeNotNull('isDefault', instance.isDefault);
+  writeNotNull('lastUpdateInstant', instance.lastUpdateInstant);
+  writeNotNull('name', instance.name);
+  return val;
+}
+
+EntityTypeRequest _$EntityTypeRequestFromJson(Map<String, dynamic> json) {
+  return EntityTypeRequest(
+    type: json['type'] == null
+        ? null
+        : EntityType.fromJson(json['type'] as Map<String, dynamic>),
+  );
+}
+
+Map<String, dynamic> _$EntityTypeRequestToJson(EntityTypeRequest instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('type', instance.type);
+  return val;
+}
+
+EntityTypeResponse _$EntityTypeResponseFromJson(Map<String, dynamic> json) {
+  return EntityTypeResponse(
+    type: json['type'] == null
+        ? null
+        : EntityType.fromJson(json['type'] as Map<String, dynamic>),
+    types: (json['types'] as List)
+        ?.map((e) =>
+            e == null ? null : EntityType.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
+  );
+}
+
+Map<String, dynamic> _$EntityTypeResponseToJson(EntityTypeResponse instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('type', instance.type);
+  writeNotNull('types', instance.types);
+  return val;
+}
+
 Error _$ErrorFromJson(Map<String, dynamic> json) {
   return Error(
     code: json['code'] as String,
@@ -3939,6 +4088,27 @@ Map<String, dynamic> _$JWTRefreshEventToJson(JWTRefreshEvent instance) {
   return val;
 }
 
+JWTRefreshResponse _$JWTRefreshResponseFromJson(Map<String, dynamic> json) {
+  return JWTRefreshResponse(
+    refreshToken: json['refreshToken'] as String,
+    token: json['token'] as String,
+  );
+}
+
+Map<String, dynamic> _$JWTRefreshResponseToJson(JWTRefreshResponse instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('refreshToken', instance.refreshToken);
+  writeNotNull('token', instance.token);
+  return val;
+}
+
 JWTRefreshTokenRevokeEvent _$JWTRefreshTokenRevokeEventFromJson(
     Map<String, dynamic> json) {
   return JWTRefreshTokenRevokeEvent(
@@ -5694,30 +5864,11 @@ Map<String, dynamic> _$RefreshRequestToJson(RefreshRequest instance) {
 }
 
 RefreshResponse _$RefreshResponseFromJson(Map<String, dynamic> json) {
-  return RefreshResponse(
-    refreshToken: json['refreshToken'] as String,
-    refreshTokens: (json['refreshTokens'] as List)
-        ?.map((e) =>
-            e == null ? null : RefreshToken.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
-    token: json['token'] as String,
-  );
+  return RefreshResponse();
 }
 
-Map<String, dynamic> _$RefreshResponseToJson(RefreshResponse instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('refreshToken', instance.refreshToken);
-  writeNotNull('refreshTokens', instance.refreshTokens);
-  writeNotNull('token', instance.token);
-  return val;
-}
+Map<String, dynamic> _$RefreshResponseToJson(RefreshResponse instance) =>
+    <String, dynamic>{};
 
 RefreshToken _$RefreshTokenFromJson(Map<String, dynamic> json) {
   return RefreshToken(
@@ -5777,6 +5928,33 @@ Map<String, dynamic> _$RefreshTokenImportRequestToJson(
 
   writeNotNull('refreshTokens', instance.refreshTokens);
   writeNotNull('validateDbConstraints', instance.validateDbConstraints);
+  return val;
+}
+
+RefreshTokenResponse _$RefreshTokenResponseFromJson(Map<String, dynamic> json) {
+  return RefreshTokenResponse(
+    refreshToken: json['refreshToken'] == null
+        ? null
+        : RefreshToken.fromJson(json['refreshToken'] as Map<String, dynamic>),
+    refreshTokens: (json['refreshTokens'] as List)
+        ?.map((e) =>
+            e == null ? null : RefreshToken.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
+  );
+}
+
+Map<String, dynamic> _$RefreshTokenResponseToJson(
+    RefreshTokenResponse instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('refreshToken', instance.refreshToken);
+  writeNotNull('refreshTokens', instance.refreshTokens);
   return val;
 }
 
@@ -8072,6 +8250,36 @@ Map<String, dynamic> _$UserEmailVerifiedEventToJson(
   writeNotNull('id', instance.id);
   writeNotNull('tenantId', instance.tenantId);
   writeNotNull('user', instance.user);
+  return val;
+}
+
+UserEntityGrant _$UserEntityGrantFromJson(Map<String, dynamic> json) {
+  return UserEntityGrant(
+    data: json['data'] as Map<String, dynamic>,
+    entityId: json['entityId'] as String,
+    insertInstant: json['insertInstant'] as num,
+    lastUpdateInstant: json['lastUpdateInstant'] as num,
+    permissions:
+        (json['permissions'] as List)?.map((e) => e as String)?.toSet(),
+    userId: json['userId'] as String,
+  );
+}
+
+Map<String, dynamic> _$UserEntityGrantToJson(UserEntityGrant instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('data', instance.data);
+  writeNotNull('entityId', instance.entityId);
+  writeNotNull('insertInstant', instance.insertInstant);
+  writeNotNull('lastUpdateInstant', instance.lastUpdateInstant);
+  writeNotNull('permissions', instance.permissions?.toList());
+  writeNotNull('userId', instance.userId);
   return val;
 }
 

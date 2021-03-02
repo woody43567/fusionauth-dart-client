@@ -242,6 +242,21 @@ class FusionAuthClient {
         .go();
   }
 
+  /// Creates an entity type. You can optionally specify an Id for the type, if not provided one will be generated.
+  ///
+  /// @param {String} entityTypeId (Optional) The Id for the entity type. If not provided a secure random UUID will be generated.
+  /// @param {EntityTypeRequest} request The request object that contains all of the information used to create the entity type.
+  /// @returns {Promise<ClientResponse<EntityTypeResponse>>}
+  Future<ClientResponse<EntityTypeResponse, Errors>> createEntityType(String entityTypeId, EntityTypeRequest request) {
+    return _start<EntityTypeResponse, Errors>()
+        .withUri('/api/entity/type')
+        .withUriSegment(entityTypeId)
+        .withJSONBody(request)
+        .withMethod('POST')
+        .withResponseHandler(defaultResponseHandlerBuilder((d) => EntityTypeResponse.fromJson(d)))
+        .go();
+  }
+
   /// Creates a family with the user id in the request as the owner and sole member of the family. You can optionally specify an id for the
   /// family, if not provided one will be generated.
   ///
