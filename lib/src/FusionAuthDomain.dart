@@ -1339,6 +1339,7 @@ class Enableable {
 /// @author Brian Pontarelli
 @JsonSerializable()
 class Entity {
+  String clientId;
   String clientSecret;
   Map<String, dynamic> data;
   String id;
@@ -1350,6 +1351,7 @@ class Entity {
   EntityType type;
 
   Entity({
+      this.clientId,
       this.clientSecret,
       this.data,
       this.id,
@@ -1363,6 +1365,36 @@ class Entity {
 
   factory Entity.fromJson(Map<String, dynamic> json) => _$EntityFromJson(json);
   Map<String, dynamic> toJson() => _$EntityToJson(this);
+}
+
+/// Entity API request object.
+///
+/// @author Brian Pontarelli
+@JsonSerializable()
+class EntityRequest {
+  Entity entity;
+
+  EntityRequest({
+      this.entity
+  });
+
+  factory EntityRequest.fromJson(Map<String, dynamic> json) => _$EntityRequestFromJson(json);
+  Map<String, dynamic> toJson() => _$EntityRequestToJson(this);
+}
+
+/// Entity API response object.
+///
+/// @author Brian Pontarelli
+@JsonSerializable()
+class EntityResponse {
+  Entity entity;
+
+  EntityResponse({
+      this.entity
+  });
+
+  factory EntityResponse.fromJson(Map<String, dynamic> json) => _$EntityResponseFromJson(json);
+  Map<String, dynamic> toJson() => _$EntityResponseToJson(this);
 }
 
 /// Models an entity type that has a specific set of permissions. These are global objects and can be used across tenants.
@@ -1422,10 +1454,10 @@ class EntityTypePermission {
 /// @author Brian Pontarelli
 @JsonSerializable()
 class EntityTypeRequest {
-  EntityType type;
+  EntityType entityType;
 
   EntityTypeRequest({
-      this.type
+      this.entityType
   });
 
   factory EntityTypeRequest.fromJson(Map<String, dynamic> json) => _$EntityTypeRequestFromJson(json);
@@ -1437,12 +1469,12 @@ class EntityTypeRequest {
 /// @author Brian Pontarelli
 @JsonSerializable()
 class EntityTypeResponse {
-  EntityType type;
-  List<EntityType> types;
+  EntityType entityType;
+  List<EntityType> entityTypes;
 
   EntityTypeResponse({
-      this.type,
-      this.types
+      this.entityType,
+      this.entityTypes
   });
 
   factory EntityTypeResponse.fromJson(Map<String, dynamic> json) => _$EntityTypeResponseFromJson(json);

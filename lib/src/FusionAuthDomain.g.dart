@@ -1800,6 +1800,7 @@ Map<String, dynamic> _$EnableableToJson(Enableable instance) {
 
 Entity _$EntityFromJson(Map<String, dynamic> json) {
   return Entity(
+    clientId: json['clientId'] as String,
     clientSecret: json['clientSecret'] as String,
     data: json['data'] as Map<String, dynamic>,
     id: json['id'] as String,
@@ -1823,6 +1824,7 @@ Map<String, dynamic> _$EntityToJson(Entity instance) {
     }
   }
 
+  writeNotNull('clientId', instance.clientId);
   writeNotNull('clientSecret', instance.clientSecret);
   writeNotNull('data', instance.data);
   writeNotNull('id', instance.id);
@@ -1832,6 +1834,48 @@ Map<String, dynamic> _$EntityToJson(Entity instance) {
   writeNotNull('parentId', instance.parentId);
   writeNotNull('tenantId', instance.tenantId);
   writeNotNull('type', instance.type);
+  return val;
+}
+
+EntityRequest _$EntityRequestFromJson(Map<String, dynamic> json) {
+  return EntityRequest(
+    entity: json['entity'] == null
+        ? null
+        : Entity.fromJson(json['entity'] as Map<String, dynamic>),
+  );
+}
+
+Map<String, dynamic> _$EntityRequestToJson(EntityRequest instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('entity', instance.entity);
+  return val;
+}
+
+EntityResponse _$EntityResponseFromJson(Map<String, dynamic> json) {
+  return EntityResponse(
+    entity: json['entity'] == null
+        ? null
+        : Entity.fromJson(json['entity'] as Map<String, dynamic>),
+  );
+}
+
+Map<String, dynamic> _$EntityResponseToJson(EntityResponse instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('entity', instance.entity);
   return val;
 }
 
@@ -1902,9 +1946,9 @@ Map<String, dynamic> _$EntityTypePermissionToJson(
 
 EntityTypeRequest _$EntityTypeRequestFromJson(Map<String, dynamic> json) {
   return EntityTypeRequest(
-    type: json['type'] == null
+    entityType: json['entityType'] == null
         ? null
-        : EntityType.fromJson(json['type'] as Map<String, dynamic>),
+        : EntityType.fromJson(json['entityType'] as Map<String, dynamic>),
   );
 }
 
@@ -1917,16 +1961,16 @@ Map<String, dynamic> _$EntityTypeRequestToJson(EntityTypeRequest instance) {
     }
   }
 
-  writeNotNull('type', instance.type);
+  writeNotNull('entityType', instance.entityType);
   return val;
 }
 
 EntityTypeResponse _$EntityTypeResponseFromJson(Map<String, dynamic> json) {
   return EntityTypeResponse(
-    type: json['type'] == null
+    entityType: json['entityType'] == null
         ? null
-        : EntityType.fromJson(json['type'] as Map<String, dynamic>),
-    types: (json['types'] as List)
+        : EntityType.fromJson(json['entityType'] as Map<String, dynamic>),
+    entityTypes: (json['entityTypes'] as List)
         ?.map((e) =>
             e == null ? null : EntityType.fromJson(e as Map<String, dynamic>))
         ?.toList(),
@@ -1942,8 +1986,8 @@ Map<String, dynamic> _$EntityTypeResponseToJson(EntityTypeResponse instance) {
     }
   }
 
-  writeNotNull('type', instance.type);
-  writeNotNull('types', instance.types);
+  writeNotNull('entityType', instance.entityType);
+  writeNotNull('entityTypes', instance.entityTypes);
   return val;
 }
 
