@@ -451,6 +451,7 @@ ApplicationMultiFactorConfiguration
         ? null
         : MultiFactorEmailTemplate.fromJson(
             json['email'] as Map<String, dynamic>),
+    required: json['required'] as bool,
     sms: json['sms'] == null
         ? null
         : MultiFactorSMSTemplate.fromJson(json['sms'] as Map<String, dynamic>),
@@ -468,6 +469,7 @@ Map<String, dynamic> _$ApplicationMultiFactorConfigurationToJson(
   }
 
   writeNotNull('email', instance.email);
+  writeNotNull('required', instance.required);
   writeNotNull('sms', instance.sms);
   return val;
 }
@@ -5243,6 +5245,7 @@ Map<String, dynamic> _$MultiFactorEmailTemplateToJson(
 MultiFactorEmailTransport _$MultiFactorEmailTransportFromJson(
     Map<String, dynamic> json) {
   return MultiFactorEmailTransport(
+    sendToUnverified: json['sendToUnverified'] as bool,
     templateId: json['templateId'] as String,
   )..enabled = json['enabled'] as bool;
 }
@@ -5258,6 +5261,7 @@ Map<String, dynamic> _$MultiFactorEmailTransportToJson(
   }
 
   writeNotNull('enabled', instance.enabled);
+  writeNotNull('sendToUnverified', instance.sendToUnverified);
   writeNotNull('templateId', instance.templateId);
   return val;
 }
@@ -5306,6 +5310,36 @@ Map<String, dynamic> _$MultiFactorSMSTransportToJson(
   writeNotNull('templateId', instance.templateId);
   return val;
 }
+
+MultiFactorTOTP _$MultiFactorTOTPFromJson(Map<String, dynamic> json) {
+  return MultiFactorTOTP(
+    algorithm: _$enumDecodeNullable(_$TOTPAlgorithmEnumMap, json['algorithm']),
+    codeLength: json['codeLength'] as num,
+    timeStep: json['timeStep'] as num,
+  )..enabled = json['enabled'] as bool;
+}
+
+Map<String, dynamic> _$MultiFactorTOTPToJson(MultiFactorTOTP instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('enabled', instance.enabled);
+  writeNotNull('algorithm', _$TOTPAlgorithmEnumMap[instance.algorithm]);
+  writeNotNull('codeLength', instance.codeLength);
+  writeNotNull('timeStep', instance.timeStep);
+  return val;
+}
+
+const _$TOTPAlgorithmEnumMap = {
+  TOTPAlgorithm.HmacSHA1: 'HmacSHA1',
+  TOTPAlgorithm.HmacSHA256: 'HmacSHA256',
+  TOTPAlgorithm.HmacSHA512: 'HmacSHA512',
+};
 
 Normalizer _$NormalizerFromJson(Map<String, dynamic> json) {
   return Normalizer();
@@ -6017,7 +6051,7 @@ PreviewMessageTemplateResponse _$PreviewMessageTemplateResponseFromJson(
         : Errors.fromJson(json['errors'] as Map<String, dynamic>),
     message: json['message'] == null
         ? null
-        : Message.fromJson(json['message'] as Map<String, dynamic>),
+        : SMSMessage.fromJson(json['message'] as Map<String, dynamic>),
   );
 }
 
@@ -7135,6 +7169,7 @@ Templates _$TemplatesFromJson(Map<String, dynamic> json) {
     emailVerify: json['emailVerify'] as String,
     helpers: json['helpers'] as String,
     index: json['index'] as String,
+    multiFactorConfiguration: json['multiFactorConfiguration'] as String,
     oauth2Authorize: json['oauth2Authorize'] as String,
     oauth2ChildRegistrationNotAllowed:
         json['oauth2ChildRegistrationNotAllowed'] as String,
@@ -7176,6 +7211,7 @@ Map<String, dynamic> _$TemplatesToJson(Templates instance) {
   writeNotNull('emailVerify', instance.emailVerify);
   writeNotNull('helpers', instance.helpers);
   writeNotNull('index', instance.index);
+  writeNotNull('multiFactorConfiguration', instance.multiFactorConfiguration);
   writeNotNull('oauth2Authorize', instance.oauth2Authorize);
   writeNotNull('oauth2ChildRegistrationNotAllowed',
       instance.oauth2ChildRegistrationNotAllowed);
@@ -7359,6 +7395,9 @@ TenantMultiFactorConfiguration _$TenantMultiFactorConfigurationFromJson(
     sms: json['sms'] == null
         ? null
         : MultiFactorSMSTransport.fromJson(json['sms'] as Map<String, dynamic>),
+    totp: json['totp'] == null
+        ? null
+        : MultiFactorTOTP.fromJson(json['totp'] as Map<String, dynamic>),
   );
 }
 
@@ -7374,6 +7413,7 @@ Map<String, dynamic> _$TenantMultiFactorConfigurationToJson(
 
   writeNotNull('email', instance.email);
   writeNotNull('sms', instance.sms);
+  writeNotNull('totp', instance.totp);
   return val;
 }
 
@@ -7829,8 +7869,10 @@ Map<String, dynamic> _$TwoFactorRequestToJson(TwoFactorRequest instance) {
 
 TwoFactorSendRequest _$TwoFactorSendRequestFromJson(Map<String, dynamic> json) {
   return TwoFactorSendRequest(
+    code: json['code'] as String,
     mobilePhone: json['mobilePhone'] as String,
     secret: json['secret'] as String,
+    transport: json['transport'] as String,
     userId: json['userId'] as String,
   );
 }
@@ -7845,8 +7887,10 @@ Map<String, dynamic> _$TwoFactorSendRequestToJson(
     }
   }
 
+  writeNotNull('code', instance.code);
   writeNotNull('mobilePhone', instance.mobilePhone);
   writeNotNull('secret', instance.secret);
+  writeNotNull('transport', instance.transport);
   writeNotNull('userId', instance.userId);
   return val;
 }

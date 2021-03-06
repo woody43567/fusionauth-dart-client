@@ -4284,7 +4284,7 @@ class PreviewMessageTemplateRequest {
 @JsonSerializable()
 class PreviewMessageTemplateResponse {
   Errors errors;
-  Message message;
+  SMSMessage message;
 
   PreviewMessageTemplateResponse({
       this.errors,
@@ -5036,6 +5036,7 @@ class Templates {
   String emailVerify;
   String helpers;
   String index;
+  String multiFactorConfiguration;
   String oauth2Authorize;
   String oauth2ChildRegistrationNotAllowed;
   String oauth2ChildRegistrationNotAllowedComplete;
@@ -5065,6 +5066,7 @@ class Templates {
       this.emailVerify,
       this.helpers,
       this.index,
+      this.multiFactorConfiguration,
       this.oauth2Authorize,
       this.oauth2ChildRegistrationNotAllowed,
       this.oauth2ChildRegistrationNotAllowedComplete,
@@ -5510,13 +5512,17 @@ class TwoFactorRequest {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class TwoFactorSendRequest {
+  String code;
   String mobilePhone;
   String secret;
+  String transport;
   String userId;
 
   TwoFactorSendRequest({
+      this.code,
       this.mobilePhone,
       this.secret,
+      this.transport,
       this.userId
   });
 
