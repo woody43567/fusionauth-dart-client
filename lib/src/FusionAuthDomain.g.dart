@@ -839,6 +839,44 @@ const _$ConnectorTypeEnumMap = {
   ConnectorType.LDAP: 'LDAP',
 };
 
+BaseElasticSearchCriteria _$BaseElasticSearchCriteriaFromJson(
+    Map<String, dynamic> json) {
+  return BaseElasticSearchCriteria(
+    accurateTotal: json['accurateTotal'] as bool,
+    ids: (json['ids'] as List)?.map((e) => e as String)?.toList(),
+    query: json['query'] as String,
+    queryString: json['queryString'] as String,
+    sortFields: (json['sortFields'] as List)
+        ?.map((e) =>
+            e == null ? null : SortField.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
+  )
+    ..numberOfResults = json['numberOfResults'] as num
+    ..orderBy = json['orderBy'] as String
+    ..startRow = json['startRow'] as num;
+}
+
+Map<String, dynamic> _$BaseElasticSearchCriteriaToJson(
+    BaseElasticSearchCriteria instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('numberOfResults', instance.numberOfResults);
+  writeNotNull('orderBy', instance.orderBy);
+  writeNotNull('startRow', instance.startRow);
+  writeNotNull('accurateTotal', instance.accurateTotal);
+  writeNotNull('ids', instance.ids);
+  writeNotNull('query', instance.query);
+  writeNotNull('queryString', instance.queryString);
+  writeNotNull('sortFields', instance.sortFields);
+  return val;
+}
+
 BaseEvent _$BaseEventFromJson(Map<String, dynamic> json) {
   return BaseEvent(
     createInstant: json['createInstant'] as num,
@@ -1876,6 +1914,42 @@ Map<String, dynamic> _$EntityResponseToJson(EntityResponse instance) {
   }
 
   writeNotNull('entity', instance.entity);
+  return val;
+}
+
+EntitySearchCriteria _$EntitySearchCriteriaFromJson(Map<String, dynamic> json) {
+  return EntitySearchCriteria()
+    ..numberOfResults = json['numberOfResults'] as num
+    ..orderBy = json['orderBy'] as String
+    ..startRow = json['startRow'] as num
+    ..accurateTotal = json['accurateTotal'] as bool
+    ..ids = (json['ids'] as List)?.map((e) => e as String)?.toList()
+    ..query = json['query'] as String
+    ..queryString = json['queryString'] as String
+    ..sortFields = (json['sortFields'] as List)
+        ?.map((e) =>
+            e == null ? null : SortField.fromJson(e as Map<String, dynamic>))
+        ?.toList();
+}
+
+Map<String, dynamic> _$EntitySearchCriteriaToJson(
+    EntitySearchCriteria instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('numberOfResults', instance.numberOfResults);
+  writeNotNull('orderBy', instance.orderBy);
+  writeNotNull('startRow', instance.startRow);
+  writeNotNull('accurateTotal', instance.accurateTotal);
+  writeNotNull('ids', instance.ids);
+  writeNotNull('query', instance.query);
+  writeNotNull('queryString', instance.queryString);
+  writeNotNull('sortFields', instance.sortFields);
   return val;
 }
 
@@ -6432,6 +6506,38 @@ Map<String, dynamic> _$SearchRequestToJson(SearchRequest instance) {
   return val;
 }
 
+SearchRequest _$SearchRequestFromJson(Map<String, dynamic> json) {
+  return SearchRequest(
+    search: json['search'] == null
+        ? null
+        : EntitySearchCriteria.fromJson(json['search'] as Map<String, dynamic>),
+  );
+}
+
+SearchResponse _$SearchResponseFromJson(Map<String, dynamic> json) {
+  return SearchResponse(
+    entities: (json['entities'] as List)
+        ?.map((e) =>
+            e == null ? null : Entity.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
+    total: json['total'] as num,
+  );
+}
+
+Map<String, dynamic> _$SearchResponseToJson(SearchResponse instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('entities', instance.entities);
+  writeNotNull('total', instance.total);
+  return val;
+}
+
 SearchResponse _$SearchResponseFromJson(Map<String, dynamic> json) {
   return SearchResponse(
     total: json['total'] as num,
@@ -8723,19 +8829,18 @@ Map<String, dynamic> _$UserResponseToJson(UserResponse instance) {
 }
 
 UserSearchCriteria _$UserSearchCriteriaFromJson(Map<String, dynamic> json) {
-  return UserSearchCriteria(
-    accurateTotal: json['accurateTotal'] as bool,
-    ids: (json['ids'] as List)?.map((e) => e as String)?.toList(),
-    query: json['query'] as String,
-    queryString: json['queryString'] as String,
-    sortFields: (json['sortFields'] as List)
-        ?.map((e) =>
-            e == null ? null : SortField.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
-  )
+  return UserSearchCriteria()
     ..numberOfResults = json['numberOfResults'] as num
     ..orderBy = json['orderBy'] as String
-    ..startRow = json['startRow'] as num;
+    ..startRow = json['startRow'] as num
+    ..accurateTotal = json['accurateTotal'] as bool
+    ..ids = (json['ids'] as List)?.map((e) => e as String)?.toList()
+    ..query = json['query'] as String
+    ..queryString = json['queryString'] as String
+    ..sortFields = (json['sortFields'] as List)
+        ?.map((e) =>
+            e == null ? null : SortField.fromJson(e as Map<String, dynamic>))
+        ?.toList();
 }
 
 Map<String, dynamic> _$UserSearchCriteriaToJson(UserSearchCriteria instance) {

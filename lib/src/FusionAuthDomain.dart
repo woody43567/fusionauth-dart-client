@@ -542,6 +542,27 @@ class BaseConnectorConfiguration {
   Map<String, dynamic> toJson() => _$BaseConnectorConfigurationToJson(this);
 }
 
+/// @author Brian Pontarelli
+@JsonSerializable()
+class BaseElasticSearchCriteria extends BaseSearchCriteria {
+  bool accurateTotal;
+  List<String> ids;
+  String query;
+  String queryString;
+  List<SortField> sortFields;
+
+  BaseElasticSearchCriteria({
+      this.accurateTotal,
+      this.ids,
+      this.query,
+      this.queryString,
+      this.sortFields
+  });
+
+  factory BaseElasticSearchCriteria.fromJson(Map<String, dynamic> json) => _$BaseElasticSearchCriteriaFromJson(json);
+  Map<String, dynamic> toJson() => _$BaseElasticSearchCriteriaToJson(this);
+}
+
 /// Base-class for all FusionAuth events.
 ///
 /// @author Brian Pontarelli
@@ -1395,6 +1416,18 @@ class EntityResponse {
 
   factory EntityResponse.fromJson(Map<String, dynamic> json) => _$EntityResponseFromJson(json);
   Map<String, dynamic> toJson() => _$EntityResponseToJson(this);
+}
+
+/// This class is the entity query. It provides a build pattern as well as public fields for use on forms and in actions.
+///
+/// @author Brian Pontarelli
+@JsonSerializable()
+class EntitySearchCriteria extends BaseElasticSearchCriteria {
+
+  EntitySearchCriteria();
+
+  factory EntitySearchCriteria.fromJson(Map<String, dynamic> json) => _$EntitySearchCriteriaFromJson(json);
+  Map<String, dynamic> toJson() => _$EntitySearchCriteriaToJson(this);
 }
 
 /// Models an entity type that has a specific set of permissions. These are global objects and can be used across tenants.
@@ -4597,6 +4630,38 @@ class SearchRequest {
   Map<String, dynamic> toJson() => _$SearchRequestToJson(this);
 }
 
+/// Search API request.
+///
+/// @author Brian Pontarelli
+@JsonSerializable()
+class SearchRequest {
+  EntitySearchCriteria search;
+
+  SearchRequest({
+      this.search
+  });
+
+  factory SearchRequest.fromJson(Map<String, dynamic> json) => _$SearchRequestFromJson(json);
+  Map<String, dynamic> toJson() => _$SearchRequestToJson(this);
+}
+
+/// Search API response.
+///
+/// @author Brian Pontarelli
+@JsonSerializable()
+class SearchResponse {
+  List<Entity> entities;
+  num total;
+
+  SearchResponse({
+      this.entities,
+      this.total
+  });
+
+  factory SearchResponse.fromJson(Map<String, dynamic> json) => _$SearchResponseFromJson(json);
+  Map<String, dynamic> toJson() => _$SearchResponseToJson(this);
+}
+
 /// Search API response.
 ///
 /// @author Brian Pontarelli
@@ -6154,20 +6219,9 @@ class UserResponse {
 ///
 /// @author Brian Pontarelli
 @JsonSerializable()
-class UserSearchCriteria extends BaseSearchCriteria {
-  bool accurateTotal;
-  List<String> ids;
-  String query;
-  String queryString;
-  List<SortField> sortFields;
+class UserSearchCriteria extends BaseElasticSearchCriteria {
 
-  UserSearchCriteria({
-      this.accurateTotal,
-      this.ids,
-      this.query,
-      this.queryString,
-      this.sortFields
-  });
+  UserSearchCriteria();
 
   factory UserSearchCriteria.fromJson(Map<String, dynamic> json) => _$UserSearchCriteriaFromJson(json);
   Map<String, dynamic> toJson() => _$UserSearchCriteriaToJson(this);
