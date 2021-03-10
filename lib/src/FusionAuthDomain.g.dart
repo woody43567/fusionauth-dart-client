@@ -1875,6 +1875,34 @@ Map<String, dynamic> _$EntityToJson(Entity instance) {
   return val;
 }
 
+EntityGrant _$EntityGrantFromJson(Map<String, dynamic> json) {
+  return EntityGrant(
+    data: json['data'] as Map<String, dynamic>,
+    id: json['id'] as String,
+    permissions:
+        (json['permissions'] as List)?.map((e) => e as String)?.toSet(),
+    targetEntityId: json['targetEntityId'] as String,
+    userId: json['userId'] as String,
+  );
+}
+
+Map<String, dynamic> _$EntityGrantToJson(EntityGrant instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('data', instance.data);
+  writeNotNull('id', instance.id);
+  writeNotNull('permissions', instance.permissions?.toList());
+  writeNotNull('targetEntityId', instance.targetEntityId);
+  writeNotNull('userId', instance.userId);
+  return val;
+}
+
 EntityRequest _$EntityRequestFromJson(Map<String, dynamic> json) {
   return EntityRequest(
     entity: json['entity'] == null
@@ -3333,6 +3361,53 @@ Map<String, dynamic> _$GoogleIdentityProviderToJson(
   writeNotNull('client_id', instance.client_id);
   writeNotNull('client_secret', instance.client_secret);
   writeNotNull('scope', instance.scope);
+  return val;
+}
+
+GrantRequest _$GrantRequestFromJson(Map<String, dynamic> json) {
+  return GrantRequest(
+    grant: json['grant'] == null
+        ? null
+        : EntityGrant.fromJson(json['grant'] as Map<String, dynamic>),
+  );
+}
+
+Map<String, dynamic> _$GrantRequestToJson(GrantRequest instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('grant', instance.grant);
+  return val;
+}
+
+GrantResponse _$GrantResponseFromJson(Map<String, dynamic> json) {
+  return GrantResponse(
+    grant: json['grant'] == null
+        ? null
+        : EntityGrant.fromJson(json['grant'] as Map<String, dynamic>),
+    grants: (json['grants'] as List)
+        ?.map((e) =>
+            e == null ? null : EntityGrant.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
+  );
+}
+
+Map<String, dynamic> _$GrantResponseToJson(GrantResponse instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('grant', instance.grant);
+  writeNotNull('grants', instance.grants);
   return val;
 }
 
