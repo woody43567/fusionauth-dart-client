@@ -1395,15 +1395,19 @@ class Entity {
 class EntityGrant {
   Map<String, dynamic> data;
   String id;
+  num insertInstant;
+  num lastUpdateInstant;
   Set<String> permissions;
-  String targetEntityId;
+  String recipientEntityId;
   String userId;
 
   EntityGrant({
       this.data,
       this.id,
+      this.insertInstant,
+      this.lastUpdateInstant,
       this.permissions,
-      this.targetEntityId,
+      this.recipientEntityId,
       this.userId
   });
 
@@ -1461,6 +1465,7 @@ class EntityType {
   Map<String, dynamic> data;
   String id;
   num insertInstant;
+  JWTConfiguration jwtConfiguration;
   num lastUpdateInstant;
   String name;
   List<EntityTypePermission> permissions;
@@ -1469,6 +1474,7 @@ class EntityType {
       this.data,
       this.id,
       this.insertInstant,
+      this.jwtConfiguration,
       this.lastUpdateInstant,
       this.name,
       this.permissions
@@ -3013,6 +3019,21 @@ class JWTConfiguration extends Enableable {
   Map<String, dynamic> toJson() => _$JWTConfigurationToJson(this);
 }
 
+/// JWT Configuration for entities.
+@JsonSerializable()
+class JWTConfiguration extends Enableable {
+  String accessTokenKeyId;
+  num timeToLiveInSeconds;
+
+  JWTConfiguration({
+      this.accessTokenKeyId,
+      this.timeToLiveInSeconds
+  });
+
+  factory JWTConfiguration.fromJson(Map<String, dynamic> json) => _$JWTConfigurationFromJson(json);
+  Map<String, dynamic> toJson() => _$JWTConfigurationToJson(this);
+}
+
 /// Models the JWT public key Refresh Token Revoke Event (and can be converted to JSON). This event might be for a single
 /// token, a user or an entire application.
 ///
@@ -3867,10 +3888,16 @@ enum OAuthErrorReason {
   invalid_user_code,
   @JsonValue('invalid_additional_client_id')
   invalid_additional_client_id,
+  @JsonValue('invalid_target_entity_scope')
+  invalid_target_entity_scope,
+  @JsonValue('invalid_entity_permissions_scope')
+  invalid_entity_permissions_scope,
   @JsonValue('grant_type_disabled')
   grant_type_disabled,
   @JsonValue('missing_client_id')
   missing_client_id,
+  @JsonValue('missing_client_secret')
+  missing_client_secret,
   @JsonValue('missing_code')
   missing_code,
   @JsonValue('missing_device_code')
@@ -6000,31 +6027,6 @@ class UserEmailVerifiedEvent extends BaseEvent {
 
   factory UserEmailVerifiedEvent.fromJson(Map<String, dynamic> json) => _$UserEmailVerifiedEventFromJson(json);
   Map<String, dynamic> toJson() => _$UserEmailVerifiedEventToJson(this);
-}
-
-/// Models the grant of zero or more permissions to a user for an entity.
-///
-/// @author Brian Pontarelli
-@JsonSerializable()
-class UserEntityGrant {
-  Map<String, dynamic> data;
-  String entityId;
-  num insertInstant;
-  num lastUpdateInstant;
-  Set<String> permissions;
-  String userId;
-
-  UserEntityGrant({
-      this.data,
-      this.entityId,
-      this.insertInstant,
-      this.lastUpdateInstant,
-      this.permissions,
-      this.userId
-  });
-
-  factory UserEntityGrant.fromJson(Map<String, dynamic> json) => _$UserEntityGrantFromJson(json);
-  Map<String, dynamic> toJson() => _$UserEntityGrantToJson(this);
 }
 
 /// Models the User Login Failed Event.

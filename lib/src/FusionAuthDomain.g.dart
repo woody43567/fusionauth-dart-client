@@ -1879,9 +1879,11 @@ EntityGrant _$EntityGrantFromJson(Map<String, dynamic> json) {
   return EntityGrant(
     data: json['data'] as Map<String, dynamic>,
     id: json['id'] as String,
+    insertInstant: json['insertInstant'] as num,
+    lastUpdateInstant: json['lastUpdateInstant'] as num,
     permissions:
         (json['permissions'] as List)?.map((e) => e as String)?.toSet(),
-    targetEntityId: json['targetEntityId'] as String,
+    recipientEntityId: json['recipientEntityId'] as String,
     userId: json['userId'] as String,
   );
 }
@@ -1897,8 +1899,10 @@ Map<String, dynamic> _$EntityGrantToJson(EntityGrant instance) {
 
   writeNotNull('data', instance.data);
   writeNotNull('id', instance.id);
+  writeNotNull('insertInstant', instance.insertInstant);
+  writeNotNull('lastUpdateInstant', instance.lastUpdateInstant);
   writeNotNull('permissions', instance.permissions?.toList());
-  writeNotNull('targetEntityId', instance.targetEntityId);
+  writeNotNull('recipientEntityId', instance.recipientEntityId);
   writeNotNull('userId', instance.userId);
   return val;
 }
@@ -1986,6 +1990,10 @@ EntityType _$EntityTypeFromJson(Map<String, dynamic> json) {
     data: json['data'] as Map<String, dynamic>,
     id: json['id'] as String,
     insertInstant: json['insertInstant'] as num,
+    jwtConfiguration: json['jwtConfiguration'] == null
+        ? null
+        : JWTConfiguration.fromJson(
+            json['jwtConfiguration'] as Map<String, dynamic>),
     lastUpdateInstant: json['lastUpdateInstant'] as num,
     name: json['name'] as String,
     permissions: (json['permissions'] as List)
@@ -2008,6 +2016,7 @@ Map<String, dynamic> _$EntityTypeToJson(EntityType instance) {
   writeNotNull('data', instance.data);
   writeNotNull('id', instance.id);
   writeNotNull('insertInstant', instance.insertInstant);
+  writeNotNull('jwtConfiguration', instance.jwtConfiguration);
   writeNotNull('lastUpdateInstant', instance.lastUpdateInstant);
   writeNotNull('name', instance.name);
   writeNotNull('permissions', instance.permissions);
@@ -4220,6 +4229,28 @@ const _$RefreshTokenUsagePolicyEnumMap = {
   RefreshTokenUsagePolicy.OneTimeUse: 'OneTimeUse',
 };
 
+JWTConfiguration _$JWTConfigurationFromJson(Map<String, dynamic> json) {
+  return JWTConfiguration(
+    accessTokenKeyId: json['accessTokenKeyId'] as String,
+    timeToLiveInSeconds: json['timeToLiveInSeconds'] as num,
+  )..enabled = json['enabled'] as bool;
+}
+
+Map<String, dynamic> _$JWTConfigurationToJson(JWTConfiguration instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('enabled', instance.enabled);
+  writeNotNull('accessTokenKeyId', instance.accessTokenKeyId);
+  writeNotNull('timeToLiveInSeconds', instance.timeToLiveInSeconds);
+  return val;
+}
+
 JWTPublicKeyUpdateEvent _$JWTPublicKeyUpdateEventFromJson(
     Map<String, dynamic> json) {
   return JWTPublicKeyUpdateEvent(
@@ -5416,8 +5447,12 @@ const _$OAuthErrorReasonEnumMap = {
   OAuthErrorReason.invalid_device_code: 'invalid_device_code',
   OAuthErrorReason.invalid_user_code: 'invalid_user_code',
   OAuthErrorReason.invalid_additional_client_id: 'invalid_additional_client_id',
+  OAuthErrorReason.invalid_target_entity_scope: 'invalid_target_entity_scope',
+  OAuthErrorReason.invalid_entity_permissions_scope:
+      'invalid_entity_permissions_scope',
   OAuthErrorReason.grant_type_disabled: 'grant_type_disabled',
   OAuthErrorReason.missing_client_id: 'missing_client_id',
+  OAuthErrorReason.missing_client_secret: 'missing_client_secret',
   OAuthErrorReason.missing_code: 'missing_code',
   OAuthErrorReason.missing_device_code: 'missing_device_code',
   OAuthErrorReason.missing_grant_type: 'missing_grant_type',
@@ -8475,36 +8510,6 @@ Map<String, dynamic> _$UserEmailVerifiedEventToJson(
   writeNotNull('id', instance.id);
   writeNotNull('tenantId', instance.tenantId);
   writeNotNull('user', instance.user);
-  return val;
-}
-
-UserEntityGrant _$UserEntityGrantFromJson(Map<String, dynamic> json) {
-  return UserEntityGrant(
-    data: json['data'] as Map<String, dynamic>,
-    entityId: json['entityId'] as String,
-    insertInstant: json['insertInstant'] as num,
-    lastUpdateInstant: json['lastUpdateInstant'] as num,
-    permissions:
-        (json['permissions'] as List)?.map((e) => e as String)?.toSet(),
-    userId: json['userId'] as String,
-  );
-}
-
-Map<String, dynamic> _$UserEntityGrantToJson(UserEntityGrant instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('data', instance.data);
-  writeNotNull('entityId', instance.entityId);
-  writeNotNull('insertInstant', instance.insertInstant);
-  writeNotNull('lastUpdateInstant', instance.lastUpdateInstant);
-  writeNotNull('permissions', instance.permissions?.toList());
-  writeNotNull('userId', instance.userId);
   return val;
 }
 
