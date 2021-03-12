@@ -5245,7 +5245,6 @@ Map<String, dynamic> _$MultiFactorEmailTemplateToJson(
 MultiFactorEmailTransport _$MultiFactorEmailTransportFromJson(
     Map<String, dynamic> json) {
   return MultiFactorEmailTransport(
-    sendToUnverified: json['sendToUnverified'] as bool,
     templateId: json['templateId'] as String,
   )..enabled = json['enabled'] as bool;
 }
@@ -5261,7 +5260,6 @@ Map<String, dynamic> _$MultiFactorEmailTransportToJson(
   }
 
   writeNotNull('enabled', instance.enabled);
-  writeNotNull('sendToUnverified', instance.sendToUnverified);
   writeNotNull('templateId', instance.templateId);
   return val;
 }
@@ -6830,6 +6828,12 @@ SecureIdentity _$SecureIdentityFromJson(Map<String, dynamic> json) {
     twoFactorDelivery: _$enumDecodeNullable(
         _$TwoFactorDeliveryEnumMap, json['twoFactorDelivery']),
     twoFactorEnabled: json['twoFactorEnabled'] as bool,
+    twoFactorMethods:
+        (json['twoFactorMethods'] as List)?.map((e) => e as String)?.toList(),
+    twoFactorPreferredMethod: json['twoFactorPreferredMethod'] as String,
+    twoFactorRecoveryCodes: (json['twoFactorRecoveryCodes'] as List)
+        ?.map((e) => e as String)
+        ?.toList(),
     twoFactorSecret: json['twoFactorSecret'] as String,
     username: json['username'] as String,
     usernameStatus:
@@ -6865,6 +6869,9 @@ Map<String, dynamic> _$SecureIdentityToJson(SecureIdentity instance) {
   writeNotNull('twoFactorDelivery',
       _$TwoFactorDeliveryEnumMap[instance.twoFactorDelivery]);
   writeNotNull('twoFactorEnabled', instance.twoFactorEnabled);
+  writeNotNull('twoFactorMethods', instance.twoFactorMethods);
+  writeNotNull('twoFactorPreferredMethod', instance.twoFactorPreferredMethod);
+  writeNotNull('twoFactorRecoveryCodes', instance.twoFactorRecoveryCodes);
   writeNotNull('twoFactorSecret', instance.twoFactorSecret);
   writeNotNull('username', instance.username);
   writeNotNull(
@@ -7183,7 +7190,7 @@ Templates _$TemplatesFromJson(Map<String, dynamic> json) {
     oauth2Passwordless: json['oauth2Passwordless'] as String,
     oauth2Register: json['oauth2Register'] as String,
     oauth2TwoFactor: json['oauth2TwoFactor'] as String,
-    oauth2TwoFactorOptions: json['oauth2TwoFactorOptions'] as String,
+    oauth2TwoFactorMethods: json['oauth2TwoFactorMethods'] as String,
     oauth2Wait: json['oauth2Wait'] as String,
     passwordChange: json['passwordChange'] as String,
     passwordComplete: json['passwordComplete'] as String,
@@ -7226,7 +7233,7 @@ Map<String, dynamic> _$TemplatesToJson(Templates instance) {
   writeNotNull('oauth2Passwordless', instance.oauth2Passwordless);
   writeNotNull('oauth2Register', instance.oauth2Register);
   writeNotNull('oauth2TwoFactor', instance.oauth2TwoFactor);
-  writeNotNull('oauth2TwoFactorOptions', instance.oauth2TwoFactorOptions);
+  writeNotNull('oauth2TwoFactorMethods', instance.oauth2TwoFactorMethods);
   writeNotNull('oauth2Wait', instance.oauth2Wait);
   writeNotNull('passwordChange', instance.passwordChange);
   writeNotNull('passwordComplete', instance.passwordComplete);
@@ -7841,6 +7848,13 @@ Map<String, dynamic> _$TwoFactorLoginRequestToJson(
   return val;
 }
 
+TwoFactorMethod _$TwoFactorMethodFromJson(Map<String, dynamic> json) {
+  return TwoFactorMethod();
+}
+
+Map<String, dynamic> _$TwoFactorMethodToJson(TwoFactorMethod instance) =>
+    <String, dynamic>{};
+
 TwoFactorRequest _$TwoFactorRequestFromJson(Map<String, dynamic> json) {
   return TwoFactorRequest(
     code: json['code'] as String,
@@ -8017,6 +8031,12 @@ User _$UserFromJson(Map<String, dynamic> json) {
     ..twoFactorDelivery = _$enumDecodeNullable(
         _$TwoFactorDeliveryEnumMap, json['twoFactorDelivery'])
     ..twoFactorEnabled = json['twoFactorEnabled'] as bool
+    ..twoFactorMethods =
+        (json['twoFactorMethods'] as List)?.map((e) => e as String)?.toList()
+    ..twoFactorPreferredMethod = json['twoFactorPreferredMethod'] as String
+    ..twoFactorRecoveryCodes = (json['twoFactorRecoveryCodes'] as List)
+        ?.map((e) => e as String)
+        ?.toList()
     ..twoFactorSecret = json['twoFactorSecret'] as String
     ..username = json['username'] as String
     ..usernameStatus =
@@ -8051,6 +8071,9 @@ Map<String, dynamic> _$UserToJson(User instance) {
   writeNotNull('twoFactorDelivery',
       _$TwoFactorDeliveryEnumMap[instance.twoFactorDelivery]);
   writeNotNull('twoFactorEnabled', instance.twoFactorEnabled);
+  writeNotNull('twoFactorMethods', instance.twoFactorMethods);
+  writeNotNull('twoFactorPreferredMethod', instance.twoFactorPreferredMethod);
+  writeNotNull('twoFactorRecoveryCodes', instance.twoFactorRecoveryCodes);
   writeNotNull('twoFactorSecret', instance.twoFactorSecret);
   writeNotNull('username', instance.username);
   writeNotNull(

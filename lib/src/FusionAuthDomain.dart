@@ -3718,11 +3718,9 @@ class MultiFactorEmailTemplate {
 
 @JsonSerializable()
 class MultiFactorEmailTransport extends Enableable {
-  bool sendToUnverified;
   String templateId;
 
   MultiFactorEmailTransport({
-      this.sendToUnverified,
       this.templateId
   });
 
@@ -4826,6 +4824,9 @@ class SecureIdentity {
   String salt;
   TwoFactorDelivery twoFactorDelivery;
   bool twoFactorEnabled;
+  List<String> twoFactorMethods;
+  String twoFactorPreferredMethod;
+  List<String> twoFactorRecoveryCodes;
   String twoFactorSecret;
   String username;
   ContentStatus usernameStatus;
@@ -4846,6 +4847,9 @@ class SecureIdentity {
       this.salt,
       this.twoFactorDelivery,
       this.twoFactorEnabled,
+      this.twoFactorMethods,
+      this.twoFactorPreferredMethod,
+      this.twoFactorRecoveryCodes,
       this.twoFactorSecret,
       this.username,
       this.usernameStatus,
@@ -5048,7 +5052,7 @@ class Templates {
   String oauth2Passwordless;
   String oauth2Register;
   String oauth2TwoFactor;
-  String oauth2TwoFactorOptions;
+  String oauth2TwoFactorMethods;
   String oauth2Wait;
   String passwordChange;
   String passwordComplete;
@@ -5078,7 +5082,7 @@ class Templates {
       this.oauth2Passwordless,
       this.oauth2Register,
       this.oauth2TwoFactor,
-      this.oauth2TwoFactorOptions,
+      this.oauth2TwoFactorMethods,
       this.oauth2Wait,
       this.passwordChange,
       this.passwordComplete,
@@ -5488,6 +5492,16 @@ class TwoFactorLoginRequest extends BaseLoginRequest {
 
   factory TwoFactorLoginRequest.fromJson(Map<String, dynamic> json) => _$TwoFactorLoginRequestFromJson(json);
   Map<String, dynamic> toJson() => _$TwoFactorLoginRequestToJson(this);
+}
+
+/// @author Daniel DeGroff
+@JsonSerializable()
+class TwoFactorMethod {
+
+  TwoFactorMethod();
+
+  factory TwoFactorMethod.fromJson(Map<String, dynamic> json) => _$TwoFactorMethodFromJson(json);
+  Map<String, dynamic> toJson() => _$TwoFactorMethodToJson(this);
 }
 
 /// @author Brian Pontarelli
