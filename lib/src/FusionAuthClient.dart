@@ -242,10 +242,10 @@ class FusionAuthClient {
         .go();
   }
 
-  /// Creates an entity type. You can optionally specify an Id for the type, if not provided one will be generated.
+  /// Creates a Entity Type. You can optionally specify an Id for the Entity Type, if not provided one will be generated.
   ///
-  /// @param {String} entityTypeId (Optional) The Id for the entity type. If not provided a secure random UUID will be generated.
-  /// @param {EntityTypeRequest} request The request object that contains all of the information used to create the entity type.
+  /// @param {String} entityTypeId (Optional) The Id for the Entity Type. If not provided a secure random UUID will be generated.
+  /// @param {EntityTypeRequest} request The request object that contains all of the information used to create the Entity Type.
   /// @returns {Promise<ClientResponse<EntityTypeResponse>>}
   Future<ClientResponse<EntityTypeResponse, Errors>> createEntityType(String entityTypeId, EntityTypeRequest request) {
     return _start<EntityTypeResponse, Errors>()
@@ -600,6 +600,18 @@ class FusionAuthClient {
     return _start<void, Errors>()
         .withUri('/api/email/template')
         .withUriSegment(emailTemplateId)
+        .withMethod('DELETE')
+        .go();
+  }
+
+  /// Deletes the Entity Type for the given Id.
+  ///
+  /// @param {String} entityTypeId The Id of the Entity Type to delete.
+  /// @returns {Promise<ClientResponse<void>>}
+  Future<ClientResponse<void, Errors>> deleteEntityType(String entityTypeId) {
+    return _start<void, Errors>()
+        .withUri('/api/entity/type')
+        .withUriSegment(entityTypeId)
         .withMethod('DELETE')
         .go();
   }
@@ -1340,6 +1352,21 @@ class FusionAuthClient {
         .go();
   }
 
+  /// Updates, via PATCH, the Entity Type with the given Id.
+  ///
+  /// @param {String} entityTypeId The Id of the Entity Type to update.
+  /// @param {EntityTypeRequest} request The request that contains just the new Entity Type information.
+  /// @returns {Promise<ClientResponse<EntityTypeResponse>>}
+  Future<ClientResponse<EntityTypeResponse, Errors>> patchEntityType(String entityTypeId, EntityTypeRequest request) {
+    return _start<EntityTypeResponse, Errors>()
+        .withUri('/api/entity/type')
+        .withUriSegment(entityTypeId)
+        .withJSONBody(request)
+        .withMethod('PATCH')
+        .withResponseHandler(defaultResponseHandlerBuilder((d) => EntityTypeResponse.fromJson(d)))
+        .go();
+  }
+
   /// Updates, via PATCH, the group with the given Id.
   ///
   /// @param {String} groupId The Id of the group to update.
@@ -1856,6 +1883,30 @@ class FusionAuthClient {
         .withUri('/api/email/template')
         .withMethod('GET')
         .withResponseHandler(defaultResponseHandlerBuilder((d) => EmailTemplateResponse.fromJson(d)))
+        .go();
+  }
+
+  /// Retrieves the Entity Type for the given Id.
+  ///
+  /// @param {String} entityTypeId The Id of the Entity Type.
+  /// @returns {Promise<ClientResponse<EntityTypeResponse>>}
+  Future<ClientResponse<EntityTypeResponse, void>> retrieveEntityType(String entityTypeId) {
+    return _start<EntityTypeResponse, void>()
+        .withUri('/api/entity/type')
+        .withUriSegment(entityTypeId)
+        .withMethod('GET')
+        .withResponseHandler(defaultResponseHandlerBuilder((d) => EntityTypeResponse.fromJson(d)))
+        .go();
+  }
+
+  /// Retrieves all of the Entity Types.
+  ///
+  /// @returns {Promise<ClientResponse<EntityTypeResponse>>}
+  Future<ClientResponse<EntityTypeResponse, void>> retrieveEntityTypes() {
+    return _start<EntityTypeResponse, void>()
+        .withUri('/api/entity/type')
+        .withMethod('GET')
+        .withResponseHandler(defaultResponseHandlerBuilder((d) => EntityTypeResponse.fromJson(d)))
         .go();
   }
 
@@ -3068,6 +3119,21 @@ class FusionAuthClient {
         .withJSONBody(request)
         .withMethod('PUT')
         .withResponseHandler(defaultResponseHandlerBuilder((d) => EmailTemplateResponse.fromJson(d)))
+        .go();
+  }
+
+  /// Updates the Entity Type with the given Id.
+  ///
+  /// @param {String} entityTypeId The Id of the Entity Type to update.
+  /// @param {EntityTypeRequest} request The request that contains all of the new Entity Type information.
+  /// @returns {Promise<ClientResponse<EntityTypeResponse>>}
+  Future<ClientResponse<EntityTypeResponse, Errors>> updateEntityType(String entityTypeId, EntityTypeRequest request) {
+    return _start<EntityTypeResponse, Errors>()
+        .withUri('/api/entity/type')
+        .withUriSegment(entityTypeId)
+        .withJSONBody(request)
+        .withMethod('PUT')
+        .withResponseHandler(defaultResponseHandlerBuilder((d) => EntityTypeResponse.fromJson(d)))
         .go();
   }
 

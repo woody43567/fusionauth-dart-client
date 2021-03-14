@@ -3890,8 +3890,8 @@ enum OAuthErrorReason {
   invalid_additional_client_id,
   @JsonValue('invalid_target_entity_scope')
   invalid_target_entity_scope,
-  @JsonValue('invalid_entity_permissions_scope')
-  invalid_entity_permissions_scope,
+  @JsonValue('invalid_entity_permission_scope')
+  invalid_entity_permission_scope,
   @JsonValue('grant_type_disabled')
   grant_type_disabled,
   @JsonValue('missing_client_id')
