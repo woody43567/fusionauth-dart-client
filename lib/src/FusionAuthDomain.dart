@@ -3705,6 +3705,22 @@ class MonthlyActiveUserReportResponse {
 }
 
 @JsonSerializable()
+class MultiFactorAuthenticator extends Enableable {
+  TOTPAlgorithm algorithm;
+  num codeLength;
+  num timeStep;
+
+  MultiFactorAuthenticator({
+      this.algorithm,
+      this.codeLength,
+      this.timeStep
+  });
+
+  factory MultiFactorAuthenticator.fromJson(Map<String, dynamic> json) => _$MultiFactorAuthenticatorFromJson(json);
+  Map<String, dynamic> toJson() => _$MultiFactorAuthenticatorToJson(this);
+}
+
+@JsonSerializable()
 class MultiFactorEmailTemplate {
   String templateId;
 
@@ -3718,9 +3734,11 @@ class MultiFactorEmailTemplate {
 
 @JsonSerializable()
 class MultiFactorEmailTransport extends Enableable {
+  bool sendOnLoginWhenPreferred;
   String templateId;
 
   MultiFactorEmailTransport({
+      this.sendOnLoginWhenPreferred,
       this.templateId
   });
 
@@ -3743,31 +3761,17 @@ class MultiFactorSMSTemplate {
 @JsonSerializable()
 class MultiFactorSMSTransport extends Enableable {
   String messengerId;
+  bool sendOnLoginWhenPreferred;
   String templateId;
 
   MultiFactorSMSTransport({
       this.messengerId,
+      this.sendOnLoginWhenPreferred,
       this.templateId
   });
 
   factory MultiFactorSMSTransport.fromJson(Map<String, dynamic> json) => _$MultiFactorSMSTransportFromJson(json);
   Map<String, dynamic> toJson() => _$MultiFactorSMSTransportToJson(this);
-}
-
-@JsonSerializable()
-class MultiFactorTOTP extends Enableable {
-  TOTPAlgorithm algorithm;
-  num codeLength;
-  num timeStep;
-
-  MultiFactorTOTP({
-      this.algorithm,
-      this.codeLength,
-      this.timeStep
-  });
-
-  factory MultiFactorTOTP.fromJson(Map<String, dynamic> json) => _$MultiFactorTOTPFromJson(json);
-  Map<String, dynamic> toJson() => _$MultiFactorTOTPToJson(this);
 }
 
 /// Helper methods for normalizing values.
@@ -4822,12 +4826,6 @@ class SecureIdentity {
   bool passwordChangeRequired;
   num passwordLastUpdateInstant;
   String salt;
-  TwoFactorDelivery twoFactorDelivery;
-  bool twoFactorEnabled;
-  List<String> twoFactorMethods;
-  String twoFactorPreferredMethod;
-  List<String> twoFactorRecoveryCodes;
-  String twoFactorSecret;
   String username;
   ContentStatus usernameStatus;
   bool verified;
@@ -4845,12 +4843,6 @@ class SecureIdentity {
       this.passwordChangeRequired,
       this.passwordLastUpdateInstant,
       this.salt,
-      this.twoFactorDelivery,
-      this.twoFactorEnabled,
-      this.twoFactorMethods,
-      this.twoFactorPreferredMethod,
-      this.twoFactorRecoveryCodes,
-      this.twoFactorSecret,
       this.username,
       this.usernameStatus,
       this.verified
@@ -5041,6 +5033,8 @@ class Templates {
   String helpers;
   String index;
   String multiFactorConfiguration;
+  String multiFactorConfirm;
+  String multiFactorSend;
   String oauth2Authorize;
   String oauth2ChildRegistrationNotAllowed;
   String oauth2ChildRegistrationNotAllowedComplete;
@@ -5071,6 +5065,8 @@ class Templates {
       this.helpers,
       this.index,
       this.multiFactorConfiguration,
+      this.multiFactorConfirm,
+      this.multiFactorSend,
       this.oauth2Authorize,
       this.oauth2ChildRegistrationNotAllowed,
       this.oauth2ChildRegistrationNotAllowedComplete,
@@ -5184,14 +5180,14 @@ class TenantFormConfiguration {
 /// @author Mikey Sleevi
 @JsonSerializable()
 class TenantMultiFactorConfiguration {
+  MultiFactorAuthenticator authenticator;
   MultiFactorEmailTransport email;
   MultiFactorSMSTransport sms;
-  MultiFactorTOTP totp;
 
   TenantMultiFactorConfiguration({
+      this.authenticator,
       this.email,
-      this.sms,
-      this.totp
+      this.sms
   });
 
   factory TenantMultiFactorConfiguration.fromJson(Map<String, dynamic> json) => _$TenantMultiFactorConfigurationFromJson(json);
@@ -5508,13 +5504,13 @@ class TwoFactorMethod {
 @JsonSerializable()
 class TwoFactorRequest {
   String code;
-  TwoFactorDelivery delivery;
+  String method;
   String secret;
   String secretBase32Encoded;
 
   TwoFactorRequest({
       this.code,
-      this.delivery,
+      this.method,
       this.secret,
       this.secretBase32Encoded
   });
@@ -5527,16 +5523,16 @@ class TwoFactorRequest {
 @JsonSerializable()
 class TwoFactorSendRequest {
   String code;
+  String method;
   String mobilePhone;
   String secret;
-  String transport;
   String userId;
 
   TwoFactorSendRequest({
       this.code,
+      this.method,
       this.mobilePhone,
       this.secret,
-      this.transport,
       this.userId
   });
 
@@ -5620,6 +5616,10 @@ class User extends SecureIdentity {
   List<UserRegistration> registrations;
   String tenantId;
   String timezone;
+  List<String> twoFactorMethods;
+  String twoFactorPreferredMethod;
+  List<String> twoFactorRecoveryCodes;
+  String twoFactorSecret;
 
   User({
       this.active,
@@ -5641,7 +5641,11 @@ class User extends SecureIdentity {
       this.preferredLanguages,
       this.registrations,
       this.tenantId,
-      this.timezone
+      this.timezone,
+      this.twoFactorMethods,
+      this.twoFactorPreferredMethod,
+      this.twoFactorRecoveryCodes,
+      this.twoFactorSecret
   });
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
