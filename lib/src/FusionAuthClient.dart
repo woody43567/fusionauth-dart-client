@@ -870,13 +870,13 @@ class FusionAuthClient {
   /// Disable Two Factor authentication for a user.
   ///
   /// @param {String} userId The Id of the User for which you're disabling Two Factor authentication.
-  /// @param {String} code The Two Factor code used verify the the caller knows the Two Factor secret.
+  /// @param {TwoFactorRequest} request The two factor enable request information.
   /// @returns {Promise<ClientResponse<void>>}
-  Future<ClientResponse<void, Errors>> disableTwoFactor(String userId, String code) {
+  Future<ClientResponse<void, Errors>> disableTwoFactor(String userId, TwoFactorRequest request) {
     return _start<void, Errors>()
         .withUri('/api/user/two-factor')
         .withParameter('userId', userId)
-        .withParameter('code', code)
+        .withJSONBody(request)
         .withMethod('DELETE')
         .go();
   }
