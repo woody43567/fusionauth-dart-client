@@ -7874,7 +7874,6 @@ TwoFactorSendRequest _$TwoFactorSendRequestFromJson(Map<String, dynamic> json) {
     code: json['code'] as String,
     method: json['method'] as String,
     mobilePhone: json['mobilePhone'] as String,
-    secret: json['secret'] as String,
     userId: json['userId'] as String,
   );
 }
@@ -7892,7 +7891,6 @@ Map<String, dynamic> _$TwoFactorSendRequestToJson(
   writeNotNull('code', instance.code);
   writeNotNull('method', instance.method);
   writeNotNull('mobilePhone', instance.mobilePhone);
-  writeNotNull('secret', instance.secret);
   writeNotNull('userId', instance.userId);
   return val;
 }

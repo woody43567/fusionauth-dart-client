@@ -5525,14 +5525,12 @@ class TwoFactorSendRequest {
   String code;
   String method;
   String mobilePhone;
-  String secret;
   String userId;
 
   TwoFactorSendRequest({
       this.code,
       this.method,
       this.mobilePhone,
-      this.secret,
       this.userId
   });
 
