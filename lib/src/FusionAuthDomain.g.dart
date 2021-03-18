@@ -7155,14 +7155,15 @@ Templates _$TemplatesFromJson(Map<String, dynamic> json) {
   return Templates(
     accountEdit: json['accountEdit'] as String,
     accountIndex: json['accountIndex'] as String,
+    accountTwoFactorDisable: json['accountTwoFactorDisable'] as String,
+    accountTwoFactorEnable: json['accountTwoFactorEnable'] as String,
+    accountTwoFactorIndex: json['accountTwoFactorIndex'] as String,
+    accountTwoFactorSend: json['accountTwoFactorSend'] as String,
     emailComplete: json['emailComplete'] as String,
     emailSend: json['emailSend'] as String,
     emailVerify: json['emailVerify'] as String,
     helpers: json['helpers'] as String,
     index: json['index'] as String,
-    multiFactorConfiguration: json['multiFactorConfiguration'] as String,
-    multiFactorConfirm: json['multiFactorConfirm'] as String,
-    multiFactorSend: json['multiFactorSend'] as String,
     oauth2Authorize: json['oauth2Authorize'] as String,
     oauth2ChildRegistrationNotAllowed:
         json['oauth2ChildRegistrationNotAllowed'] as String,
@@ -7199,14 +7200,15 @@ Map<String, dynamic> _$TemplatesToJson(Templates instance) {
 
   writeNotNull('accountEdit', instance.accountEdit);
   writeNotNull('accountIndex', instance.accountIndex);
+  writeNotNull('accountTwoFactorDisable', instance.accountTwoFactorDisable);
+  writeNotNull('accountTwoFactorEnable', instance.accountTwoFactorEnable);
+  writeNotNull('accountTwoFactorIndex', instance.accountTwoFactorIndex);
+  writeNotNull('accountTwoFactorSend', instance.accountTwoFactorSend);
   writeNotNull('emailComplete', instance.emailComplete);
   writeNotNull('emailSend', instance.emailSend);
   writeNotNull('emailVerify', instance.emailVerify);
   writeNotNull('helpers', instance.helpers);
   writeNotNull('index', instance.index);
-  writeNotNull('multiFactorConfiguration', instance.multiFactorConfiguration);
-  writeNotNull('multiFactorConfirm', instance.multiFactorConfirm);
-  writeNotNull('multiFactorSend', instance.multiFactorSend);
   writeNotNull('oauth2Authorize', instance.oauth2Authorize);
   writeNotNull('oauth2ChildRegistrationNotAllowed',
       instance.oauth2ChildRegistrationNotAllowed);

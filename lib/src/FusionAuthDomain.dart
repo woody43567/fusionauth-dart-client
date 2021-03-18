@@ -5027,14 +5027,15 @@ class SystemLogsExportRequest extends BaseExportRequest {
 class Templates {
   String accountEdit;
   String accountIndex;
+  String accountTwoFactorDisable;
+  String accountTwoFactorEnable;
+  String accountTwoFactorIndex;
+  String accountTwoFactorSend;
   String emailComplete;
   String emailSend;
   String emailVerify;
   String helpers;
   String index;
-  String multiFactorConfiguration;
-  String multiFactorConfirm;
-  String multiFactorSend;
   String oauth2Authorize;
   String oauth2ChildRegistrationNotAllowed;
   String oauth2ChildRegistrationNotAllowedComplete;
@@ -5059,14 +5060,15 @@ class Templates {
   Templates({
       this.accountEdit,
       this.accountIndex,
+      this.accountTwoFactorDisable,
+      this.accountTwoFactorEnable,
+      this.accountTwoFactorIndex,
+      this.accountTwoFactorSend,
       this.emailComplete,
       this.emailSend,
       this.emailVerify,
       this.helpers,
       this.index,
-      this.multiFactorConfiguration,
-      this.multiFactorConfirm,
-      this.multiFactorSend,
       this.oauth2Authorize,
       this.oauth2ChildRegistrationNotAllowed,
       this.oauth2ChildRegistrationNotAllowedComplete,
