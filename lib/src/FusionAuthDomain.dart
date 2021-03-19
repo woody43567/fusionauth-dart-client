@@ -1517,9 +1517,11 @@ class EntityTypePermission {
 @JsonSerializable()
 class EntityTypeRequest {
   EntityType entityType;
+  EntityTypePermission permission;
 
   EntityTypeRequest({
-      this.entityType
+      this.entityType,
+      this.permission
   });
 
   factory EntityTypeRequest.fromJson(Map<String, dynamic> json) => _$EntityTypeRequestFromJson(json);
@@ -1541,6 +1543,53 @@ class EntityTypeResponse {
 
   factory EntityTypeResponse.fromJson(Map<String, dynamic> json) => _$EntityTypeResponseFromJson(json);
   Map<String, dynamic> toJson() => _$EntityTypeResponseToJson(this);
+}
+
+/// Search criteria for entity types.
+///
+/// @author Brian Pontarelli
+@JsonSerializable()
+class EntityTypeSearchCriteria extends BaseSearchCriteria {
+  String name;
+
+  EntityTypeSearchCriteria({
+      this.name
+  });
+
+  factory EntityTypeSearchCriteria.fromJson(Map<String, dynamic> json) => _$EntityTypeSearchCriteriaFromJson(json);
+  Map<String, dynamic> toJson() => _$EntityTypeSearchCriteriaToJson(this);
+}
+
+/// Search request for entity types.
+///
+/// @author Brian Pontarelli
+@JsonSerializable()
+class EntityTypeSearchRequest {
+  EntityTypeSearchCriteria search;
+
+  EntityTypeSearchRequest({
+      this.search
+  });
+
+  factory EntityTypeSearchRequest.fromJson(Map<String, dynamic> json) => _$EntityTypeSearchRequestFromJson(json);
+  Map<String, dynamic> toJson() => _$EntityTypeSearchRequestToJson(this);
+}
+
+/// Search request for entity types.
+///
+/// @author Brian Pontarelli
+@JsonSerializable()
+class EntityTypeSearchResponse {
+  List<EntityType> entityTypes;
+  num total;
+
+  EntityTypeSearchResponse({
+      this.entityTypes,
+      this.total
+  });
+
+  factory EntityTypeSearchResponse.fromJson(Map<String, dynamic> json) => _$EntityTypeSearchResponseFromJson(json);
+  Map<String, dynamic> toJson() => _$EntityTypeSearchResponseToJson(this);
 }
 
 /// Defines an error.

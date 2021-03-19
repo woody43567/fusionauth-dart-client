@@ -2060,6 +2060,10 @@ EntityTypeRequest _$EntityTypeRequestFromJson(Map<String, dynamic> json) {
     entityType: json['entityType'] == null
         ? null
         : EntityType.fromJson(json['entityType'] as Map<String, dynamic>),
+    permission: json['permission'] == null
+        ? null
+        : EntityTypePermission.fromJson(
+            json['permission'] as Map<String, dynamic>),
   );
 }
 
@@ -2073,6 +2077,7 @@ Map<String, dynamic> _$EntityTypeRequestToJson(EntityTypeRequest instance) {
   }
 
   writeNotNull('entityType', instance.entityType);
+  writeNotNull('permission', instance.permission);
   return val;
 }
 
@@ -2099,6 +2104,83 @@ Map<String, dynamic> _$EntityTypeResponseToJson(EntityTypeResponse instance) {
 
   writeNotNull('entityType', instance.entityType);
   writeNotNull('entityTypes', instance.entityTypes);
+  return val;
+}
+
+EntityTypeSearchCriteria _$EntityTypeSearchCriteriaFromJson(
+    Map<String, dynamic> json) {
+  return EntityTypeSearchCriteria(
+    name: json['name'] as String,
+  )
+    ..numberOfResults = json['numberOfResults'] as num
+    ..orderBy = json['orderBy'] as String
+    ..startRow = json['startRow'] as num;
+}
+
+Map<String, dynamic> _$EntityTypeSearchCriteriaToJson(
+    EntityTypeSearchCriteria instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('numberOfResults', instance.numberOfResults);
+  writeNotNull('orderBy', instance.orderBy);
+  writeNotNull('startRow', instance.startRow);
+  writeNotNull('name', instance.name);
+  return val;
+}
+
+EntityTypeSearchRequest _$EntityTypeSearchRequestFromJson(
+    Map<String, dynamic> json) {
+  return EntityTypeSearchRequest(
+    search: json['search'] == null
+        ? null
+        : EntityTypeSearchCriteria.fromJson(
+            json['search'] as Map<String, dynamic>),
+  );
+}
+
+Map<String, dynamic> _$EntityTypeSearchRequestToJson(
+    EntityTypeSearchRequest instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('search', instance.search);
+  return val;
+}
+
+EntityTypeSearchResponse _$EntityTypeSearchResponseFromJson(
+    Map<String, dynamic> json) {
+  return EntityTypeSearchResponse(
+    entityTypes: (json['entityTypes'] as List)
+        ?.map((e) =>
+            e == null ? null : EntityType.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
+    total: json['total'] as num,
+  );
+}
+
+Map<String, dynamic> _$EntityTypeSearchResponseToJson(
+    EntityTypeSearchResponse instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('entityTypes', instance.entityTypes);
+  writeNotNull('total', instance.total);
   return val;
 }
 
@@ -5448,8 +5530,8 @@ const _$OAuthErrorReasonEnumMap = {
   OAuthErrorReason.invalid_user_code: 'invalid_user_code',
   OAuthErrorReason.invalid_additional_client_id: 'invalid_additional_client_id',
   OAuthErrorReason.invalid_target_entity_scope: 'invalid_target_entity_scope',
-  OAuthErrorReason.invalid_entity_permissions_scope:
-      'invalid_entity_permissions_scope',
+  OAuthErrorReason.invalid_entity_permission_scope:
+      'invalid_entity_permission_scope',
   OAuthErrorReason.grant_type_disabled: 'grant_type_disabled',
   OAuthErrorReason.missing_client_id: 'missing_client_id',
   OAuthErrorReason.missing_client_secret: 'missing_client_secret',
