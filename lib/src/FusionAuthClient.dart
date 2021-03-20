@@ -2854,6 +2854,19 @@ class FusionAuthClient {
         .go();
   }
 
+  /// Searches the entity types with the specified criteria and pagination.
+  ///
+  /// @param {EntityTypeSearchRequest} request The search criteria and pagination information.
+  /// @returns {Promise<ClientResponse<EntityTypeSearchResponse>>}
+  Future<ClientResponse<EntityTypeSearchResponse, void>> searchEntityTypes(EntityTypeSearchRequest request) {
+    return _start<EntityTypeSearchResponse, void>()
+        .withUri('/api/entity/type/search')
+        .withJSONBody(request)
+        .withMethod('POST')
+        .withResponseHandler(defaultResponseHandlerBuilder((d) => EntityTypeSearchResponse.fromJson(d)))
+        .go();
+  }
+
   /// Searches the event logs with the specified criteria and pagination.
   ///
   /// @param {EventLogSearchRequest} request The search criteria and pagination information.
