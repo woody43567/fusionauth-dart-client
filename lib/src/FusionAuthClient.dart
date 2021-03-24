@@ -257,6 +257,25 @@ class FusionAuthClient {
         .go();
   }
 
+  /// Creates a new permission for an entity type. You must specify the id of the entity type you are creating the permission for.
+  /// You can optionally specify an Id for the permission inside the EntityTypePermission object itself, if not provided one will be generated.
+  ///
+  /// @param {String} entityTypeId The Id of the entity type to create the permission on.
+  /// @param {String} permissionId (Optional) The Id of the permission. If not provided a secure random UUID will be generated.
+  /// @param {EntityTypeRequest} request The request object that contains all of the information used to create the permission.
+  /// @returns {Promise<ClientResponse<EntityTypeResponse>>}
+  Future<ClientResponse<EntityTypeResponse, Errors>> createEntityTypePermission(String entityTypeId, String permissionId, EntityTypeRequest request) {
+    return _start<EntityTypeResponse, Errors>()
+        .withUri('/api/entity/type')
+        .withUriSegment(entityTypeId)
+        .withUriSegment("permission")
+        .withUriSegment(permissionId)
+        .withJSONBody(request)
+        .withMethod('POST')
+        .withResponseHandler(defaultResponseHandlerBuilder((d) => EntityTypeResponse.fromJson(d)))
+        .go();
+  }
+
   /// Creates a family with the user id in the request as the owner and sole member of the family. You can optionally specify an id for the
   /// family, if not provided one will be generated.
   ///
@@ -612,6 +631,22 @@ class FusionAuthClient {
     return _start<void, Errors>()
         .withUri('/api/entity/type')
         .withUriSegment(entityTypeId)
+        .withMethod('DELETE')
+        .go();
+  }
+
+  /// Hard deletes a permission. This is a dangerous operation and should not be used in most circumstances. This
+  /// permanently removes the given permission from all grants that had it.
+  ///
+  /// @param {String} entityTypeId The Id of the entityType the the permission belongs to.
+  /// @param {String} permissionId The Id of the permission to delete.
+  /// @returns {Promise<ClientResponse<void>>}
+  Future<ClientResponse<void, Errors>> deleteEntityTypePermission(String entityTypeId, String permissionId) {
+    return _start<void, Errors>()
+        .withUri('/api/entity/type')
+        .withUriSegment(entityTypeId)
+        .withUriSegment("permission")
+        .withUriSegment(permissionId)
         .withMethod('DELETE')
         .go();
   }
@@ -3144,6 +3179,24 @@ class FusionAuthClient {
     return _start<EntityTypeResponse, Errors>()
         .withUri('/api/entity/type')
         .withUriSegment(entityTypeId)
+        .withJSONBody(request)
+        .withMethod('PUT')
+        .withResponseHandler(defaultResponseHandlerBuilder((d) => EntityTypeResponse.fromJson(d)))
+        .go();
+  }
+
+  /// Updates the permission with the given id for the entity type.
+  ///
+  /// @param {String} entityTypeId The Id of the entityType that the permission belongs to.
+  /// @param {String} permissionId The Id of the permission to update.
+  /// @param {EntityTypeRequest} request The request that contains all of the new permission information.
+  /// @returns {Promise<ClientResponse<EntityTypeResponse>>}
+  Future<ClientResponse<EntityTypeResponse, Errors>> updateEntityTypePermission(String entityTypeId, String permissionId, EntityTypeRequest request) {
+    return _start<EntityTypeResponse, Errors>()
+        .withUri('/api/entity/type')
+        .withUriSegment(entityTypeId)
+        .withUriSegment("permission")
+        .withUriSegment(permissionId)
         .withJSONBody(request)
         .withMethod('PUT')
         .withResponseHandler(defaultResponseHandlerBuilder((d) => EntityTypeResponse.fromJson(d)))

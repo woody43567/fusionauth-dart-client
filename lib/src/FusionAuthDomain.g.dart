@@ -2090,6 +2090,10 @@ EntityTypeResponse _$EntityTypeResponseFromJson(Map<String, dynamic> json) {
         ?.map((e) =>
             e == null ? null : EntityType.fromJson(e as Map<String, dynamic>))
         ?.toList(),
+    permission: json['permission'] == null
+        ? null
+        : EntityTypePermission.fromJson(
+            json['permission'] as Map<String, dynamic>),
   );
 }
 
@@ -2104,6 +2108,7 @@ Map<String, dynamic> _$EntityTypeResponseToJson(EntityTypeResponse instance) {
 
   writeNotNull('entityType', instance.entityType);
   writeNotNull('entityTypes', instance.entityTypes);
+  writeNotNull('permission', instance.permission);
   return val;
 }
 
@@ -4259,6 +4264,28 @@ Map<String, dynamic> _$JWTToJson(JWT instance) {
 JWTConfiguration _$JWTConfigurationFromJson(Map<String, dynamic> json) {
   return JWTConfiguration(
     accessTokenKeyId: json['accessTokenKeyId'] as String,
+    timeToLiveInSeconds: json['timeToLiveInSeconds'] as num,
+  )..enabled = json['enabled'] as bool;
+}
+
+Map<String, dynamic> _$JWTConfigurationToJson(JWTConfiguration instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('enabled', instance.enabled);
+  writeNotNull('accessTokenKeyId', instance.accessTokenKeyId);
+  writeNotNull('timeToLiveInSeconds', instance.timeToLiveInSeconds);
+  return val;
+}
+
+JWTConfiguration _$JWTConfigurationFromJson(Map<String, dynamic> json) {
+  return JWTConfiguration(
+    accessTokenKeyId: json['accessTokenKeyId'] as String,
     idTokenKeyId: json['idTokenKeyId'] as String,
     refreshTokenExpirationPolicy: _$enumDecodeNullable(
         _$RefreshTokenExpirationPolicyEnumMap,
@@ -4310,28 +4337,6 @@ const _$RefreshTokenUsagePolicyEnumMap = {
   RefreshTokenUsagePolicy.Reusable: 'Reusable',
   RefreshTokenUsagePolicy.OneTimeUse: 'OneTimeUse',
 };
-
-JWTConfiguration _$JWTConfigurationFromJson(Map<String, dynamic> json) {
-  return JWTConfiguration(
-    accessTokenKeyId: json['accessTokenKeyId'] as String,
-    timeToLiveInSeconds: json['timeToLiveInSeconds'] as num,
-  )..enabled = json['enabled'] as bool;
-}
-
-Map<String, dynamic> _$JWTConfigurationToJson(JWTConfiguration instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('enabled', instance.enabled);
-  writeNotNull('accessTokenKeyId', instance.accessTokenKeyId);
-  writeNotNull('timeToLiveInSeconds', instance.timeToLiveInSeconds);
-  return val;
-}
 
 JWTPublicKeyUpdateEvent _$JWTPublicKeyUpdateEventFromJson(
     Map<String, dynamic> json) {
