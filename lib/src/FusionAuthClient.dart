@@ -1070,6 +1070,20 @@ class FusionAuthClient {
         .go();
   }
 
+  /// Generate two-factor recovery codes for a user. Generating two-factor recovery codes will invalidate any existing recovery codes. 
+  ///
+  /// @param {String} userId The Id of the user to generate new Two Factor recovery codes.
+  /// @returns {Promise<ClientResponse<RecoveryCodeResponse>>}
+  Future<ClientResponse<RecoveryCodeResponse, Errors>> generateTwoFactorRecoveryCodes(String userId) {
+    return _start<RecoveryCodeResponse, Errors>()
+        .withHeader('Content-Type', 'text/plain')
+        .withUri('/api/user/two-factor/recovery-code')
+        .withUriSegment(userId)
+        .withMethod('POST')
+        .withResponseHandler(defaultResponseHandlerBuilder((d) => RecoveryCodeResponse.fromJson(d)))
+        .go();
+  }
+
   /// Generate a Two Factor secret that can be used to enable Two Factor authentication for a User. The response will contain
   /// both the secret and a Base32 encoded form of the secret which can be shown to a User when using a 2 Step Authentication
   /// application such as Google Authenticator.
@@ -2530,6 +2544,19 @@ class FusionAuthClient {
         .withUri('/api/report/totals')
         .withMethod('GET')
         .withResponseHandler(defaultResponseHandlerBuilder((d) => TotalsReportResponse.fromJson(d)))
+        .go();
+  }
+
+  /// Retrieve two-factor recovery codes for a user.
+  ///
+  /// @param {String} userId The Id of the user to retrieve Two Factor recovery codes.
+  /// @returns {Promise<ClientResponse<RecoveryCodeResponse>>}
+  Future<ClientResponse<RecoveryCodeResponse, Errors>> retrieveTwoFactorRecoveryCodes(String userId) {
+    return _start<RecoveryCodeResponse, Errors>()
+        .withUri('/api/user/two-factor/recovery-code')
+        .withUriSegment(userId)
+        .withMethod('GET')
+        .withResponseHandler(defaultResponseHandlerBuilder((d) => RecoveryCodeResponse.fromJson(d)))
         .go();
   }
 

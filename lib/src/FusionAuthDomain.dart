@@ -3705,19 +3705,33 @@ class MonthlyActiveUserReportResponse {
 }
 
 @JsonSerializable()
-class MultiFactorAuthenticator extends Enableable {
+class MultiFactorAuthenticatorMethod extends Enableable {
   TOTPAlgorithm algorithm;
   num codeLength;
   num timeStep;
 
-  MultiFactorAuthenticator({
+  MultiFactorAuthenticatorMethod({
       this.algorithm,
       this.codeLength,
       this.timeStep
   });
 
-  factory MultiFactorAuthenticator.fromJson(Map<String, dynamic> json) => _$MultiFactorAuthenticatorFromJson(json);
-  Map<String, dynamic> toJson() => _$MultiFactorAuthenticatorToJson(this);
+  factory MultiFactorAuthenticatorMethod.fromJson(Map<String, dynamic> json) => _$MultiFactorAuthenticatorMethodFromJson(json);
+  Map<String, dynamic> toJson() => _$MultiFactorAuthenticatorMethodToJson(this);
+}
+
+@JsonSerializable()
+class MultiFactorEmailMethod extends Enableable {
+  bool sendFirstCodeWithoutPrompt;
+  String templateId;
+
+  MultiFactorEmailMethod({
+      this.sendFirstCodeWithoutPrompt,
+      this.templateId
+  });
+
+  factory MultiFactorEmailMethod.fromJson(Map<String, dynamic> json) => _$MultiFactorEmailMethodFromJson(json);
+  Map<String, dynamic> toJson() => _$MultiFactorEmailMethodToJson(this);
 }
 
 @JsonSerializable()
@@ -3733,17 +3747,19 @@ class MultiFactorEmailTemplate {
 }
 
 @JsonSerializable()
-class MultiFactorEmailTransport extends Enableable {
-  bool sendOnLoginWhenPreferred;
+class MultiFactorSMSMethod extends Enableable {
+  String messengerId;
+  bool sendFirstCodeWithoutPrompt;
   String templateId;
 
-  MultiFactorEmailTransport({
-      this.sendOnLoginWhenPreferred,
+  MultiFactorSMSMethod({
+      this.messengerId,
+      this.sendFirstCodeWithoutPrompt,
       this.templateId
   });
 
-  factory MultiFactorEmailTransport.fromJson(Map<String, dynamic> json) => _$MultiFactorEmailTransportFromJson(json);
-  Map<String, dynamic> toJson() => _$MultiFactorEmailTransportToJson(this);
+  factory MultiFactorSMSMethod.fromJson(Map<String, dynamic> json) => _$MultiFactorSMSMethodFromJson(json);
+  Map<String, dynamic> toJson() => _$MultiFactorSMSMethodToJson(this);
 }
 
 @JsonSerializable()
@@ -3756,22 +3772,6 @@ class MultiFactorSMSTemplate {
 
   factory MultiFactorSMSTemplate.fromJson(Map<String, dynamic> json) => _$MultiFactorSMSTemplateFromJson(json);
   Map<String, dynamic> toJson() => _$MultiFactorSMSTemplateToJson(this);
-}
-
-@JsonSerializable()
-class MultiFactorSMSTransport extends Enableable {
-  String messengerId;
-  bool sendOnLoginWhenPreferred;
-  String templateId;
-
-  MultiFactorSMSTransport({
-      this.messengerId,
-      this.sendOnLoginWhenPreferred,
-      this.templateId
-  });
-
-  factory MultiFactorSMSTransport.fromJson(Map<String, dynamic> json) => _$MultiFactorSMSTransportFromJson(json);
-  Map<String, dynamic> toJson() => _$MultiFactorSMSTransportToJson(this);
 }
 
 /// Helper methods for normalizing values.
@@ -4378,6 +4378,19 @@ class RecentLoginResponse {
 
   factory RecentLoginResponse.fromJson(Map<String, dynamic> json) => _$RecentLoginResponseFromJson(json);
   Map<String, dynamic> toJson() => _$RecentLoginResponseToJson(this);
+}
+
+/// @author Daniel DeGroff
+@JsonSerializable()
+class RecoveryCodeResponse {
+  List<String> recoveryCodes;
+
+  RecoveryCodeResponse({
+      this.recoveryCodes
+  });
+
+  factory RecoveryCodeResponse.fromJson(Map<String, dynamic> json) => _$RecoveryCodeResponseFromJson(json);
+  Map<String, dynamic> toJson() => _$RecoveryCodeResponseToJson(this);
 }
 
 /// @author Daniel DeGroff
@@ -5182,9 +5195,9 @@ class TenantFormConfiguration {
 /// @author Mikey Sleevi
 @JsonSerializable()
 class TenantMultiFactorConfiguration {
-  MultiFactorAuthenticator authenticator;
-  MultiFactorEmailTransport email;
-  MultiFactorSMSTransport sms;
+  MultiFactorAuthenticatorMethod authenticator;
+  MultiFactorEmailMethod email;
+  MultiFactorSMSMethod sms;
 
   TenantMultiFactorConfiguration({
       this.authenticator,
@@ -5608,6 +5621,7 @@ class User extends SecureIdentity {
   num insertInstant;
   String lastName;
   num lastUpdateInstant;
+  String lastUsedTwoFactorMethod;
   List<GroupMember> memberships;
   String middleName;
   String mobilePhone;
@@ -5617,7 +5631,6 @@ class User extends SecureIdentity {
   String tenantId;
   String timezone;
   List<String> twoFactorMethods;
-  String twoFactorPreferredMethod;
   List<String> twoFactorRecoveryCodes;
   String twoFactorSecret;
 
@@ -5634,6 +5647,7 @@ class User extends SecureIdentity {
       this.insertInstant,
       this.lastName,
       this.lastUpdateInstant,
+      this.lastUsedTwoFactorMethod,
       this.memberships,
       this.middleName,
       this.mobilePhone,
@@ -5643,7 +5657,6 @@ class User extends SecureIdentity {
       this.tenantId,
       this.timezone,
       this.twoFactorMethods,
-      this.twoFactorPreferredMethod,
       this.twoFactorRecoveryCodes,
       this.twoFactorSecret
   });
