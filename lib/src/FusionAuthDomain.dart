@@ -1450,11 +1450,46 @@ class EntityResponse {
 /// @author Brian Pontarelli
 @JsonSerializable()
 class EntitySearchCriteria extends BaseElasticSearchCriteria {
+  String name;
 
-  EntitySearchCriteria();
+  EntitySearchCriteria({
+      this.name
+  });
 
   factory EntitySearchCriteria.fromJson(Map<String, dynamic> json) => _$EntitySearchCriteriaFromJson(json);
   Map<String, dynamic> toJson() => _$EntitySearchCriteriaToJson(this);
+}
+
+/// Search request for entities
+///
+/// @author Brett Guy
+@JsonSerializable()
+class EntitySearchRequest {
+  EntitySearchCriteria search;
+
+  EntitySearchRequest({
+      this.search
+  });
+
+  factory EntitySearchRequest.fromJson(Map<String, dynamic> json) => _$EntitySearchRequestFromJson(json);
+  Map<String, dynamic> toJson() => _$EntitySearchRequestToJson(this);
+}
+
+/// Search request for entities
+///
+/// @author Brett Guy
+@JsonSerializable()
+class EntitySearchResponse {
+  List<Entity> entities;
+  num total;
+
+  EntitySearchResponse({
+      this.entities,
+      this.total
+  });
+
+  factory EntitySearchResponse.fromJson(Map<String, dynamic> json) => _$EntitySearchResponseFromJson(json);
+  Map<String, dynamic> toJson() => _$EntitySearchResponseToJson(this);
 }
 
 /// Models an entity type that has a specific set of permissions. These are global objects and can be used across tenants.

@@ -242,6 +242,21 @@ class FusionAuthClient {
         .go();
   }
 
+  /// Creates an Entity. You can optionally specify an Id for the Entity. If not provided one will be generated.
+  ///
+  /// @param {String} entityId (Optional) The Id for the Entity. If not provided a secure random UUID will be generated.
+  /// @param {EntityRequest} request The request object that contains all of the information used to create the Entity.
+  /// @returns {Promise<ClientResponse<EntityResponse>>}
+  Future<ClientResponse<EntityResponse, Errors>> createEntity(String entityId, EntityRequest request) {
+    return _start<EntityResponse, Errors>()
+        .withUri('/api/entity')
+        .withUriSegment(entityId)
+        .withJSONBody(request)
+        .withMethod('POST')
+        .withResponseHandler(defaultResponseHandlerBuilder((d) => EntityResponse.fromJson(d)))
+        .go();
+  }
+
   /// Creates a Entity Type. You can optionally specify an Id for the Entity Type, if not provided one will be generated.
   ///
   /// @param {String} entityTypeId (Optional) The Id for the Entity Type. If not provided a secure random UUID will be generated.
@@ -619,6 +634,18 @@ class FusionAuthClient {
     return _start<void, Errors>()
         .withUri('/api/email/template')
         .withUriSegment(emailTemplateId)
+        .withMethod('DELETE')
+        .go();
+  }
+
+  /// Deletes the Entity for the given Id.
+  ///
+  /// @param {String} entityId The Id of the Entity to delete.
+  /// @returns {Promise<ClientResponse<void>>}
+  Future<ClientResponse<void, Errors>> deleteEntity(String entityId) {
+    return _start<void, Errors>()
+        .withUri('/api/entity')
+        .withUriSegment(entityId)
         .withMethod('DELETE')
         .go();
   }
@@ -1921,6 +1948,30 @@ class FusionAuthClient {
         .go();
   }
 
+  /// Retrieves all Entities.
+  ///
+  /// @returns {Promise<ClientResponse<EntityResponse>>}
+  Future<ClientResponse<EntityResponse, void>> retrieveEntities() {
+    return _start<EntityResponse, void>()
+        .withUri('/api/entity')
+        .withMethod('GET')
+        .withResponseHandler(defaultResponseHandlerBuilder((d) => EntityResponse.fromJson(d)))
+        .go();
+  }
+
+  /// Retrieves the Entity for the given Id.
+  ///
+  /// @param {String} entityId The Id of the Entity.
+  /// @returns {Promise<ClientResponse<EntityResponse>>}
+  Future<ClientResponse<EntityResponse, void>> retrieveEntity(String entityId) {
+    return _start<EntityResponse, void>()
+        .withUri('/api/entity')
+        .withUriSegment(entityId)
+        .withMethod('GET')
+        .withResponseHandler(defaultResponseHandlerBuilder((d) => EntityResponse.fromJson(d)))
+        .go();
+  }
+
   /// Retrieves the Entity Type for the given Id.
   ///
   /// @param {String} entityTypeId The Id of the Entity Type.
@@ -2889,6 +2940,19 @@ class FusionAuthClient {
         .go();
   }
 
+  /// Searches entities with the specified criteria and pagination.
+  ///
+  /// @param {EntitySearchRequest} request The search criteria and pagination information.
+  /// @returns {Promise<ClientResponse<EntitySearchResponse>>}
+  Future<ClientResponse<EntitySearchResponse, void>> searchEntities(EntitySearchRequest request) {
+    return _start<EntitySearchResponse, void>()
+        .withUri('/api/entity/search')
+        .withJSONBody(request)
+        .withMethod('POST')
+        .withResponseHandler(defaultResponseHandlerBuilder((d) => EntitySearchResponse.fromJson(d)))
+        .go();
+  }
+
   /// Searches the entity types with the specified criteria and pagination.
   ///
   /// @param {EntityTypeSearchRequest} request The search criteria and pagination information.
@@ -3167,6 +3231,21 @@ class FusionAuthClient {
         .withJSONBody(request)
         .withMethod('PUT')
         .withResponseHandler(defaultResponseHandlerBuilder((d) => EmailTemplateResponse.fromJson(d)))
+        .go();
+  }
+
+  /// Updates the Entity with the given Id.
+  ///
+  /// @param {String} entityId The Id of the Entity to update.
+  /// @param {EntityRequest} request The request that contains all of the new Entity information.
+  /// @returns {Promise<ClientResponse<EntityResponse>>}
+  Future<ClientResponse<EntityResponse, Errors>> updateEntity(String entityId, EntityRequest request) {
+    return _start<EntityResponse, Errors>()
+        .withUri('/api/entity')
+        .withUriSegment(entityId)
+        .withJSONBody(request)
+        .withMethod('PUT')
+        .withResponseHandler(defaultResponseHandlerBuilder((d) => EntityResponse.fromJson(d)))
         .go();
   }
 
