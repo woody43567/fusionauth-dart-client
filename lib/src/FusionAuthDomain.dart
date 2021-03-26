@@ -703,6 +703,29 @@ enum BreachedPasswordStatus {
   CommonPassword
 }
 
+/// @author Daniel DeGroff
+@JsonSerializable()
+class BreachedPasswordTenantMetric {
+  num actionRequired;
+  num matchedCommonPasswordCount;
+  num matchedExactCount;
+  num matchedPasswordCount;
+  num matchedSubAddressCount;
+  num passwordsCheckedCount;
+
+  BreachedPasswordTenantMetric({
+      this.actionRequired,
+      this.matchedCommonPasswordCount,
+      this.matchedExactCount,
+      this.matchedPasswordCount,
+      this.matchedSubAddressCount,
+      this.passwordsCheckedCount
+  });
+
+  factory BreachedPasswordTenantMetric.fromJson(Map<String, dynamic> json) => _$BreachedPasswordTenantMetricFromJson(json);
+  Map<String, dynamic> toJson() => _$BreachedPasswordTenantMetricToJson(this);
+}
+
 enum BreachMatchMode {
   @JsonValue('Low')
   Low,
@@ -3077,21 +3100,6 @@ class JWT {
   Map<String, dynamic> toJson() => _$JWTToJson(this);
 }
 
-/// JWT Configuration for entities.
-@JsonSerializable()
-class JWTConfiguration extends Enableable {
-  String accessTokenKeyId;
-  num timeToLiveInSeconds;
-
-  JWTConfiguration({
-      this.accessTokenKeyId,
-      this.timeToLiveInSeconds
-  });
-
-  factory JWTConfiguration.fromJson(Map<String, dynamic> json) => _$JWTConfigurationFromJson(json);
-  Map<String, dynamic> toJson() => _$JWTConfigurationToJson(this);
-}
-
 /// JWT Configuration. A JWT Configuration for an Application may not be active if it is using the global configuration, the configuration
 /// may be <code>enabled = false</code>.
 ///
@@ -3113,6 +3121,21 @@ class JWTConfiguration extends Enableable {
       this.refreshTokenRevocationPolicy,
       this.refreshTokenTimeToLiveInMinutes,
       this.refreshTokenUsagePolicy,
+      this.timeToLiveInSeconds
+  });
+
+  factory JWTConfiguration.fromJson(Map<String, dynamic> json) => _$JWTConfigurationFromJson(json);
+  Map<String, dynamic> toJson() => _$JWTConfigurationToJson(this);
+}
+
+/// JWT Configuration for entities.
+@JsonSerializable()
+class JWTConfiguration extends Enableable {
+  String accessTokenKeyId;
+  num timeToLiveInSeconds;
+
+  JWTConfiguration({
+      this.accessTokenKeyId,
       this.timeToLiveInSeconds
   });
 
@@ -4409,6 +4432,57 @@ class RawLogin {
 
   factory RawLogin.fromJson(Map<String, dynamic> json) => _$RawLoginFromJson(json);
   Map<String, dynamic> toJson() => _$RawLoginToJson(this);
+}
+
+enum ReactorFeatureStatus {
+  @JsonValue('ACTIVE')
+  ACTIVE,
+  @JsonValue('DISCONNECTED')
+  DISCONNECTED,
+  @JsonValue('PENDING')
+  PENDING,
+  @JsonValue('UNKNOWN')
+  UNKNOWN
+}
+
+/// Request for managing FusionAuth Reactor and licenses.
+///
+/// @author Brian Pontarelli
+@JsonSerializable()
+class ReactorRequest {
+  String license;
+
+  ReactorRequest({
+      this.license
+  });
+
+  factory ReactorRequest.fromJson(Map<String, dynamic> json) => _$ReactorRequestFromJson(json);
+  Map<String, dynamic> toJson() => _$ReactorRequestToJson(this);
+}
+
+/// @author Daniel DeGroff
+@JsonSerializable()
+class ReactorStatus {
+  ReactorFeatureStatus advancedRegistrationForms;
+  ReactorFeatureStatus breachedPasswordDetection;
+  Map<String, BreachedPasswordTenantMetric> breachedPasswordMetrics;
+  ReactorFeatureStatus connectors;
+  ReactorFeatureStatus entityManagement;
+  bool licensed;
+  ReactorFeatureStatus multiFactorAuthentication;
+
+  ReactorStatus({
+      this.advancedRegistrationForms,
+      this.breachedPasswordDetection,
+      this.breachedPasswordMetrics,
+      this.connectors,
+      this.entityManagement,
+      this.licensed,
+      this.multiFactorAuthentication
+  });
+
+  factory ReactorStatus.fromJson(Map<String, dynamic> json) => _$ReactorStatusFromJson(json);
+  Map<String, dynamic> toJson() => _$ReactorStatusToJson(this);
 }
 
 /// Response for the user login report.

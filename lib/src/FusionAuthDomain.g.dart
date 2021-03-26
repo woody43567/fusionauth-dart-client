@@ -1023,6 +1023,38 @@ Map<String, dynamic> _$BaseSearchCriteriaToJson(BaseSearchCriteria instance) {
   return val;
 }
 
+BreachedPasswordTenantMetric _$BreachedPasswordTenantMetricFromJson(
+    Map<String, dynamic> json) {
+  return BreachedPasswordTenantMetric(
+    actionRequired: json['actionRequired'] as num,
+    matchedCommonPasswordCount: json['matchedCommonPasswordCount'] as num,
+    matchedExactCount: json['matchedExactCount'] as num,
+    matchedPasswordCount: json['matchedPasswordCount'] as num,
+    matchedSubAddressCount: json['matchedSubAddressCount'] as num,
+    passwordsCheckedCount: json['passwordsCheckedCount'] as num,
+  );
+}
+
+Map<String, dynamic> _$BreachedPasswordTenantMetricToJson(
+    BreachedPasswordTenantMetric instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('actionRequired', instance.actionRequired);
+  writeNotNull(
+      'matchedCommonPasswordCount', instance.matchedCommonPasswordCount);
+  writeNotNull('matchedExactCount', instance.matchedExactCount);
+  writeNotNull('matchedPasswordCount', instance.matchedPasswordCount);
+  writeNotNull('matchedSubAddressCount', instance.matchedSubAddressCount);
+  writeNotNull('passwordsCheckedCount', instance.passwordsCheckedCount);
+  return val;
+}
+
 CertificateInformation _$CertificateInformationFromJson(
     Map<String, dynamic> json) {
   return CertificateInformation(
@@ -1907,6 +1939,53 @@ Map<String, dynamic> _$EntityGrantToJson(EntityGrant instance) {
   return val;
 }
 
+EntityGrantRequest _$EntityGrantRequestFromJson(Map<String, dynamic> json) {
+  return EntityGrantRequest(
+    grant: json['grant'] == null
+        ? null
+        : EntityGrant.fromJson(json['grant'] as Map<String, dynamic>),
+  );
+}
+
+Map<String, dynamic> _$EntityGrantRequestToJson(EntityGrantRequest instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('grant', instance.grant);
+  return val;
+}
+
+EntityGrantResponse _$EntityGrantResponseFromJson(Map<String, dynamic> json) {
+  return EntityGrantResponse(
+    grant: json['grant'] == null
+        ? null
+        : EntityGrant.fromJson(json['grant'] as Map<String, dynamic>),
+    grants: (json['grants'] as List)
+        ?.map((e) =>
+            e == null ? null : EntityGrant.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
+  );
+}
+
+Map<String, dynamic> _$EntityGrantResponseToJson(EntityGrantResponse instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('grant', instance.grant);
+  writeNotNull('grants', instance.grants);
+  return val;
+}
+
 EntityRequest _$EntityRequestFromJson(Map<String, dynamic> json) {
   return EntityRequest(
     entity: json['entity'] == null
@@ -1950,7 +2029,9 @@ Map<String, dynamic> _$EntityResponseToJson(EntityResponse instance) {
 }
 
 EntitySearchCriteria _$EntitySearchCriteriaFromJson(Map<String, dynamic> json) {
-  return EntitySearchCriteria()
+  return EntitySearchCriteria(
+    name: json['name'] as String,
+  )
     ..numberOfResults = json['numberOfResults'] as num
     ..orderBy = json['orderBy'] as String
     ..startRow = json['startRow'] as num
@@ -1982,6 +2063,53 @@ Map<String, dynamic> _$EntitySearchCriteriaToJson(
   writeNotNull('query', instance.query);
   writeNotNull('queryString', instance.queryString);
   writeNotNull('sortFields', instance.sortFields);
+  writeNotNull('name', instance.name);
+  return val;
+}
+
+EntitySearchRequest _$EntitySearchRequestFromJson(Map<String, dynamic> json) {
+  return EntitySearchRequest(
+    search: json['search'] == null
+        ? null
+        : EntitySearchCriteria.fromJson(json['search'] as Map<String, dynamic>),
+  );
+}
+
+Map<String, dynamic> _$EntitySearchRequestToJson(EntitySearchRequest instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('search', instance.search);
+  return val;
+}
+
+EntitySearchResponse _$EntitySearchResponseFromJson(Map<String, dynamic> json) {
+  return EntitySearchResponse(
+    entities: (json['entities'] as List)
+        ?.map((e) =>
+            e == null ? null : Entity.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
+    total: json['total'] as num,
+  );
+}
+
+Map<String, dynamic> _$EntitySearchResponseToJson(
+    EntitySearchResponse instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('entities', instance.entities);
+  writeNotNull('total', instance.total);
   return val;
 }
 
@@ -3460,53 +3588,6 @@ Map<String, dynamic> _$GoogleIdentityProviderToJson(
   return val;
 }
 
-GrantRequest _$GrantRequestFromJson(Map<String, dynamic> json) {
-  return GrantRequest(
-    grant: json['grant'] == null
-        ? null
-        : EntityGrant.fromJson(json['grant'] as Map<String, dynamic>),
-  );
-}
-
-Map<String, dynamic> _$GrantRequestToJson(GrantRequest instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('grant', instance.grant);
-  return val;
-}
-
-GrantResponse _$GrantResponseFromJson(Map<String, dynamic> json) {
-  return GrantResponse(
-    grant: json['grant'] == null
-        ? null
-        : EntityGrant.fromJson(json['grant'] as Map<String, dynamic>),
-    grants: (json['grants'] as List)
-        ?.map((e) =>
-            e == null ? null : EntityGrant.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
-  );
-}
-
-Map<String, dynamic> _$GrantResponseToJson(GrantResponse instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('grant', instance.grant);
-  writeNotNull('grants', instance.grants);
-  return val;
-}
-
 Group _$GroupFromJson(Map<String, dynamic> json) {
   return Group(
     data: json['data'] as Map<String, dynamic>,
@@ -4264,28 +4345,6 @@ Map<String, dynamic> _$JWTToJson(JWT instance) {
 JWTConfiguration _$JWTConfigurationFromJson(Map<String, dynamic> json) {
   return JWTConfiguration(
     accessTokenKeyId: json['accessTokenKeyId'] as String,
-    timeToLiveInSeconds: json['timeToLiveInSeconds'] as num,
-  )..enabled = json['enabled'] as bool;
-}
-
-Map<String, dynamic> _$JWTConfigurationToJson(JWTConfiguration instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('enabled', instance.enabled);
-  writeNotNull('accessTokenKeyId', instance.accessTokenKeyId);
-  writeNotNull('timeToLiveInSeconds', instance.timeToLiveInSeconds);
-  return val;
-}
-
-JWTConfiguration _$JWTConfigurationFromJson(Map<String, dynamic> json) {
-  return JWTConfiguration(
-    accessTokenKeyId: json['accessTokenKeyId'] as String,
     idTokenKeyId: json['idTokenKeyId'] as String,
     refreshTokenExpirationPolicy: _$enumDecodeNullable(
         _$RefreshTokenExpirationPolicyEnumMap,
@@ -4337,6 +4396,28 @@ const _$RefreshTokenUsagePolicyEnumMap = {
   RefreshTokenUsagePolicy.Reusable: 'Reusable',
   RefreshTokenUsagePolicy.OneTimeUse: 'OneTimeUse',
 };
+
+JWTConfiguration _$JWTConfigurationFromJson(Map<String, dynamic> json) {
+  return JWTConfiguration(
+    accessTokenKeyId: json['accessTokenKeyId'] as String,
+    timeToLiveInSeconds: json['timeToLiveInSeconds'] as num,
+  )..enabled = json['enabled'] as bool;
+}
+
+Map<String, dynamic> _$JWTConfigurationToJson(JWTConfiguration instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('enabled', instance.enabled);
+  writeNotNull('accessTokenKeyId', instance.accessTokenKeyId);
+  writeNotNull('timeToLiveInSeconds', instance.timeToLiveInSeconds);
+  return val;
+}
 
 JWTPublicKeyUpdateEvent _$JWTPublicKeyUpdateEventFromJson(
     Map<String, dynamic> json) {
@@ -6134,6 +6215,81 @@ Map<String, dynamic> _$RawLoginToJson(RawLogin instance) {
   return val;
 }
 
+ReactorRequest _$ReactorRequestFromJson(Map<String, dynamic> json) {
+  return ReactorRequest(
+    license: json['license'] as String,
+  );
+}
+
+Map<String, dynamic> _$ReactorRequestToJson(ReactorRequest instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('license', instance.license);
+  return val;
+}
+
+ReactorStatus _$ReactorStatusFromJson(Map<String, dynamic> json) {
+  return ReactorStatus(
+    advancedRegistrationForms: _$enumDecodeNullable(
+        _$ReactorFeatureStatusEnumMap, json['advancedRegistrationForms']),
+    breachedPasswordDetection: _$enumDecodeNullable(
+        _$ReactorFeatureStatusEnumMap, json['breachedPasswordDetection']),
+    breachedPasswordMetrics:
+        (json['breachedPasswordMetrics'] as Map<String, dynamic>)?.map(
+      (k, e) => MapEntry(
+          k,
+          e == null
+              ? null
+              : BreachedPasswordTenantMetric.fromJson(
+                  e as Map<String, dynamic>)),
+    ),
+    connectors:
+        _$enumDecodeNullable(_$ReactorFeatureStatusEnumMap, json['connectors']),
+    entityManagement: _$enumDecodeNullable(
+        _$ReactorFeatureStatusEnumMap, json['entityManagement']),
+    licensed: json['licensed'] as bool,
+    multiFactorAuthentication: _$enumDecodeNullable(
+        _$ReactorFeatureStatusEnumMap, json['multiFactorAuthentication']),
+  );
+}
+
+Map<String, dynamic> _$ReactorStatusToJson(ReactorStatus instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('advancedRegistrationForms',
+      _$ReactorFeatureStatusEnumMap[instance.advancedRegistrationForms]);
+  writeNotNull('breachedPasswordDetection',
+      _$ReactorFeatureStatusEnumMap[instance.breachedPasswordDetection]);
+  writeNotNull('breachedPasswordMetrics', instance.breachedPasswordMetrics);
+  writeNotNull(
+      'connectors', _$ReactorFeatureStatusEnumMap[instance.connectors]);
+  writeNotNull('entityManagement',
+      _$ReactorFeatureStatusEnumMap[instance.entityManagement]);
+  writeNotNull('licensed', instance.licensed);
+  writeNotNull('multiFactorAuthentication',
+      _$ReactorFeatureStatusEnumMap[instance.multiFactorAuthentication]);
+  return val;
+}
+
+const _$ReactorFeatureStatusEnumMap = {
+  ReactorFeatureStatus.ACTIVE: 'ACTIVE',
+  ReactorFeatureStatus.DISCONNECTED: 'DISCONNECTED',
+  ReactorFeatureStatus.PENDING: 'PENDING',
+  ReactorFeatureStatus.UNKNOWN: 'UNKNOWN',
+};
+
 RecentLoginResponse _$RecentLoginResponseFromJson(Map<String, dynamic> json) {
   return RecentLoginResponse(
     logins: (json['logins'] as List)
@@ -6700,38 +6856,6 @@ Map<String, dynamic> _$SearchRequestToJson(SearchRequest instance) {
   }
 
   writeNotNull('search', instance.search);
-  return val;
-}
-
-SearchRequest _$SearchRequestFromJson(Map<String, dynamic> json) {
-  return SearchRequest(
-    search: json['search'] == null
-        ? null
-        : EntitySearchCriteria.fromJson(json['search'] as Map<String, dynamic>),
-  );
-}
-
-SearchResponse _$SearchResponseFromJson(Map<String, dynamic> json) {
-  return SearchResponse(
-    entities: (json['entities'] as List)
-        ?.map((e) =>
-            e == null ? null : Entity.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
-    total: json['total'] as num,
-  );
-}
-
-Map<String, dynamic> _$SearchResponseToJson(SearchResponse instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('entities', instance.entities);
-  writeNotNull('total', instance.total);
   return val;
 }
 

@@ -76,6 +76,20 @@ class FusionAuthClient {
         .go();
   }
 
+  /// Activates the FusionAuth Reactor using a license id and optionally a license text (for air-gapped deployments)
+  ///
+  /// @param {String} licenseId The license id
+  /// @param {ReactorRequest} request An optional request that contains the license text to activate Reactor (useful for air-gap deployments of FusionAuth).
+  /// @returns {Promise<ClientResponse<void>>}
+  Future<ClientResponse<void, Errors>> activateReactor(String licenseId, ReactorRequest request) {
+    return _start<void, Errors>()
+        .withUri('/api/reactor')
+        .withUriSegment(licenseId)
+        .withJSONBody(request)
+        .withMethod('POST')
+        .go();
+  }
+
   /// Adds a user to an existing family. The family id must be specified.
   ///
   /// @param {String} familyId The id of the family.
@@ -510,6 +524,16 @@ class FusionAuthClient {
     return _start<void, Errors>()
         .withUri('/api/application')
         .withUriSegment(applicationId)
+        .withMethod('DELETE')
+        .go();
+  }
+
+  /// Deactivates the FusionAuth Reactor.
+  ///
+  /// @returns {Promise<ClientResponse<void>>}
+  Future<ClientResponse<void, void>> deactivateReactor() {
+    return _start<void, void>()
+        .withUri('/api/reactor')
         .withMethod('DELETE')
         .go();
   }
@@ -1673,6 +1697,16 @@ class FusionAuthClient {
         .go();
   }
 
+  /// Regenerates any keys that are used by the FusionAuth Reactor.
+  ///
+  /// @returns {Promise<ClientResponse<void>>}
+  Future<ClientResponse<void, void>> regenerateReactorKeys() {
+    return _start<void, void>()
+        .withUri('/api/reactor')
+        .withMethod('PUT')
+        .go();
+  }
+
   /// Registers a user for an application. If you provide the User and the UserRegistration object on this request, it
   /// will create the user as well as register them for the application. This is called a Full Registration. However, if
   /// you only provide the UserRegistration object, then the user must already exist and they will be registered for the
@@ -2379,6 +2413,17 @@ class FusionAuthClient {
         .withParameter('parentEmail', parentEmail)
         .withMethod('GET')
         .withResponseHandler(defaultResponseHandlerBuilder((d) => PendingResponse.fromJson(d)))
+        .go();
+  }
+
+  /// Retrieves the FusionAuth Reactor status.
+  ///
+  /// @returns {Promise<ClientResponse<ReactorStatus>>}
+  Future<ClientResponse<ReactorStatus, void>> retrieveReactorStatus() {
+    return _start<ReactorStatus, void>()
+        .withUri('/api/reactor')
+        .withMethod('GET')
+        .withResponseHandler(defaultResponseHandlerBuilder((d) => ReactorStatus.fromJson(d)))
         .go();
   }
 
