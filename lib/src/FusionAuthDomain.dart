@@ -3077,6 +3077,21 @@ class JWT {
   Map<String, dynamic> toJson() => _$JWTToJson(this);
 }
 
+/// JWT Configuration for entities.
+@JsonSerializable()
+class JWTConfiguration extends Enableable {
+  String accessTokenKeyId;
+  num timeToLiveInSeconds;
+
+  JWTConfiguration({
+      this.accessTokenKeyId,
+      this.timeToLiveInSeconds
+  });
+
+  factory JWTConfiguration.fromJson(Map<String, dynamic> json) => _$JWTConfigurationFromJson(json);
+  Map<String, dynamic> toJson() => _$JWTConfigurationToJson(this);
+}
+
 /// JWT Configuration. A JWT Configuration for an Application may not be active if it is using the global configuration, the configuration
 /// may be <code>enabled = false</code>.
 ///
@@ -3098,21 +3113,6 @@ class JWTConfiguration extends Enableable {
       this.refreshTokenRevocationPolicy,
       this.refreshTokenTimeToLiveInMinutes,
       this.refreshTokenUsagePolicy,
-      this.timeToLiveInSeconds
-  });
-
-  factory JWTConfiguration.fromJson(Map<String, dynamic> json) => _$JWTConfigurationFromJson(json);
-  Map<String, dynamic> toJson() => _$JWTConfigurationToJson(this);
-}
-
-/// JWT Configuration for entities.
-@JsonSerializable()
-class JWTConfiguration extends Enableable {
-  String accessTokenKeyId;
-  num timeToLiveInSeconds;
-
-  JWTConfiguration({
-      this.accessTokenKeyId,
       this.timeToLiveInSeconds
   });
 
@@ -4796,38 +4796,6 @@ class SearchRequest {
 
   factory SearchRequest.fromJson(Map<String, dynamic> json) => _$SearchRequestFromJson(json);
   Map<String, dynamic> toJson() => _$SearchRequestToJson(this);
-}
-
-/// Search API request.
-///
-/// @author Brian Pontarelli
-@JsonSerializable()
-class SearchRequest {
-  EntitySearchCriteria search;
-
-  SearchRequest({
-      this.search
-  });
-
-  factory SearchRequest.fromJson(Map<String, dynamic> json) => _$SearchRequestFromJson(json);
-  Map<String, dynamic> toJson() => _$SearchRequestToJson(this);
-}
-
-/// Search API response.
-///
-/// @author Brian Pontarelli
-@JsonSerializable()
-class SearchResponse {
-  List<Entity> entities;
-  num total;
-
-  SearchResponse({
-      this.entities,
-      this.total
-  });
-
-  factory SearchResponse.fromJson(Map<String, dynamic> json) => _$SearchResponseFromJson(json);
-  Map<String, dynamic> toJson() => _$SearchResponseToJson(this);
 }
 
 /// Search API response.

@@ -1948,17 +1948,6 @@ class FusionAuthClient {
         .go();
   }
 
-  /// Retrieves all Entities.
-  ///
-  /// @returns {Promise<ClientResponse<EntityResponse>>}
-  Future<ClientResponse<EntityResponse, void>> retrieveEntities() {
-    return _start<EntityResponse, void>()
-        .withUri('/api/entity')
-        .withMethod('GET')
-        .withResponseHandler(defaultResponseHandlerBuilder((d) => EntityResponse.fromJson(d)))
-        .go();
-  }
-
   /// Retrieves the Entity for the given Id.
   ///
   /// @param {String} entityId The Id of the Entity.
