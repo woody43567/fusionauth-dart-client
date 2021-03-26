@@ -1415,6 +1415,38 @@ class EntityGrant {
   Map<String, dynamic> toJson() => _$EntityGrantToJson(this);
 }
 
+/// Entity grant API request object.
+///
+/// @author Brian Pontarelli
+@JsonSerializable()
+class EntityGrantRequest {
+  EntityGrant grant;
+
+  EntityGrantRequest({
+      this.grant
+  });
+
+  factory EntityGrantRequest.fromJson(Map<String, dynamic> json) => _$EntityGrantRequestFromJson(json);
+  Map<String, dynamic> toJson() => _$EntityGrantRequestToJson(this);
+}
+
+/// Entity grant API response object.
+///
+/// @author Brian Pontarelli
+@JsonSerializable()
+class EntityGrantResponse {
+  EntityGrant grant;
+  List<EntityGrant> grants;
+
+  EntityGrantResponse({
+      this.grant,
+      this.grants
+  });
+
+  factory EntityGrantResponse.fromJson(Map<String, dynamic> json) => _$EntityGrantResponseFromJson(json);
+  Map<String, dynamic> toJson() => _$EntityGrantResponseToJson(this);
+}
+
 /// Entity API request object.
 ///
 /// @author Brian Pontarelli
@@ -2481,38 +2513,6 @@ class GoogleIdentityProvider extends BaseIdentityProvider<GoogleApplicationConfi
 
   factory GoogleIdentityProvider.fromJson(Map<String, dynamic> json) => _$GoogleIdentityProviderFromJson(json);
   Map<String, dynamic> toJson() => _$GoogleIdentityProviderToJson(this);
-}
-
-/// Entity grant API request object.
-///
-/// @author Brian Pontarelli
-@JsonSerializable()
-class GrantRequest {
-  EntityGrant grant;
-
-  GrantRequest({
-      this.grant
-  });
-
-  factory GrantRequest.fromJson(Map<String, dynamic> json) => _$GrantRequestFromJson(json);
-  Map<String, dynamic> toJson() => _$GrantRequestToJson(this);
-}
-
-/// Entity grant API response object.
-///
-/// @author Brian Pontarelli
-@JsonSerializable()
-class GrantResponse {
-  EntityGrant grant;
-  List<EntityGrant> grants;
-
-  GrantResponse({
-      this.grant,
-      this.grants
-  });
-
-  factory GrantResponse.fromJson(Map<String, dynamic> json) => _$GrantResponseFromJson(json);
-  Map<String, dynamic> toJson() => _$GrantResponseToJson(this);
 }
 
 /// Authorization Grant types as defined by the <a href="https://tools.ietf.org/html/rfc6749">The OAuth 2.0 Authorization
