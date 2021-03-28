@@ -3100,6 +3100,21 @@ class JWT {
   Map<String, dynamic> toJson() => _$JWTToJson(this);
 }
 
+/// JWT Configuration for entities.
+@JsonSerializable()
+class JWTConfiguration extends Enableable {
+  String accessTokenKeyId;
+  num timeToLiveInSeconds;
+
+  JWTConfiguration({
+      this.accessTokenKeyId,
+      this.timeToLiveInSeconds
+  });
+
+  factory JWTConfiguration.fromJson(Map<String, dynamic> json) => _$JWTConfigurationFromJson(json);
+  Map<String, dynamic> toJson() => _$JWTConfigurationToJson(this);
+}
+
 /// JWT Configuration. A JWT Configuration for an Application may not be active if it is using the global configuration, the configuration
 /// may be <code>enabled = false</code>.
 ///
@@ -3121,21 +3136,6 @@ class JWTConfiguration extends Enableable {
       this.refreshTokenRevocationPolicy,
       this.refreshTokenTimeToLiveInMinutes,
       this.refreshTokenUsagePolicy,
-      this.timeToLiveInSeconds
-  });
-
-  factory JWTConfiguration.fromJson(Map<String, dynamic> json) => _$JWTConfigurationFromJson(json);
-  Map<String, dynamic> toJson() => _$JWTConfigurationToJson(this);
-}
-
-/// JWT Configuration for entities.
-@JsonSerializable()
-class JWTConfiguration extends Enableable {
-  String accessTokenKeyId;
-  num timeToLiveInSeconds;
-
-  JWTConfiguration({
-      this.accessTokenKeyId,
       this.timeToLiveInSeconds
   });
 

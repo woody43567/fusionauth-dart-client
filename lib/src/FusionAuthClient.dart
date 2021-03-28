@@ -2987,6 +2987,19 @@ class FusionAuthClient {
         .go();
   }
 
+  /// Retrieves the entities for the given ids. If any id is invalid, it is ignored.
+  ///
+  /// @param {List<String>} ids The entity ids to search for.
+  /// @returns {Promise<ClientResponse<EntitySearchResponse>>}
+  Future<ClientResponse<EntitySearchResponse, Errors>> searchEntitiesByIds(List<String> ids) {
+    return _start<EntitySearchResponse, Errors>()
+        .withUri('/api/entity/search')
+        .withParameter('ids', ids)
+        .withMethod('GET')
+        .withResponseHandler(defaultResponseHandlerBuilder((d) => EntitySearchResponse.fromJson(d)))
+        .go();
+  }
+
   /// Searches the entity types with the specified criteria and pagination.
   ///
   /// @param {EntityTypeSearchRequest} request The search criteria and pagination information.
