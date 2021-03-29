@@ -1986,8 +1986,8 @@ class FusionAuthClient {
   ///
   /// @param {String} entityId The Id of the Entity.
   /// @returns {Promise<ClientResponse<EntityResponse>>}
-  Future<ClientResponse<EntityResponse, void>> retrieveEntity(String entityId) {
-    return _start<EntityResponse, void>()
+  Future<ClientResponse<EntityResponse, Errors>> retrieveEntity(String entityId) {
+    return _start<EntityResponse, Errors>()
         .withUri('/api/entity')
         .withUriSegment(entityId)
         .withMethod('GET')
@@ -1999,8 +1999,8 @@ class FusionAuthClient {
   ///
   /// @param {String} entityTypeId The Id of the Entity Type.
   /// @returns {Promise<ClientResponse<EntityTypeResponse>>}
-  Future<ClientResponse<EntityTypeResponse, void>> retrieveEntityType(String entityTypeId) {
-    return _start<EntityTypeResponse, void>()
+  Future<ClientResponse<EntityTypeResponse, Errors>> retrieveEntityType(String entityTypeId) {
+    return _start<EntityTypeResponse, Errors>()
         .withUri('/api/entity/type')
         .withUriSegment(entityTypeId)
         .withMethod('GET')
@@ -2011,8 +2011,8 @@ class FusionAuthClient {
   /// Retrieves all of the Entity Types.
   ///
   /// @returns {Promise<ClientResponse<EntityTypeResponse>>}
-  Future<ClientResponse<EntityTypeResponse, void>> retrieveEntityTypes() {
-    return _start<EntityTypeResponse, void>()
+  Future<ClientResponse<EntityTypeResponse, Errors>> retrieveEntityTypes() {
+    return _start<EntityTypeResponse, Errors>()
         .withUri('/api/entity/type')
         .withMethod('GET')
         .withResponseHandler(defaultResponseHandlerBuilder((d) => EntityTypeResponse.fromJson(d)))
