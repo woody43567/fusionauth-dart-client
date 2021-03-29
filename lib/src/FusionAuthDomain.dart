@@ -4027,6 +4027,8 @@ enum OAuthErrorReason {
   missing_verification_uri,
   @JsonValue('login_prevented')
   login_prevented,
+  @JsonValue('not_licensed')
+  not_licensed,
   @JsonValue('user_code_expired')
   user_code_expired,
   @JsonValue('user_expired')
@@ -4076,6 +4078,8 @@ enum OAuthErrorType {
   unsupported_response_type,
   @JsonValue('change_password_required')
   change_password_required,
+  @JsonValue('not_licensed')
+  not_licensed,
   @JsonValue('two_factor_required')
   two_factor_required,
   @JsonValue('authorization_pending')
