@@ -264,6 +264,7 @@ const _$IdentityProviderTypeEnumMap = {
   IdentityProviderType.HYPR: 'HYPR',
   IdentityProviderType.Apple: 'Apple',
   IdentityProviderType.LinkedIn: 'LinkedIn',
+  IdentityProviderType.SAMLv2IdPInitiated: 'SAMLv2IdPInitiated',
 };
 
 Application _$ApplicationFromJson(Map<String, dynamic> json) {
@@ -2030,7 +2031,7 @@ Map<String, dynamic> _$EntityResponseToJson(EntityResponse instance) {
 
 EntitySearchCriteria _$EntitySearchCriteriaFromJson(Map<String, dynamic> json) {
   return EntitySearchCriteria(
-    name: json['name'] as String,
+    tenantId: json['tenantId'] as String,
   )
     ..numberOfResults = json['numberOfResults'] as num
     ..orderBy = json['orderBy'] as String
@@ -2063,7 +2064,7 @@ Map<String, dynamic> _$EntitySearchCriteriaToJson(
   writeNotNull('query', instance.query);
   writeNotNull('queryString', instance.queryString);
   writeNotNull('sortFields', instance.sortFields);
-  writeNotNull('name', instance.name);
+  writeNotNull('tenantId', instance.tenantId);
   return val;
 }
 
@@ -6837,6 +6838,88 @@ Map<String, dynamic> _$SAMLv2IdentityProviderToJson(
   writeNotNull('useNameIdForEmail', instance.useNameIdForEmail);
   writeNotNull('xmlSignatureC14nMethod',
       _$CanonicalizationMethodEnumMap[instance.xmlSignatureC14nMethod]);
+  return val;
+}
+
+SAMLv2IdPInitiatedApplicationConfiguration
+    _$SAMLv2IdPInitiatedApplicationConfigurationFromJson(
+        Map<String, dynamic> json) {
+  return SAMLv2IdPInitiatedApplicationConfiguration()
+    ..enabled = json['enabled'] as bool
+    ..createRegistration = json['createRegistration'] as bool
+    ..data = json['data'] as Map<String, dynamic>;
+}
+
+Map<String, dynamic> _$SAMLv2IdPInitiatedApplicationConfigurationToJson(
+    SAMLv2IdPInitiatedApplicationConfiguration instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('enabled', instance.enabled);
+  writeNotNull('createRegistration', instance.createRegistration);
+  writeNotNull('data', instance.data);
+  return val;
+}
+
+SAMLv2IdPInitiatedIdentityProvider _$SAMLv2IdPInitiatedIdentityProviderFromJson(
+    Map<String, dynamic> json) {
+  return SAMLv2IdPInitiatedIdentityProvider(
+    domains: (json['domains'] as List)?.map((e) => e as String)?.toSet(),
+    emailClaim: json['emailClaim'] as String,
+    issuer: json['issuer'] as String,
+    keyId: json['keyId'] as String,
+    useNameIdForEmail: json['useNameIdForEmail'] as bool,
+  )
+    ..enabled = json['enabled'] as bool
+    ..applicationConfiguration =
+        (json['applicationConfiguration'] as Map<String, dynamic>)?.map(
+      (k, e) => MapEntry(
+          k,
+          e == null
+              ? null
+              : SAMLv2IdPInitiatedApplicationConfiguration.fromJson(
+                  e as Map<String, dynamic>)),
+    )
+    ..data = json['data'] as Map<String, dynamic>
+    ..debug = json['debug'] as bool
+    ..id = json['id'] as String
+    ..insertInstant = json['insertInstant'] as num
+    ..lambdaConfiguration = json['lambdaConfiguration']
+    ..lastUpdateInstant = json['lastUpdateInstant'] as num
+    ..name = json['name'] as String
+    ..type = _$enumDecodeNullable(_$IdentityProviderTypeEnumMap, json['type']);
+}
+
+Map<String, dynamic> _$SAMLv2IdPInitiatedIdentityProviderToJson(
+    SAMLv2IdPInitiatedIdentityProvider instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('enabled', instance.enabled);
+  writeNotNull('applicationConfiguration', instance.applicationConfiguration);
+  writeNotNull('data', instance.data);
+  writeNotNull('debug', instance.debug);
+  writeNotNull('id', instance.id);
+  writeNotNull('insertInstant', instance.insertInstant);
+  writeNotNull('lambdaConfiguration', instance.lambdaConfiguration);
+  writeNotNull('lastUpdateInstant', instance.lastUpdateInstant);
+  writeNotNull('name', instance.name);
+  writeNotNull('type', _$IdentityProviderTypeEnumMap[instance.type]);
+  writeNotNull('domains', instance.domains?.toList());
+  writeNotNull('emailClaim', instance.emailClaim);
+  writeNotNull('issuer', instance.issuer);
+  writeNotNull('keyId', instance.keyId);
+  writeNotNull('useNameIdForEmail', instance.useNameIdForEmail);
   return val;
 }
 

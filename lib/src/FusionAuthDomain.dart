@@ -1505,10 +1505,10 @@ class EntityResponse {
 /// @author Brian Pontarelli
 @JsonSerializable()
 class EntitySearchCriteria extends BaseElasticSearchCriteria {
-  String name;
+  String tenantId;
 
   EntitySearchCriteria({
-      this.name
+      this.tenantId
   });
 
   factory EntitySearchCriteria.fromJson(Map<String, dynamic> json) => _$EntitySearchCriteriaFromJson(json);
@@ -2860,7 +2860,9 @@ enum IdentityProviderType {
   @JsonValue('Apple')
   Apple,
   @JsonValue('LinkedIn')
-  LinkedIn
+  LinkedIn,
+  @JsonValue('SAMLv2IdPInitiated')
+  SAMLv2IdPInitiated
 }
 
 /// Import request.
@@ -4859,6 +4861,39 @@ class SAMLv2IdentityProvider extends BaseIdentityProvider<SAMLv2ApplicationConfi
 
   factory SAMLv2IdentityProvider.fromJson(Map<String, dynamic> json) => _$SAMLv2IdentityProviderFromJson(json);
   Map<String, dynamic> toJson() => _$SAMLv2IdentityProviderToJson(this);
+}
+
+/// @author Daniel DeGroff
+@JsonSerializable()
+class SAMLv2IdPInitiatedApplicationConfiguration extends BaseIdentityProviderApplicationConfiguration {
+
+  SAMLv2IdPInitiatedApplicationConfiguration();
+
+  factory SAMLv2IdPInitiatedApplicationConfiguration.fromJson(Map<String, dynamic> json) => _$SAMLv2IdPInitiatedApplicationConfigurationFromJson(json);
+  Map<String, dynamic> toJson() => _$SAMLv2IdPInitiatedApplicationConfigurationToJson(this);
+}
+
+/// SAML v2 IdP Initiated identity provider configuration.
+///
+/// @author Daniel DeGroff
+@JsonSerializable()
+class SAMLv2IdPInitiatedIdentityProvider extends BaseIdentityProvider<SAMLv2IdPInitiatedApplicationConfiguration> {
+  Set<String> domains;
+  String emailClaim;
+  String issuer;
+  String keyId;
+  bool useNameIdForEmail;
+
+  SAMLv2IdPInitiatedIdentityProvider({
+      this.domains,
+      this.emailClaim,
+      this.issuer,
+      this.keyId,
+      this.useNameIdForEmail
+  });
+
+  factory SAMLv2IdPInitiatedIdentityProvider.fromJson(Map<String, dynamic> json) => _$SAMLv2IdPInitiatedIdentityProviderFromJson(json);
+  Map<String, dynamic> toJson() => _$SAMLv2IdPInitiatedIdentityProviderToJson(this);
 }
 
 /// Search API request.
