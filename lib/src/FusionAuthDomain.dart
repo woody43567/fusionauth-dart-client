@@ -4878,14 +4878,12 @@ class SAMLv2IdPInitiatedApplicationConfiguration extends BaseIdentityProviderApp
 /// @author Daniel DeGroff
 @JsonSerializable()
 class SAMLv2IdPInitiatedIdentityProvider extends BaseIdentityProvider<SAMLv2IdPInitiatedApplicationConfiguration> {
-  Set<String> domains;
   String emailClaim;
   String issuer;
   String keyId;
   bool useNameIdForEmail;
 
   SAMLv2IdPInitiatedIdentityProvider({
-      this.domains,
       this.emailClaim,
       this.issuer,
       this.keyId,

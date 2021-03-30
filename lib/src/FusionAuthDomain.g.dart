@@ -6869,7 +6869,6 @@ Map<String, dynamic> _$SAMLv2IdPInitiatedApplicationConfigurationToJson(
 SAMLv2IdPInitiatedIdentityProvider _$SAMLv2IdPInitiatedIdentityProviderFromJson(
     Map<String, dynamic> json) {
   return SAMLv2IdPInitiatedIdentityProvider(
-    domains: (json['domains'] as List)?.map((e) => e as String)?.toSet(),
     emailClaim: json['emailClaim'] as String,
     issuer: json['issuer'] as String,
     keyId: json['keyId'] as String,
@@ -6915,7 +6914,6 @@ Map<String, dynamic> _$SAMLv2IdPInitiatedIdentityProviderToJson(
   writeNotNull('lastUpdateInstant', instance.lastUpdateInstant);
   writeNotNull('name', instance.name);
   writeNotNull('type', _$IdentityProviderTypeEnumMap[instance.type]);
-  writeNotNull('domains', instance.domains?.toList());
   writeNotNull('emailClaim', instance.emailClaim);
   writeNotNull('issuer', instance.issuer);
   writeNotNull('keyId', instance.keyId);
