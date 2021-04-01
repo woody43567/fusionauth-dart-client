@@ -1684,6 +1684,19 @@ class FusionAuthClient {
         .go();
   }
 
+  /// Request a refresh of the Entity search index. This API is not generally necessary and the search index will become consistent in a
+  /// reasonable amount of time. There may be scenarios where you may wish to manually request an index refresh. One example may be 
+  /// if you are using the Search API or Delete Tenant API immediately following a Entity Create etc, you may wish to request a refresh to
+  ///  ensure the index immediately current before making a query request to the search index.
+  ///
+  /// @returns {Promise<ClientResponse<void>>}
+  Future<ClientResponse<void, Errors>> refreshEntitySearchIndex() {
+    return _start<void, Errors>()
+        .withUri('/api/entity/search')
+        .withMethod('PUT')
+        .go();
+  }
+
   /// Request a refresh of the User search index. This API is not generally necessary and the search index will become consistent in a
   /// reasonable amount of time. There may be scenarios where you may wish to manually request an index refresh. One example may be 
   /// if you are using the Search API or Delete Tenant API immediately following a User Create etc, you may wish to request a refresh to
