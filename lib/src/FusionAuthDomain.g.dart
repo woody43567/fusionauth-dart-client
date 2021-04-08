@@ -837,6 +837,37 @@ Map<String, dynamic> _$AuthenticationTokenConfigurationToJson(
   return val;
 }
 
+AuthenticatorConfiguration _$AuthenticatorConfigurationFromJson(
+    Map<String, dynamic> json) {
+  return AuthenticatorConfiguration(
+    algorithm: _$enumDecodeNullable(_$TOTPAlgorithmEnumMap, json['algorithm']),
+    codeLength: json['codeLength'] as num,
+    timeStep: json['timeStep'] as num,
+  );
+}
+
+Map<String, dynamic> _$AuthenticatorConfigurationToJson(
+    AuthenticatorConfiguration instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('algorithm', _$TOTPAlgorithmEnumMap[instance.algorithm]);
+  writeNotNull('codeLength', instance.codeLength);
+  writeNotNull('timeStep', instance.timeStep);
+  return val;
+}
+
+const _$TOTPAlgorithmEnumMap = {
+  TOTPAlgorithm.HmacSHA1: 'HmacSHA1',
+  TOTPAlgorithm.HmacSHA256: 'HmacSHA256',
+  TOTPAlgorithm.HmacSHA512: 'HmacSHA512',
+};
+
 BaseConnectorConfiguration _$BaseConnectorConfigurationFromJson(
     Map<String, dynamic> json) {
   return BaseConnectorConfiguration(
@@ -5221,17 +5252,17 @@ Map<String, dynamic> _$MonthlyActiveUserReportResponseToJson(
   return val;
 }
 
-MultiFactorAuthenticator _$MultiFactorAuthenticatorFromJson(
+MultiFactorAuthenticatorMethod _$MultiFactorAuthenticatorMethodFromJson(
     Map<String, dynamic> json) {
-  return MultiFactorAuthenticator(
+  return MultiFactorAuthenticatorMethod(
     algorithm: _$enumDecodeNullable(_$TOTPAlgorithmEnumMap, json['algorithm']),
     codeLength: json['codeLength'] as num,
     timeStep: json['timeStep'] as num,
   )..enabled = json['enabled'] as bool;
 }
 
-Map<String, dynamic> _$MultiFactorAuthenticatorToJson(
-    MultiFactorAuthenticator instance) {
+Map<String, dynamic> _$MultiFactorAuthenticatorMethodToJson(
+    MultiFactorAuthenticatorMethod instance) {
   final val = <String, dynamic>{};
 
   void writeNotNull(String key, dynamic value) {
@@ -5247,11 +5278,30 @@ Map<String, dynamic> _$MultiFactorAuthenticatorToJson(
   return val;
 }
 
-const _$TOTPAlgorithmEnumMap = {
-  TOTPAlgorithm.HmacSHA1: 'HmacSHA1',
-  TOTPAlgorithm.HmacSHA256: 'HmacSHA256',
-  TOTPAlgorithm.HmacSHA512: 'HmacSHA512',
-};
+MultiFactorEmailMethod _$MultiFactorEmailMethodFromJson(
+    Map<String, dynamic> json) {
+  return MultiFactorEmailMethod(
+    sendFirstCodeWithoutPrompt: json['sendFirstCodeWithoutPrompt'] as bool,
+    templateId: json['templateId'] as String,
+  )..enabled = json['enabled'] as bool;
+}
+
+Map<String, dynamic> _$MultiFactorEmailMethodToJson(
+    MultiFactorEmailMethod instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('enabled', instance.enabled);
+  writeNotNull(
+      'sendFirstCodeWithoutPrompt', instance.sendFirstCodeWithoutPrompt);
+  writeNotNull('templateId', instance.templateId);
+  return val;
+}
 
 MultiFactorEmailTemplate _$MultiFactorEmailTemplateFromJson(
     Map<String, dynamic> json) {
@@ -5274,16 +5324,16 @@ Map<String, dynamic> _$MultiFactorEmailTemplateToJson(
   return val;
 }
 
-MultiFactorEmailTransport _$MultiFactorEmailTransportFromJson(
-    Map<String, dynamic> json) {
-  return MultiFactorEmailTransport(
-    sendOnLoginWhenPreferred: json['sendOnLoginWhenPreferred'] as bool,
+MultiFactorSMSMethod _$MultiFactorSMSMethodFromJson(Map<String, dynamic> json) {
+  return MultiFactorSMSMethod(
+    messengerId: json['messengerId'] as String,
+    sendFirstCodeWithoutPrompt: json['sendFirstCodeWithoutPrompt'] as bool,
     templateId: json['templateId'] as String,
   )..enabled = json['enabled'] as bool;
 }
 
-Map<String, dynamic> _$MultiFactorEmailTransportToJson(
-    MultiFactorEmailTransport instance) {
+Map<String, dynamic> _$MultiFactorSMSMethodToJson(
+    MultiFactorSMSMethod instance) {
   final val = <String, dynamic>{};
 
   void writeNotNull(String key, dynamic value) {
@@ -5293,7 +5343,9 @@ Map<String, dynamic> _$MultiFactorEmailTransportToJson(
   }
 
   writeNotNull('enabled', instance.enabled);
-  writeNotNull('sendOnLoginWhenPreferred', instance.sendOnLoginWhenPreferred);
+  writeNotNull('messengerId', instance.messengerId);
+  writeNotNull(
+      'sendFirstCodeWithoutPrompt', instance.sendFirstCodeWithoutPrompt);
   writeNotNull('templateId', instance.templateId);
   return val;
 }
@@ -5315,32 +5367,6 @@ Map<String, dynamic> _$MultiFactorSMSTemplateToJson(
     }
   }
 
-  writeNotNull('templateId', instance.templateId);
-  return val;
-}
-
-MultiFactorSMSTransport _$MultiFactorSMSTransportFromJson(
-    Map<String, dynamic> json) {
-  return MultiFactorSMSTransport(
-    messengerId: json['messengerId'] as String,
-    sendOnLoginWhenPreferred: json['sendOnLoginWhenPreferred'] as bool,
-    templateId: json['templateId'] as String,
-  )..enabled = json['enabled'] as bool;
-}
-
-Map<String, dynamic> _$MultiFactorSMSTransportToJson(
-    MultiFactorSMSTransport instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('enabled', instance.enabled);
-  writeNotNull('messengerId', instance.messengerId);
-  writeNotNull('sendOnLoginWhenPreferred', instance.sendOnLoginWhenPreferred);
   writeNotNull('templateId', instance.templateId);
   return val;
 }
@@ -6190,6 +6216,27 @@ Map<String, dynamic> _$RecentLoginResponseToJson(RecentLoginResponse instance) {
   }
 
   writeNotNull('logins', instance.logins);
+  return val;
+}
+
+RecoveryCodeResponse _$RecoveryCodeResponseFromJson(Map<String, dynamic> json) {
+  return RecoveryCodeResponse(
+    recoveryCodes:
+        (json['recoveryCodes'] as List)?.map((e) => e as String)?.toList(),
+  );
+}
+
+Map<String, dynamic> _$RecoveryCodeResponseToJson(
+    RecoveryCodeResponse instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('recoveryCodes', instance.recoveryCodes);
   return val;
 }
 
@@ -7158,7 +7205,6 @@ Templates _$TemplatesFromJson(Map<String, dynamic> json) {
     accountTwoFactorDisable: json['accountTwoFactorDisable'] as String,
     accountTwoFactorEnable: json['accountTwoFactorEnable'] as String,
     accountTwoFactorIndex: json['accountTwoFactorIndex'] as String,
-    accountTwoFactorSend: json['accountTwoFactorSend'] as String,
     emailComplete: json['emailComplete'] as String,
     emailSend: json['emailSend'] as String,
     emailVerify: json['emailVerify'] as String,
@@ -7203,7 +7249,6 @@ Map<String, dynamic> _$TemplatesToJson(Templates instance) {
   writeNotNull('accountTwoFactorDisable', instance.accountTwoFactorDisable);
   writeNotNull('accountTwoFactorEnable', instance.accountTwoFactorEnable);
   writeNotNull('accountTwoFactorIndex', instance.accountTwoFactorIndex);
-  writeNotNull('accountTwoFactorSend', instance.accountTwoFactorSend);
   writeNotNull('emailComplete', instance.emailComplete);
   writeNotNull('emailSend', instance.emailSend);
   writeNotNull('emailVerify', instance.emailVerify);
@@ -7387,15 +7432,15 @@ TenantMultiFactorConfiguration _$TenantMultiFactorConfigurationFromJson(
   return TenantMultiFactorConfiguration(
     authenticator: json['authenticator'] == null
         ? null
-        : MultiFactorAuthenticator.fromJson(
+        : MultiFactorAuthenticatorMethod.fromJson(
             json['authenticator'] as Map<String, dynamic>),
     email: json['email'] == null
         ? null
-        : MultiFactorEmailTransport.fromJson(
+        : MultiFactorEmailMethod.fromJson(
             json['email'] as Map<String, dynamic>),
     sms: json['sms'] == null
         ? null
-        : MultiFactorSMSTransport.fromJson(json['sms'] as Map<String, dynamic>),
+        : MultiFactorSMSMethod.fromJson(json['sms'] as Map<String, dynamic>),
   );
 }
 
@@ -7840,16 +7885,40 @@ Map<String, dynamic> _$TwoFactorLoginRequestToJson(
 }
 
 TwoFactorMethod _$TwoFactorMethodFromJson(Map<String, dynamic> json) {
-  return TwoFactorMethod();
+  return TwoFactorMethod(
+    authenticator: json['authenticator'] == null
+        ? null
+        : AuthenticatorConfiguration.fromJson(
+            json['authenticator'] as Map<String, dynamic>),
+    id: json['id'] as String,
+    method: json['method'] as String,
+    secret: json['secret'] as String,
+  );
 }
 
-Map<String, dynamic> _$TwoFactorMethodToJson(TwoFactorMethod instance) =>
-    <String, dynamic>{};
+Map<String, dynamic> _$TwoFactorMethodToJson(TwoFactorMethod instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('authenticator', instance.authenticator);
+  writeNotNull('id', instance.id);
+  writeNotNull('method', instance.method);
+  writeNotNull('secret', instance.secret);
+  return val;
+}
 
 TwoFactorRequest _$TwoFactorRequestFromJson(Map<String, dynamic> json) {
   return TwoFactorRequest(
     code: json['code'] as String,
+    email: json['email'] as String,
     method: json['method'] as String,
+    mobilePhone: json['mobilePhone'] as String,
+    name: json['name'] as String,
     secret: json['secret'] as String,
     secretBase32Encoded: json['secretBase32Encoded'] as String,
   );
@@ -7865,7 +7934,10 @@ Map<String, dynamic> _$TwoFactorRequestToJson(TwoFactorRequest instance) {
   }
 
   writeNotNull('code', instance.code);
+  writeNotNull('email', instance.email);
   writeNotNull('method', instance.method);
+  writeNotNull('mobilePhone', instance.mobilePhone);
+  writeNotNull('name', instance.name);
   writeNotNull('secret', instance.secret);
   writeNotNull('secretBase32Encoded', instance.secretBase32Encoded);
   return val;
@@ -8000,13 +8072,10 @@ User _$UserFromJson(Map<String, dynamic> json) {
         ?.toList(),
     tenantId: json['tenantId'] as String,
     timezone: json['timezone'] as String,
-    twoFactorMethods:
-        (json['twoFactorMethods'] as List)?.map((e) => e as String)?.toList(),
-    twoFactorPreferredMethod: json['twoFactorPreferredMethod'] as String,
-    twoFactorRecoveryCodes: (json['twoFactorRecoveryCodes'] as List)
-        ?.map((e) => e as String)
-        ?.toList(),
-    twoFactorSecret: json['twoFactorSecret'] as String,
+    twoFactor: json['twoFactor'] == null
+        ? null
+        : UserTwoFactorConfiguration.fromJson(
+            json['twoFactor'] as Map<String, dynamic>),
   )
     ..breachedPasswordLastCheckedInstant =
         json['breachedPasswordLastCheckedInstant'] as num
@@ -8077,10 +8146,7 @@ Map<String, dynamic> _$UserToJson(User instance) {
   writeNotNull('registrations', instance.registrations);
   writeNotNull('tenantId', instance.tenantId);
   writeNotNull('timezone', instance.timezone);
-  writeNotNull('twoFactorMethods', instance.twoFactorMethods);
-  writeNotNull('twoFactorPreferredMethod', instance.twoFactorPreferredMethod);
-  writeNotNull('twoFactorRecoveryCodes', instance.twoFactorRecoveryCodes);
-  writeNotNull('twoFactorSecret', instance.twoFactorSecret);
+  writeNotNull('twoFactor', instance.twoFactor);
   return val;
 }
 
@@ -9210,6 +9276,36 @@ Map<String, dynamic> _$UserSearchCriteriaToJson(UserSearchCriteria instance) {
   writeNotNull('query', instance.query);
   writeNotNull('queryString', instance.queryString);
   writeNotNull('sortFields', instance.sortFields);
+  return val;
+}
+
+UserTwoFactorConfiguration _$UserTwoFactorConfigurationFromJson(
+    Map<String, dynamic> json) {
+  return UserTwoFactorConfiguration(
+    lastUsed: json['lastUsed'] as String,
+    methods: (json['methods'] as List)
+        ?.map((e) => e == null
+            ? null
+            : TwoFactorMethod.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
+    recoveryCodes:
+        (json['recoveryCodes'] as List)?.map((e) => e as String)?.toList(),
+  );
+}
+
+Map<String, dynamic> _$UserTwoFactorConfigurationToJson(
+    UserTwoFactorConfiguration instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('lastUsed', instance.lastUsed);
+  writeNotNull('methods', instance.methods);
+  writeNotNull('recoveryCodes', instance.recoveryCodes);
   return val;
 }
 

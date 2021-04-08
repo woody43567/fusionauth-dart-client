@@ -538,6 +538,23 @@ class AuthenticationTokenConfiguration extends Enableable {
   Map<String, dynamic> toJson() => _$AuthenticationTokenConfigurationToJson(this);
 }
 
+/// @author Daniel DeGroff
+@JsonSerializable()
+class AuthenticatorConfiguration {
+  TOTPAlgorithm algorithm;
+  num codeLength;
+  num timeStep;
+
+  AuthenticatorConfiguration({
+      this.algorithm,
+      this.codeLength,
+      this.timeStep
+  });
+
+  factory AuthenticatorConfiguration.fromJson(Map<String, dynamic> json) => _$AuthenticatorConfigurationFromJson(json);
+  Map<String, dynamic> toJson() => _$AuthenticatorConfigurationToJson(this);
+}
+
 // Do not require a setter for 'type', it is defined by the concrete class and is not mutable
 @JsonSerializable()
 class BaseConnectorConfiguration {
@@ -5043,7 +5060,6 @@ class Templates {
   String accountTwoFactorDisable;
   String accountTwoFactorEnable;
   String accountTwoFactorIndex;
-  String accountTwoFactorSend;
   String emailComplete;
   String emailSend;
   String emailVerify;
@@ -5076,7 +5092,6 @@ class Templates {
       this.accountTwoFactorDisable,
       this.accountTwoFactorEnable,
       this.accountTwoFactorIndex,
-      this.accountTwoFactorSend,
       this.emailComplete,
       this.emailSend,
       this.emailVerify,
@@ -5479,6 +5494,7 @@ class TwitterIdentityProvider extends BaseIdentityProvider<TwitterApplicationCon
 }
 
 /// @author Daniel DeGroff
+/// @deprecated Use <code>User.twoFactor.methods</code>
 enum TwoFactorDelivery {
   @JsonValue('None')
   None,
@@ -5508,8 +5524,17 @@ class TwoFactorLoginRequest extends BaseLoginRequest {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class TwoFactorMethod {
+  AuthenticatorConfiguration authenticator;
+  String id;
+  String method;
+  String secret;
 
-  TwoFactorMethod();
+  TwoFactorMethod({
+      this.authenticator,
+      this.id,
+      this.method,
+      this.secret
+  });
 
   factory TwoFactorMethod.fromJson(Map<String, dynamic> json) => _$TwoFactorMethodFromJson(json);
   Map<String, dynamic> toJson() => _$TwoFactorMethodToJson(this);
@@ -5519,13 +5544,19 @@ class TwoFactorMethod {
 @JsonSerializable()
 class TwoFactorRequest {
   String code;
+  String email;
   String method;
+  String mobilePhone;
+  String name;
   String secret;
   String secretBase32Encoded;
 
   TwoFactorRequest({
       this.code,
+      this.email,
       this.method,
+      this.mobilePhone,
+      this.name,
       this.secret,
       this.secretBase32Encoded
   });
@@ -5621,7 +5652,6 @@ class User extends SecureIdentity {
   num insertInstant;
   String lastName;
   num lastUpdateInstant;
-  String lastUsedTwoFactorMethod;
   List<GroupMember> memberships;
   String middleName;
   String mobilePhone;
@@ -5630,9 +5660,7 @@ class User extends SecureIdentity {
   List<UserRegistration> registrations;
   String tenantId;
   String timezone;
-  List<String> twoFactorMethods;
-  List<String> twoFactorRecoveryCodes;
-  String twoFactorSecret;
+  UserTwoFactorConfiguration twoFactor;
 
   User({
       this.active,
@@ -5647,7 +5675,6 @@ class User extends SecureIdentity {
       this.insertInstant,
       this.lastName,
       this.lastUpdateInstant,
-      this.lastUsedTwoFactorMethod,
       this.memberships,
       this.middleName,
       this.mobilePhone,
@@ -5656,9 +5683,7 @@ class User extends SecureIdentity {
       this.registrations,
       this.tenantId,
       this.timezone,
-      this.twoFactorMethods,
-      this.twoFactorRecoveryCodes,
-      this.twoFactorSecret
+      this.twoFactor
   });
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
@@ -6444,6 +6469,23 @@ enum UserState {
   Authenticated,
   @JsonValue('AuthenticatedNotRegistered')
   AuthenticatedNotRegistered
+}
+
+/// @author Daniel DeGroff
+@JsonSerializable()
+class UserTwoFactorConfiguration {
+  String lastUsed;
+  List<TwoFactorMethod> methods;
+  List<String> recoveryCodes;
+
+  UserTwoFactorConfiguration({
+      this.lastUsed,
+      this.methods,
+      this.recoveryCodes
+  });
+
+  factory UserTwoFactorConfiguration.fromJson(Map<String, dynamic> json) => _$UserTwoFactorConfigurationFromJson(json);
+  Map<String, dynamic> toJson() => _$UserTwoFactorConfigurationToJson(this);
 }
 
 /// Models the User Update Event (and can be converted to JSON).
