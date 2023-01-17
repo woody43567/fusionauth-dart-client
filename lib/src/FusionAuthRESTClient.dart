@@ -8,11 +8,11 @@ import 'dart:io';
 import 'FusionAuthDomain.dart';
 
 class ClientResponse<RT, ERT> {
-  num statusCode;
+  num? statusCode;
   dynamic exception;
 
-  RT successResponse;
-  ERT errorResponse;
+  RT? successResponse;
+  ERT? errorResponse;
 }
 
 typedef ResponseHandler<RT, ERT> = Future<void> Function(
@@ -39,14 +39,14 @@ ResponseHandler<RT, ERT> defaultErrorResponseHandlerBuilder<RT, ERT>(
 class FusionAuthRESTClient<ReturnType, ErrorReturnType> {
   dynamic body;
   Map<String, String> headers = Map<String, String>();
-  String method;
+  String? method;
   Map<String, String> parameters = Map<String, String>();
-  String uri;
-  HttpClientCredentials credentials;
-  String realm;
+  String? uri;
+  HttpClientCredentials? credentials;
+  String? realm;
   String host;
-  ResponseHandler<ReturnType, ErrorReturnType> responseHandler;
-  ResponseHandler<ReturnType, ErrorReturnType> errorResponseHandler;
+  ResponseHandler<ReturnType, ErrorReturnType>? responseHandler;
+  ResponseHandler<ReturnType, ErrorReturnType>? errorResponseHandler;
 
   final HttpClient httpClient;
 
@@ -61,33 +61,36 @@ class FusionAuthRESTClient<ReturnType, ErrorReturnType> {
   ///
   /// @param {string} key The value of the authorization header.
   /// @returns {DefaultRESTClient}
-  FusionAuthRESTClient withAuthorization(String key) {
+  FusionAuthRESTClient<ReturnType, ErrorReturnType> withAuthorization(
+      String key) {
     withHeader('Authorization', key);
     return this;
   }
 
   /// Adds a segment to the request uri
-  FusionAuthRESTClient withUriSegment(dynamic segment) {
+  FusionAuthRESTClient<ReturnType, ErrorReturnType> withUriSegment(
+      dynamic segment) {
     if (segment == null) {
       return this;
     }
     uri ??= '';
-    if (uri[uri.length - 1] != '/') {
-      uri += '/';
+    if (uri![uri!.length - 1] != '/') {
+      uri = uri! + '/';
     }
-    uri = uri + segment;
+    uri = uri! + segment;
     return this;
   }
 
   /// Get the full url + parameter list
   String getFullUrl() {
-    return host + uri + _getQueryString();
+    return host + (uri ?? '') + _getQueryString();
   }
 
   /// Sets the body of the client request.
   ///
   /// @param body The object to be written to the request body as form data.
-  FusionAuthRESTClient withFormData(Map<String, dynamic> body) {
+  FusionAuthRESTClient<ReturnType, ErrorReturnType> withFormData(
+      Map<String, dynamic> body) {
     this.body = body;
     withHeader('Content-Type', 'application/x-www-form-urlencoded');
     return this;
@@ -97,7 +100,8 @@ class FusionAuthRESTClient<ReturnType, ErrorReturnType> {
   ///
   /// @param key The name of the header.
   /// @param value The value of the header.
-  FusionAuthRESTClient withHeader(String key, String value) {
+  FusionAuthRESTClient<ReturnType, ErrorReturnType> withHeader(
+      String key, String value) {
     headers[key] = value;
     return this;
   }
@@ -105,7 +109,7 @@ class FusionAuthRESTClient<ReturnType, ErrorReturnType> {
   /// Sets the body of the client request.
   ///
   /// @param body The object to be written to the request body as JSON.
-  FusionAuthRESTClient withJSONBody(dynamic body) {
+  FusionAuthRESTClient<ReturnType, ErrorReturnType> withJSONBody(dynamic body) {
     this.body = body;
     withHeader('Content-Type', 'application/json');
     // Omit the Content-Length, this is set auto-magically by the request library
@@ -113,13 +117,13 @@ class FusionAuthRESTClient<ReturnType, ErrorReturnType> {
   }
 
   /// Sets the http method for the request
-  FusionAuthRESTClient withMethod(String method) {
+  FusionAuthRESTClient<ReturnType, ErrorReturnType> withMethod(String method) {
     this.method = method;
     return this;
   }
 
   /// Sets the uri of the request
-  FusionAuthRESTClient withUri(String uri) {
+  FusionAuthRESTClient<ReturnType, ErrorReturnType> withUri(String uri) {
     this.uri = uri;
     return this;
   }
@@ -128,7 +132,13 @@ class FusionAuthRESTClient<ReturnType, ErrorReturnType> {
   ///
   /// @param name The name of the parameter.
   /// @param value The value of the parameter, may be a string, object or number.
-  FusionAuthRESTClient withParameter(String name, dynamic value) {
+  FusionAuthRESTClient<ReturnType, ErrorReturnType> withParameter(
+    String name,
+    dynamic value, {
+    bool skipNulls = false,
+  }) {
+    if (skipNulls && value == null) return this;
+
     parameters[name] = value.toString();
     return this;
   }
@@ -136,22 +146,24 @@ class FusionAuthRESTClient<ReturnType, ErrorReturnType> {
   /// Sets request's credentials.
   ///
   /// @param value A string indicating whether credentials will be sent with the request always, never, or only when sent to a same-origin URL.
-  FusionAuthRESTClient withCredentials(HttpClientCredentials value) {
+  FusionAuthRESTClient<ReturnType, ErrorReturnType> withCredentials(
+      HttpClientCredentials value) {
     credentials = value;
     return this;
   }
 
-  FusionAuthRESTClient withRealm(String realm) {
+  FusionAuthRESTClient<ReturnType, ErrorReturnType> withRealm(String realm) {
     this.realm = realm;
     return this;
   }
 
-  FusionAuthRESTClient withResponseHandler(ResponseHandler responseHandler) {
+  FusionAuthRESTClient<ReturnType, ErrorReturnType> withResponseHandler(
+      ResponseHandler responseHandler) {
     this.responseHandler = responseHandler;
     return this;
   }
 
-  FusionAuthRESTClient withErrorResponseHandler(
+  FusionAuthRESTClient<ReturnType, ErrorReturnType> withErrorResponseHandler(
       ResponseHandler errorResponseHandler) {
     this.errorResponseHandler = errorResponseHandler;
     return this;
@@ -185,13 +197,13 @@ class FusionAuthRESTClient<ReturnType, ErrorReturnType> {
       clientResponse.statusCode = response.statusCode;
 
       if (response.statusCode == 400 && errorResponseHandler != null) {
-        await errorResponseHandler(response, clientResponse);
+        await errorResponseHandler!(response, clientResponse);
       }
 
       if (response.statusCode >= 200 &&
           response.statusCode < 300 &&
           responseHandler != null) {
-        await responseHandler(response, clientResponse);
+        await responseHandler!(response, clientResponse);
       }
     } catch (e) {
       clientResponse.exception = e;
@@ -202,7 +214,7 @@ class FusionAuthRESTClient<ReturnType, ErrorReturnType> {
 
   Future<HttpClientRequest> _newRequest(Uri uri) {
     if (credentials != null) {
-      httpClient.addCredentials(uri, realm, credentials);
+      httpClient.addCredentials(uri, realm!, credentials!);
     }
 
     switch (method) {

@@ -32,15 +32,16 @@ class AccessToken {
   TokenType token_type;
   String userId;
 
-  AccessToken(
-      {this.access_token,
-      this.expires_in,
-      this.id_token,
-      this.refresh_token,
-      this.refresh_token_id,
-      this.scope,
-      this.token_type,
-      this.userId});
+  AccessToken({
+    required this.access_token,
+    required this.expires_in,
+    required this.id_token,
+    required this.refresh_token,
+    required this.refresh_token_id,
+    required this.scope,
+    required this.token_type,
+    required this.userId,
+  });
 
   factory AccessToken.fromJson(Map<String, dynamic> json) =>
       _$AccessTokenFromJson(json);
@@ -60,17 +61,18 @@ class ActionData {
   String reasonId;
   String userActionId;
 
-  ActionData(
-      {this.actioneeUserId,
-      this.actionerUserId,
-      this.applicationIds,
-      this.comment,
-      this.emailUser,
-      this.expiry,
-      this.notifyUser,
-      this.option,
-      this.reasonId,
-      this.userActionId});
+  ActionData({
+    required this.actioneeUserId,
+    required this.actionerUserId,
+    required this.applicationIds,
+    required this.comment,
+    required this.emailUser,
+    required this.expiry,
+    required this.notifyUser,
+    required this.option,
+    required this.reasonId,
+    required this.userActionId,
+  });
 
   factory ActionData.fromJson(Map<String, dynamic> json) =>
       _$ActionDataFromJson(json);
@@ -85,7 +87,7 @@ class ActionRequest extends BaseEventRequest {
   ActionData action;
   bool broadcast;
 
-  ActionRequest({this.action, this.broadcast});
+  ActionRequest({required this.action, this.broadcast = false});
 
   factory ActionRequest.fromJson(Map<String, dynamic> json) =>
       _$ActionRequestFromJson(json);
@@ -100,7 +102,7 @@ class ActionResponse {
   UserActionLog action;
   List<UserActionLog> actions;
 
-  ActionResponse({this.action, this.actions});
+  ActionResponse({required this.action, required this.actions});
 
   factory ActionResponse.fromJson(Map<String, dynamic> json) =>
       _$ActionResponseFromJson(json);
@@ -154,16 +156,17 @@ class APIKey {
   APIKeyPermissions permissions;
   String tenantId;
 
-  APIKey(
-      {this.id,
-      this.insertInstant,
-      this.ipAccessControlListId,
-      this.key,
-      this.keyManager,
-      this.lastUpdateInstant,
-      this.metaData,
-      this.permissions,
-      this.tenantId});
+  APIKey({
+    required this.id,
+    required this.insertInstant,
+    required this.ipAccessControlListId,
+    required this.key,
+    required this.keyManager,
+    required this.lastUpdateInstant,
+    required this.metaData,
+    required this.permissions,
+    required this.tenantId,
+  });
 
   factory APIKey.fromJson(Map<String, dynamic> json) => _$APIKeyFromJson(json);
   Map<String, dynamic> toJson() => _$APIKeyToJson(this);
@@ -173,7 +176,7 @@ class APIKey {
 class APIKeyMetaData {
   Map<String, String> attributes;
 
-  APIKeyMetaData({this.attributes});
+  APIKeyMetaData({required this.attributes});
 
   factory APIKeyMetaData.fromJson(Map<String, dynamic> json) =>
       _$APIKeyMetaDataFromJson(json);
@@ -184,7 +187,7 @@ class APIKeyMetaData {
 class APIKeyPermissions {
   Map<String, Set<String>> endpoints;
 
-  APIKeyPermissions({this.endpoints});
+  APIKeyPermissions({required this.endpoints});
 
   factory APIKeyPermissions.fromJson(Map<String, dynamic> json) =>
       _$APIKeyPermissionsFromJson(json);
@@ -199,7 +202,10 @@ class APIKeyRequest {
   APIKey apiKey;
   String sourceKeyId;
 
-  APIKeyRequest({this.apiKey, this.sourceKeyId});
+  APIKeyRequest({
+    required this.apiKey,
+    required this.sourceKeyId,
+  });
 
   factory APIKeyRequest.fromJson(Map<String, dynamic> json) =>
       _$APIKeyRequestFromJson(json);
@@ -213,7 +219,7 @@ class APIKeyRequest {
 class APIKeyResponse {
   APIKey apiKey;
 
-  APIKeyResponse({this.apiKey});
+  APIKeyResponse({required this.apiKey});
 
   factory APIKeyResponse.fromJson(Map<String, dynamic> json) =>
       _$APIKeyResponseFromJson(json);
@@ -230,8 +236,13 @@ class AppleApplicationConfiguration
   String servicesId;
   String teamId;
 
-  AppleApplicationConfiguration(
-      {this.buttonText, this.keyId, this.scope, this.servicesId, this.teamId});
+  AppleApplicationConfiguration({
+    required this.buttonText,
+    required this.keyId,
+    required this.scope,
+    required this.servicesId,
+    required this.teamId,
+  });
 
   factory AppleApplicationConfiguration.fromJson(Map<String, dynamic> json) =>
       _$AppleApplicationConfigurationFromJson(json);
@@ -248,8 +259,13 @@ class AppleIdentityProvider
   String servicesId;
   String teamId;
 
-  AppleIdentityProvider(
-      {this.buttonText, this.keyId, this.scope, this.servicesId, this.teamId});
+  AppleIdentityProvider({
+    required this.buttonText,
+    required this.keyId,
+    required this.scope,
+    required this.servicesId,
+    required this.teamId,
+  });
 
   factory AppleIdentityProvider.fromJson(Map<String, dynamic> json) =>
       _$AppleIdentityProviderFromJson(json);
@@ -290,37 +306,38 @@ class Application {
   bool verifyRegistration;
   ApplicationWebAuthnConfiguration webAuthnConfiguration;
 
-  Application(
-      {this.accessControlConfiguration,
-      this.active,
-      this.authenticationTokenConfiguration,
-      this.cleanSpeakConfiguration,
-      this.data,
-      this.emailConfiguration,
-      this.externalIdentifierConfiguration,
-      this.formConfiguration,
-      this.id,
-      this.insertInstant,
-      this.jwtConfiguration,
-      this.lambdaConfiguration,
-      this.lastUpdateInstant,
-      this.loginConfiguration,
-      this.multiFactorConfiguration,
-      this.name,
-      this.oauthConfiguration,
-      this.passwordlessConfiguration,
-      this.registrationConfiguration,
-      this.registrationDeletePolicy,
-      this.roles,
-      this.samlv2Configuration,
-      this.state,
-      this.tenantId,
-      this.themeId,
-      this.unverified,
-      this.verificationEmailTemplateId,
-      this.verificationStrategy,
-      this.verifyRegistration,
-      this.webAuthnConfiguration});
+  Application({
+    required this.accessControlConfiguration,
+    required this.active,
+    required this.authenticationTokenConfiguration,
+    required this.cleanSpeakConfiguration,
+    required this.data,
+    required this.emailConfiguration,
+    required this.externalIdentifierConfiguration,
+    required this.formConfiguration,
+    required this.id,
+    required this.insertInstant,
+    required this.jwtConfiguration,
+    required this.lambdaConfiguration,
+    required this.lastUpdateInstant,
+    required this.loginConfiguration,
+    required this.multiFactorConfiguration,
+    required this.name,
+    required this.oauthConfiguration,
+    required this.passwordlessConfiguration,
+    required this.registrationConfiguration,
+    required this.registrationDeletePolicy,
+    required this.roles,
+    required this.samlv2Configuration,
+    required this.state,
+    required this.tenantId,
+    required this.themeId,
+    required this.unverified,
+    required this.verificationEmailTemplateId,
+    required this.verificationStrategy,
+    required this.verifyRegistration,
+    required this.webAuthnConfiguration,
+  });
 
   factory Application.fromJson(Map<String, dynamic> json) =>
       _$ApplicationFromJson(json);
@@ -332,7 +349,8 @@ class Application {
 class ApplicationAccessControlConfiguration {
   String uiIPAccessControlListId;
 
-  ApplicationAccessControlConfiguration({this.uiIPAccessControlListId});
+  ApplicationAccessControlConfiguration(
+      {required this.uiIPAccessControlListId});
 
   factory ApplicationAccessControlConfiguration.fromJson(
           Map<String, dynamic> json) =>
@@ -358,21 +376,22 @@ class ApplicationEmailConfiguration {
   String twoFactorMethodAddEmailTemplateId;
   String twoFactorMethodRemoveEmailTemplateId;
 
-  ApplicationEmailConfiguration(
-      {this.emailUpdateEmailTemplateId,
-      this.emailVerificationEmailTemplateId,
-      this.emailVerifiedEmailTemplateId,
-      this.forgotPasswordEmailTemplateId,
-      this.loginIdInUseOnCreateEmailTemplateId,
-      this.loginIdInUseOnUpdateEmailTemplateId,
-      this.loginNewDeviceEmailTemplateId,
-      this.loginSuspiciousEmailTemplateId,
-      this.passwordlessEmailTemplateId,
-      this.passwordResetSuccessEmailTemplateId,
-      this.passwordUpdateEmailTemplateId,
-      this.setPasswordEmailTemplateId,
-      this.twoFactorMethodAddEmailTemplateId,
-      this.twoFactorMethodRemoveEmailTemplateId});
+  ApplicationEmailConfiguration({
+    required this.emailUpdateEmailTemplateId,
+    required this.emailVerificationEmailTemplateId,
+    required this.emailVerifiedEmailTemplateId,
+    required this.forgotPasswordEmailTemplateId,
+    required this.loginIdInUseOnCreateEmailTemplateId,
+    required this.loginIdInUseOnUpdateEmailTemplateId,
+    required this.loginNewDeviceEmailTemplateId,
+    required this.loginSuspiciousEmailTemplateId,
+    required this.passwordlessEmailTemplateId,
+    required this.passwordResetSuccessEmailTemplateId,
+    required this.passwordUpdateEmailTemplateId,
+    required this.setPasswordEmailTemplateId,
+    required this.twoFactorMethodAddEmailTemplateId,
+    required this.twoFactorMethodRemoveEmailTemplateId,
+  });
 
   factory ApplicationEmailConfiguration.fromJson(Map<String, dynamic> json) =>
       _$ApplicationEmailConfigurationFromJson(json);
@@ -397,7 +416,7 @@ class ApplicationExternalIdentifierConfiguration {
   num twoFactorTrustIdTimeToLiveInSeconds;
 
   ApplicationExternalIdentifierConfiguration(
-      {this.twoFactorTrustIdTimeToLiveInSeconds});
+      {required this.twoFactorTrustIdTimeToLiveInSeconds});
 
   factory ApplicationExternalIdentifierConfiguration.fromJson(
           Map<String, dynamic> json) =>
@@ -413,7 +432,7 @@ class ApplicationFormConfiguration {
   String selfServiceFormId;
 
   ApplicationFormConfiguration(
-      {this.adminRegistrationFormId, this.selfServiceFormId});
+      {required this.adminRegistrationFormId, required this.selfServiceFormId});
 
   factory ApplicationFormConfiguration.fromJson(Map<String, dynamic> json) =>
       _$ApplicationFormConfigurationFromJson(json);
@@ -429,7 +448,10 @@ class ApplicationMultiFactorConfiguration {
   ApplicationMultiFactorTrustPolicy trustPolicy;
 
   ApplicationMultiFactorConfiguration(
-      {this.email, this.loginPolicy, this.sms, this.trustPolicy});
+      {required this.email,
+      required this.loginPolicy,
+      required this.sms,
+      required this.trustPolicy});
 
   factory ApplicationMultiFactorConfiguration.fromJson(
           Map<String, dynamic> json) =>
@@ -455,7 +477,7 @@ enum ApplicationMultiFactorTrustPolicy {
 class ApplicationRegistrationDeletePolicy {
   TimeBasedDeletePolicy unverified;
 
-  ApplicationRegistrationDeletePolicy({this.unverified});
+  ApplicationRegistrationDeletePolicy({required this.unverified});
 
   factory ApplicationRegistrationDeletePolicy.fromJson(
           Map<String, dynamic> json) =>
@@ -472,7 +494,7 @@ class ApplicationRequest extends BaseEventRequest {
   Application application;
   ApplicationRole role;
 
-  ApplicationRequest({this.application, this.role});
+  ApplicationRequest({required this.application, required this.role});
 
   factory ApplicationRequest.fromJson(Map<String, dynamic> json) =>
       _$ApplicationRequestFromJson(json);
@@ -488,7 +510,10 @@ class ApplicationResponse {
   List<Application> applications;
   ApplicationRole role;
 
-  ApplicationResponse({this.application, this.applications, this.role});
+  ApplicationResponse(
+      {required this.application,
+      required this.applications,
+      required this.role});
 
   factory ApplicationResponse.fromJson(Map<String, dynamic> json) =>
       _$ApplicationResponseFromJson(json);
@@ -508,14 +533,15 @@ class ApplicationRole {
   num lastUpdateInstant;
   String name;
 
-  ApplicationRole(
-      {this.description,
-      this.id,
-      this.insertInstant,
-      this.isDefault,
-      this.isSuperRole,
-      this.lastUpdateInstant,
-      this.name});
+  ApplicationRole({
+    required this.description,
+    required this.id,
+    required this.insertInstant,
+    required this.isDefault,
+    required this.isSuperRole,
+    required this.lastUpdateInstant,
+    required this.name,
+  });
 
   factory ApplicationRole.fromJson(Map<String, dynamic> json) =>
       _$ApplicationRoleFromJson(json);
@@ -529,8 +555,11 @@ class ApplicationUnverifiedConfiguration {
   VerificationStrategy verificationStrategy;
   RegistrationUnverifiedOptions whenGated;
 
-  ApplicationUnverifiedConfiguration(
-      {this.registration, this.verificationStrategy, this.whenGated});
+  ApplicationUnverifiedConfiguration({
+    required this.registration,
+    required this.verificationStrategy,
+    required this.whenGated,
+  });
 
   factory ApplicationUnverifiedConfiguration.fromJson(
           Map<String, dynamic> json) =>
@@ -544,8 +573,8 @@ class ApplicationUnverifiedConfiguration {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class ApplicationWebAuthnConfiguration extends Enableable {
-  ApplicationWebAuthnWorkflowConfiguration bootstrapWorkflow;
-  ApplicationWebAuthnWorkflowConfiguration reauthenticationWorkflow;
+  ApplicationWebAuthnWorkflowConfiguration? bootstrapWorkflow;
+  ApplicationWebAuthnWorkflowConfiguration? reauthenticationWorkflow;
 
   ApplicationWebAuthnConfiguration(
       {this.bootstrapWorkflow, this.reauthenticationWorkflow});
@@ -578,7 +607,11 @@ class Attachment {
   String mime;
   String name;
 
-  Attachment({this.attachment, this.mime, this.name});
+  Attachment({
+    required this.attachment,
+    required this.mime,
+    required this.name,
+  });
 
   factory Attachment.fromJson(Map<String, dynamic> json) =>
       _$AttachmentFromJson(json);
@@ -630,14 +663,14 @@ class AuditLog {
   String reason;
 
   AuditLog(
-      {this.data,
-      this.id,
-      this.insertInstant,
-      this.insertUser,
-      this.message,
-      this.newValue,
-      this.oldValue,
-      this.reason});
+      {required this.data,
+      required this.id,
+      required this.insertInstant,
+      required this.insertUser,
+      required this.message,
+      required this.newValue,
+      required this.oldValue,
+      required this.reason});
 
   factory AuditLog.fromJson(Map<String, dynamic> json) =>
       _$AuditLogFromJson(json);
@@ -648,7 +681,7 @@ class AuditLog {
 class AuditLogConfiguration {
   DeleteConfiguration delete;
 
-  AuditLogConfiguration({this.delete});
+  AuditLogConfiguration({required this.delete});
 
   factory AuditLogConfiguration.fromJson(Map<String, dynamic> json) =>
       _$AuditLogConfigurationFromJson(json);
@@ -662,7 +695,7 @@ class AuditLogConfiguration {
 class AuditLogCreateEvent extends BaseEvent {
   AuditLog auditLog;
 
-  AuditLogCreateEvent({this.auditLog});
+  AuditLogCreateEvent({required this.auditLog});
 
   factory AuditLogCreateEvent.fromJson(Map<String, dynamic> json) =>
       _$AuditLogCreateEventFromJson(json);
@@ -672,7 +705,7 @@ class AuditLogCreateEvent extends BaseEvent {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class AuditLogExportRequest extends BaseExportRequest {
-  AuditLogSearchCriteria criteria;
+  AuditLogSearchCriteria? criteria;
 
   AuditLogExportRequest({this.criteria});
 
@@ -684,7 +717,7 @@ class AuditLogExportRequest extends BaseExportRequest {
 /// @author Brian Pontarelli
 @JsonSerializable()
 class AuditLogRequest extends BaseEventRequest {
-  AuditLog auditLog;
+  AuditLog? auditLog;
 
   AuditLogRequest({this.auditLog});
 
@@ -698,7 +731,7 @@ class AuditLogRequest extends BaseEventRequest {
 /// @author Brian Pontarelli
 @JsonSerializable()
 class AuditLogResponse {
-  AuditLog auditLog;
+  AuditLog? auditLog;
 
   AuditLogResponse({this.auditLog});
 
@@ -710,13 +743,13 @@ class AuditLogResponse {
 /// @author Brian Pontarelli
 @JsonSerializable()
 class AuditLogSearchCriteria extends BaseSearchCriteria {
-  num end;
-  String message;
-  String newValue;
-  String oldValue;
-  String reason;
-  num start;
-  String user;
+  num? end;
+  String? message;
+  String? newValue;
+  String? oldValue;
+  String? reason;
+  num? start;
+  String? user;
 
   AuditLogSearchCriteria(
       {this.end,
@@ -737,7 +770,7 @@ class AuditLogSearchCriteria extends BaseSearchCriteria {
 class AuditLogSearchRequest {
   AuditLogSearchCriteria search;
 
-  AuditLogSearchRequest({this.search});
+  AuditLogSearchRequest({required this.search});
 
   factory AuditLogSearchRequest.fromJson(Map<String, dynamic> json) =>
       _$AuditLogSearchRequestFromJson(json);
@@ -752,7 +785,7 @@ class AuditLogSearchResponse {
   List<AuditLog> auditLogs;
   num total;
 
-  AuditLogSearchResponse({this.auditLogs, this.total});
+  AuditLogSearchResponse({required this.auditLogs, required this.total});
 
   factory AuditLogSearchResponse.fromJson(Map<String, dynamic> json) =>
       _$AuditLogSearchResponseFromJson(json);
@@ -801,9 +834,9 @@ enum AuthenticatorAttachmentPreference {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class AuthenticatorConfiguration {
-  TOTPAlgorithm algorithm;
-  num codeLength;
-  num timeStep;
+  TOTPAlgorithm? algorithm;
+  num? codeLength;
+  num? timeStep;
 
   AuthenticatorConfiguration({this.algorithm, this.codeLength, this.timeStep});
 
@@ -821,13 +854,14 @@ class AuthenticatorSelectionCriteria {
   AuthenticatorAttachment authenticatorAttachment;
   bool requireResidentKey;
   ResidentKeyRequirement residentKey;
-  UserVerificationRequirement userVerification;
+  UserVerificationRequirement? userVerification;
 
-  AuthenticatorSelectionCriteria(
-      {this.authenticatorAttachment,
-      this.requireResidentKey,
-      this.residentKey,
-      this.userVerification});
+  AuthenticatorSelectionCriteria({
+    required this.authenticatorAttachment,
+    required this.requireResidentKey,
+    required this.residentKey,
+    required this.userVerification,
+  });
 
   factory AuthenticatorSelectionCriteria.fromJson(Map<String, dynamic> json) =>
       _$AuthenticatorSelectionCriteriaFromJson(json);
@@ -837,17 +871,17 @@ class AuthenticatorSelectionCriteria {
 // Do not require a setter for 'type', it is defined by the concrete class and is not mutable
 @JsonSerializable()
 class BaseConnectorConfiguration {
-  Map<String, dynamic> data;
-  bool debug;
-  String id;
-  num insertInstant;
-  num lastUpdateInstant;
-  String name;
-  ConnectorType type;
+  Map<String, dynamic>? data;
+  bool? debug;
+  String? id;
+  num? insertInstant;
+  num? lastUpdateInstant;
+  String? name;
+  ConnectorType? type;
 
   BaseConnectorConfiguration(
       {this.data,
-      this.debug,
+      this.debug = false,
       this.id,
       this.insertInstant,
       this.lastUpdateInstant,
@@ -862,14 +896,14 @@ class BaseConnectorConfiguration {
 /// @author Brian Pontarelli
 @JsonSerializable()
 class BaseElasticSearchCriteria extends BaseSearchCriteria {
-  bool accurateTotal;
-  List<String> ids;
-  String query;
-  String queryString;
-  List<SortField> sortFields;
+  bool? accurateTotal;
+  List<String>? ids;
+  String? query;
+  String? queryString;
+  List<SortField>? sortFields;
 
   BaseElasticSearchCriteria(
-      {this.accurateTotal,
+      {this.accurateTotal = false,
       this.ids,
       this.query,
       this.queryString,
@@ -885,13 +919,19 @@ class BaseElasticSearchCriteria extends BaseSearchCriteria {
 /// @author Brian Pontarelli
 @JsonSerializable()
 class BaseEvent {
-  num createInstant;
-  String id;
-  EventInfo info;
-  String tenantId;
-  EventType type;
+  num? createInstant;
+  String? id;
+  EventInfo? info;
+  String? tenantId;
+  EventType? type;
 
-  BaseEvent({this.createInstant, this.id, this.info, this.tenantId, this.type});
+  BaseEvent({
+    this.createInstant,
+    this.id,
+    this.info,
+    this.tenantId,
+    this.type,
+  });
 
   factory BaseEvent.fromJson(Map<String, dynamic> json) =>
       _$BaseEventFromJson(json);
@@ -904,7 +944,7 @@ class BaseEvent {
 /// @author Brian Pontarelli
 @JsonSerializable()
 class BaseEventRequest {
-  EventInfo eventInfo;
+  EventInfo? eventInfo;
 
   BaseEventRequest({this.eventInfo});
 
@@ -916,8 +956,8 @@ class BaseEventRequest {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class BaseExportRequest {
-  String dateTimeSecondsFormat;
-  String zoneId;
+  String? dateTimeSecondsFormat;
+  String? zoneId;
 
   BaseExportRequest({this.dateTimeSecondsFormat, this.zoneId});
 
@@ -931,22 +971,22 @@ class BaseExportRequest {
 class BaseIdentityProvider<
     D extends BaseIdentityProviderApplicationConfiguration> extends Enableable {
   @IdentityProviderApplicationConfigurationConverter()
-  Map<String, D> applicationConfiguration;
-  Map<String, dynamic> data;
+  Map<String, D>? applicationConfiguration;
+  Map<String, dynamic>? data;
   bool debug;
-  String id;
-  num insertInstant;
+  String? id;
+  num? insertInstant;
   dynamic lambdaConfiguration;
-  num lastUpdateInstant;
-  IdentityProviderLinkingStrategy linkingStrategy;
-  String name;
-  Map<String, IdentityProviderTenantConfiguration> tenantConfiguration;
-  IdentityProviderType type;
+  num? lastUpdateInstant;
+  IdentityProviderLinkingStrategy? linkingStrategy;
+  String? name;
+  Map<String, IdentityProviderTenantConfiguration>? tenantConfiguration;
+  IdentityProviderType? type;
 
   BaseIdentityProvider(
       {this.applicationConfiguration,
       this.data,
-      this.debug,
+      this.debug = false,
       this.id,
       this.insertInstant,
       this.lambdaConfiguration,
@@ -956,16 +996,16 @@ class BaseIdentityProvider<
       this.tenantConfiguration,
       this.type});
 
-  factory BaseIdentityProvider.fromJson(Map<String, dynamic> json) =>
-      BaseIdentityProviderFromJson(json);
+  // factory BaseIdentityProvider.fromJson(Map<String, dynamic> json) =>
+  //     BaseIdentityProviderFromJson(json);
   Map<String, dynamic> toJson() => _$BaseIdentityProviderToJson(this);
 }
 
 /// @author Daniel DeGroff
 @JsonSerializable()
 class BaseIdentityProviderApplicationConfiguration extends Enableable {
-  bool createRegistration;
-  Map<String, dynamic> data;
+  bool? createRegistration;
+  Map<String, dynamic>? data;
 
   BaseIdentityProviderApplicationConfiguration(
       {this.createRegistration, this.data});
@@ -980,19 +1020,19 @@ class BaseIdentityProviderApplicationConfiguration extends Enableable {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class BaseLoginRequest extends BaseEventRequest {
-  String applicationId;
-  String ipAddress;
-  MetaData metaData;
-  bool newDevice;
-  bool noJWT;
+  String? applicationId;
+  String? ipAddress;
+  MetaData? metaData;
+  bool? newDevice;
+  bool? noJWT;
 
-  BaseLoginRequest(
-      {this.applicationId,
-      this.ipAddress,
-      this.metaData,
-      this.newDevice,
-      this.noJWT});
-
+  BaseLoginRequest({
+    this.applicationId,
+    this.ipAddress,
+    this.metaData,
+    this.newDevice,
+    this.noJWT,
+  });
   factory BaseLoginRequest.fromJson(Map<String, dynamic> json) =>
       _$BaseLoginRequestFromJson(json);
   Map<String, dynamic> toJson() => _$BaseLoginRequestToJson(this);
@@ -1001,18 +1041,18 @@ class BaseLoginRequest extends BaseEventRequest {
 // Do not require a setter for 'type', it is defined by the concrete class and is not mutable
 @JsonSerializable()
 class BaseMessengerConfiguration {
-  Map<String, dynamic> data;
+  Map<String, dynamic>? data;
   bool debug;
-  String id;
-  num insertInstant;
-  num lastUpdateInstant;
-  String name;
-  String transport;
-  MessengerType type;
+  String? id;
+  num? insertInstant;
+  num? lastUpdateInstant;
+  String? name;
+  String? transport;
+  MessengerType? type;
 
   BaseMessengerConfiguration(
       {this.data,
-      this.debug,
+      this.debug = false,
       this.id,
       this.insertInstant,
       this.lastUpdateInstant,
@@ -1028,9 +1068,9 @@ class BaseMessengerConfiguration {
 /// @author Brian Pontarelli
 @JsonSerializable()
 class BaseSearchCriteria {
-  num numberOfResults;
-  String orderBy;
-  num startRow;
+  num? numberOfResults;
+  String? orderBy;
+  num? startRow;
 
   BaseSearchCriteria({this.numberOfResults, this.orderBy, this.startRow});
 
@@ -1067,12 +1107,12 @@ enum BreachedPasswordStatus {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class BreachedPasswordTenantMetric {
-  num actionRequired;
-  num matchedCommonPasswordCount;
-  num matchedExactCount;
-  num matchedPasswordCount;
-  num matchedSubAddressCount;
-  num passwordsCheckedCount;
+  num? actionRequired;
+  num? matchedCommonPasswordCount;
+  num? matchedExactCount;
+  num? matchedPasswordCount;
+  num? matchedSubAddressCount;
+  num? passwordsCheckedCount;
 
   BreachedPasswordTenantMetric(
       {this.actionRequired,
@@ -1124,28 +1164,29 @@ enum CaptchaMethod {
 
 @JsonSerializable()
 class CertificateInformation {
-  String issuer;
-  String md5Fingerprint;
-  String serialNumber;
-  String sha1Fingerprint;
-  String sha1Thumbprint;
-  String sha256Fingerprint;
-  String sha256Thumbprint;
-  String subject;
-  num validFrom;
-  num validTo;
+  String? issuer;
+  String? md5Fingerprint;
+  String? serialNumber;
+  String? sha1Fingerprint;
+  String? sha1Thumbprint;
+  String? sha256Fingerprint;
+  String? sha256Thumbprint;
+  String? subject;
+  num? validFrom;
+  num? validTo;
 
-  CertificateInformation(
-      {this.issuer,
-      this.md5Fingerprint,
-      this.serialNumber,
-      this.sha1Fingerprint,
-      this.sha1Thumbprint,
-      this.sha256Fingerprint,
-      this.sha256Thumbprint,
-      this.subject,
-      this.validFrom,
-      this.validTo});
+  CertificateInformation({
+    this.issuer,
+    this.md5Fingerprint,
+    this.serialNumber,
+    this.sha1Fingerprint,
+    this.sha1Thumbprint,
+    this.sha256Fingerprint,
+    this.sha256Thumbprint,
+    this.subject,
+    this.validFrom,
+    this.validTo,
+  });
 
   factory CertificateInformation.fromJson(Map<String, dynamic> json) =>
       _$CertificateInformationFromJson(json);
@@ -1169,14 +1210,14 @@ enum ChangePasswordReason {
 /// @author Brian Pontarelli
 @JsonSerializable()
 class ChangePasswordRequest extends BaseEventRequest {
-  String applicationId;
-  String changePasswordId;
-  String currentPassword;
-  String loginId;
-  String password;
-  String refreshToken;
-  String trustChallenge;
-  String trustToken;
+  String? applicationId;
+  String? changePasswordId;
+  String? currentPassword;
+  String? loginId;
+  String? password;
+  String? refreshToken;
+  String? trustChallenge;
+  String? trustToken;
 
   ChangePasswordRequest(
       {this.applicationId,
@@ -1199,9 +1240,9 @@ class ChangePasswordRequest extends BaseEventRequest {
 @JsonSerializable()
 class ChangePasswordResponse {
   String oneTimePassword;
-  Map<String, dynamic> state;
+  Map<String, dynamic>? state;
 
-  ChangePasswordResponse({this.oneTimePassword, this.state});
+  ChangePasswordResponse({required this.oneTimePassword, this.state});
 
   factory ChangePasswordResponse.fromJson(Map<String, dynamic> json) =>
       _$ChangePasswordResponseFromJson(json);
@@ -1213,13 +1254,17 @@ class ChangePasswordResponse {
 /// @author Brian Pontarelli
 @JsonSerializable()
 class CleanSpeakConfiguration extends Enableable {
-  String apiKey;
-  List<String> applicationIds;
-  String url;
-  UsernameModeration usernameModeration;
+  String? apiKey;
+  List<String>? applicationIds;
+  String? url;
+  UsernameModeration? usernameModeration;
 
-  CleanSpeakConfiguration(
-      {this.apiKey, this.applicationIds, this.url, this.usernameModeration});
+  CleanSpeakConfiguration({
+    this.apiKey,
+    this.applicationIds,
+    this.url,
+    this.usernameModeration,
+  });
 
   factory CleanSpeakConfiguration.fromJson(Map<String, dynamic> json) =>
       _$CleanSpeakConfigurationFromJson(json);
@@ -1248,10 +1293,10 @@ enum ClientAuthenticationPolicy {
 /// @author Trevor Smith
 @JsonSerializable()
 class ConnectorPolicy {
-  String connectorId;
-  Map<String, dynamic> data;
-  Set<String> domains;
-  bool migrate;
+  String? connectorId;
+  Map<String, dynamic>? data;
+  Set<String>? domains;
+  bool? migrate;
 
   ConnectorPolicy({this.connectorId, this.data, this.domains, this.migrate});
 
@@ -1265,7 +1310,7 @@ class ConnectorPolicy {
 class ConnectorRequest {
   BaseConnectorConfiguration connector;
 
-  ConnectorRequest({this.connector});
+  ConnectorRequest({required this.connector});
 
   factory ConnectorRequest.fromJson(Map<String, dynamic> json) =>
       _$ConnectorRequestFromJson(json);
@@ -1278,7 +1323,7 @@ class ConnectorResponse {
   BaseConnectorConfiguration connector;
   List<BaseConnectorConfiguration> connectors;
 
-  ConnectorResponse({this.connector, this.connectors});
+  ConnectorResponse({required this.connector, required this.connectors});
 
   factory ConnectorResponse.fromJson(Map<String, dynamic> json) =>
       _$ConnectorResponseFromJson(json);
@@ -1314,18 +1359,19 @@ class Consent {
   String name;
   List<String> values;
 
-  Consent(
-      {this.consentEmailTemplateId,
-      this.countryMinimumAgeForSelfConsent,
-      this.data,
-      this.defaultMinimumAgeForSelfConsent,
-      this.emailPlus,
-      this.id,
-      this.insertInstant,
-      this.lastUpdateInstant,
-      this.multipleValuesAllowed,
-      this.name,
-      this.values});
+  Consent({
+    required this.consentEmailTemplateId,
+    required this.countryMinimumAgeForSelfConsent,
+    required this.data,
+    required this.defaultMinimumAgeForSelfConsent,
+    required this.emailPlus,
+    required this.id,
+    required this.insertInstant,
+    required this.lastUpdateInstant,
+    required this.multipleValuesAllowed,
+    required this.name,
+    required this.values,
+  });
 
   factory Consent.fromJson(Map<String, dynamic> json) =>
       _$ConsentFromJson(json);
@@ -1337,7 +1383,7 @@ class Consent {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class ConsentRequest {
-  Consent consent;
+  Consent? consent;
 
   ConsentRequest({this.consent});
 
@@ -1351,8 +1397,8 @@ class ConsentRequest {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class ConsentResponse {
-  Consent consent;
-  List<Consent> consents;
+  Consent? consent;
+  List<Consent>? consents;
 
   ConsentResponse({this.consent, this.consents});
 
@@ -1386,13 +1432,13 @@ enum ContentStatus {
 /// @author Trevor Smith
 @JsonSerializable()
 class CORSConfiguration extends Enableable {
-  bool allowCredentials;
-  List<String> allowedHeaders;
-  List<HTTPMethod> allowedMethods;
-  List<String> allowedOrigins;
-  bool debug;
-  List<String> exposedHeaders;
-  num preflightMaxAgeInSeconds;
+  bool? allowCredentials;
+  List<String>? allowedHeaders;
+  List<HTTPMethod>? allowedMethods;
+  List<String>? allowedOrigins;
+  bool? debug;
+  List<String>? exposedHeaders;
+  num? preflightMaxAgeInSeconds;
 
   CORSConfiguration(
       {this.allowCredentials,
@@ -1476,8 +1522,8 @@ enum CoseKeyType {
 /// @author Brian Pontarelli
 @JsonSerializable()
 class Count {
-  num count;
-  num interval;
+  num? count;
+  num? interval;
 
   Count({this.count, this.interval});
 
@@ -1490,7 +1536,7 @@ class Count {
 /// @author Spencer Witt
 @JsonSerializable()
 class CredentialPropertiesOutput {
-  bool rk;
+  bool? rk;
 
   CredentialPropertiesOutput({this.rk});
 
@@ -1504,8 +1550,8 @@ class CredentialPropertiesOutput {
 /// @author Brian Pontarelli
 @JsonSerializable()
 class DailyActiveUserReportResponse {
-  List<Count> dailyActiveUsers;
-  num total;
+  List<Count>? dailyActiveUsers;
+  num? total;
 
   DailyActiveUserReportResponse({this.dailyActiveUsers, this.total});
 
@@ -1516,7 +1562,7 @@ class DailyActiveUserReportResponse {
 
 @JsonSerializable()
 class DeleteConfiguration extends Enableable {
-  num numberOfDaysToRetain;
+  num? numberOfDaysToRetain;
 
   DeleteConfiguration({this.numberOfDaysToRetain});
 
@@ -1528,18 +1574,19 @@ class DeleteConfiguration extends Enableable {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class DeviceInfo {
-  String description;
-  String lastAccessedAddress;
-  num lastAccessedInstant;
-  String name;
-  DeviceType type;
+  String? description;
+  String? lastAccessedAddress;
+  num? lastAccessedInstant;
+  String? name;
+  DeviceType? type;
 
-  DeviceInfo(
-      {this.description,
-      this.lastAccessedAddress,
-      this.lastAccessedInstant,
-      this.name,
-      this.type});
+  DeviceInfo({
+    this.description,
+    this.lastAccessedAddress,
+    this.lastAccessedInstant,
+    this.name,
+    this.type,
+  });
 
   factory DeviceInfo.fromJson(Map<String, dynamic> json) =>
       _$DeviceInfoFromJson(json);
@@ -1556,13 +1603,14 @@ class DeviceResponse {
   String verification_uri;
   String verification_uri_complete;
 
-  DeviceResponse(
-      {this.device_code,
-      this.expires_in,
-      this.interval,
-      this.user_code,
-      this.verification_uri,
-      this.verification_uri_complete});
+  DeviceResponse({
+    required this.device_code,
+    required this.expires_in,
+    required this.interval,
+    required this.user_code,
+    required this.verification_uri,
+    required this.verification_uri_complete,
+  });
 
   factory DeviceResponse.fromJson(Map<String, dynamic> json) =>
       _$DeviceResponseFromJson(json);
@@ -1595,9 +1643,9 @@ enum DeviceType {
 /// @author Brian Pontarelli
 @JsonSerializable()
 class DisplayableRawLogin extends RawLogin {
-  String applicationName;
-  Location location;
-  String loginId;
+  String? applicationName;
+  Location? location;
+  String? loginId;
 
   DisplayableRawLogin({this.applicationName, this.location, this.loginId});
 
@@ -1631,16 +1679,17 @@ class Email {
   String text;
   List<EmailAddress> to;
 
-  Email(
-      {this.attachments,
-      this.bcc,
-      this.cc,
-      this.from,
-      this.html,
-      this.replyTo,
-      this.subject,
-      this.text,
-      this.to});
+  Email({
+    required this.attachments,
+    required this.bcc,
+    required this.cc,
+    required this.from,
+    required this.html,
+    required this.replyTo,
+    required this.subject,
+    required this.text,
+    required this.to,
+  });
 
   factory Email.fromJson(Map<String, dynamic> json) => _$EmailFromJson(json);
   Map<String, dynamic> toJson() => _$EmailToJson(this);
@@ -1651,8 +1700,8 @@ class Email {
 /// @author Brian Pontarelli
 @JsonSerializable()
 class EmailAddress {
-  String address;
-  String display;
+  String? address;
+  String? display;
 
   EmailAddress({this.address, this.display});
 
@@ -1664,66 +1713,67 @@ class EmailAddress {
 /// @author Brian Pontarelli
 @JsonSerializable()
 class EmailConfiguration {
-  List<EmailHeader> additionalHeaders;
-  bool debug;
-  String defaultFromEmail;
-  String defaultFromName;
-  String emailUpdateEmailTemplateId;
-  String emailVerifiedEmailTemplateId;
-  String forgotPasswordEmailTemplateId;
-  String host;
-  bool implicitEmailVerificationAllowed;
-  String loginIdInUseOnCreateEmailTemplateId;
-  String loginIdInUseOnUpdateEmailTemplateId;
-  String loginNewDeviceEmailTemplateId;
-  String loginSuspiciousEmailTemplateId;
-  String password;
-  String passwordlessEmailTemplateId;
-  String passwordResetSuccessEmailTemplateId;
-  String passwordUpdateEmailTemplateId;
-  num port;
-  String properties;
-  EmailSecurityType security;
-  String setPasswordEmailTemplateId;
-  String twoFactorMethodAddEmailTemplateId;
-  String twoFactorMethodRemoveEmailTemplateId;
-  EmailUnverifiedOptions unverified;
-  String username;
-  String verificationEmailTemplateId;
-  VerificationStrategy verificationStrategy;
-  bool verifyEmail;
-  bool verifyEmailWhenChanged;
+  List<EmailHeader>? additionalHeaders;
+  bool? debug;
+  String? defaultFromEmail;
+  String? defaultFromName;
+  String? emailUpdateEmailTemplateId;
+  String? emailVerifiedEmailTemplateId;
+  String? forgotPasswordEmailTemplateId;
+  String? host;
+  bool? implicitEmailVerificationAllowed;
+  String? loginIdInUseOnCreateEmailTemplateId;
+  String? loginIdInUseOnUpdateEmailTemplateId;
+  String? loginNewDeviceEmailTemplateId;
+  String? loginSuspiciousEmailTemplateId;
+  String? password;
+  String? passwordlessEmailTemplateId;
+  String? passwordResetSuccessEmailTemplateId;
+  String? passwordUpdateEmailTemplateId;
+  num? port;
+  String? properties;
+  EmailSecurityType? security;
+  String? setPasswordEmailTemplateId;
+  String? twoFactorMethodAddEmailTemplateId;
+  String? twoFactorMethodRemoveEmailTemplateId;
+  EmailUnverifiedOptions? unverified;
+  String? username;
+  String? verificationEmailTemplateId;
+  VerificationStrategy? verificationStrategy;
+  bool? verifyEmail;
+  bool? verifyEmailWhenChanged;
 
-  EmailConfiguration(
-      {this.additionalHeaders,
-      this.debug,
-      this.defaultFromEmail,
-      this.defaultFromName,
-      this.emailUpdateEmailTemplateId,
-      this.emailVerifiedEmailTemplateId,
-      this.forgotPasswordEmailTemplateId,
-      this.host,
-      this.implicitEmailVerificationAllowed,
-      this.loginIdInUseOnCreateEmailTemplateId,
-      this.loginIdInUseOnUpdateEmailTemplateId,
-      this.loginNewDeviceEmailTemplateId,
-      this.loginSuspiciousEmailTemplateId,
-      this.password,
-      this.passwordlessEmailTemplateId,
-      this.passwordResetSuccessEmailTemplateId,
-      this.passwordUpdateEmailTemplateId,
-      this.port,
-      this.properties,
-      this.security,
-      this.setPasswordEmailTemplateId,
-      this.twoFactorMethodAddEmailTemplateId,
-      this.twoFactorMethodRemoveEmailTemplateId,
-      this.unverified,
-      this.username,
-      this.verificationEmailTemplateId,
-      this.verificationStrategy,
-      this.verifyEmail,
-      this.verifyEmailWhenChanged});
+  EmailConfiguration({
+    this.additionalHeaders,
+    this.debug,
+    this.defaultFromEmail,
+    this.defaultFromName,
+    this.emailUpdateEmailTemplateId,
+    this.emailVerifiedEmailTemplateId,
+    this.forgotPasswordEmailTemplateId,
+    this.host,
+    this.implicitEmailVerificationAllowed,
+    this.loginIdInUseOnCreateEmailTemplateId,
+    this.loginIdInUseOnUpdateEmailTemplateId,
+    this.loginNewDeviceEmailTemplateId,
+    this.loginSuspiciousEmailTemplateId,
+    this.password,
+    this.passwordlessEmailTemplateId,
+    this.passwordResetSuccessEmailTemplateId,
+    this.passwordUpdateEmailTemplateId,
+    this.port,
+    this.properties,
+    this.security,
+    this.setPasswordEmailTemplateId,
+    this.twoFactorMethodAddEmailTemplateId,
+    this.twoFactorMethodRemoveEmailTemplateId,
+    this.unverified,
+    this.username,
+    this.verificationEmailTemplateId,
+    this.verificationStrategy,
+    this.verifyEmail,
+    this.verifyEmailWhenChanged,
+  });
 
   factory EmailConfiguration.fromJson(Map<String, dynamic> json) =>
       _$EmailConfigurationFromJson(json);
@@ -1733,8 +1783,8 @@ class EmailConfiguration {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class EmailHeader {
-  String name;
-  String value;
+  String? name;
+  String? value;
 
   EmailHeader({this.name, this.value});
 
@@ -1745,9 +1795,9 @@ class EmailHeader {
 
 @JsonSerializable()
 class EmailPlus extends Enableable {
-  String emailTemplateId;
-  num maximumTimeToSendEmailInHours;
-  num minimumTimeToSendEmailInHours;
+  String? emailTemplateId;
+  num? maximumTimeToSendEmailInHours;
+  num? minimumTimeToSendEmailInHours;
 
   EmailPlus(
       {this.emailTemplateId,
@@ -1773,34 +1823,35 @@ enum EmailSecurityType {
 /// @author Brian Pontarelli
 @JsonSerializable()
 class EmailTemplate {
-  String defaultFromName;
-  String defaultHtmlTemplate;
-  String defaultSubject;
-  String defaultTextTemplate;
-  String fromEmail;
-  String id;
-  num insertInstant;
-  num lastUpdateInstant;
-  Map<String, String> localizedFromNames;
-  Map<String, String> localizedHtmlTemplates;
-  Map<String, String> localizedSubjects;
-  Map<String, String> localizedTextTemplates;
-  String name;
+  String? defaultFromName;
+  String? defaultHtmlTemplate;
+  String? defaultSubject;
+  String? defaultTextTemplate;
+  String? fromEmail;
+  String? id;
+  num? insertInstant;
+  num? lastUpdateInstant;
+  Map<String, String>? localizedFromNames;
+  Map<String, String>? localizedHtmlTemplates;
+  Map<String, String>? localizedSubjects;
+  Map<String, String>? localizedTextTemplates;
+  String? name;
 
-  EmailTemplate(
-      {this.defaultFromName,
-      this.defaultHtmlTemplate,
-      this.defaultSubject,
-      this.defaultTextTemplate,
-      this.fromEmail,
-      this.id,
-      this.insertInstant,
-      this.lastUpdateInstant,
-      this.localizedFromNames,
-      this.localizedHtmlTemplates,
-      this.localizedSubjects,
-      this.localizedTextTemplates,
-      this.name});
+  EmailTemplate({
+    this.defaultFromName,
+    this.defaultHtmlTemplate,
+    this.defaultSubject,
+    this.defaultTextTemplate,
+    this.fromEmail,
+    this.id,
+    this.insertInstant,
+    this.lastUpdateInstant,
+    this.localizedFromNames,
+    this.localizedHtmlTemplates,
+    this.localizedSubjects,
+    this.localizedTextTemplates,
+    this.name,
+  });
 
   factory EmailTemplate.fromJson(Map<String, dynamic> json) =>
       _$EmailTemplateFromJson(json);
@@ -1809,8 +1860,8 @@ class EmailTemplate {
 
 @JsonSerializable()
 class EmailTemplateErrors {
-  Map<String, String> parseErrors;
-  Map<String, String> renderErrors;
+  Map<String, String>? parseErrors;
+  Map<String, String>? renderErrors;
 
   EmailTemplateErrors({this.parseErrors, this.renderErrors});
 
@@ -1824,7 +1875,7 @@ class EmailTemplateErrors {
 /// @author Brian Pontarelli
 @JsonSerializable()
 class EmailTemplateRequest {
-  EmailTemplate emailTemplate;
+  EmailTemplate? emailTemplate;
 
   EmailTemplateRequest({this.emailTemplate});
 
@@ -1838,8 +1889,8 @@ class EmailTemplateRequest {
 /// @author Brian Pontarelli
 @JsonSerializable()
 class EmailTemplateResponse {
-  EmailTemplate emailTemplate;
-  List<EmailTemplate> emailTemplates;
+  EmailTemplate? emailTemplate;
+  List<EmailTemplate>? emailTemplates;
 
   EmailTemplateResponse({this.emailTemplate, this.emailTemplates});
 
@@ -1851,8 +1902,8 @@ class EmailTemplateResponse {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class EmailUnverifiedOptions {
-  bool allowEmailChangeWhenGated;
-  UnverifiedBehavior behavior;
+  bool? allowEmailChangeWhenGated;
+  UnverifiedBehavior? behavior;
 
   EmailUnverifiedOptions({this.allowEmailChangeWhenGated, this.behavior});
 
@@ -1866,7 +1917,7 @@ class EmailUnverifiedOptions {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class Enableable {
-  bool enabled;
+  bool? enabled;
 
   Enableable({this.enabled});
 
@@ -1880,16 +1931,16 @@ class Enableable {
 /// @author Brian Pontarelli
 @JsonSerializable()
 class Entity {
-  String clientId;
-  String clientSecret;
-  Map<String, dynamic> data;
-  String id;
-  num insertInstant;
-  num lastUpdateInstant;
-  String name;
-  String parentId;
-  String tenantId;
-  EntityType type;
+  String? clientId;
+  String? clientSecret;
+  Map<String, dynamic>? data;
+  String? id;
+  num? insertInstant;
+  num? lastUpdateInstant;
+  String? name;
+  String? parentId;
+  String? tenantId;
+  EntityType? type;
 
   Entity(
       {this.clientId,
@@ -1921,15 +1972,16 @@ class EntityGrant {
   String recipientEntityId;
   String userId;
 
-  EntityGrant(
-      {this.data,
-      this.entity,
-      this.id,
-      this.insertInstant,
-      this.lastUpdateInstant,
-      this.permissions,
-      this.recipientEntityId,
-      this.userId});
+  EntityGrant({
+    required this.data,
+    required this.entity,
+    required this.id,
+    required this.insertInstant,
+    required this.lastUpdateInstant,
+    required this.permissions,
+    required this.recipientEntityId,
+    required this.userId,
+  });
 
   factory EntityGrant.fromJson(Map<String, dynamic> json) =>
       _$EntityGrantFromJson(json);
@@ -1941,7 +1993,7 @@ class EntityGrant {
 /// @author Brian Pontarelli
 @JsonSerializable()
 class EntityGrantRequest {
-  EntityGrant grant;
+  EntityGrant? grant;
 
   EntityGrantRequest({this.grant});
 
@@ -1955,8 +2007,8 @@ class EntityGrantRequest {
 /// @author Brian Pontarelli
 @JsonSerializable()
 class EntityGrantResponse {
-  EntityGrant grant;
-  List<EntityGrant> grants;
+  EntityGrant? grant;
+  List<EntityGrant>? grants;
 
   EntityGrantResponse({this.grant, this.grants});
 
@@ -1970,9 +2022,9 @@ class EntityGrantResponse {
 /// @author Brian Pontarelli
 @JsonSerializable()
 class EntityGrantSearchCriteria extends BaseSearchCriteria {
-  String entityId;
-  String name;
-  String userId;
+  String? entityId;
+  String? name;
+  String? userId;
 
   EntityGrantSearchCriteria({this.entityId, this.name, this.userId});
 
@@ -1986,7 +2038,7 @@ class EntityGrantSearchCriteria extends BaseSearchCriteria {
 /// @author Brian Pontarelli
 @JsonSerializable()
 class EntityGrantSearchRequest {
-  EntityGrantSearchCriteria search;
+  EntityGrantSearchCriteria? search;
 
   EntityGrantSearchRequest({this.search});
 
@@ -2000,8 +2052,8 @@ class EntityGrantSearchRequest {
 /// @author Brian Pontarelli
 @JsonSerializable()
 class EntityGrantSearchResponse {
-  List<EntityGrant> grants;
-  num total;
+  List<EntityGrant>? grants;
+  num? total;
 
   EntityGrantSearchResponse({this.grants, this.total});
 
@@ -2013,8 +2065,8 @@ class EntityGrantSearchResponse {
 /// JWT Configuration for entities.
 @JsonSerializable()
 class EntityJWTConfiguration extends Enableable {
-  String accessTokenKeyId;
-  num timeToLiveInSeconds;
+  String? accessTokenKeyId;
+  num? timeToLiveInSeconds;
 
   EntityJWTConfiguration({this.accessTokenKeyId, this.timeToLiveInSeconds});
 
@@ -2028,7 +2080,7 @@ class EntityJWTConfiguration extends Enableable {
 /// @author Brian Pontarelli
 @JsonSerializable()
 class EntityRequest {
-  Entity entity;
+  Entity? entity;
 
   EntityRequest({this.entity});
 
@@ -2042,7 +2094,7 @@ class EntityRequest {
 /// @author Brian Pontarelli
 @JsonSerializable()
 class EntityResponse {
-  Entity entity;
+  Entity? entity;
 
   EntityResponse({this.entity});
 
@@ -2068,7 +2120,7 @@ class EntitySearchCriteria extends BaseElasticSearchCriteria {
 /// @author Brett Guy
 @JsonSerializable()
 class EntitySearchRequest {
-  EntitySearchCriteria search;
+  EntitySearchCriteria? search;
 
   EntitySearchRequest({this.search});
 
@@ -2082,8 +2134,8 @@ class EntitySearchRequest {
 /// @author Brett Guy
 @JsonSerializable()
 class EntitySearchResponse {
-  List<Entity> entities;
-  num total;
+  List<Entity>? entities;
+  num? total;
 
   EntitySearchResponse({this.entities, this.total});
 
@@ -2097,13 +2149,13 @@ class EntitySearchResponse {
 /// @author Brian Pontarelli
 @JsonSerializable()
 class EntityType {
-  Map<String, dynamic> data;
-  String id;
-  num insertInstant;
-  EntityJWTConfiguration jwtConfiguration;
-  num lastUpdateInstant;
-  String name;
-  List<EntityTypePermission> permissions;
+  Map<String, dynamic>? data;
+  String? id;
+  num? insertInstant;
+  EntityJWTConfiguration? jwtConfiguration;
+  num? lastUpdateInstant;
+  String? name;
+  List<EntityTypePermission>? permissions;
 
   EntityType(
       {this.data,
@@ -2124,22 +2176,23 @@ class EntityType {
 /// @author Brian Pontarelli
 @JsonSerializable()
 class EntityTypePermission {
-  Map<String, dynamic> data;
-  String description;
-  String id;
-  num insertInstant;
-  bool isDefault;
-  num lastUpdateInstant;
-  String name;
+  Map<String, dynamic>? data;
+  String? description;
+  String? id;
+  num? insertInstant;
+  bool? isDefault;
+  num? lastUpdateInstant;
+  String? name;
 
-  EntityTypePermission(
-      {this.data,
-      this.description,
-      this.id,
-      this.insertInstant,
-      this.isDefault,
-      this.lastUpdateInstant,
-      this.name});
+  EntityTypePermission({
+    required this.data,
+    required this.description,
+    required this.id,
+    required this.insertInstant,
+    required this.isDefault,
+    required this.lastUpdateInstant,
+    required this.name,
+  });
 
   factory EntityTypePermission.fromJson(Map<String, dynamic> json) =>
       _$EntityTypePermissionFromJson(json);
@@ -2151,8 +2204,8 @@ class EntityTypePermission {
 /// @author Brian Pontarelli
 @JsonSerializable()
 class EntityTypeRequest {
-  EntityType entityType;
-  EntityTypePermission permission;
+  EntityType? entityType;
+  EntityTypePermission? permission;
 
   EntityTypeRequest({this.entityType, this.permission});
 
@@ -2166,9 +2219,9 @@ class EntityTypeRequest {
 /// @author Brian Pontarelli
 @JsonSerializable()
 class EntityTypeResponse {
-  EntityType entityType;
-  List<EntityType> entityTypes;
-  EntityTypePermission permission;
+  EntityType? entityType;
+  List<EntityType>? entityTypes;
+  EntityTypePermission? permission;
 
   EntityTypeResponse({this.entityType, this.entityTypes, this.permission});
 
@@ -2182,7 +2235,7 @@ class EntityTypeResponse {
 /// @author Brian Pontarelli
 @JsonSerializable()
 class EntityTypeSearchCriteria extends BaseSearchCriteria {
-  String name;
+  String? name;
 
   EntityTypeSearchCriteria({this.name});
 
@@ -2196,7 +2249,7 @@ class EntityTypeSearchCriteria extends BaseSearchCriteria {
 /// @author Brian Pontarelli
 @JsonSerializable()
 class EntityTypeSearchRequest {
-  EntityTypeSearchCriteria search;
+  EntityTypeSearchCriteria? search;
 
   EntityTypeSearchRequest({this.search});
 
@@ -2210,8 +2263,8 @@ class EntityTypeSearchRequest {
 /// @author Brian Pontarelli
 @JsonSerializable()
 class EntityTypeSearchResponse {
-  List<EntityType> entityTypes;
-  num total;
+  List<EntityType>? entityTypes;
+  num? total;
 
   EntityTypeSearchResponse({this.entityTypes, this.total});
 
@@ -2224,10 +2277,10 @@ class EntityTypeSearchResponse {
 @JsonSerializable()
 class EpicGamesApplicationConfiguration
     extends BaseIdentityProviderApplicationConfiguration {
-  String buttonText;
-  String client_id;
-  String client_secret;
-  String scope;
+  String? buttonText;
+  String? client_id;
+  String? client_secret;
+  String? scope;
 
   EpicGamesApplicationConfiguration(
       {this.buttonText, this.client_id, this.client_secret, this.scope});
@@ -2245,10 +2298,10 @@ class EpicGamesApplicationConfiguration
 @JsonSerializable()
 class EpicGamesIdentityProvider
     extends BaseIdentityProvider<EpicGamesApplicationConfiguration> {
-  String buttonText;
-  String client_id;
-  String client_secret;
-  String scope;
+  String? buttonText;
+  String? client_id;
+  String? client_secret;
+  String? scope;
 
   EpicGamesIdentityProvider(
       {this.buttonText, this.client_id, this.client_secret, this.scope});
@@ -2263,9 +2316,9 @@ class EpicGamesIdentityProvider
 /// @author Brian Pontarelli
 @JsonSerializable()
 class Error {
-  String code;
-  Map<String, dynamic> data;
-  String message;
+  String? code;
+  Map<String, dynamic>? data;
+  String? message;
 
   Error({this.code, this.data, this.message});
 
@@ -2278,10 +2331,10 @@ class Error {
 /// @author Brian Pontarelli
 @JsonSerializable()
 class Errors {
-  Map<String, List<Error>> fieldErrors;
-  List<Error> generalErrors;
+  Map<String, List<Error>>? fieldErrors;
+  List<Error>? generalErrors;
 
-  Errors({this.fieldErrors, this.generalErrors});
+  Errors({required this.fieldErrors, required this.generalErrors});
 
   factory Errors.fromJson(Map<String, dynamic> json) => _$ErrorsFromJson(json);
   Map<String, dynamic> toJson() => _$ErrorsToJson(this);
@@ -2290,9 +2343,9 @@ class Errors {
 /// @author Brian Pontarelli
 @JsonSerializable()
 class EventConfiguration {
-  Map<EventType, EventConfigurationData> events;
+  Map<EventType, EventConfigurationData>? events;
 
-  EventConfiguration({this.events});
+  EventConfiguration({required this.events});
 
   factory EventConfiguration.fromJson(Map<String, dynamic> json) =>
       _$EventConfigurationFromJson(json);
@@ -2301,9 +2354,9 @@ class EventConfiguration {
 
 @JsonSerializable()
 class EventConfigurationData extends Enableable {
-  TransactionType transactionType;
+  TransactionType? transactionType;
 
-  EventConfigurationData({this.transactionType});
+  EventConfigurationData({required this.transactionType});
 
   factory EventConfigurationData.fromJson(Map<String, dynamic> json) =>
       _$EventConfigurationDataFromJson(json);
@@ -2315,24 +2368,25 @@ class EventConfigurationData extends Enableable {
 /// @author Brian Pontarelli
 @JsonSerializable()
 class EventInfo {
-  Map<String, dynamic> data;
-  String deviceDescription;
-  String deviceName;
-  String deviceType;
-  String ipAddress;
-  Location location;
-  String os;
-  String userAgent;
+  Map<String, dynamic>? data;
+  String? deviceDescription;
+  String? deviceName;
+  String? deviceType;
+  String? ipAddress;
+  Location? location;
+  String? os;
+  String? userAgent;
 
-  EventInfo(
-      {this.data,
-      this.deviceDescription,
-      this.deviceName,
-      this.deviceType,
-      this.ipAddress,
-      this.location,
-      this.os,
-      this.userAgent});
+  EventInfo({
+    this.data,
+    this.deviceDescription,
+    this.deviceName,
+    this.deviceType,
+    this.ipAddress,
+    this.location,
+    this.os,
+    this.userAgent,
+  });
 
   factory EventInfo.fromJson(Map<String, dynamic> json) =>
       _$EventInfoFromJson(json);
@@ -2344,10 +2398,10 @@ class EventInfo {
 /// @author Brian Pontarelli
 @JsonSerializable()
 class EventLog {
-  num id;
-  num insertInstant;
-  String message;
-  EventLogType type;
+  num? id;
+  num? insertInstant;
+  String? message;
+  EventLogType? type;
 
   EventLog({this.id, this.insertInstant, this.message, this.type});
 
@@ -2358,7 +2412,7 @@ class EventLog {
 
 @JsonSerializable()
 class EventLogConfiguration {
-  num numberToRetain;
+  num? numberToRetain;
 
   EventLogConfiguration({this.numberToRetain});
 
@@ -2372,7 +2426,7 @@ class EventLogConfiguration {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class EventLogCreateEvent extends BaseEvent {
-  EventLog eventLog;
+  EventLog? eventLog;
 
   EventLogCreateEvent({this.eventLog});
 
@@ -2386,9 +2440,9 @@ class EventLogCreateEvent extends BaseEvent {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class EventLogResponse {
-  EventLog eventLog;
+  EventLog? eventLog;
 
-  EventLogResponse({this.eventLog});
+  EventLogResponse({required this.eventLog});
 
   factory EventLogResponse.fromJson(Map<String, dynamic> json) =>
       _$EventLogResponseFromJson(json);
@@ -2400,10 +2454,10 @@ class EventLogResponse {
 /// @author Brian Pontarelli
 @JsonSerializable()
 class EventLogSearchCriteria extends BaseSearchCriteria {
-  num end;
-  String message;
-  num start;
-  EventLogType type;
+  num? end;
+  String? message;
+  num? start;
+  EventLogType? type;
 
   EventLogSearchCriteria({this.end, this.message, this.start, this.type});
 
@@ -2415,7 +2469,7 @@ class EventLogSearchCriteria extends BaseSearchCriteria {
 /// @author Brian Pontarelli
 @JsonSerializable()
 class EventLogSearchRequest {
-  EventLogSearchCriteria search;
+  EventLogSearchCriteria? search;
 
   EventLogSearchRequest({this.search});
 
@@ -2429,10 +2483,10 @@ class EventLogSearchRequest {
 /// @author Brian Pontarelli
 @JsonSerializable()
 class EventLogSearchResponse {
-  List<EventLog> eventLogs;
-  num total;
+  List<EventLog>? eventLogs;
+  num? total;
 
-  EventLogSearchResponse({this.eventLogs, this.total});
+  EventLogSearchResponse({required this.eventLogs, required this.total});
 
   factory EventLogSearchResponse.fromJson(Map<String, dynamic> json) =>
       _$EventLogSearchResponseFromJson(json);
@@ -2456,7 +2510,7 @@ enum EventLogType {
 /// @author Brian Pontarelli
 @JsonSerializable()
 class EventRequest {
-  BaseEvent event;
+  BaseEvent? event;
 
   EventRequest({this.event});
 
@@ -2596,60 +2650,61 @@ enum ExpiryUnit {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class ExternalIdentifierConfiguration {
-  num authorizationGrantIdTimeToLiveInSeconds;
-  SecureGeneratorConfiguration changePasswordIdGenerator;
-  num changePasswordIdTimeToLiveInSeconds;
-  num deviceCodeTimeToLiveInSeconds;
-  SecureGeneratorConfiguration deviceUserCodeIdGenerator;
-  SecureGeneratorConfiguration emailVerificationIdGenerator;
-  num emailVerificationIdTimeToLiveInSeconds;
-  SecureGeneratorConfiguration emailVerificationOneTimeCodeGenerator;
-  num externalAuthenticationIdTimeToLiveInSeconds;
-  num oneTimePasswordTimeToLiveInSeconds;
-  SecureGeneratorConfiguration passwordlessLoginGenerator;
-  num passwordlessLoginTimeToLiveInSeconds;
-  num pendingAccountLinkTimeToLiveInSeconds;
-  SecureGeneratorConfiguration registrationVerificationIdGenerator;
-  num registrationVerificationIdTimeToLiveInSeconds;
-  SecureGeneratorConfiguration registrationVerificationOneTimeCodeGenerator;
-  num samlv2AuthNRequestIdTimeToLiveInSeconds;
-  SecureGeneratorConfiguration setupPasswordIdGenerator;
-  num setupPasswordIdTimeToLiveInSeconds;
-  num trustTokenTimeToLiveInSeconds;
-  num twoFactorIdTimeToLiveInSeconds;
-  SecureGeneratorConfiguration twoFactorOneTimeCodeIdGenerator;
-  num twoFactorOneTimeCodeIdTimeToLiveInSeconds;
-  num twoFactorTrustIdTimeToLiveInSeconds;
-  num webAuthnAuthenticationChallengeTimeToLiveInSeconds;
-  num webAuthnRegistrationChallengeTimeToLiveInSeconds;
+  num? authorizationGrantIdTimeToLiveInSeconds;
+  SecureGeneratorConfiguration? changePasswordIdGenerator;
+  num? changePasswordIdTimeToLiveInSeconds;
+  num? deviceCodeTimeToLiveInSeconds;
+  SecureGeneratorConfiguration? deviceUserCodeIdGenerator;
+  SecureGeneratorConfiguration? emailVerificationIdGenerator;
+  num? emailVerificationIdTimeToLiveInSeconds;
+  SecureGeneratorConfiguration? emailVerificationOneTimeCodeGenerator;
+  num? externalAuthenticationIdTimeToLiveInSeconds;
+  num? oneTimePasswordTimeToLiveInSeconds;
+  SecureGeneratorConfiguration? passwordlessLoginGenerator;
+  num? passwordlessLoginTimeToLiveInSeconds;
+  num? pendingAccountLinkTimeToLiveInSeconds;
+  SecureGeneratorConfiguration? registrationVerificationIdGenerator;
+  num? registrationVerificationIdTimeToLiveInSeconds;
+  SecureGeneratorConfiguration? registrationVerificationOneTimeCodeGenerator;
+  num? samlv2AuthNRequestIdTimeToLiveInSeconds;
+  SecureGeneratorConfiguration? setupPasswordIdGenerator;
+  num? setupPasswordIdTimeToLiveInSeconds;
+  num? trustTokenTimeToLiveInSeconds;
+  num? twoFactorIdTimeToLiveInSeconds;
+  SecureGeneratorConfiguration? twoFactorOneTimeCodeIdGenerator;
+  num? twoFactorOneTimeCodeIdTimeToLiveInSeconds;
+  num? twoFactorTrustIdTimeToLiveInSeconds;
+  num? webAuthnAuthenticationChallengeTimeToLiveInSeconds;
+  num? webAuthnRegistrationChallengeTimeToLiveInSeconds;
 
-  ExternalIdentifierConfiguration(
-      {this.authorizationGrantIdTimeToLiveInSeconds,
-      this.changePasswordIdGenerator,
-      this.changePasswordIdTimeToLiveInSeconds,
-      this.deviceCodeTimeToLiveInSeconds,
-      this.deviceUserCodeIdGenerator,
-      this.emailVerificationIdGenerator,
-      this.emailVerificationIdTimeToLiveInSeconds,
-      this.emailVerificationOneTimeCodeGenerator,
-      this.externalAuthenticationIdTimeToLiveInSeconds,
-      this.oneTimePasswordTimeToLiveInSeconds,
-      this.passwordlessLoginGenerator,
-      this.passwordlessLoginTimeToLiveInSeconds,
-      this.pendingAccountLinkTimeToLiveInSeconds,
-      this.registrationVerificationIdGenerator,
-      this.registrationVerificationIdTimeToLiveInSeconds,
-      this.registrationVerificationOneTimeCodeGenerator,
-      this.samlv2AuthNRequestIdTimeToLiveInSeconds,
-      this.setupPasswordIdGenerator,
-      this.setupPasswordIdTimeToLiveInSeconds,
-      this.trustTokenTimeToLiveInSeconds,
-      this.twoFactorIdTimeToLiveInSeconds,
-      this.twoFactorOneTimeCodeIdGenerator,
-      this.twoFactorOneTimeCodeIdTimeToLiveInSeconds,
-      this.twoFactorTrustIdTimeToLiveInSeconds,
-      this.webAuthnAuthenticationChallengeTimeToLiveInSeconds,
-      this.webAuthnRegistrationChallengeTimeToLiveInSeconds});
+  ExternalIdentifierConfiguration({
+    this.authorizationGrantIdTimeToLiveInSeconds,
+    this.changePasswordIdGenerator,
+    this.changePasswordIdTimeToLiveInSeconds,
+    this.deviceCodeTimeToLiveInSeconds,
+    this.deviceUserCodeIdGenerator,
+    this.emailVerificationIdGenerator,
+    this.emailVerificationIdTimeToLiveInSeconds,
+    this.emailVerificationOneTimeCodeGenerator,
+    this.externalAuthenticationIdTimeToLiveInSeconds,
+    this.oneTimePasswordTimeToLiveInSeconds,
+    this.passwordlessLoginGenerator,
+    this.passwordlessLoginTimeToLiveInSeconds,
+    this.pendingAccountLinkTimeToLiveInSeconds,
+    this.registrationVerificationIdGenerator,
+    this.registrationVerificationIdTimeToLiveInSeconds,
+    this.registrationVerificationOneTimeCodeGenerator,
+    this.samlv2AuthNRequestIdTimeToLiveInSeconds,
+    this.setupPasswordIdGenerator,
+    this.setupPasswordIdTimeToLiveInSeconds,
+    this.trustTokenTimeToLiveInSeconds,
+    this.twoFactorIdTimeToLiveInSeconds,
+    this.twoFactorOneTimeCodeIdGenerator,
+    this.twoFactorOneTimeCodeIdTimeToLiveInSeconds,
+    this.twoFactorTrustIdTimeToLiveInSeconds,
+    this.webAuthnAuthenticationChallengeTimeToLiveInSeconds,
+    this.webAuthnRegistrationChallengeTimeToLiveInSeconds,
+  });
 
   factory ExternalIdentifierConfiguration.fromJson(Map<String, dynamic> json) =>
       _$ExternalIdentifierConfigurationFromJson(json);
@@ -2676,12 +2731,12 @@ class ExternalJWTApplicationConfiguration
 @JsonSerializable()
 class ExternalJWTIdentityProvider
     extends BaseIdentityProvider<ExternalJWTApplicationConfiguration> {
-  Map<String, String> claimMap;
-  String defaultKeyId;
-  Set<String> domains;
-  String headerKeyParameter;
-  IdentityProviderOauth2Configuration oauth2;
-  String uniqueIdentityClaim;
+  Map<String, String>? claimMap;
+  String? defaultKeyId;
+  Set<String>? domains;
+  String? headerKeyParameter;
+  IdentityProviderOauth2Configuration? oauth2;
+  String? uniqueIdentityClaim;
 
   ExternalJWTIdentityProvider(
       {this.claimMap,
@@ -2700,12 +2755,12 @@ class ExternalJWTIdentityProvider
 @JsonSerializable()
 class FacebookApplicationConfiguration
     extends BaseIdentityProviderApplicationConfiguration {
-  String appId;
-  String buttonText;
-  String client_secret;
-  String fields;
-  IdentityProviderLoginMethod loginMethod;
-  String permissions;
+  String? appId;
+  String? buttonText;
+  String? client_secret;
+  String? fields;
+  IdentityProviderLoginMethod? loginMethod;
+  String? permissions;
 
   FacebookApplicationConfiguration(
       {this.appId,
@@ -2728,12 +2783,12 @@ class FacebookApplicationConfiguration
 @JsonSerializable()
 class FacebookIdentityProvider
     extends BaseIdentityProvider<FacebookApplicationConfiguration> {
-  String appId;
-  String buttonText;
-  String client_secret;
-  String fields;
-  IdentityProviderLoginMethod loginMethod;
-  String permissions;
+  String? appId;
+  String? buttonText;
+  String? client_secret;
+  String? fields;
+  IdentityProviderLoginMethod? loginMethod;
+  String? permissions;
 
   FacebookIdentityProvider(
       {this.appId,
@@ -2753,7 +2808,7 @@ class FacebookIdentityProvider
 /// @author Daniel DeGroff
 @JsonSerializable()
 class FailedAuthenticationActionCancelPolicy {
-  bool onPasswordReset;
+  bool? onPasswordReset;
 
   FailedAuthenticationActionCancelPolicy({this.onPasswordReset});
 
@@ -2769,13 +2824,13 @@ class FailedAuthenticationActionCancelPolicy {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class FailedAuthenticationConfiguration {
-  FailedAuthenticationActionCancelPolicy actionCancelPolicy;
-  num actionDuration;
-  ExpiryUnit actionDurationUnit;
-  bool emailUser;
-  num resetCountInSeconds;
-  num tooManyAttempts;
-  String userActionId;
+  FailedAuthenticationActionCancelPolicy? actionCancelPolicy;
+  num? actionDuration;
+  ExpiryUnit? actionDurationUnit;
+  bool? emailUser;
+  num? resetCountInSeconds;
+  num? tooManyAttempts;
+  String? userActionId;
 
   FailedAuthenticationConfiguration(
       {this.actionCancelPolicy,
@@ -2798,10 +2853,10 @@ class FailedAuthenticationConfiguration {
 /// @author Brian Pontarelli
 @JsonSerializable()
 class Family {
-  String id;
-  num insertInstant;
-  num lastUpdateInstant;
-  List<FamilyMember> members;
+  String? id;
+  num? insertInstant;
+  num? lastUpdateInstant;
+  List<FamilyMember>? members;
 
   Family({this.id, this.insertInstant, this.lastUpdateInstant, this.members});
 
@@ -2812,15 +2867,15 @@ class Family {
 /// @author Brian Pontarelli
 @JsonSerializable()
 class FamilyConfiguration extends Enableable {
-  bool allowChildRegistrations;
-  String confirmChildEmailTemplateId;
-  bool deleteOrphanedAccounts;
-  num deleteOrphanedAccountsDays;
-  String familyRequestEmailTemplateId;
-  num maximumChildAge;
-  num minimumOwnerAge;
-  bool parentEmailRequired;
-  String parentRegistrationEmailTemplateId;
+  bool? allowChildRegistrations;
+  String? confirmChildEmailTemplateId;
+  bool? deleteOrphanedAccounts;
+  num? deleteOrphanedAccountsDays;
+  String? familyRequestEmailTemplateId;
+  num? maximumChildAge;
+  num? minimumOwnerAge;
+  bool? parentEmailRequired;
+  String? parentRegistrationEmailTemplateId;
 
   FamilyConfiguration(
       {this.allowChildRegistrations,
@@ -2843,7 +2898,7 @@ class FamilyConfiguration extends Enableable {
 /// @author Brian Pontarelli
 @JsonSerializable()
 class FamilyEmailRequest {
-  String parentEmail;
+  String? parentEmail;
 
   FamilyEmailRequest({this.parentEmail});
 
@@ -2857,20 +2912,21 @@ class FamilyEmailRequest {
 /// @author Brian Pontarelli
 @JsonSerializable()
 class FamilyMember {
-  Map<String, dynamic> data;
-  num insertInstant;
-  num lastUpdateInstant;
-  bool owner;
-  FamilyRole role;
-  String userId;
+  Map<String, dynamic>? data;
+  num? insertInstant;
+  num? lastUpdateInstant;
+  bool? owner;
+  FamilyRole? role;
+  String? userId;
 
-  FamilyMember(
-      {this.data,
-      this.insertInstant,
-      this.lastUpdateInstant,
-      this.owner,
-      this.role,
-      this.userId});
+  FamilyMember({
+    this.data,
+    this.insertInstant,
+    this.lastUpdateInstant,
+    this.owner,
+    this.role,
+    this.userId,
+  });
 
   factory FamilyMember.fromJson(Map<String, dynamic> json) =>
       _$FamilyMemberFromJson(json);
@@ -2882,7 +2938,7 @@ class FamilyMember {
 /// @author Brian Pontarelli
 @JsonSerializable()
 class FamilyRequest {
-  FamilyMember familyMember;
+  FamilyMember? familyMember;
 
   FamilyRequest({this.familyMember});
 
@@ -2896,8 +2952,8 @@ class FamilyRequest {
 /// @author Brian Pontarelli
 @JsonSerializable()
 class FamilyResponse {
-  List<Family> families;
-  Family family;
+  List<Family>? families;
+  Family? family;
 
   FamilyResponse({this.families, this.family});
 
@@ -2920,13 +2976,13 @@ enum FamilyRole {
 /// @author Brian Pontarelli
 @JsonSerializable()
 class ForgotPasswordRequest extends BaseEventRequest {
-  String applicationId;
-  String changePasswordId;
-  String email;
-  String loginId;
-  bool sendForgotPasswordEmail;
-  Map<String, dynamic> state;
-  String username;
+  String? applicationId;
+  String? changePasswordId;
+  String? email;
+  String? loginId;
+  bool? sendForgotPasswordEmail;
+  Map<String, dynamic>? state;
+  String? username;
 
   ForgotPasswordRequest(
       {this.applicationId,
@@ -2947,9 +3003,9 @@ class ForgotPasswordRequest extends BaseEventRequest {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class ForgotPasswordResponse {
-  String changePasswordId;
+  String? changePasswordId;
 
-  ForgotPasswordResponse({this.changePasswordId});
+  ForgotPasswordResponse({required this.changePasswordId});
 
   factory ForgotPasswordResponse.fromJson(Map<String, dynamic> json) =>
       _$ForgotPasswordResponseFromJson(json);
@@ -2959,22 +3015,23 @@ class ForgotPasswordResponse {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class Form {
-  Map<String, dynamic> data;
-  String id;
-  num insertInstant;
-  num lastUpdateInstant;
-  String name;
-  List<FormStep> steps;
-  FormType type;
+  Map<String, dynamic>? data;
+  String? id;
+  num? insertInstant;
+  num? lastUpdateInstant;
+  String? name;
+  List<FormStep>? steps;
+  FormType? type;
 
-  Form(
-      {this.data,
-      this.id,
-      this.insertInstant,
-      this.lastUpdateInstant,
-      this.name,
-      this.steps,
-      this.type});
+  Form({
+    this.data,
+    this.id,
+    this.insertInstant,
+    this.lastUpdateInstant,
+    this.name,
+    this.steps,
+    this.type,
+  });
 
   factory Form.fromJson(Map<String, dynamic> json) => _$FormFromJson(json);
   Map<String, dynamic> toJson() => _$FormToJson(this);
@@ -3017,36 +3074,37 @@ enum FormDataType {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class FormField {
-  bool confirm;
-  String consentId;
-  FormControl control;
-  Map<String, dynamic> data;
-  String description;
-  String id;
-  num insertInstant;
-  String key;
-  num lastUpdateInstant;
-  String name;
-  List<String> options;
-  bool required;
-  FormDataType type;
-  FormFieldValidator validator;
+  bool? confirm;
+  String? consentId;
+  FormControl? control;
+  Map<String, dynamic>? data;
+  String? description;
+  String? id;
+  num? insertInstant;
+  String? key;
+  num? lastUpdateInstant;
+  String? name;
+  List<String>? options;
+  bool? required;
+  FormDataType? type;
+  FormFieldValidator? validator;
 
-  FormField(
-      {this.confirm,
-      this.consentId,
-      this.control,
-      this.data,
-      this.description,
-      this.id,
-      this.insertInstant,
-      this.key,
-      this.lastUpdateInstant,
-      this.name,
-      this.options,
-      this.required,
-      this.type,
-      this.validator});
+  FormField({
+    this.confirm,
+    this.consentId,
+    this.control,
+    this.data,
+    this.description,
+    this.id,
+    this.insertInstant,
+    this.key,
+    this.lastUpdateInstant,
+    this.name,
+    this.options,
+    this.required,
+    this.type,
+    this.validator,
+  });
 
   factory FormField.fromJson(Map<String, dynamic> json) =>
       _$FormFieldFromJson(json);
@@ -3066,8 +3124,8 @@ enum FormFieldAdminPolicy {
 /// @author Brett Guy
 @JsonSerializable()
 class FormFieldRequest {
-  FormField field;
-  List<FormField> fields;
+  FormField? field;
+  List<FormField>? fields;
 
   FormFieldRequest({this.field, this.fields});
 
@@ -3081,10 +3139,10 @@ class FormFieldRequest {
 /// @author Brett Guy
 @JsonSerializable()
 class FormFieldResponse {
-  FormField field;
-  List<FormField> fields;
+  FormField? field;
+  List<FormField>? fields;
 
-  FormFieldResponse({this.field, this.fields});
+  FormFieldResponse({required this.field, required this.fields});
 
   factory FormFieldResponse.fromJson(Map<String, dynamic> json) =>
       _$FormFieldResponseFromJson(json);
@@ -3094,9 +3152,9 @@ class FormFieldResponse {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class FormFieldValidator extends Enableable {
-  String expression;
+  String? expression;
 
-  FormFieldValidator({this.expression});
+  FormFieldValidator({required this.expression});
 
   factory FormFieldValidator.fromJson(Map<String, dynamic> json) =>
       _$FormFieldValidatorFromJson(json);
@@ -3108,7 +3166,7 @@ class FormFieldValidator extends Enableable {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class FormRequest {
-  Form form;
+  Form? form;
 
   FormRequest({this.form});
 
@@ -3122,8 +3180,8 @@ class FormRequest {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class FormResponse {
-  Form form;
-  List<Form> forms;
+  Form? form;
+  List<Form>? forms;
 
   FormResponse({this.form, this.forms});
 
@@ -3135,7 +3193,7 @@ class FormResponse {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class FormStep {
-  List<String> fields;
+  List<String>? fields;
 
   FormStep({this.fields});
 
@@ -3175,22 +3233,23 @@ class FusionAuthConnectorConfiguration extends BaseConnectorConfiguration {
 /// @author Trevor Smith
 @JsonSerializable()
 class GenericConnectorConfiguration extends BaseConnectorConfiguration {
-  String authenticationURL;
-  num connectTimeout;
-  Map<String, String> headers;
-  String httpAuthenticationPassword;
-  String httpAuthenticationUsername;
-  num readTimeout;
-  String sslCertificateKeyId;
+  String? authenticationURL;
+  num? connectTimeout;
+  Map<String, String>? headers;
+  String? httpAuthenticationPassword;
+  String? httpAuthenticationUsername;
+  num? readTimeout;
+  String? sslCertificateKeyId;
 
-  GenericConnectorConfiguration(
-      {this.authenticationURL,
-      this.connectTimeout,
-      this.headers,
-      this.httpAuthenticationPassword,
-      this.httpAuthenticationUsername,
-      this.readTimeout,
-      this.sslCertificateKeyId});
+  GenericConnectorConfiguration({
+    this.authenticationURL,
+    this.connectTimeout,
+    this.headers,
+    this.httpAuthenticationPassword,
+    this.httpAuthenticationUsername,
+    this.readTimeout,
+    this.sslCertificateKeyId,
+  });
 
   factory GenericConnectorConfiguration.fromJson(Map<String, dynamic> json) =>
       _$GenericConnectorConfigurationFromJson(json);
@@ -3200,22 +3259,23 @@ class GenericConnectorConfiguration extends BaseConnectorConfiguration {
 /// @author Brett Guy
 @JsonSerializable()
 class GenericMessengerConfiguration extends BaseMessengerConfiguration {
-  num connectTimeout;
-  Map<String, String> headers;
-  String httpAuthenticationPassword;
-  String httpAuthenticationUsername;
-  num readTimeout;
-  String sslCertificate;
-  String url;
+  num? connectTimeout;
+  Map<String, String>? headers;
+  String? httpAuthenticationPassword;
+  String? httpAuthenticationUsername;
+  num? readTimeout;
+  String? sslCertificate;
+  String? url;
 
-  GenericMessengerConfiguration(
-      {this.connectTimeout,
-      this.headers,
-      this.httpAuthenticationPassword,
-      this.httpAuthenticationUsername,
-      this.readTimeout,
-      this.sslCertificate,
-      this.url});
+  GenericMessengerConfiguration({
+    this.connectTimeout,
+    this.headers,
+    this.httpAuthenticationPassword,
+    this.httpAuthenticationUsername,
+    this.readTimeout,
+    this.sslCertificate,
+    this.url,
+  });
 
   factory GenericMessengerConfiguration.fromJson(Map<String, dynamic> json) =>
       _$GenericMessengerConfigurationFromJson(json);
@@ -3226,18 +3286,19 @@ class GenericMessengerConfiguration extends BaseMessengerConfiguration {
 @JsonSerializable()
 class GoogleApplicationConfiguration
     extends BaseIdentityProviderApplicationConfiguration {
-  String buttonText;
-  String client_id;
-  String client_secret;
-  IdentityProviderLoginMethod loginMethod;
-  String scope;
+  String? buttonText;
+  String? client_id;
+  String? client_secret;
+  IdentityProviderLoginMethod? loginMethod;
+  String? scope;
 
-  GoogleApplicationConfiguration(
-      {this.buttonText,
-      this.client_id,
-      this.client_secret,
-      this.loginMethod,
-      this.scope});
+  GoogleApplicationConfiguration({
+    this.buttonText,
+    this.client_id,
+    this.client_secret,
+    this.loginMethod,
+    this.scope,
+  });
 
   factory GoogleApplicationConfiguration.fromJson(Map<String, dynamic> json) =>
       _$GoogleApplicationConfigurationFromJson(json);
@@ -3250,18 +3311,19 @@ class GoogleApplicationConfiguration
 @JsonSerializable()
 class GoogleIdentityProvider
     extends BaseIdentityProvider<GoogleApplicationConfiguration> {
-  String buttonText;
-  String client_id;
-  String client_secret;
-  IdentityProviderLoginMethod loginMethod;
-  String scope;
+  String? buttonText;
+  String? client_id;
+  String? client_secret;
+  IdentityProviderLoginMethod? loginMethod;
+  String? scope;
 
-  GoogleIdentityProvider(
-      {this.buttonText,
-      this.client_id,
-      this.client_secret,
-      this.loginMethod,
-      this.scope});
+  GoogleIdentityProvider({
+    this.buttonText,
+    this.client_id,
+    this.client_secret,
+    this.loginMethod,
+    this.scope,
+  });
 
   factory GoogleIdentityProvider.fromJson(Map<String, dynamic> json) =>
       _$GoogleIdentityProviderFromJson(json);
@@ -3295,22 +3357,23 @@ enum GrantType {
 /// @author Tyler Scott
 @JsonSerializable()
 class Group {
-  Map<String, dynamic> data;
-  String id;
-  num insertInstant;
-  num lastUpdateInstant;
-  String name;
-  Map<String, List<ApplicationRole>> roles;
-  String tenantId;
+  Map<String, dynamic>? data;
+  String? id;
+  num? insertInstant;
+  num? lastUpdateInstant;
+  String? name;
+  Map<String, List<ApplicationRole>>? roles;
+  String? tenantId;
 
-  Group(
-      {this.data,
-      this.id,
-      this.insertInstant,
-      this.lastUpdateInstant,
-      this.name,
-      this.roles,
-      this.tenantId});
+  Group({
+    this.data,
+    this.id,
+    this.insertInstant,
+    this.lastUpdateInstant,
+    this.name,
+    this.roles,
+    this.tenantId,
+  });
 
   factory Group.fromJson(Map<String, dynamic> json) => _$GroupFromJson(json);
   Map<String, dynamic> toJson() => _$GroupToJson(this);
@@ -3321,9 +3384,9 @@ class Group {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class GroupCreateCompleteEvent extends BaseEvent {
-  Group group;
+  Group? group;
 
-  GroupCreateCompleteEvent({this.group});
+  GroupCreateCompleteEvent({required this.group});
 
   factory GroupCreateCompleteEvent.fromJson(Map<String, dynamic> json) =>
       _$GroupCreateCompleteEventFromJson(json);
@@ -3335,9 +3398,9 @@ class GroupCreateCompleteEvent extends BaseEvent {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class GroupCreateEvent extends BaseEvent {
-  Group group;
+  Group? group;
 
-  GroupCreateEvent({this.group});
+  GroupCreateEvent({required this.group});
 
   factory GroupCreateEvent.fromJson(Map<String, dynamic> json) =>
       _$GroupCreateEventFromJson(json);
@@ -3349,9 +3412,9 @@ class GroupCreateEvent extends BaseEvent {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class GroupDeleteCompleteEvent extends BaseEvent {
-  Group group;
+  Group? group;
 
-  GroupDeleteCompleteEvent({this.group});
+  GroupDeleteCompleteEvent({required this.group});
 
   factory GroupDeleteCompleteEvent.fromJson(Map<String, dynamic> json) =>
       _$GroupDeleteCompleteEventFromJson(json);
@@ -3363,9 +3426,9 @@ class GroupDeleteCompleteEvent extends BaseEvent {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class GroupDeleteEvent extends BaseEvent {
-  Group group;
+  Group? group;
 
-  GroupDeleteEvent({this.group});
+  GroupDeleteEvent({required this.group});
 
   factory GroupDeleteEvent.fromJson(Map<String, dynamic> json) =>
       _$GroupDeleteEventFromJson(json);
@@ -3377,20 +3440,21 @@ class GroupDeleteEvent extends BaseEvent {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class GroupMember {
-  Map<String, dynamic> data;
-  String groupId;
-  String id;
-  num insertInstant;
-  User user;
-  String userId;
+  Map<String, dynamic>? data;
+  String? groupId;
+  String? id;
+  num? insertInstant;
+  User? user;
+  String? userId;
 
-  GroupMember(
-      {this.data,
-      this.groupId,
-      this.id,
-      this.insertInstant,
-      this.user,
-      this.userId});
+  GroupMember({
+    this.data,
+    this.groupId,
+    this.id,
+    this.insertInstant,
+    this.user,
+    this.userId,
+  });
 
   factory GroupMember.fromJson(Map<String, dynamic> json) =>
       _$GroupMemberFromJson(json);
@@ -3402,10 +3466,10 @@ class GroupMember {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class GroupMemberAddCompleteEvent extends BaseEvent {
-  Group group;
-  List<GroupMember> members;
+  Group? group;
+  List<GroupMember>? members;
 
-  GroupMemberAddCompleteEvent({this.group, this.members});
+  GroupMemberAddCompleteEvent({required this.group, required this.members});
 
   factory GroupMemberAddCompleteEvent.fromJson(Map<String, dynamic> json) =>
       _$GroupMemberAddCompleteEventFromJson(json);
@@ -3417,10 +3481,10 @@ class GroupMemberAddCompleteEvent extends BaseEvent {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class GroupMemberAddEvent extends BaseEvent {
-  Group group;
-  List<GroupMember> members;
+  Group? group;
+  List<GroupMember>? members;
 
-  GroupMemberAddEvent({this.group, this.members});
+  GroupMemberAddEvent({required this.group, required this.members});
 
   factory GroupMemberAddEvent.fromJson(Map<String, dynamic> json) =>
       _$GroupMemberAddEventFromJson(json);
@@ -3432,10 +3496,10 @@ class GroupMemberAddEvent extends BaseEvent {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class GroupMemberRemoveCompleteEvent extends BaseEvent {
-  Group group;
-  List<GroupMember> members;
+  Group? group;
+  List<GroupMember>? members;
 
-  GroupMemberRemoveCompleteEvent({this.group, this.members});
+  GroupMemberRemoveCompleteEvent({required this.group, required this.members});
 
   factory GroupMemberRemoveCompleteEvent.fromJson(Map<String, dynamic> json) =>
       _$GroupMemberRemoveCompleteEventFromJson(json);
@@ -3447,10 +3511,10 @@ class GroupMemberRemoveCompleteEvent extends BaseEvent {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class GroupMemberRemoveEvent extends BaseEvent {
-  Group group;
-  List<GroupMember> members;
+  Group? group;
+  List<GroupMember>? members;
 
-  GroupMemberRemoveEvent({this.group, this.members});
+  GroupMemberRemoveEvent({required this.group, required this.members});
 
   factory GroupMemberRemoveEvent.fromJson(Map<String, dynamic> json) =>
       _$GroupMemberRemoveEventFromJson(json);
@@ -3462,11 +3526,15 @@ class GroupMemberRemoveEvent extends BaseEvent {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class GroupMemberSearchCriteria extends BaseSearchCriteria {
-  String groupId;
-  String tenantId;
-  String userId;
+  String? groupId;
+  String? tenantId;
+  String? userId;
 
-  GroupMemberSearchCriteria({this.groupId, this.tenantId, this.userId});
+  GroupMemberSearchCriteria({
+    this.groupId,
+    this.tenantId,
+    this.userId,
+  });
 
   factory GroupMemberSearchCriteria.fromJson(Map<String, dynamic> json) =>
       _$GroupMemberSearchCriteriaFromJson(json);
@@ -3478,7 +3546,7 @@ class GroupMemberSearchCriteria extends BaseSearchCriteria {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class GroupMemberSearchRequest {
-  GroupMemberSearchCriteria search;
+  GroupMemberSearchCriteria? search;
 
   GroupMemberSearchRequest({this.search});
 
@@ -3492,8 +3560,8 @@ class GroupMemberSearchRequest {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class GroupMemberSearchResponse {
-  List<GroupMember> members;
-  num total;
+  List<GroupMember>? members;
+  num? total;
 
   GroupMemberSearchResponse({this.members, this.total});
 
@@ -3507,8 +3575,8 @@ class GroupMemberSearchResponse {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class GroupMemberUpdateCompleteEvent extends BaseEvent {
-  Group group;
-  List<GroupMember> members;
+  Group? group;
+  List<GroupMember>? members;
 
   GroupMemberUpdateCompleteEvent({this.group, this.members});
 
@@ -3522,8 +3590,8 @@ class GroupMemberUpdateCompleteEvent extends BaseEvent {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class GroupMemberUpdateEvent extends BaseEvent {
-  Group group;
-  List<GroupMember> members;
+  Group? group;
+  List<GroupMember>? members;
 
   GroupMemberUpdateEvent({this.group, this.members});
 
@@ -3537,8 +3605,8 @@ class GroupMemberUpdateEvent extends BaseEvent {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class GroupRequest {
-  Group group;
-  List<String> roleIds;
+  Group? group;
+  List<String>? roleIds;
 
   GroupRequest({this.group, this.roleIds});
 
@@ -3552,8 +3620,8 @@ class GroupRequest {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class GroupResponse {
-  Group group;
-  List<Group> groups;
+  Group? group;
+  List<Group>? groups;
 
   GroupResponse({this.group, this.groups});
 
@@ -3567,8 +3635,8 @@ class GroupResponse {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class GroupSearchCriteria extends BaseSearchCriteria {
-  String name;
-  String tenantId;
+  String? name;
+  String? tenantId;
 
   GroupSearchCriteria({this.name, this.tenantId});
 
@@ -3582,7 +3650,7 @@ class GroupSearchCriteria extends BaseSearchCriteria {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class GroupSearchRequest {
-  GroupSearchCriteria search;
+  GroupSearchCriteria? search;
 
   GroupSearchRequest({this.search});
 
@@ -3596,8 +3664,8 @@ class GroupSearchRequest {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class GroupSearchResponse {
-  List<Group> groups;
-  num total;
+  List<Group>? groups;
+  num? total;
 
   GroupSearchResponse({this.groups, this.total});
 
@@ -3611,8 +3679,8 @@ class GroupSearchResponse {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class GroupUpdateCompleteEvent extends BaseEvent {
-  Group group;
-  Group original;
+  Group? group;
+  Group? original;
 
   GroupUpdateCompleteEvent({this.group, this.original});
 
@@ -3626,8 +3694,8 @@ class GroupUpdateCompleteEvent extends BaseEvent {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class GroupUpdateEvent extends BaseEvent {
-  Group group;
-  Group original;
+  Group? group;
+  Group? original;
 
   GroupUpdateEvent({this.group, this.original});
 
@@ -3638,13 +3706,17 @@ class GroupUpdateEvent extends BaseEvent {
 
 @JsonSerializable()
 class HistoryItem {
-  String actionerUserId;
-  String comment;
-  num createInstant;
-  num expiry;
+  String? actionerUserId;
+  String? comment;
+  num? createInstant;
+  num? expiry;
 
-  HistoryItem(
-      {this.actionerUserId, this.comment, this.createInstant, this.expiry});
+  HistoryItem({
+    this.actionerUserId,
+    this.comment,
+    this.createInstant,
+    this.expiry,
+  });
 
   factory HistoryItem.fromJson(Map<String, dynamic> json) =>
       _$HistoryItemFromJson(json);
@@ -3673,8 +3745,8 @@ enum HTTPMethod {
 @JsonSerializable()
 class HYPRApplicationConfiguration
     extends BaseIdentityProviderApplicationConfiguration {
-  String relyingPartyApplicationId;
-  String relyingPartyURL;
+  String? relyingPartyApplicationId;
+  String? relyingPartyURL;
 
   HYPRApplicationConfiguration(
       {this.relyingPartyApplicationId, this.relyingPartyURL});
@@ -3688,8 +3760,8 @@ class HYPRApplicationConfiguration
 @JsonSerializable()
 class HYPRIdentityProvider
     extends BaseIdentityProvider<HYPRApplicationConfiguration> {
-  String relyingPartyApplicationId;
-  String relyingPartyURL;
+  String? relyingPartyApplicationId;
+  String? relyingPartyURL;
 
   HYPRIdentityProvider({this.relyingPartyApplicationId, this.relyingPartyURL});
 
@@ -3700,20 +3772,21 @@ class HYPRIdentityProvider
 
 @JsonSerializable()
 class IdentityProviderDetails {
-  List<String> applicationIds;
-  String id;
-  String idpEndpoint;
-  String name;
-  IdentityProviderOauth2Configuration oauth2;
-  IdentityProviderType type;
+  List<String>? applicationIds;
+  String? id;
+  String? idpEndpoint;
+  String? name;
+  IdentityProviderOauth2Configuration? oauth2;
+  IdentityProviderType? type;
 
-  IdentityProviderDetails(
-      {this.applicationIds,
-      this.id,
-      this.idpEndpoint,
-      this.name,
-      this.oauth2,
-      this.type});
+  IdentityProviderDetails({
+    this.applicationIds,
+    this.id,
+    this.idpEndpoint,
+    this.name,
+    this.oauth2,
+    this.type,
+  });
 
   factory IdentityProviderDetails.fromJson(Map<String, dynamic> json) =>
       _$IdentityProviderDetailsFromJson(json);
@@ -3723,7 +3796,7 @@ class IdentityProviderDetails {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class IdentityProviderLimitUserLinkingPolicy extends Enableable {
-  num maximumLinks;
+  num? maximumLinks;
 
   IdentityProviderLimitUserLinkingPolicy({this.maximumLinks});
 
@@ -3737,26 +3810,27 @@ class IdentityProviderLimitUserLinkingPolicy extends Enableable {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class IdentityProviderLink {
-  Map<String, dynamic> data;
-  String displayName;
-  String identityProviderId;
-  String identityProviderUserId;
-  num insertInstant;
-  num lastLoginInstant;
-  String tenantId;
-  String token;
-  String userId;
+  Map<String, dynamic>? data;
+  String? displayName;
+  String? identityProviderId;
+  String? identityProviderUserId;
+  num? insertInstant;
+  num? lastLoginInstant;
+  String? tenantId;
+  String? token;
+  String? userId;
 
-  IdentityProviderLink(
-      {this.data,
-      this.displayName,
-      this.identityProviderId,
-      this.identityProviderUserId,
-      this.insertInstant,
-      this.lastLoginInstant,
-      this.tenantId,
-      this.token,
-      this.userId});
+  IdentityProviderLink({
+    this.data,
+    this.displayName,
+    this.identityProviderId,
+    this.identityProviderUserId,
+    this.insertInstant,
+    this.lastLoginInstant,
+    this.tenantId,
+    this.token,
+    this.userId,
+  });
 
   factory IdentityProviderLink.fromJson(Map<String, dynamic> json) =>
       _$IdentityProviderLinkFromJson(json);
@@ -3788,18 +3862,19 @@ enum IdentityProviderLinkingStrategy {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class IdentityProviderLinkRequest extends BaseEventRequest {
-  String displayName;
-  String identityProviderId;
-  String identityProviderUserId;
-  String pendingIdPLinkId;
-  String userId;
+  String? displayName;
+  String? identityProviderId;
+  String? identityProviderUserId;
+  String? pendingIdPLinkId;
+  String? userId;
 
-  IdentityProviderLinkRequest(
-      {this.displayName,
-      this.identityProviderId,
-      this.identityProviderUserId,
-      this.pendingIdPLinkId,
-      this.userId});
+  IdentityProviderLinkRequest({
+    this.displayName,
+    this.identityProviderId,
+    this.identityProviderUserId,
+    this.pendingIdPLinkId,
+    this.userId,
+  });
 
   factory IdentityProviderLinkRequest.fromJson(Map<String, dynamic> json) =>
       _$IdentityProviderLinkRequestFromJson(json);
@@ -3809,8 +3884,8 @@ class IdentityProviderLinkRequest extends BaseEventRequest {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class IdentityProviderLinkResponse {
-  IdentityProviderLink identityProviderLink;
-  List<IdentityProviderLink> identityProviderLinks;
+  IdentityProviderLink? identityProviderLink;
+  List<IdentityProviderLink>? identityProviderLinks;
 
   IdentityProviderLinkResponse(
       {this.identityProviderLink, this.identityProviderLinks});
@@ -3833,13 +3908,17 @@ enum IdentityProviderLoginMethod {
 /// @author Brian Pontarelli
 @JsonSerializable()
 class IdentityProviderLoginRequest extends BaseLoginRequest {
-  Map<String, String> data;
-  String encodedJWT;
-  String identityProviderId;
-  bool noLink;
+  Map<String, String>? data;
+  String? encodedJWT;
+  String? identityProviderId;
+  bool? noLink;
 
-  IdentityProviderLoginRequest(
-      {this.data, this.encodedJWT, this.identityProviderId, this.noLink});
+  IdentityProviderLoginRequest({
+    this.data,
+    this.encodedJWT,
+    this.identityProviderId,
+    this.noLink,
+  });
 
   factory IdentityProviderLoginRequest.fromJson(Map<String, dynamic> json) =>
       _$IdentityProviderLoginRequestFromJson(json);
@@ -3849,30 +3928,31 @@ class IdentityProviderLoginRequest extends BaseLoginRequest {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class IdentityProviderOauth2Configuration {
-  String authorization_endpoint;
-  String client_id;
-  String client_secret;
-  ClientAuthenticationMethod clientAuthenticationMethod;
-  String emailClaim;
-  String issuer;
-  String scope;
-  String token_endpoint;
-  String uniqueIdClaim;
-  String userinfo_endpoint;
-  String usernameClaim;
+  String? authorization_endpoint;
+  String? client_id;
+  String? client_secret;
+  ClientAuthenticationMethod? clientAuthenticationMethod;
+  String? emailClaim;
+  String? issuer;
+  String? scope;
+  String? token_endpoint;
+  String? uniqueIdClaim;
+  String? userinfo_endpoint;
+  String? usernameClaim;
 
-  IdentityProviderOauth2Configuration(
-      {this.authorization_endpoint,
-      this.client_id,
-      this.client_secret,
-      this.clientAuthenticationMethod,
-      this.emailClaim,
-      this.issuer,
-      this.scope,
-      this.token_endpoint,
-      this.uniqueIdClaim,
-      this.userinfo_endpoint,
-      this.usernameClaim});
+  IdentityProviderOauth2Configuration({
+    this.authorization_endpoint,
+    this.client_id,
+    this.client_secret,
+    this.clientAuthenticationMethod,
+    this.emailClaim,
+    this.issuer,
+    this.scope,
+    this.token_endpoint,
+    this.uniqueIdClaim,
+    this.userinfo_endpoint,
+    this.usernameClaim,
+  });
 
   factory IdentityProviderOauth2Configuration.fromJson(
           Map<String, dynamic> json) =>
@@ -3885,7 +3965,7 @@ class IdentityProviderOauth2Configuration {
 @JsonSerializable()
 class IdentityProviderRequest {
   @IdentityProviderConverter()
-  BaseIdentityProvider<dynamic> identityProvider;
+  BaseIdentityProvider<dynamic>? identityProvider;
 
   IdentityProviderRequest({this.identityProvider});
 
@@ -3898,8 +3978,8 @@ class IdentityProviderRequest {
 @JsonSerializable()
 class IdentityProviderResponse {
   @IdentityProviderConverter()
-  BaseIdentityProvider<dynamic> identityProvider;
-  List<BaseIdentityProvider<dynamic>> identityProviders;
+  BaseIdentityProvider<dynamic>? identityProvider;
+  List<BaseIdentityProvider<dynamic>>? identityProviders;
 
   IdentityProviderResponse({this.identityProvider, this.identityProviders});
 
@@ -3911,13 +3991,17 @@ class IdentityProviderResponse {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class IdentityProviderStartLoginRequest extends BaseLoginRequest {
-  Map<String, String> data;
-  String identityProviderId;
-  String loginId;
-  Map<String, dynamic> state;
+  Map<String, String>? data;
+  String? identityProviderId;
+  String? loginId;
+  Map<String, dynamic>? state;
 
-  IdentityProviderStartLoginRequest(
-      {this.data, this.identityProviderId, this.loginId, this.state});
+  IdentityProviderStartLoginRequest({
+    this.data,
+    this.identityProviderId,
+    this.loginId,
+    this.state,
+  });
 
   factory IdentityProviderStartLoginRequest.fromJson(
           Map<String, dynamic> json) =>
@@ -3929,7 +4013,7 @@ class IdentityProviderStartLoginRequest extends BaseLoginRequest {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class IdentityProviderStartLoginResponse {
-  String code;
+  String? code;
 
   IdentityProviderStartLoginResponse({this.code});
 
@@ -3946,7 +4030,8 @@ class IdentityProviderTenantConfiguration {
   Map<String, dynamic> data;
   IdentityProviderLimitUserLinkingPolicy limitUserLinkCount;
 
-  IdentityProviderTenantConfiguration({this.data, this.limitUserLinkCount});
+  IdentityProviderTenantConfiguration(
+      {required this.data, required this.limitUserLinkCount});
 
   factory IdentityProviderTenantConfiguration.fromJson(
           Map<String, dynamic> json) =>
@@ -4001,11 +4086,12 @@ class ImportRequest extends BaseEventRequest {
   List<User> users;
   bool validateDbConstraints;
 
-  ImportRequest(
-      {this.encryptionScheme,
-      this.factor,
-      this.users,
-      this.validateDbConstraints});
+  ImportRequest({
+    required this.encryptionScheme,
+    required this.factor,
+    required this.users,
+    required this.validateDbConstraints,
+  });
 
   factory ImportRequest.fromJson(Map<String, dynamic> json) =>
       _$ImportRequestFromJson(json);
@@ -4029,7 +4115,7 @@ class InstanceEvent extends NonTransactionalEvent {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class IntegrationRequest {
-  Integrations integrations;
+  Integrations? integrations;
 
   IntegrationRequest({this.integrations});
 
@@ -4043,7 +4129,7 @@ class IntegrationRequest {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class IntegrationResponse {
-  Integrations integrations;
+  Integrations? integrations;
 
   IntegrationResponse({this.integrations});
 
@@ -4057,8 +4143,8 @@ class IntegrationResponse {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class Integrations {
-  CleanSpeakConfiguration cleanspeak;
-  KafkaConfiguration kafka;
+  CleanSpeakConfiguration? cleanspeak;
+  KafkaConfiguration? kafka;
 
   Integrations({this.cleanspeak, this.kafka});
 
@@ -4070,11 +4156,15 @@ class Integrations {
 /// @author Brett Guy
 @JsonSerializable()
 class IPAccessControlEntry {
-  IPAccessControlEntryAction action;
-  String endIPAddress;
-  String startIPAddress;
+  IPAccessControlEntryAction? action;
+  String? endIPAddress;
+  String? startIPAddress;
 
-  IPAccessControlEntry({this.action, this.endIPAddress, this.startIPAddress});
+  IPAccessControlEntry({
+    this.action,
+    this.endIPAddress,
+    this.startIPAddress,
+  });
 
   factory IPAccessControlEntry.fromJson(Map<String, dynamic> json) =>
       _$IPAccessControlEntryFromJson(json);
@@ -4092,20 +4182,21 @@ enum IPAccessControlEntryAction {
 /// @author Brett Guy
 @JsonSerializable()
 class IPAccessControlList {
-  Map<String, dynamic> data;
-  List<IPAccessControlEntry> entries;
-  String id;
-  num insertInstant;
-  num lastUpdateInstant;
-  String name;
+  Map<String, dynamic>? data;
+  List<IPAccessControlEntry>? entries;
+  String? id;
+  num? insertInstant;
+  num? lastUpdateInstant;
+  String? name;
 
-  IPAccessControlList(
-      {this.data,
-      this.entries,
-      this.id,
-      this.insertInstant,
-      this.lastUpdateInstant,
-      this.name});
+  IPAccessControlList({
+    this.data,
+    this.entries,
+    this.id,
+    this.insertInstant,
+    this.lastUpdateInstant,
+    this.name,
+  });
 
   factory IPAccessControlList.fromJson(Map<String, dynamic> json) =>
       _$IPAccessControlListFromJson(json);
@@ -4115,9 +4206,9 @@ class IPAccessControlList {
 /// @author Brett Guy
 @JsonSerializable()
 class IPAccessControlListRequest {
-  IPAccessControlList ipAccessControlList;
+  IPAccessControlList? ipAccessControlList;
 
-  IPAccessControlListRequest({this.ipAccessControlList});
+  IPAccessControlListRequest({required this.ipAccessControlList});
 
   factory IPAccessControlListRequest.fromJson(Map<String, dynamic> json) =>
       _$IPAccessControlListRequestFromJson(json);
@@ -4127,11 +4218,11 @@ class IPAccessControlListRequest {
 /// @author Brett Guy
 @JsonSerializable()
 class IPAccessControlListResponse {
-  IPAccessControlList ipAccessControlList;
-  List<IPAccessControlList> ipAccessControlLists;
+  IPAccessControlList? ipAccessControlList;
+  List<IPAccessControlList>? ipAccessControlLists;
 
   IPAccessControlListResponse(
-      {this.ipAccessControlList, this.ipAccessControlLists});
+      {required this.ipAccessControlList, required this.ipAccessControlLists});
 
   factory IPAccessControlListResponse.fromJson(Map<String, dynamic> json) =>
       _$IPAccessControlListResponseFromJson(json);
@@ -4141,9 +4232,9 @@ class IPAccessControlListResponse {
 /// @author Brett Guy
 @JsonSerializable()
 class IPAccessControlListSearchCriteria extends BaseSearchCriteria {
-  String name;
+  String? name;
 
-  IPAccessControlListSearchCriteria({this.name});
+  IPAccessControlListSearchCriteria({required this.name});
 
   factory IPAccessControlListSearchCriteria.fromJson(
           Map<String, dynamic> json) =>
@@ -4157,9 +4248,9 @@ class IPAccessControlListSearchCriteria extends BaseSearchCriteria {
 /// @author Brett Guy
 @JsonSerializable()
 class IPAccessControlListSearchRequest {
-  IPAccessControlListSearchCriteria search;
+  IPAccessControlListSearchCriteria? search;
 
-  IPAccessControlListSearchRequest({this.search});
+  IPAccessControlListSearchRequest({required this.search});
 
   factory IPAccessControlListSearchRequest.fromJson(
           Map<String, dynamic> json) =>
@@ -4171,10 +4262,11 @@ class IPAccessControlListSearchRequest {
 /// @author Brett Guy
 @JsonSerializable()
 class IPAccessControlListSearchResponse {
-  List<IPAccessControlList> ipAccessControlLists;
-  num total;
+  List<IPAccessControlList>? ipAccessControlLists;
+  num? total;
 
-  IPAccessControlListSearchResponse({this.ipAccessControlLists, this.total});
+  IPAccessControlListSearchResponse(
+      {required this.ipAccessControlLists, required this.total});
 
   factory IPAccessControlListSearchResponse.fromJson(
           Map<String, dynamic> json) =>
@@ -4186,10 +4278,10 @@ class IPAccessControlListSearchResponse {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class IssueResponse {
-  String refreshToken;
-  String token;
+  String? refreshToken;
+  String? token;
 
-  IssueResponse({this.refreshToken, this.token});
+  IssueResponse({required this.refreshToken, required this.token});
 
   factory IssueResponse.fromJson(Map<String, dynamic> json) =>
       _$IssueResponseFromJson(json);
@@ -4202,29 +4294,29 @@ class IssueResponse {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class JSONWebKey {
-  Algorithm alg;
-  String crv;
-  String d;
-  String dp;
-  String dq;
-  String e;
-  String kid;
-  KeyType kty;
-  String n;
+  Algorithm? alg;
+  String? crv;
+  String? d;
+  String? dp;
+  String? dq;
+  String? e;
+  String? kid;
+  KeyType? kty;
+  String? n;
   final Map<String, dynamic> _other = Map<String, dynamic>();
   dynamic operator [](String index) => _other[index]; // Get any other fields
   void operator []=(String index, dynamic value) =>
       _other[index] = value; // Set any other fields
-  String p;
-  String q;
-  String qi;
-  String use;
-  String x;
-  List<String> x5c;
-  String x5t;
+  String? p;
+  String? q;
+  String? qi;
+  String? use;
+  String? x;
+  List<String>? x5c;
+  String? x5t;
   @JsonKey(name: 'x5t#S256')
-  String x5t_S256;
-  String y;
+  String? x5t_S256;
+  String? y;
 
   JSONWebKey(
       {this.alg,
@@ -4266,7 +4358,7 @@ class JSONWebKeyInfoProvider {
 class JWKSResponse {
   List<JSONWebKey> keys;
 
-  JWKSResponse({this.keys});
+  JWKSResponse({required this.keys});
 
   factory JWKSResponse.fromJson(Map<String, dynamic> json) =>
       _$JWKSResponseFromJson(json);
@@ -4283,20 +4375,28 @@ class JWKSResponse {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class JWT {
-  dynamic aud;
-  num exp;
-  num iat;
-  String iss;
-  String jti;
-  num nbf;
+  dynamic? aud;
+  num? exp;
+  num? iat;
+  String? iss;
+  String? jti;
+  num? nbf;
   final Map<String, dynamic> _otherClaims = Map<String, dynamic>();
   dynamic operator [](String index) =>
       _otherClaims[index]; // Get any other fields
   void operator []=(String index, dynamic value) =>
       _otherClaims[index] = value; // Set any other fields
-  String sub;
+  String? sub;
 
-  JWT({this.aud, this.exp, this.iat, this.iss, this.jti, this.nbf, this.sub});
+  JWT({
+    this.aud,
+    this.exp,
+    this.iat,
+    this.iss,
+    this.jti,
+    this.nbf,
+    this.sub,
+  });
 
   factory JWT.fromJson(Map<String, dynamic> json) => _$JWTFromJson(json);
   Map<String, dynamic> toJson() => _$JWTToJson(this);
@@ -4308,13 +4408,13 @@ class JWT {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class JWTConfiguration extends Enableable {
-  String accessTokenKeyId;
-  String idTokenKeyId;
-  RefreshTokenExpirationPolicy refreshTokenExpirationPolicy;
-  RefreshTokenRevocationPolicy refreshTokenRevocationPolicy;
-  num refreshTokenTimeToLiveInMinutes;
-  RefreshTokenUsagePolicy refreshTokenUsagePolicy;
-  num timeToLiveInSeconds;
+  String? accessTokenKeyId;
+  String? idTokenKeyId;
+  RefreshTokenExpirationPolicy? refreshTokenExpirationPolicy;
+  RefreshTokenRevocationPolicy? refreshTokenRevocationPolicy;
+  num? refreshTokenTimeToLiveInMinutes;
+  RefreshTokenUsagePolicy? refreshTokenUsagePolicy;
+  num? timeToLiveInSeconds;
 
   JWTConfiguration(
       {this.accessTokenKeyId,
@@ -4336,9 +4436,9 @@ class JWTConfiguration extends Enableable {
 /// @author Brian Pontarelli
 @JsonSerializable()
 class JWTPublicKeyUpdateEvent extends BaseEvent {
-  Set<String> applicationIds;
+  Set<String>? applicationIds;
 
-  JWTPublicKeyUpdateEvent({this.applicationIds});
+  JWTPublicKeyUpdateEvent({required this.applicationIds});
 
   factory JWTPublicKeyUpdateEvent.fromJson(Map<String, dynamic> json) =>
       _$JWTPublicKeyUpdateEventFromJson(json);
@@ -4350,18 +4450,18 @@ class JWTPublicKeyUpdateEvent extends BaseEvent {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class JWTRefreshEvent extends BaseEvent {
-  String applicationId;
-  String original;
-  String refreshToken;
-  String token;
-  String userId;
+  String? applicationId;
+  String? original;
+  String? refreshToken;
+  String? token;
+  String? userId;
 
   JWTRefreshEvent(
-      {this.applicationId,
-      this.original,
-      this.refreshToken,
-      this.token,
-      this.userId});
+      {required this.applicationId,
+      required this.original,
+      required this.refreshToken,
+      required this.token,
+      required this.userId});
 
   factory JWTRefreshEvent.fromJson(Map<String, dynamic> json) =>
       _$JWTRefreshEventFromJson(json);
@@ -4377,10 +4477,11 @@ class JWTRefreshEvent extends BaseEvent {
 @JsonSerializable()
 class JWTRefreshResponse {
   String refreshToken;
-  String refreshTokenId;
+  String? refreshTokenId;
   String token;
 
-  JWTRefreshResponse({this.refreshToken, this.refreshTokenId, this.token});
+  JWTRefreshResponse(
+      {required this.refreshToken, this.refreshTokenId, required this.token});
 
   factory JWTRefreshResponse.fromJson(Map<String, dynamic> json) =>
       _$JWTRefreshResponseFromJson(json);
@@ -4393,11 +4494,11 @@ class JWTRefreshResponse {
 /// @author Brian Pontarelli
 @JsonSerializable()
 class JWTRefreshTokenRevokeEvent extends BaseEvent {
-  String applicationId;
-  Map<String, num> applicationTimeToLiveInSeconds;
-  RefreshToken refreshToken;
-  User user;
-  String userId;
+  String? applicationId;
+  Map<String, num>? applicationTimeToLiveInSeconds;
+  RefreshToken? refreshToken;
+  User? user;
+  String? userId;
 
   JWTRefreshTokenRevokeEvent(
       {this.applicationId,
@@ -4418,7 +4519,10 @@ class JWTVendRequest {
   String keyId;
   num timeToLiveInSeconds;
 
-  JWTVendRequest({this.claims, this.keyId, this.timeToLiveInSeconds});
+  JWTVendRequest(
+      {required this.claims,
+      required this.keyId,
+      required this.timeToLiveInSeconds});
 
   factory JWTVendRequest.fromJson(Map<String, dynamic> json) =>
       _$JWTVendRequestFromJson(json);
@@ -4430,7 +4534,7 @@ class JWTVendRequest {
 class JWTVendResponse {
   String token;
 
-  JWTVendResponse({this.token});
+  JWTVendResponse({required this.token});
 
   factory JWTVendResponse.fromJson(Map<String, dynamic> json) =>
       _$JWTVendResponseFromJson(json);
@@ -4443,7 +4547,7 @@ class KafkaConfiguration extends Enableable {
   String defaultTopic;
   Map<String, String> producer;
 
-  KafkaConfiguration({this.defaultTopic, this.producer});
+  KafkaConfiguration({required this.defaultTopic, required this.producer});
 
   factory KafkaConfiguration.fromJson(Map<String, dynamic> json) =>
       _$KafkaConfigurationFromJson(json);
@@ -4456,7 +4560,8 @@ class KafkaMessengerConfiguration extends BaseMessengerConfiguration {
   String defaultTopic;
   Map<String, String> producer;
 
-  KafkaMessengerConfiguration({this.defaultTopic, this.producer});
+  KafkaMessengerConfiguration(
+      {required this.defaultTopic, required this.producer});
 
   factory KafkaMessengerConfiguration.fromJson(Map<String, dynamic> json) =>
       _$KafkaMessengerConfigurationFromJson(json);
@@ -4486,22 +4591,22 @@ class Key {
   KeyType type;
 
   Key(
-      {this.algorithm,
-      this.certificate,
-      this.certificateInformation,
-      this.expirationInstant,
-      this.hasPrivateKey,
-      this.id,
-      this.insertInstant,
-      this.issuer,
-      this.kid,
-      this.lastUpdateInstant,
-      this.length,
-      this.name,
-      this.privateKey,
-      this.publicKey,
-      this.secret,
-      this.type});
+      {required this.algorithm,
+      required this.certificate,
+      required this.certificateInformation,
+      required this.expirationInstant,
+      required this.hasPrivateKey,
+      required this.id,
+      required this.insertInstant,
+      required this.issuer,
+      required this.kid,
+      required this.lastUpdateInstant,
+      required this.length,
+      required this.name,
+      required this.privateKey,
+      required this.publicKey,
+      required this.secret,
+      required this.type});
 
   factory Key.fromJson(Map<String, dynamic> json) => _$KeyFromJson(json);
   Map<String, dynamic> toJson() => _$KeyToJson(this);
@@ -4535,7 +4640,7 @@ enum KeyAlgorithm {
 class KeyRequest {
   Key key;
 
-  KeyRequest({this.key});
+  KeyRequest({required this.key});
 
   factory KeyRequest.fromJson(Map<String, dynamic> json) =>
       _$KeyRequestFromJson(json);
@@ -4550,7 +4655,7 @@ class KeyResponse {
   Key key;
   List<Key> keys;
 
-  KeyResponse({this.key, this.keys});
+  KeyResponse({required this.key, required this.keys});
 
   factory KeyResponse.fromJson(Map<String, dynamic> json) =>
       _$KeyResponseFromJson(json);
@@ -4585,7 +4690,7 @@ enum KeyUse {
 class KickstartSuccessEvent extends BaseEvent {
   String instanceId;
 
-  KickstartSuccessEvent({this.instanceId});
+  KickstartSuccessEvent({required this.instanceId});
 
   factory KickstartSuccessEvent.fromJson(Map<String, dynamic> json) =>
       _$KickstartSuccessEventFromJson(json);
@@ -4607,14 +4712,14 @@ class Lambda {
   LambdaType type;
 
   Lambda(
-      {this.body,
-      this.debug,
-      this.engineType,
-      this.id,
-      this.insertInstant,
-      this.lastUpdateInstant,
-      this.name,
-      this.type});
+      {required this.body,
+      required this.debug,
+      required this.engineType,
+      required this.id,
+      required this.insertInstant,
+      required this.lastUpdateInstant,
+      required this.name,
+      required this.type});
 
   factory Lambda.fromJson(Map<String, dynamic> json) => _$LambdaFromJson(json);
   Map<String, dynamic> toJson() => _$LambdaToJson(this);
@@ -4635,7 +4740,7 @@ enum LambdaEngineType {
 class LambdaRequest {
   Lambda lambda;
 
-  LambdaRequest({this.lambda});
+  LambdaRequest({required this.lambda});
 
   factory LambdaRequest.fromJson(Map<String, dynamic> json) =>
       _$LambdaRequestFromJson(json);
@@ -4650,7 +4755,7 @@ class LambdaResponse {
   Lambda lambda;
   List<Lambda> lambdas;
 
-  LambdaResponse({this.lambda, this.lambdas});
+  LambdaResponse({required this.lambda, required this.lambdas});
 
   factory LambdaResponse.fromJson(Map<String, dynamic> json) =>
       _$LambdaResponseFromJson(json);
@@ -4727,17 +4832,17 @@ class LDAPConnectorConfiguration extends BaseConnectorConfiguration {
   String systemAccountPassword;
 
   LDAPConnectorConfiguration(
-      {this.authenticationURL,
-      this.baseStructure,
-      this.connectTimeout,
-      this.identifyingAttribute,
-      this.lambdaConfiguration,
-      this.loginIdAttribute,
-      this.readTimeout,
-      this.requestedAttributes,
-      this.securityMethod,
-      this.systemAccountDN,
-      this.systemAccountPassword});
+      {required this.authenticationURL,
+      required this.baseStructure,
+      required this.connectTimeout,
+      required this.identifyingAttribute,
+      required this.lambdaConfiguration,
+      required this.loginIdAttribute,
+      required this.readTimeout,
+      required this.requestedAttributes,
+      required this.securityMethod,
+      required this.systemAccountDN,
+      required this.systemAccountPassword});
 
   factory LDAPConnectorConfiguration.fromJson(Map<String, dynamic> json) =>
       _$LDAPConnectorConfigurationFromJson(json);
@@ -4762,8 +4867,12 @@ class LinkedInApplicationConfiguration
   String client_secret;
   String scope;
 
-  LinkedInApplicationConfiguration(
-      {this.buttonText, this.client_id, this.client_secret, this.scope});
+  LinkedInApplicationConfiguration({
+    required this.buttonText,
+    required this.client_id,
+    required this.client_secret,
+    required this.scope,
+  });
 
   factory LinkedInApplicationConfiguration.fromJson(
           Map<String, dynamic> json) =>
@@ -4782,7 +4891,11 @@ class LinkedInIdentityProvider
   String scope;
 
   LinkedInIdentityProvider(
-      {this.buttonText, this.client_id, this.client_secret, this.scope});
+      {required this.buttonText,
+      required this.client_id,
+      required this.client_secret,
+      required this.scope})
+      : super();
 
   factory LinkedInIdentityProvider.fromJson(Map<String, dynamic> json) =>
       _$LinkedInIdentityProviderFromJson(json);
@@ -4794,13 +4907,13 @@ class LinkedInIdentityProvider
 /// @author Brian Pontarelli
 @JsonSerializable()
 class Location {
-  String city;
-  String country;
-  String displayString;
-  num latitude;
-  num longitude;
-  String region;
-  String zipcode;
+  String? city;
+  String? country;
+  String? displayString;
+  num? latitude;
+  num? longitude;
+  String? region;
+  String? zipcode;
 
   Location(
       {this.city,
@@ -4821,7 +4934,7 @@ class Location {
 /// @author Brian Pontarelli
 @JsonSerializable()
 class LogHistory {
-  List<HistoryItem> historyItems;
+  List<HistoryItem>? historyItems;
 
   LogHistory({this.historyItems});
 
@@ -4832,9 +4945,9 @@ class LogHistory {
 
 @JsonSerializable()
 class LoginConfiguration {
-  bool allowTokenRefresh;
-  bool generateRefreshTokens;
-  bool requireAuthentication;
+  bool? allowTokenRefresh;
+  bool? generateRefreshTokens;
+  bool? requireAuthentication;
 
   LoginConfiguration(
       {this.allowTokenRefresh,
@@ -4849,7 +4962,7 @@ class LoginConfiguration {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class LoginHintConfiguration extends Enableable {
-  String parameterName;
+  String? parameterName;
 
   LoginHintConfiguration({this.parameterName});
 
@@ -4870,7 +4983,7 @@ enum LoginIdType {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class LoginPingRequest extends BaseLoginRequest {
-  String userId;
+  String? userId;
 
   LoginPingRequest({this.userId});
 
@@ -4884,16 +4997,16 @@ class LoginPingRequest extends BaseLoginRequest {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class LoginPreventedResponse {
-  String actionerUserId;
-  String actionId;
-  num expiry;
-  String localizedName;
-  String localizedOption;
-  String localizedReason;
-  String name;
-  String option;
-  String reason;
-  String reasonCode;
+  String? actionerUserId;
+  String? actionId;
+  num? expiry;
+  String? localizedName;
+  String? localizedOption;
+  String? localizedReason;
+  String? name;
+  String? option;
+  String? reason;
+  String? reasonCode;
 
   LoginPreventedResponse(
       {this.actionerUserId,
@@ -4914,7 +5027,7 @@ class LoginPreventedResponse {
 
 @JsonSerializable()
 class LoginRecordConfiguration {
-  DeleteConfiguration delete;
+  DeleteConfiguration? delete;
 
   LoginRecordConfiguration({this.delete});
 
@@ -4926,7 +5039,7 @@ class LoginRecordConfiguration {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class LoginRecordExportRequest extends BaseExportRequest {
-  LoginRecordSearchCriteria criteria;
+  LoginRecordSearchCriteria? criteria;
 
   LoginRecordExportRequest({this.criteria});
 
@@ -4938,10 +5051,10 @@ class LoginRecordExportRequest extends BaseExportRequest {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class LoginRecordSearchCriteria extends BaseSearchCriteria {
-  String applicationId;
-  num end;
-  num start;
-  String userId;
+  String? applicationId;
+  num? end;
+  num? start;
+  String? userId;
 
   LoginRecordSearchCriteria(
       {this.applicationId, this.end, this.start, this.userId});
@@ -4954,8 +5067,8 @@ class LoginRecordSearchCriteria extends BaseSearchCriteria {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class LoginRecordSearchRequest {
-  bool retrieveTotal;
-  LoginRecordSearchCriteria search;
+  bool? retrieveTotal;
+  LoginRecordSearchCriteria? search;
 
   LoginRecordSearchRequest({this.retrieveTotal, this.search});
 
@@ -4969,8 +5082,8 @@ class LoginRecordSearchRequest {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class LoginRecordSearchResponse {
-  List<DisplayableRawLogin> logins;
-  num total;
+  List<DisplayableRawLogin>? logins;
+  num? total;
 
   LoginRecordSearchResponse({this.logins, this.total});
 
@@ -4984,8 +5097,8 @@ class LoginRecordSearchResponse {
 /// @author Brian Pontarelli
 @JsonSerializable()
 class LoginReportResponse {
-  List<Count> hourlyCounts;
-  num total;
+  List<Count>? hourlyCounts;
+  num? total;
 
   LoginReportResponse({this.hourlyCounts, this.total});
 
@@ -4999,10 +5112,10 @@ class LoginReportResponse {
 /// @author Seth Musselman
 @JsonSerializable()
 class LoginRequest extends BaseLoginRequest {
-  String loginId;
-  String oneTimePassword;
-  String password;
-  String twoFactorTrustId;
+  String? loginId;
+  String? oneTimePassword;
+  String? password;
+  String? twoFactorTrustId;
 
   LoginRequest(
       {this.loginId,
@@ -5018,24 +5131,24 @@ class LoginRequest extends BaseLoginRequest {
 /// @author Brian Pontarelli
 @JsonSerializable()
 class LoginResponse {
-  List<LoginPreventedResponse> actions;
-  String changePasswordId;
-  ChangePasswordReason changePasswordReason;
-  List<String> configurableMethods;
-  String emailVerificationId;
-  List<TwoFactorMethod> methods;
-  String pendingIdPLinkId;
-  String refreshToken;
-  String refreshTokenId;
-  String registrationVerificationId;
-  Map<String, dynamic> state;
-  Set<AuthenticationThreats> threatsDetected;
-  String token;
-  num tokenExpirationInstant;
-  String trustToken;
-  String twoFactorId;
-  String twoFactorTrustId;
-  User user;
+  List<LoginPreventedResponse>? actions;
+  String? changePasswordId;
+  ChangePasswordReason? changePasswordReason;
+  List<String>? configurableMethods;
+  String? emailVerificationId;
+  List<TwoFactorMethod>? methods;
+  String? pendingIdPLinkId;
+  String? refreshToken;
+  String? refreshTokenId;
+  String? registrationVerificationId;
+  Map<String, dynamic>? state;
+  Set<AuthenticationThreats>? threatsDetected;
+  String? token;
+  num? tokenExpirationInstant;
+  String? trustToken;
+  String? twoFactorId;
+  String? twoFactorTrustId;
+  User? user;
 
   LoginResponse(
       {this.actions,
@@ -5075,8 +5188,8 @@ enum LogoutBehavior {
 /// @author Brian Pontarelli
 @JsonSerializable()
 class LogoutRequest extends BaseEventRequest {
-  bool global;
-  String refreshToken;
+  bool? global;
+  String? refreshToken;
 
   LogoutRequest({this.global, this.refreshToken});
 
@@ -5088,7 +5201,7 @@ class LogoutRequest extends BaseEventRequest {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class LookupResponse {
-  IdentityProviderDetails identityProvider;
+  IdentityProviderDetails? identityProvider;
 
   LookupResponse({this.identityProvider});
 
@@ -5115,7 +5228,7 @@ class ManagedFields {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class MaximumPasswordAge extends Enableable {
-  num days;
+  num? days;
 
   MaximumPasswordAge({this.days});
 
@@ -5129,8 +5242,8 @@ class MaximumPasswordAge extends Enableable {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class MemberDeleteRequest {
-  List<String> memberIds;
-  Map<String, List<String>> members;
+  List<String>? memberIds;
+  Map<String, List<String>>? members;
 
   MemberDeleteRequest({this.memberIds, this.members});
 
@@ -5144,7 +5257,7 @@ class MemberDeleteRequest {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class MemberRequest {
-  Map<String, List<GroupMember>> members;
+  Map<String, List<GroupMember>>? members;
 
   MemberRequest({this.members});
 
@@ -5158,7 +5271,7 @@ class MemberRequest {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class MemberResponse {
-  Map<String, List<GroupMember>> members;
+  Map<String, List<GroupMember>>? members;
 
   MemberResponse({this.members});
 
@@ -5182,12 +5295,12 @@ class Message {
 /// @author Michael Sleevi
 @JsonSerializable()
 class MessageTemplate {
-  Map<String, dynamic> data;
-  String id;
-  num insertInstant;
-  num lastUpdateInstant;
-  String name;
-  MessageType type;
+  Map<String, dynamic>? data;
+  String? id;
+  num? insertInstant;
+  num? lastUpdateInstant;
+  String? name;
+  MessageType? type;
 
   MessageTemplate(
       {this.data,
@@ -5207,7 +5320,7 @@ class MessageTemplate {
 /// @author Michael Sleevi
 @JsonSerializable()
 class MessageTemplateRequest {
-  MessageTemplate messageTemplate;
+  MessageTemplate? messageTemplate;
 
   MessageTemplateRequest({this.messageTemplate});
 
@@ -5219,8 +5332,8 @@ class MessageTemplateRequest {
 /// @author Michael Sleevi
 @JsonSerializable()
 class MessageTemplateResponse {
-  MessageTemplate messageTemplate;
-  List<MessageTemplate> messageTemplates;
+  MessageTemplate? messageTemplate;
+  List<MessageTemplate>? messageTemplates;
 
   MessageTemplateResponse({this.messageTemplate, this.messageTemplates});
 
@@ -5238,7 +5351,7 @@ enum MessageType {
 /// @author Brett Guy
 @JsonSerializable()
 class MessengerRequest {
-  BaseMessengerConfiguration messenger;
+  BaseMessengerConfiguration? messenger;
 
   MessengerRequest({this.messenger});
 
@@ -5250,8 +5363,8 @@ class MessengerRequest {
 /// @author Brett Guy
 @JsonSerializable()
 class MessengerResponse {
-  BaseMessengerConfiguration messenger;
-  List<BaseMessengerConfiguration> messengers;
+  BaseMessengerConfiguration? messenger;
+  List<BaseMessengerConfiguration>? messengers;
 
   MessengerResponse({this.messenger, this.messengers});
 
@@ -5282,9 +5395,9 @@ enum MessengerType {
 
 @JsonSerializable()
 class MetaData {
-  Map<String, dynamic> data;
-  DeviceInfo device;
-  Set<String> scopes;
+  Map<String, dynamic>? data;
+  DeviceInfo? device;
+  Set<String>? scopes;
 
   MetaData({this.data, this.device, this.scopes});
 
@@ -5296,7 +5409,7 @@ class MetaData {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class MinimumPasswordAge extends Enableable {
-  num seconds;
+  num? seconds;
 
   MinimumPasswordAge({this.seconds});
 
@@ -5310,8 +5423,8 @@ class MinimumPasswordAge extends Enableable {
 /// @author Brian Pontarelli
 @JsonSerializable()
 class MonthlyActiveUserReportResponse {
-  List<Count> monthlyActiveUsers;
-  num total;
+  List<Count>? monthlyActiveUsers;
+  num? total;
 
   MonthlyActiveUserReportResponse({this.monthlyActiveUsers, this.total});
 
@@ -5323,9 +5436,9 @@ class MonthlyActiveUserReportResponse {
 
 @JsonSerializable()
 class MultiFactorAuthenticatorMethod extends Enableable {
-  TOTPAlgorithm algorithm;
-  num codeLength;
-  num timeStep;
+  TOTPAlgorithm? algorithm;
+  num? codeLength;
+  num? timeStep;
 
   MultiFactorAuthenticatorMethod(
       {this.algorithm, this.codeLength, this.timeStep});
@@ -5337,7 +5450,7 @@ class MultiFactorAuthenticatorMethod extends Enableable {
 
 @JsonSerializable()
 class MultiFactorEmailMethod extends Enableable {
-  String templateId;
+  String? templateId;
 
   MultiFactorEmailMethod({this.templateId});
 
@@ -5348,7 +5461,7 @@ class MultiFactorEmailMethod extends Enableable {
 
 @JsonSerializable()
 class MultiFactorEmailTemplate {
-  String templateId;
+  String? templateId;
 
   MultiFactorEmailTemplate({this.templateId});
 
@@ -5369,8 +5482,8 @@ enum MultiFactorLoginPolicy {
 
 @JsonSerializable()
 class MultiFactorSMSMethod extends Enableable {
-  String messengerId;
-  String templateId;
+  String? messengerId;
+  String? templateId;
 
   MultiFactorSMSMethod({this.messengerId, this.templateId});
 
@@ -5381,7 +5494,7 @@ class MultiFactorSMSMethod extends Enableable {
 
 @JsonSerializable()
 class MultiFactorSMSTemplate {
-  String templateId;
+  String? templateId;
 
   MultiFactorSMSTemplate({this.templateId});
 
@@ -5394,13 +5507,13 @@ class MultiFactorSMSTemplate {
 @JsonSerializable()
 class NintendoApplicationConfiguration
     extends BaseIdentityProviderApplicationConfiguration {
-  String buttonText;
-  String client_id;
-  String client_secret;
-  String emailClaim;
-  String scope;
-  String uniqueIdClaim;
-  String usernameClaim;
+  String? buttonText;
+  String? client_id;
+  String? client_secret;
+  String? emailClaim;
+  String? scope;
+  String? uniqueIdClaim;
+  String? usernameClaim;
 
   NintendoApplicationConfiguration(
       {this.buttonText,
@@ -5424,13 +5537,13 @@ class NintendoApplicationConfiguration
 @JsonSerializable()
 class NintendoIdentityProvider
     extends BaseIdentityProvider<NintendoApplicationConfiguration> {
-  String buttonText;
-  String client_id;
-  String client_secret;
-  String emailClaim;
-  String scope;
-  String uniqueIdClaim;
-  String usernameClaim;
+  String? buttonText;
+  String? client_id;
+  String? client_secret;
+  String? emailClaim;
+  String? scope;
+  String? uniqueIdClaim;
+  String? usernameClaim;
 
   NintendoIdentityProvider(
       {this.buttonText,
@@ -5461,20 +5574,20 @@ class NonTransactionalEvent {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class OAuth2Configuration {
-  List<String> authorizedOriginURLs;
-  List<String> authorizedRedirectURLs;
-  ClientAuthenticationPolicy clientAuthenticationPolicy;
-  String clientId;
-  String clientSecret;
-  bool debug;
-  String deviceVerificationURL;
-  Set<GrantType> enabledGrants;
-  bool generateRefreshTokens;
-  LogoutBehavior logoutBehavior;
-  String logoutURL;
-  ProofKeyForCodeExchangePolicy proofKeyForCodeExchangePolicy;
-  bool requireClientAuthentication;
-  bool requireRegistration;
+  List<String>? authorizedOriginURLs;
+  List<String>? authorizedRedirectURLs;
+  ClientAuthenticationPolicy? clientAuthenticationPolicy;
+  String? clientId;
+  String? clientSecret;
+  bool? debug;
+  String? deviceVerificationURL;
+  Set<GrantType>? enabledGrants;
+  bool? generateRefreshTokens;
+  LogoutBehavior? logoutBehavior;
+  String? logoutURL;
+  ProofKeyForCodeExchangePolicy? proofKeyForCodeExchangePolicy;
+  bool? requireClientAuthentication;
+  bool? requireRegistration;
 
   OAuth2Configuration(
       {this.authorizedOriginURLs,
@@ -5500,9 +5613,9 @@ class OAuth2Configuration {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class OAuthConfigurationResponse {
-  num httpSessionMaxInactiveInterval;
-  String logoutURL;
-  OAuth2Configuration oauthConfiguration;
+  num? httpSessionMaxInactiveInterval;
+  String? logoutURL;
+  OAuth2Configuration? oauthConfiguration;
 
   OAuthConfigurationResponse(
       {this.httpSessionMaxInactiveInterval,
@@ -5517,13 +5630,13 @@ class OAuthConfigurationResponse {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class OAuthError {
-  String change_password_id;
-  OAuthErrorType error;
-  String error_description;
-  OAuthErrorReason error_reason;
-  String error_uri;
-  String two_factor_id;
-  List<TwoFactorMethod> two_factor_methods;
+  String? change_password_id;
+  OAuthErrorType? error;
+  String? error_description;
+  OAuthErrorReason? error_reason;
+  String? error_uri;
+  String? two_factor_id;
+  List<TwoFactorMethod>? two_factor_methods;
 
   OAuthError(
       {this.change_password_id,
@@ -5709,24 +5822,24 @@ enum ObjectState {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class OpenIdConfiguration {
-  String authorization_endpoint;
-  bool backchannel_logout_supported;
-  List<String> claims_supported;
-  String device_authorization_endpoint;
-  String end_session_endpoint;
-  bool frontchannel_logout_supported;
-  List<String> grant_types_supported;
-  List<String> id_token_signing_alg_values_supported;
-  String issuer;
-  String jwks_uri;
-  List<String> response_modes_supported;
-  List<String> response_types_supported;
-  List<String> scopes_supported;
-  List<String> subject_types_supported;
-  String token_endpoint;
-  List<String> token_endpoint_auth_methods_supported;
-  String userinfo_endpoint;
-  List<String> userinfo_signing_alg_values_supported;
+  String? authorization_endpoint;
+  bool? backchannel_logout_supported;
+  List<String>? claims_supported;
+  String? device_authorization_endpoint;
+  String? end_session_endpoint;
+  bool? frontchannel_logout_supported;
+  List<String>? grant_types_supported;
+  List<String>? id_token_signing_alg_values_supported;
+  String? issuer;
+  String? jwks_uri;
+  List<String>? response_modes_supported;
+  List<String>? response_types_supported;
+  List<String>? scopes_supported;
+  List<String>? subject_types_supported;
+  String? token_endpoint;
+  List<String>? token_endpoint_auth_methods_supported;
+  String? userinfo_endpoint;
+  List<String>? userinfo_signing_alg_values_supported;
 
   OpenIdConfiguration(
       {this.authorization_endpoint,
@@ -5757,9 +5870,9 @@ class OpenIdConfiguration {
 @JsonSerializable()
 class OpenIdConnectApplicationConfiguration
     extends BaseIdentityProviderApplicationConfiguration {
-  String buttonImageURL;
-  String buttonText;
-  IdentityProviderOauth2Configuration oauth2;
+  String? buttonImageURL;
+  String? buttonText;
+  IdentityProviderOauth2Configuration? oauth2;
 
   OpenIdConnectApplicationConfiguration(
       {this.buttonImageURL, this.buttonText, this.oauth2});
@@ -5775,11 +5888,11 @@ class OpenIdConnectApplicationConfiguration
 @JsonSerializable()
 class OpenIdConnectIdentityProvider
     extends BaseIdentityProvider<OpenIdConnectApplicationConfiguration> {
-  String buttonImageURL;
-  String buttonText;
-  Set<String> domains;
-  IdentityProviderOauth2Configuration oauth2;
-  bool postRequest;
+  String? buttonImageURL;
+  String? buttonText;
+  Set<String>? domains;
+  IdentityProviderOauth2Configuration? oauth2;
+  bool? postRequest;
 
   OpenIdConnectIdentityProvider(
       {this.buttonImageURL,
@@ -5796,9 +5909,9 @@ class OpenIdConnectIdentityProvider
 /// @author Daniel DeGroff
 @JsonSerializable()
 class PasswordBreachDetection extends Enableable {
-  BreachMatchMode matchMode;
-  String notifyUserEmailTemplateId;
-  BreachAction onLogin;
+  BreachMatchMode? matchMode;
+  String? notifyUserEmailTemplateId;
+  BreachAction? onLogin;
 
   PasswordBreachDetection(
       {this.matchMode, this.notifyUserEmailTemplateId, this.onLogin});
@@ -5813,9 +5926,9 @@ class PasswordBreachDetection extends Enableable {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class PasswordEncryptionConfiguration {
-  String encryptionScheme;
-  num encryptionSchemeFactor;
-  bool modifyEncryptionSchemeOnLogin;
+  String? encryptionScheme;
+  num? encryptionSchemeFactor;
+  bool? modifyEncryptionSchemeOnLogin;
 
   PasswordEncryptionConfiguration(
       {this.encryptionScheme,
@@ -5850,8 +5963,8 @@ class PasswordlessIdentityProvider {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class PasswordlessLoginRequest extends BaseLoginRequest {
-  String code;
-  String twoFactorTrustId;
+  String? code;
+  String? twoFactorTrustId;
 
   PasswordlessLoginRequest({this.code, this.twoFactorTrustId});
 
@@ -5863,10 +5976,10 @@ class PasswordlessLoginRequest extends BaseLoginRequest {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class PasswordlessSendRequest {
-  String applicationId;
-  String code;
-  String loginId;
-  Map<String, dynamic> state;
+  String? applicationId;
+  String? code;
+  String? loginId;
+  Map<String, dynamic>? state;
 
   PasswordlessSendRequest(
       {this.applicationId, this.code, this.loginId, this.state});
@@ -5879,9 +5992,9 @@ class PasswordlessSendRequest {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class PasswordlessStartRequest {
-  String applicationId;
-  String loginId;
-  Map<String, dynamic> state;
+  String? applicationId;
+  String? loginId;
+  Map<String, dynamic>? state;
 
   PasswordlessStartRequest({this.applicationId, this.loginId, this.state});
 
@@ -5893,7 +6006,7 @@ class PasswordlessStartRequest {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class PasswordlessStartResponse {
-  String code;
+  String? code;
 
   PasswordlessStartResponse({this.code});
 
@@ -5905,14 +6018,14 @@ class PasswordlessStartResponse {
 /// @author Derek Klatt
 @JsonSerializable()
 class PasswordValidationRules {
-  PasswordBreachDetection breachDetection;
-  num maxLength;
-  num minLength;
-  RememberPreviousPasswords rememberPreviousPasswords;
-  bool requireMixedCase;
-  bool requireNonAlpha;
-  bool requireNumber;
-  bool validateOnLogin;
+  PasswordBreachDetection? breachDetection;
+  num? maxLength;
+  num? minLength;
+  RememberPreviousPasswords? rememberPreviousPasswords;
+  bool? requireMixedCase;
+  bool? requireNonAlpha;
+  bool? requireNumber;
+  bool? validateOnLogin;
 
   PasswordValidationRules(
       {this.breachDetection,
@@ -5932,7 +6045,7 @@ class PasswordValidationRules {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class PasswordValidationRulesResponse {
-  PasswordValidationRules passwordValidationRules;
+  PasswordValidationRules? passwordValidationRules;
 
   PasswordValidationRulesResponse({this.passwordValidationRules});
 
@@ -5945,16 +6058,16 @@ class PasswordValidationRulesResponse {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class PendingIdPLink {
-  String displayName;
-  String email;
-  String identityProviderId;
-  List<IdentityProviderLink> identityProviderLinks;
-  String identityProviderName;
-  IdentityProviderTenantConfiguration identityProviderTenantConfiguration;
-  IdentityProviderType identityProviderType;
-  String identityProviderUserId;
-  User user;
-  String username;
+  String? displayName;
+  String? email;
+  String? identityProviderId;
+  List<IdentityProviderLink>? identityProviderLinks;
+  String? identityProviderName;
+  IdentityProviderTenantConfiguration? identityProviderTenantConfiguration;
+  IdentityProviderType? identityProviderType;
+  String? identityProviderUserId;
+  User? user;
+  String? username;
 
   PendingIdPLink(
       {this.displayName,
@@ -5976,7 +6089,7 @@ class PendingIdPLink {
 /// @author Brian Pontarelli
 @JsonSerializable()
 class PendingResponse {
-  List<User> users;
+  List<User>? users;
 
   PendingResponse({this.users});
 
@@ -5988,8 +6101,8 @@ class PendingResponse {
 /// @author Michael Sleevi
 @JsonSerializable()
 class PreviewMessageTemplateRequest {
-  String locale;
-  MessageTemplate messageTemplate;
+  String? locale;
+  MessageTemplate? messageTemplate;
 
   PreviewMessageTemplateRequest({this.locale, this.messageTemplate});
 
@@ -6001,8 +6114,8 @@ class PreviewMessageTemplateRequest {
 /// @author Michael Sleevi
 @JsonSerializable()
 class PreviewMessageTemplateResponse {
-  Errors errors;
-  SMSMessage message;
+  Errors? errors;
+  SMSMessage? message;
 
   PreviewMessageTemplateResponse({this.errors, this.message});
 
@@ -6014,8 +6127,8 @@ class PreviewMessageTemplateResponse {
 /// @author Brian Pontarelli
 @JsonSerializable()
 class PreviewRequest {
-  EmailTemplate emailTemplate;
-  String locale;
+  EmailTemplate? emailTemplate;
+  String? locale;
 
   PreviewRequest({this.emailTemplate, this.locale});
 
@@ -6027,8 +6140,8 @@ class PreviewRequest {
 /// @author Seth Musselman
 @JsonSerializable()
 class PreviewResponse {
-  Email email;
-  Errors errors;
+  Email? email;
+  Errors? errors;
 
   PreviewResponse({this.email, this.errors});
 
@@ -6052,15 +6165,15 @@ enum ProofKeyForCodeExchangePolicy {
 /// @author Spencer Witt
 @JsonSerializable()
 class PublicKeyCredentialCreationOptions {
-  AttestationConveyancePreference attestation;
-  AuthenticatorSelectionCriteria authenticatorSelection;
-  String challenge;
-  List<PublicKeyCredentialDescriptor> excludeCredentials;
-  WebAuthnRegistrationExtensionOptions extensions;
-  List<PublicKeyCredentialParameters> pubKeyCredParams;
-  PublicKeyCredentialRelyingPartyEntity rp;
-  num timeout;
-  PublicKeyCredentialUserEntity user;
+  AttestationConveyancePreference? attestation;
+  AuthenticatorSelectionCriteria? authenticatorSelection;
+  String? challenge;
+  List<PublicKeyCredentialDescriptor>? excludeCredentials;
+  WebAuthnRegistrationExtensionOptions? extensions;
+  List<PublicKeyCredentialParameters>? pubKeyCredParams;
+  PublicKeyCredentialRelyingPartyEntity? rp;
+  num? timeout;
+  PublicKeyCredentialUserEntity? user;
 
   PublicKeyCredentialCreationOptions(
       {this.attestation,
@@ -6085,9 +6198,9 @@ class PublicKeyCredentialCreationOptions {
 /// @author Spencer Witt
 @JsonSerializable()
 class PublicKeyCredentialDescriptor {
-  String id;
-  List<String> transports;
-  PublicKeyCredentialType type;
+  String? id;
+  List<String>? transports;
+  PublicKeyCredentialType? type;
 
   PublicKeyCredentialDescriptor({this.id, this.transports, this.type});
 
@@ -6099,7 +6212,7 @@ class PublicKeyCredentialDescriptor {
 /// Describes a user account or WebAuthn Relying Party associated with a public key credential
 @JsonSerializable()
 class PublicKeyCredentialEntity {
-  String name;
+  String? name;
 
   PublicKeyCredentialEntity({this.name});
 
@@ -6113,8 +6226,8 @@ class PublicKeyCredentialEntity {
 /// @author Spencer Witt
 @JsonSerializable()
 class PublicKeyCredentialParameters {
-  CoseAlgorithmIdentifier alg;
-  PublicKeyCredentialType type;
+  CoseAlgorithmIdentifier? alg;
+  PublicKeyCredentialType? type;
 
   PublicKeyCredentialParameters({this.alg, this.type});
 
@@ -6128,7 +6241,7 @@ class PublicKeyCredentialParameters {
 /// @author Spencer Witt
 @JsonSerializable()
 class PublicKeyCredentialRelyingPartyEntity extends PublicKeyCredentialEntity {
-  String id;
+  String? id;
 
   PublicKeyCredentialRelyingPartyEntity({this.id});
 
@@ -6144,11 +6257,11 @@ class PublicKeyCredentialRelyingPartyEntity extends PublicKeyCredentialEntity {
 /// @author Spencer Witt
 @JsonSerializable()
 class PublicKeyCredentialRequestOptions {
-  List<PublicKeyCredentialDescriptor> allowCredentials;
-  String challenge;
-  String rpId;
-  num timeout;
-  UserVerificationRequirement userVerification;
+  List<PublicKeyCredentialDescriptor>? allowCredentials;
+  String? challenge;
+  String? rpId;
+  num? timeout;
+  UserVerificationRequirement? userVerification;
 
   PublicKeyCredentialRequestOptions(
       {this.allowCredentials,
@@ -6177,8 +6290,8 @@ enum PublicKeyCredentialType {
 /// @author Spencer Witt
 @JsonSerializable()
 class PublicKeyCredentialUserEntity extends PublicKeyCredentialEntity {
-  String displayName;
-  String id;
+  String? displayName;
+  String? id;
 
   PublicKeyCredentialUserEntity({this.displayName, this.id});
 
@@ -6192,8 +6305,8 @@ class PublicKeyCredentialUserEntity extends PublicKeyCredentialEntity {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class PublicKeyResponse {
-  String publicKey;
-  Map<String, String> publicKeys;
+  String? publicKey;
+  Map<String, String>? publicKeys;
 
   PublicKeyResponse({this.publicKey, this.publicKeys});
 
@@ -6205,8 +6318,8 @@ class PublicKeyResponse {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class RateLimitedRequestConfiguration extends Enableable {
-  num limit;
-  num timePeriodInSeconds;
+  num? limit;
+  num? timePeriodInSeconds;
 
   RateLimitedRequestConfiguration({this.limit, this.timePeriodInSeconds});
 
@@ -6237,10 +6350,10 @@ enum RateLimitedRequestType {
 /// @author Brian Pontarelli
 @JsonSerializable()
 class RawLogin {
-  String applicationId;
-  num instant;
-  String ipAddress;
-  String userId;
+  String? applicationId;
+  num? instant;
+  String? ipAddress;
+  String? userId;
 
   RawLogin({this.applicationId, this.instant, this.ipAddress, this.userId});
 
@@ -6266,7 +6379,7 @@ enum ReactorFeatureStatus {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class ReactorMetrics {
-  Map<String, BreachedPasswordTenantMetric> breachedPasswordMetrics;
+  Map<String, BreachedPasswordTenantMetric>? breachedPasswordMetrics;
 
   ReactorMetrics({this.breachedPasswordMetrics});
 
@@ -6278,7 +6391,7 @@ class ReactorMetrics {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class ReactorMetricsResponse {
-  ReactorMetrics metrics;
+  ReactorMetrics? metrics;
 
   ReactorMetricsResponse({this.metrics});
 
@@ -6292,8 +6405,8 @@ class ReactorMetricsResponse {
 /// @author Brian Pontarelli
 @JsonSerializable()
 class ReactorRequest {
-  String license;
-  String licenseId;
+  String? license;
+  String? licenseId;
 
   ReactorRequest({this.license, this.licenseId});
 
@@ -6305,7 +6418,7 @@ class ReactorRequest {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class ReactorResponse {
-  ReactorStatus status;
+  ReactorStatus? status;
 
   ReactorResponse({this.status});
 
@@ -6317,23 +6430,23 @@ class ReactorResponse {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class ReactorStatus {
-  ReactorFeatureStatus advancedIdentityProviders;
-  ReactorFeatureStatus advancedLambdas;
-  ReactorFeatureStatus advancedMultiFactorAuthentication;
-  ReactorFeatureStatus advancedRegistration;
-  ReactorFeatureStatus applicationMultiFactorAuthentication;
-  ReactorFeatureStatus applicationThemes;
-  ReactorFeatureStatus breachedPasswordDetection;
-  ReactorFeatureStatus connectors;
-  ReactorFeatureStatus entityManagement;
-  String expiration;
-  Map<String, String> licenseAttributes;
-  bool licensed;
-  ReactorFeatureStatus scimServer;
-  ReactorFeatureStatus threatDetection;
-  ReactorFeatureStatus webAuthn;
-  ReactorFeatureStatus webAuthnPlatformAuthenticators;
-  ReactorFeatureStatus webAuthnRoamingAuthenticators;
+  ReactorFeatureStatus? advancedIdentityProviders;
+  ReactorFeatureStatus? advancedLambdas;
+  ReactorFeatureStatus? advancedMultiFactorAuthentication;
+  ReactorFeatureStatus? advancedRegistration;
+  ReactorFeatureStatus? applicationMultiFactorAuthentication;
+  ReactorFeatureStatus? applicationThemes;
+  ReactorFeatureStatus? breachedPasswordDetection;
+  ReactorFeatureStatus? connectors;
+  ReactorFeatureStatus? entityManagement;
+  String? expiration;
+  Map<String, String>? licenseAttributes;
+  bool? licensed;
+  ReactorFeatureStatus? scimServer;
+  ReactorFeatureStatus? threatDetection;
+  ReactorFeatureStatus? webAuthn;
+  ReactorFeatureStatus? webAuthnPlatformAuthenticators;
+  ReactorFeatureStatus? webAuthnRoamingAuthenticators;
 
   ReactorStatus(
       {this.advancedIdentityProviders,
@@ -6364,7 +6477,7 @@ class ReactorStatus {
 /// @author Seth Musselman
 @JsonSerializable()
 class RecentLoginResponse {
-  List<DisplayableRawLogin> logins;
+  List<DisplayableRawLogin>? logins;
 
   RecentLoginResponse({this.logins});
 
@@ -6376,8 +6489,8 @@ class RecentLoginResponse {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class RefreshRequest extends BaseEventRequest {
-  String refreshToken;
-  String token;
+  String? refreshToken;
+  String? token;
 
   RefreshRequest({this.refreshToken, this.token});
 
@@ -6401,15 +6514,15 @@ class RefreshResponse {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class RefreshToken {
-  String applicationId;
-  Map<String, dynamic> data;
-  String id;
-  num insertInstant;
-  MetaData metaData;
-  num startInstant;
-  String tenantId;
-  String token;
-  String userId;
+  String? applicationId;
+  Map<String, dynamic>? data;
+  String? id;
+  num? insertInstant;
+  MetaData? metaData;
+  num? startInstant;
+  String? tenantId;
+  String? token;
+  String? userId;
 
   RefreshToken(
       {this.applicationId,
@@ -6440,8 +6553,8 @@ enum RefreshTokenExpirationPolicy {
 /// @author Brett Guy
 @JsonSerializable()
 class RefreshTokenImportRequest {
-  List<RefreshToken> refreshTokens;
-  bool validateDbConstraints;
+  List<RefreshToken>? refreshTokens;
+  bool? validateDbConstraints;
 
   RefreshTokenImportRequest({this.refreshTokens, this.validateDbConstraints});
 
@@ -6455,8 +6568,8 @@ class RefreshTokenImportRequest {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class RefreshTokenResponse {
-  RefreshToken refreshToken;
-  List<RefreshToken> refreshTokens;
+  RefreshToken? refreshToken;
+  List<RefreshToken>? refreshTokens;
 
   RefreshTokenResponse({this.refreshToken, this.refreshTokens});
 
@@ -6468,9 +6581,9 @@ class RefreshTokenResponse {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class RefreshTokenRevocationPolicy {
-  bool onLoginPrevented;
-  bool onMultiFactorEnable;
-  bool onPasswordChanged;
+  bool? onLoginPrevented;
+  bool? onMultiFactorEnable;
+  bool? onPasswordChanged;
 
   RefreshTokenRevocationPolicy(
       {this.onLoginPrevented,
@@ -6487,9 +6600,9 @@ class RefreshTokenRevocationPolicy {
 /// @author Brian Pontarelli
 @JsonSerializable()
 class RefreshTokenRevokeRequest extends BaseEventRequest {
-  String applicationId;
-  String token;
-  String userId;
+  String? applicationId;
+  String? token;
+  String? userId;
 
   RefreshTokenRevokeRequest({this.applicationId, this.token, this.userId});
 
@@ -6508,16 +6621,16 @@ enum RefreshTokenUsagePolicy {
 
 @JsonSerializable()
 class RegistrationConfiguration extends Enableable {
-  Requirable birthDate;
-  bool confirmPassword;
-  Requirable firstName;
-  String formId;
-  Requirable fullName;
-  Requirable lastName;
-  LoginIdType loginIdType;
-  Requirable middleName;
-  Requirable mobilePhone;
-  RegistrationType type;
+  Requirable? birthDate;
+  bool? confirmPassword;
+  Requirable? firstName;
+  String? formId;
+  Requirable? fullName;
+  Requirable? lastName;
+  LoginIdType? loginIdType;
+  Requirable? middleName;
+  Requirable? mobilePhone;
+  RegistrationType? type;
 
   RegistrationConfiguration(
       {this.birthDate,
@@ -6553,8 +6666,8 @@ class RegistrationDeleteRequest extends BaseEventRequest {
 /// @author Brian Pontarelli
 @JsonSerializable()
 class RegistrationReportResponse {
-  List<Count> hourlyCounts;
-  num total;
+  List<Count>? hourlyCounts;
+  num? total;
 
   RegistrationReportResponse({this.hourlyCounts, this.total});
 
@@ -6568,13 +6681,13 @@ class RegistrationReportResponse {
 /// @author Brian Pontarelli
 @JsonSerializable()
 class RegistrationRequest extends BaseEventRequest {
-  bool disableDomainBlock;
-  bool generateAuthenticationToken;
-  UserRegistration registration;
-  bool sendSetPasswordEmail;
-  bool skipRegistrationVerification;
-  bool skipVerification;
-  User user;
+  bool? disableDomainBlock;
+  bool? generateAuthenticationToken;
+  UserRegistration? registration;
+  bool? sendSetPasswordEmail;
+  bool? skipRegistrationVerification;
+  bool? skipVerification;
+  User? user;
 
   RegistrationRequest(
       {this.disableDomainBlock,
@@ -6595,12 +6708,12 @@ class RegistrationRequest extends BaseEventRequest {
 /// @author Brian Pontarelli
 @JsonSerializable()
 class RegistrationResponse {
-  String refreshToken;
-  UserRegistration registration;
-  String registrationVerificationId;
-  String token;
-  num tokenExpirationInstant;
-  User user;
+  String? refreshToken;
+  UserRegistration? registration;
+  String? registrationVerificationId;
+  String? token;
+  num? tokenExpirationInstant;
+  User? user;
 
   RegistrationResponse(
       {this.refreshToken,
@@ -6625,7 +6738,7 @@ enum RegistrationType {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class RegistrationUnverifiedOptions {
-  UnverifiedBehavior behavior;
+  UnverifiedBehavior? behavior;
 
   RegistrationUnverifiedOptions({this.behavior});
 
@@ -6639,7 +6752,7 @@ class RegistrationUnverifiedOptions {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class ReindexRequest {
-  String index;
+  String? index;
 
   ReindexRequest({this.index});
 
@@ -6651,7 +6764,7 @@ class ReindexRequest {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class ReloadRequest {
-  List<String> names;
+  List<String>? names;
 
   ReloadRequest({this.names});
 
@@ -6663,7 +6776,7 @@ class ReloadRequest {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class RememberPreviousPasswords extends Enableable {
-  num count;
+  num? count;
 
   RememberPreviousPasswords({this.count});
 
@@ -6678,7 +6791,7 @@ class RememberPreviousPasswords extends Enableable {
 /// @author Brian Pontarelli
 @JsonSerializable()
 class Requirable extends Enableable {
-  bool required;
+  bool? required;
 
   Requirable({this.required});
 
@@ -6723,8 +6836,8 @@ enum SAMLLogoutBehavior {
 @JsonSerializable()
 class SAMLv2ApplicationConfiguration
     extends BaseIdentityProviderApplicationConfiguration {
-  String buttonImageURL;
-  String buttonText;
+  String? buttonImageURL;
+  String? buttonText;
 
   SAMLv2ApplicationConfiguration({this.buttonImageURL, this.buttonText});
 
@@ -6735,19 +6848,19 @@ class SAMLv2ApplicationConfiguration
 
 @JsonSerializable()
 class SAMLv2Configuration extends Enableable {
-  String audience;
-  List<String> authorizedRedirectURLs;
-  String callbackURL;
-  bool debug;
-  String defaultVerificationKeyId;
-  SAMLv2IdPInitiatedLoginConfiguration initiatedLogin;
-  String issuer;
-  String keyId;
-  SAMLv2Logout logout;
-  String logoutURL;
-  bool requireSignedRequests;
-  CanonicalizationMethod xmlSignatureC14nMethod;
-  XMLSignatureLocation xmlSignatureLocation;
+  String? audience;
+  List<String>? authorizedRedirectURLs;
+  String? callbackURL;
+  bool? debug;
+  String? defaultVerificationKeyId;
+  SAMLv2IdPInitiatedLoginConfiguration? initiatedLogin;
+  String? issuer;
+  String? keyId;
+  SAMLv2Logout? logout;
+  String? logoutURL;
+  bool? requireSignedRequests;
+  CanonicalizationMethod? xmlSignatureC14nMethod;
+  XMLSignatureLocation? xmlSignatureLocation;
 
   SAMLv2Configuration(
       {this.audience,
@@ -6775,22 +6888,22 @@ class SAMLv2Configuration extends Enableable {
 @JsonSerializable()
 class SAMLv2IdentityProvider
     extends BaseIdentityProvider<SAMLv2ApplicationConfiguration> {
-  String buttonImageURL;
-  String buttonText;
-  Set<String> domains;
-  String emailClaim;
-  String idpEndpoint;
-  String issuer;
-  String keyId;
-  LoginHintConfiguration loginHintConfiguration;
-  String nameIdFormat;
-  bool postRequest;
-  String requestSigningKeyId;
-  bool signRequest;
-  String uniqueIdClaim;
-  bool useNameIdForEmail;
-  String usernameClaim;
-  CanonicalizationMethod xmlSignatureC14nMethod;
+  String? buttonImageURL;
+  String? buttonText;
+  Set<String>? domains;
+  String? emailClaim;
+  String? idpEndpoint;
+  String? issuer;
+  String? keyId;
+  LoginHintConfiguration? loginHintConfiguration;
+  String? nameIdFormat;
+  bool? postRequest;
+  String? requestSigningKeyId;
+  bool? signRequest;
+  String? uniqueIdClaim;
+  bool? useNameIdForEmail;
+  String? usernameClaim;
+  CanonicalizationMethod? xmlSignatureC14nMethod;
 
   SAMLv2IdentityProvider(
       {this.buttonImageURL,
@@ -6834,12 +6947,12 @@ class SAMLv2IdPInitiatedApplicationConfiguration
 @JsonSerializable()
 class SAMLv2IdPInitiatedIdentityProvider
     extends BaseIdentityProvider<SAMLv2IdPInitiatedApplicationConfiguration> {
-  String emailClaim;
-  String issuer;
-  String keyId;
-  String uniqueIdClaim;
-  bool useNameIdForEmail;
-  String usernameClaim;
+  String? emailClaim;
+  String? issuer;
+  String? keyId;
+  String? uniqueIdClaim;
+  bool? useNameIdForEmail;
+  String? usernameClaim;
 
   SAMLv2IdPInitiatedIdentityProvider(
       {this.emailClaim,
@@ -6861,7 +6974,7 @@ class SAMLv2IdPInitiatedIdentityProvider
 /// @author Daniel DeGroff
 @JsonSerializable()
 class SAMLv2IdPInitiatedLoginConfiguration extends Enableable {
-  String nameIdFormat;
+  String? nameIdFormat;
 
   SAMLv2IdPInitiatedLoginConfiguration({this.nameIdFormat});
 
@@ -6874,12 +6987,12 @@ class SAMLv2IdPInitiatedLoginConfiguration extends Enableable {
 
 @JsonSerializable()
 class SAMLv2Logout {
-  SAMLLogoutBehavior behavior;
-  String defaultVerificationKeyId;
-  String keyId;
-  bool requireSignedRequests;
-  SAMLv2SingleLogout singleLogout;
-  CanonicalizationMethod xmlSignatureC14nMethod;
+  SAMLLogoutBehavior? behavior;
+  String? defaultVerificationKeyId;
+  String? keyId;
+  bool? requireSignedRequests;
+  SAMLv2SingleLogout? singleLogout;
+  CanonicalizationMethod? xmlSignatureC14nMethod;
 
   SAMLv2Logout(
       {this.behavior,
@@ -6896,9 +7009,9 @@ class SAMLv2Logout {
 
 @JsonSerializable()
 class SAMLv2SingleLogout extends Enableable {
-  String keyId;
-  String url;
-  CanonicalizationMethod xmlSignatureC14nMethod;
+  String? keyId;
+  String? url;
+  CanonicalizationMethod? xmlSignatureC14nMethod;
 
   SAMLv2SingleLogout({this.keyId, this.url, this.xmlSignatureC14nMethod});
 
@@ -6912,7 +7025,7 @@ class SAMLv2SingleLogout extends Enableable {
 /// @author Brian Pontarelli
 @JsonSerializable()
 class SearchRequest {
-  UserSearchCriteria search;
+  UserSearchCriteria? search;
 
   SearchRequest({this.search});
 
@@ -6926,8 +7039,8 @@ class SearchRequest {
 /// @author Brian Pontarelli
 @JsonSerializable()
 class SearchResponse {
-  num total;
-  List<User> users;
+  num? total;
+  List<User>? users;
 
   SearchResponse({this.total, this.users});
 
@@ -6939,8 +7052,8 @@ class SearchResponse {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class SecretResponse {
-  String secret;
-  String secretBase32Encoded;
+  String? secret;
+  String? secretBase32Encoded;
 
   SecretResponse({this.secret, this.secretBase32Encoded});
 
@@ -6952,8 +7065,8 @@ class SecretResponse {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class SecureGeneratorConfiguration {
-  num length;
-  SecureGeneratorType type;
+  num? length;
+  SecureGeneratorType? type;
 
   SecureGeneratorConfiguration({this.length, this.type});
 
@@ -6977,22 +7090,22 @@ enum SecureGeneratorType {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class SecureIdentity {
-  num breachedPasswordLastCheckedInstant;
-  BreachedPasswordStatus breachedPasswordStatus;
-  String connectorId;
-  String encryptionScheme;
-  num factor;
-  String id;
-  num lastLoginInstant;
-  String password;
-  ChangePasswordReason passwordChangeReason;
-  bool passwordChangeRequired;
-  num passwordLastUpdateInstant;
-  String salt;
-  String uniqueUsername;
-  String username;
-  ContentStatus usernameStatus;
-  bool verified;
+  num? breachedPasswordLastCheckedInstant;
+  BreachedPasswordStatus? breachedPasswordStatus;
+  String? connectorId;
+  String? encryptionScheme;
+  num? factor;
+  String? id;
+  num? lastLoginInstant;
+  String? password;
+  ChangePasswordReason? passwordChangeReason;
+  bool? passwordChangeRequired;
+  num? passwordLastUpdateInstant;
+  String? salt;
+  String? uniqueUsername;
+  String? username;
+  ContentStatus? usernameStatus;
+  bool? verified;
 
   SecureIdentity(
       {this.breachedPasswordLastCheckedInstant,
@@ -7020,13 +7133,13 @@ class SecureIdentity {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class SendRequest {
-  String applicationId;
-  List<String> bccAddresses;
-  List<String> ccAddresses;
-  List<String> preferredLanguages;
-  Map<String, dynamic> requestData;
-  List<EmailAddress> toAddresses;
-  List<String> userIds;
+  String? applicationId;
+  List<String>? bccAddresses;
+  List<String>? ccAddresses;
+  List<String>? preferredLanguages;
+  Map<String, dynamic>? requestData;
+  List<EmailAddress>? toAddresses;
+  List<String>? userIds;
 
   SendRequest(
       {this.applicationId,
@@ -7045,8 +7158,8 @@ class SendRequest {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class SendResponse {
-  Map<String, EmailTemplateErrors> anonymousResults;
-  Map<String, EmailTemplateErrors> results;
+  Map<String, EmailTemplateErrors>? anonymousResults;
+  Map<String, EmailTemplateErrors>? results;
 
   SendResponse({this.anonymousResults, this.results});
 
@@ -7058,8 +7171,8 @@ class SendResponse {
 /// @author Michael Sleevi
 @JsonSerializable()
 class SMSMessage {
-  String phoneNumber;
-  String textMessage;
+  String? phoneNumber;
+  String? textMessage;
 
   SMSMessage({this.phoneNumber, this.textMessage});
 
@@ -7071,8 +7184,8 @@ class SMSMessage {
 /// @author Michael Sleevi
 @JsonSerializable()
 class SMSMessageTemplate extends MessageTemplate {
-  String defaultTemplate;
-  Map<String, String> localizedTemplates;
+  String? defaultTemplate;
+  Map<String, String>? localizedTemplates;
 
   SMSMessageTemplate({this.defaultTemplate, this.localizedTemplates});
 
@@ -7085,10 +7198,10 @@ class SMSMessageTemplate extends MessageTemplate {
 @JsonSerializable()
 class SonyPSNApplicationConfiguration
     extends BaseIdentityProviderApplicationConfiguration {
-  String buttonText;
-  String client_id;
-  String client_secret;
-  String scope;
+  String? buttonText;
+  String? client_id;
+  String? client_secret;
+  String? scope;
 
   SonyPSNApplicationConfiguration(
       {this.buttonText, this.client_id, this.client_secret, this.scope});
@@ -7105,10 +7218,10 @@ class SonyPSNApplicationConfiguration
 @JsonSerializable()
 class SonyPSNIdentityProvider
     extends BaseIdentityProvider<SonyPSNApplicationConfiguration> {
-  String buttonText;
-  String client_id;
-  String client_secret;
-  String scope;
+  String? buttonText;
+  String? client_id;
+  String? client_secret;
+  String? scope;
 
   SonyPSNIdentityProvider(
       {this.buttonText, this.client_id, this.client_secret, this.scope});
@@ -7129,9 +7242,9 @@ enum Sort {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class SortField {
-  String missing;
-  String name;
-  Sort order;
+  String? missing;
+  String? name;
+  Sort? order;
 
   SortField({this.missing, this.name, this.order});
 
@@ -7144,10 +7257,10 @@ class SortField {
 @JsonSerializable()
 class SteamApplicationConfiguration
     extends BaseIdentityProviderApplicationConfiguration {
-  String buttonText;
-  String client_id;
-  String scope;
-  String webAPIKey;
+  String? buttonText;
+  String? client_id;
+  String? scope;
+  String? webAPIKey;
 
   SteamApplicationConfiguration(
       {this.buttonText, this.client_id, this.scope, this.webAPIKey});
@@ -7163,10 +7276,10 @@ class SteamApplicationConfiguration
 @JsonSerializable()
 class SteamIdentityProvider
     extends BaseIdentityProvider<SteamApplicationConfiguration> {
-  String buttonText;
-  String client_id;
-  String scope;
-  String webAPIKey;
+  String? buttonText;
+  String? client_id;
+  String? scope;
+  String? webAPIKey;
 
   SteamIdentityProvider(
       {this.buttonText, this.client_id, this.scope, this.webAPIKey});
@@ -7191,15 +7304,15 @@ class SupportsPostBindings {
 /// @author Brian Pontarelli
 @JsonSerializable()
 class SystemConfiguration {
-  AuditLogConfiguration auditLogConfiguration;
-  CORSConfiguration corsConfiguration;
-  Map<String, dynamic> data;
-  EventLogConfiguration eventLogConfiguration;
-  num insertInstant;
-  num lastUpdateInstant;
-  LoginRecordConfiguration loginRecordConfiguration;
-  String reportTimezone;
-  UIConfiguration uiConfiguration;
+  AuditLogConfiguration? auditLogConfiguration;
+  CORSConfiguration? corsConfiguration;
+  Map<String, dynamic>? data;
+  EventLogConfiguration? eventLogConfiguration;
+  num? insertInstant;
+  num? lastUpdateInstant;
+  LoginRecordConfiguration? loginRecordConfiguration;
+  String? reportTimezone;
+  UIConfiguration? uiConfiguration;
 
   SystemConfiguration(
       {this.auditLogConfiguration,
@@ -7222,7 +7335,7 @@ class SystemConfiguration {
 /// @author Brian Pontarelli
 @JsonSerializable()
 class SystemConfigurationRequest {
-  SystemConfiguration systemConfiguration;
+  SystemConfiguration? systemConfiguration;
 
   SystemConfigurationRequest({this.systemConfiguration});
 
@@ -7236,7 +7349,7 @@ class SystemConfigurationRequest {
 /// @author Brian Pontarelli
 @JsonSerializable()
 class SystemConfigurationResponse {
-  SystemConfiguration systemConfiguration;
+  SystemConfiguration? systemConfiguration;
 
   SystemConfigurationResponse({this.systemConfiguration});
 
@@ -7248,7 +7361,7 @@ class SystemConfigurationResponse {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class SystemLogsExportRequest extends BaseExportRequest {
-  num lastNBytes;
+  num? lastNBytes;
 
   SystemLogsExportRequest({this.lastNBytes});
 
@@ -7259,52 +7372,52 @@ class SystemLogsExportRequest extends BaseExportRequest {
 
 @JsonSerializable()
 class Templates {
-  String accountEdit;
-  String accountIndex;
-  String accountTwoFactorDisable;
-  String accountTwoFactorEnable;
-  String accountTwoFactorIndex;
-  String accountWebAuthnAdd;
-  String accountWebAuthnDelete;
-  String accountWebAuthnIndex;
-  String emailComplete;
-  String emailSend;
-  String emailSent;
-  String emailVerificationRequired;
-  String emailVerify;
-  String helpers;
-  String index;
-  String oauth2Authorize;
-  String oauth2AuthorizedNotRegistered;
-  String oauth2ChildRegistrationNotAllowed;
-  String oauth2ChildRegistrationNotAllowedComplete;
-  String oauth2CompleteRegistration;
-  String oauth2Device;
-  String oauth2DeviceComplete;
-  String oauth2Error;
-  String oauth2Logout;
-  String oauth2Passwordless;
-  String oauth2Register;
-  String oauth2StartIdPLink;
-  String oauth2TwoFactor;
-  String oauth2TwoFactorEnable;
-  String oauth2TwoFactorEnableComplete;
-  String oauth2TwoFactorMethods;
-  String oauth2Wait;
-  String oauth2WebAuthn;
-  String oauth2WebAuthnReauth;
-  String oauth2WebAuthnReauthEnable;
-  String passwordChange;
-  String passwordComplete;
-  String passwordForgot;
-  String passwordSent;
-  String registrationComplete;
-  String registrationSend;
-  String registrationSent;
-  String registrationVerificationRequired;
-  String registrationVerify;
-  String samlv2Logout;
-  String unauthorized;
+  String? accountEdit;
+  String? accountIndex;
+  String? accountTwoFactorDisable;
+  String? accountTwoFactorEnable;
+  String? accountTwoFactorIndex;
+  String? accountWebAuthnAdd;
+  String? accountWebAuthnDelete;
+  String? accountWebAuthnIndex;
+  String? emailComplete;
+  String? emailSend;
+  String? emailSent;
+  String? emailVerificationRequired;
+  String? emailVerify;
+  String? helpers;
+  String? index;
+  String? oauth2Authorize;
+  String? oauth2AuthorizedNotRegistered;
+  String? oauth2ChildRegistrationNotAllowed;
+  String? oauth2ChildRegistrationNotAllowedComplete;
+  String? oauth2CompleteRegistration;
+  String? oauth2Device;
+  String? oauth2DeviceComplete;
+  String? oauth2Error;
+  String? oauth2Logout;
+  String? oauth2Passwordless;
+  String? oauth2Register;
+  String? oauth2StartIdPLink;
+  String? oauth2TwoFactor;
+  String? oauth2TwoFactorEnable;
+  String? oauth2TwoFactorEnableComplete;
+  String? oauth2TwoFactorMethods;
+  String? oauth2Wait;
+  String? oauth2WebAuthn;
+  String? oauth2WebAuthnReauth;
+  String? oauth2WebAuthnReauthEnable;
+  String? passwordChange;
+  String? passwordComplete;
+  String? passwordForgot;
+  String? passwordSent;
+  String? registrationComplete;
+  String? registrationSend;
+  String? registrationSent;
+  String? registrationVerificationRequired;
+  String? registrationVerify;
+  String? samlv2Logout;
+  String? unauthorized;
 
   Templates(
       {this.accountEdit,
@@ -7362,42 +7475,42 @@ class Templates {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class Tenant {
-  TenantAccessControlConfiguration accessControlConfiguration;
-  TenantCaptchaConfiguration captchaConfiguration;
-  bool configured;
-  List<ConnectorPolicy> connectorPolicies;
-  Map<String, dynamic> data;
-  EmailConfiguration emailConfiguration;
-  EventConfiguration eventConfiguration;
-  ExternalIdentifierConfiguration externalIdentifierConfiguration;
-  FailedAuthenticationConfiguration failedAuthenticationConfiguration;
-  FamilyConfiguration familyConfiguration;
-  TenantFormConfiguration formConfiguration;
-  num httpSessionMaxInactiveInterval;
-  String id;
-  num insertInstant;
-  String issuer;
-  JWTConfiguration jwtConfiguration;
-  TenantLambdaConfiguration lambdaConfiguration;
-  num lastUpdateInstant;
-  TenantLoginConfiguration loginConfiguration;
-  String logoutURL;
-  MaximumPasswordAge maximumPasswordAge;
-  MinimumPasswordAge minimumPasswordAge;
-  TenantMultiFactorConfiguration multiFactorConfiguration;
-  String name;
-  TenantOAuth2Configuration oauthConfiguration;
-  PasswordEncryptionConfiguration passwordEncryptionConfiguration;
-  PasswordValidationRules passwordValidationRules;
-  TenantRateLimitConfiguration rateLimitConfiguration;
-  TenantRegistrationConfiguration registrationConfiguration;
-  TenantSCIMServerConfiguration scimServerConfiguration;
-  TenantSSOConfiguration ssoConfiguration;
-  ObjectState state;
-  String themeId;
-  TenantUserDeletePolicy userDeletePolicy;
-  TenantUsernameConfiguration usernameConfiguration;
-  TenantWebAuthnConfiguration webAuthnConfiguration;
+  TenantAccessControlConfiguration? accessControlConfiguration;
+  TenantCaptchaConfiguration? captchaConfiguration;
+  bool? configured;
+  List<ConnectorPolicy>? connectorPolicies;
+  Map<String, dynamic>? data;
+  EmailConfiguration? emailConfiguration;
+  EventConfiguration? eventConfiguration;
+  ExternalIdentifierConfiguration? externalIdentifierConfiguration;
+  FailedAuthenticationConfiguration? failedAuthenticationConfiguration;
+  FamilyConfiguration? familyConfiguration;
+  TenantFormConfiguration? formConfiguration;
+  num? httpSessionMaxInactiveInterval;
+  String? id;
+  num? insertInstant;
+  String? issuer;
+  JWTConfiguration? jwtConfiguration;
+  TenantLambdaConfiguration? lambdaConfiguration;
+  num? lastUpdateInstant;
+  TenantLoginConfiguration? loginConfiguration;
+  String? logoutURL;
+  MaximumPasswordAge? maximumPasswordAge;
+  MinimumPasswordAge? minimumPasswordAge;
+  TenantMultiFactorConfiguration? multiFactorConfiguration;
+  String? name;
+  TenantOAuth2Configuration? oauthConfiguration;
+  PasswordEncryptionConfiguration? passwordEncryptionConfiguration;
+  PasswordValidationRules? passwordValidationRules;
+  TenantRateLimitConfiguration? rateLimitConfiguration;
+  TenantRegistrationConfiguration? registrationConfiguration;
+  TenantSCIMServerConfiguration? scimServerConfiguration;
+  TenantSSOConfiguration? ssoConfiguration;
+  ObjectState? state;
+  String? themeId;
+  TenantUserDeletePolicy? userDeletePolicy;
+  TenantUsernameConfiguration? usernameConfiguration;
+  TenantWebAuthnConfiguration? webAuthnConfiguration;
 
   Tenant(
       {this.accessControlConfiguration,
@@ -7454,7 +7567,7 @@ class Tenantable {
 /// @author Brett Guy
 @JsonSerializable()
 class TenantAccessControlConfiguration {
-  String uiIPAccessControlListId;
+  String? uiIPAccessControlListId;
 
   TenantAccessControlConfiguration({this.uiIPAccessControlListId});
 
@@ -7468,10 +7581,10 @@ class TenantAccessControlConfiguration {
 /// @author Brett Pontarelli
 @JsonSerializable()
 class TenantCaptchaConfiguration extends Enableable {
-  CaptchaMethod captchaMethod;
-  String secretKey;
-  String siteKey;
-  num threshold;
+  CaptchaMethod? captchaMethod;
+  String? secretKey;
+  String? siteKey;
+  num? threshold;
 
   TenantCaptchaConfiguration(
       {this.captchaMethod, this.secretKey, this.siteKey, this.threshold});
@@ -7486,7 +7599,7 @@ class TenantCaptchaConfiguration extends Enableable {
 /// @author Brian Pontarelli
 @JsonSerializable()
 class TenantDeleteRequest extends BaseEventRequest {
-  bool async;
+  bool? async;
 
   TenantDeleteRequest({this.async});
 
@@ -7498,7 +7611,7 @@ class TenantDeleteRequest extends BaseEventRequest {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class TenantFormConfiguration {
-  String adminUserFormId;
+  String? adminUserFormId;
 
   TenantFormConfiguration({this.adminUserFormId});
 
@@ -7510,12 +7623,12 @@ class TenantFormConfiguration {
 /// @author Rob Davis
 @JsonSerializable()
 class TenantLambdaConfiguration {
-  String scimEnterpriseUserRequestConverterId;
-  String scimEnterpriseUserResponseConverterId;
-  String scimGroupRequestConverterId;
-  String scimGroupResponseConverterId;
-  String scimUserRequestConverterId;
-  String scimUserResponseConverterId;
+  String? scimEnterpriseUserRequestConverterId;
+  String? scimEnterpriseUserResponseConverterId;
+  String? scimGroupRequestConverterId;
+  String? scimGroupResponseConverterId;
+  String? scimUserRequestConverterId;
+  String? scimUserResponseConverterId;
 
   TenantLambdaConfiguration(
       {this.scimEnterpriseUserRequestConverterId,
@@ -7533,7 +7646,7 @@ class TenantLambdaConfiguration {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class TenantLoginConfiguration {
-  bool requireAuthentication;
+  bool? requireAuthentication;
 
   TenantLoginConfiguration({this.requireAuthentication});
 
@@ -7545,10 +7658,10 @@ class TenantLoginConfiguration {
 /// @author Mikey Sleevi
 @JsonSerializable()
 class TenantMultiFactorConfiguration {
-  MultiFactorAuthenticatorMethod authenticator;
-  MultiFactorEmailMethod email;
-  MultiFactorLoginPolicy loginPolicy;
-  MultiFactorSMSMethod sms;
+  MultiFactorAuthenticatorMethod? authenticator;
+  MultiFactorEmailMethod? email;
+  MultiFactorLoginPolicy? loginPolicy;
+  MultiFactorSMSMethod? sms;
 
   TenantMultiFactorConfiguration(
       {this.authenticator, this.email, this.loginPolicy, this.sms});
@@ -7560,7 +7673,7 @@ class TenantMultiFactorConfiguration {
 
 @JsonSerializable()
 class TenantOAuth2Configuration {
-  String clientCredentialsAccessTokenPopulateLambdaId;
+  String? clientCredentialsAccessTokenPopulateLambdaId;
 
   TenantOAuth2Configuration(
       {this.clientCredentialsAccessTokenPopulateLambdaId});
@@ -7573,12 +7686,12 @@ class TenantOAuth2Configuration {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class TenantRateLimitConfiguration {
-  RateLimitedRequestConfiguration failedLogin;
-  RateLimitedRequestConfiguration forgotPassword;
-  RateLimitedRequestConfiguration sendEmailVerification;
-  RateLimitedRequestConfiguration sendPasswordless;
-  RateLimitedRequestConfiguration sendRegistrationVerification;
-  RateLimitedRequestConfiguration sendTwoFactor;
+  RateLimitedRequestConfiguration? failedLogin;
+  RateLimitedRequestConfiguration? forgotPassword;
+  RateLimitedRequestConfiguration? sendEmailVerification;
+  RateLimitedRequestConfiguration? sendPasswordless;
+  RateLimitedRequestConfiguration? sendRegistrationVerification;
+  RateLimitedRequestConfiguration? sendTwoFactor;
 
   TenantRateLimitConfiguration(
       {this.failedLogin,
@@ -7596,7 +7709,7 @@ class TenantRateLimitConfiguration {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class TenantRegistrationConfiguration {
-  Set<String> blockedDomains;
+  Set<String>? blockedDomains;
 
   TenantRegistrationConfiguration({this.blockedDomains});
 
@@ -7609,9 +7722,9 @@ class TenantRegistrationConfiguration {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class TenantRequest extends BaseEventRequest {
-  String sourceTenantId;
-  Tenant tenant;
-  List<String> webhookIds;
+  String? sourceTenantId;
+  Tenant? tenant;
+  List<String>? webhookIds;
 
   TenantRequest({this.sourceTenantId, this.tenant, this.webhookIds});
 
@@ -7623,8 +7736,8 @@ class TenantRequest extends BaseEventRequest {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class TenantResponse {
-  Tenant tenant;
-  List<Tenant> tenants;
+  Tenant? tenant;
+  List<Tenant>? tenants;
 
   TenantResponse({this.tenant, this.tenants});
 
@@ -7636,9 +7749,9 @@ class TenantResponse {
 /// @author Rob Davis
 @JsonSerializable()
 class TenantSCIMServerConfiguration extends Enableable {
-  String clientEntityTypeId;
-  Map<String, dynamic> schemas;
-  String serverEntityTypeId;
+  String? clientEntityTypeId;
+  Map<String, dynamic>? schemas;
+  String? serverEntityTypeId;
 
   TenantSCIMServerConfiguration(
       {this.clientEntityTypeId, this.schemas, this.serverEntityTypeId});
@@ -7651,7 +7764,7 @@ class TenantSCIMServerConfiguration extends Enableable {
 /// @author Brett Pontarelli
 @JsonSerializable()
 class TenantSSOConfiguration {
-  num deviceTrustTimeToLiveInSeconds;
+  num? deviceTrustTimeToLiveInSeconds;
 
   TenantSSOConfiguration({this.deviceTrustTimeToLiveInSeconds});
 
@@ -7663,8 +7776,8 @@ class TenantSSOConfiguration {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class TenantUnverifiedConfiguration {
-  UnverifiedBehavior email;
-  RegistrationUnverifiedOptions whenGated;
+  UnverifiedBehavior? email;
+  RegistrationUnverifiedOptions? whenGated;
 
   TenantUnverifiedConfiguration({this.email, this.whenGated});
 
@@ -7678,7 +7791,7 @@ class TenantUnverifiedConfiguration {
 /// @author Trevor Smith
 @JsonSerializable()
 class TenantUserDeletePolicy {
-  TimeBasedDeletePolicy unverified;
+  TimeBasedDeletePolicy? unverified;
 
   TenantUserDeletePolicy({this.unverified});
 
@@ -7690,7 +7803,7 @@ class TenantUserDeletePolicy {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class TenantUsernameConfiguration {
-  UniqueUsernameConfiguration unique;
+  UniqueUsernameConfiguration? unique;
 
   TenantUsernameConfiguration({this.unique});
 
@@ -7704,11 +7817,11 @@ class TenantUsernameConfiguration {
 /// @author Spencer Witt
 @JsonSerializable()
 class TenantWebAuthnConfiguration extends Enableable {
-  TenantWebAuthnWorkflowConfiguration bootstrapWorkflow;
-  bool debug;
-  TenantWebAuthnWorkflowConfiguration reauthenticationWorkflow;
-  String relyingPartyId;
-  String relyingPartyName;
+  TenantWebAuthnWorkflowConfiguration? bootstrapWorkflow;
+  bool? debug;
+  TenantWebAuthnWorkflowConfiguration? reauthenticationWorkflow;
+  String? relyingPartyId;
+  String? relyingPartyName;
 
   TenantWebAuthnConfiguration(
       {this.bootstrapWorkflow,
@@ -7725,8 +7838,8 @@ class TenantWebAuthnConfiguration extends Enableable {
 /// @author Spencer Witt
 @JsonSerializable()
 class TenantWebAuthnWorkflowConfiguration extends Enableable {
-  AuthenticatorAttachmentPreference authenticatorAttachmentPreference;
-  UserVerificationRequirement userVerificationRequirement;
+  AuthenticatorAttachmentPreference? authenticatorAttachmentPreference;
+  UserVerificationRequirement? userVerificationRequirement;
 
   TenantWebAuthnWorkflowConfiguration(
       {this.authenticatorAttachmentPreference,
@@ -7742,7 +7855,7 @@ class TenantWebAuthnWorkflowConfiguration extends Enableable {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class TestEvent extends BaseEvent {
-  String message;
+  String? message;
 
   TestEvent({this.message});
 
@@ -7754,15 +7867,15 @@ class TestEvent extends BaseEvent {
 /// @author Trevor Smith
 @JsonSerializable()
 class Theme {
-  Map<String, dynamic> data;
-  String defaultMessages;
-  String id;
-  num insertInstant;
-  num lastUpdateInstant;
-  Map<String, String> localizedMessages;
-  String name;
-  String stylesheet;
-  Templates templates;
+  Map<String, dynamic>? data;
+  String? defaultMessages;
+  String? id;
+  num? insertInstant;
+  num? lastUpdateInstant;
+  Map<String, String>? localizedMessages;
+  String? name;
+  String? stylesheet;
+  Templates? templates;
 
   Theme(
       {this.data,
@@ -7784,8 +7897,8 @@ class Theme {
 /// @author Trevor Smith
 @JsonSerializable()
 class ThemeRequest {
-  String sourceThemeId;
-  Theme theme;
+  String? sourceThemeId;
+  Theme? theme;
 
   ThemeRequest({this.sourceThemeId, this.theme});
 
@@ -7799,8 +7912,8 @@ class ThemeRequest {
 /// @author Trevor Smith
 @JsonSerializable()
 class ThemeResponse {
-  Theme theme;
-  List<Theme> themes;
+  Theme? theme;
+  List<Theme>? themes;
 
   ThemeResponse({this.theme, this.themes});
 
@@ -7814,7 +7927,7 @@ class ThemeResponse {
 /// @author Trevor Smith
 @JsonSerializable()
 class TimeBasedDeletePolicy extends Enableable {
-  num numberOfDaysToRetain;
+  num? numberOfDaysToRetain;
 
   TimeBasedDeletePolicy({this.numberOfDaysToRetain});
 
@@ -7841,9 +7954,9 @@ enum TokenType {
 
 @JsonSerializable()
 class Totals {
-  num logins;
-  num registrations;
-  num totalRegistrations;
+  num? logins;
+  num? registrations;
+  num? totalRegistrations;
 
   Totals({this.logins, this.registrations, this.totalRegistrations});
 
@@ -7856,9 +7969,9 @@ class Totals {
 /// @author Brian Pontarelli
 @JsonSerializable()
 class TotalsReportResponse {
-  Map<String, Totals> applicationTotals;
-  num globalRegistrations;
-  num totalGlobalRegistrations;
+  Map<String, Totals>? applicationTotals;
+  num? globalRegistrations;
+  num? totalGlobalRegistrations;
 
   TotalsReportResponse(
       {this.applicationTotals,
@@ -7898,11 +8011,11 @@ enum TransactionType {
 /// @author Brett Guy
 @JsonSerializable()
 class TwilioMessengerConfiguration extends BaseMessengerConfiguration {
-  String accountSID;
-  String authToken;
-  String fromPhoneNumber;
-  String messagingServiceSid;
-  String url;
+  String? accountSID;
+  String? authToken;
+  String? fromPhoneNumber;
+  String? messagingServiceSid;
+  String? url;
 
   TwilioMessengerConfiguration(
       {this.accountSID,
@@ -7920,10 +8033,10 @@ class TwilioMessengerConfiguration extends BaseMessengerConfiguration {
 @JsonSerializable()
 class TwitchApplicationConfiguration
     extends BaseIdentityProviderApplicationConfiguration {
-  String buttonText;
-  String client_id;
-  String client_secret;
-  String scope;
+  String? buttonText;
+  String? client_id;
+  String? client_secret;
+  String? scope;
 
   TwitchApplicationConfiguration(
       {this.buttonText, this.client_id, this.client_secret, this.scope});
@@ -7939,10 +8052,10 @@ class TwitchApplicationConfiguration
 @JsonSerializable()
 class TwitchIdentityProvider
     extends BaseIdentityProvider<TwitchApplicationConfiguration> {
-  String buttonText;
-  String client_id;
-  String client_secret;
-  String scope;
+  String? buttonText;
+  String? client_id;
+  String? client_secret;
+  String? scope;
 
   TwitchIdentityProvider(
       {this.buttonText, this.client_id, this.client_secret, this.scope});
@@ -7956,9 +8069,9 @@ class TwitchIdentityProvider
 @JsonSerializable()
 class TwitterApplicationConfiguration
     extends BaseIdentityProviderApplicationConfiguration {
-  String buttonText;
-  String consumerKey;
-  String consumerSecret;
+  String? buttonText;
+  String? consumerKey;
+  String? consumerSecret;
 
   TwitterApplicationConfiguration(
       {this.buttonText, this.consumerKey, this.consumerSecret});
@@ -7975,9 +8088,9 @@ class TwitterApplicationConfiguration
 @JsonSerializable()
 class TwitterIdentityProvider
     extends BaseIdentityProvider<TwitterApplicationConfiguration> {
-  String buttonText;
-  String consumerKey;
-  String consumerSecret;
+  String? buttonText;
+  String? consumerKey;
+  String? consumerSecret;
 
   TwitterIdentityProvider(
       {this.buttonText, this.consumerKey, this.consumerSecret});
@@ -7990,9 +8103,9 @@ class TwitterIdentityProvider
 /// @author Brian Pontarelli
 @JsonSerializable()
 class TwoFactorDisableRequest extends BaseEventRequest {
-  String applicationId;
-  String code;
-  String methodId;
+  String? applicationId;
+  String? code;
+  String? methodId;
 
   TwoFactorDisableRequest({this.applicationId, this.code, this.methodId});
 
@@ -8004,10 +8117,10 @@ class TwoFactorDisableRequest extends BaseEventRequest {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class TwoFactorEnableDisableSendRequest {
-  String email;
-  String method;
-  String methodId;
-  String mobilePhone;
+  String? email;
+  String? method;
+  String? methodId;
+  String? mobilePhone;
 
   TwoFactorEnableDisableSendRequest(
       {this.email, this.method, this.methodId, this.mobilePhone});
@@ -8022,10 +8135,10 @@ class TwoFactorEnableDisableSendRequest {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class TwoFactorLoginRequest extends BaseLoginRequest {
-  String code;
-  bool trustComputer;
-  String twoFactorId;
-  String userId;
+  String? code;
+  bool? trustComputer;
+  String? twoFactorId;
+  String? userId;
 
   TwoFactorLoginRequest(
       {this.code, this.trustComputer, this.twoFactorId, this.userId});
@@ -8038,13 +8151,13 @@ class TwoFactorLoginRequest extends BaseLoginRequest {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class TwoFactorMethod {
-  AuthenticatorConfiguration authenticator;
-  String email;
-  String id;
-  bool lastUsed;
-  String method;
-  String mobilePhone;
-  String secret;
+  AuthenticatorConfiguration? authenticator;
+  String? email;
+  String? id;
+  bool? lastUsed;
+  String? method;
+  String? mobilePhone;
+  String? secret;
 
   TwoFactorMethod(
       {this.authenticator,
@@ -8063,7 +8176,7 @@ class TwoFactorMethod {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class TwoFactorRecoveryCodeResponse {
-  List<String> recoveryCodes;
+  List<String>? recoveryCodes;
 
   TwoFactorRecoveryCodeResponse({this.recoveryCodes});
 
@@ -8075,15 +8188,15 @@ class TwoFactorRecoveryCodeResponse {
 /// @author Brian Pontarelli
 @JsonSerializable()
 class TwoFactorRequest extends BaseEventRequest {
-  String applicationId;
-  String authenticatorId;
-  String code;
-  String email;
-  String method;
-  String mobilePhone;
-  String secret;
-  String secretBase32Encoded;
-  String twoFactorId;
+  String? applicationId;
+  String? authenticatorId;
+  String? code;
+  String? email;
+  String? method;
+  String? mobilePhone;
+  String? secret;
+  String? secretBase32Encoded;
+  String? twoFactorId;
 
   TwoFactorRequest(
       {this.applicationId,
@@ -8104,8 +8217,8 @@ class TwoFactorRequest extends BaseEventRequest {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class TwoFactorResponse {
-  String code;
-  List<String> recoveryCodes;
+  String? code;
+  List<String>? recoveryCodes;
 
   TwoFactorResponse({this.code, this.recoveryCodes});
 
@@ -8117,11 +8230,11 @@ class TwoFactorResponse {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class TwoFactorSendRequest {
-  String email;
-  String method;
-  String methodId;
-  String mobilePhone;
-  String userId;
+  String? email;
+  String? method;
+  String? methodId;
+  String? mobilePhone;
+  String? userId;
 
   TwoFactorSendRequest(
       {this.email, this.method, this.methodId, this.mobilePhone, this.userId});
@@ -8134,12 +8247,12 @@ class TwoFactorSendRequest {
 /// @author Brett Guy
 @JsonSerializable()
 class TwoFactorStartRequest {
-  String applicationId;
-  String code;
-  String loginId;
-  Map<String, dynamic> state;
-  String trustChallenge;
-  String userId;
+  String? applicationId;
+  String? code;
+  String? loginId;
+  Map<String, dynamic>? state;
+  String? trustChallenge;
+  String? userId;
 
   TwoFactorStartRequest(
       {this.applicationId,
@@ -8157,9 +8270,9 @@ class TwoFactorStartRequest {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class TwoFactorStartResponse {
-  String code;
-  List<TwoFactorMethod> methods;
-  String twoFactorId;
+  String? code;
+  List<TwoFactorMethod>? methods;
+  String? twoFactorId;
 
   TwoFactorStartResponse({this.code, this.methods, this.twoFactorId});
 
@@ -8171,8 +8284,8 @@ class TwoFactorStartResponse {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class TwoFactorStatusResponse {
-  List<TwoFactorTrust> trusts;
-  String twoFactorTrustId;
+  List<TwoFactorTrust>? trusts;
+  String? twoFactorTrustId;
 
   TwoFactorStatusResponse({this.trusts, this.twoFactorTrustId});
 
@@ -8183,9 +8296,9 @@ class TwoFactorStatusResponse {
 
 @JsonSerializable()
 class TwoFactorTrust {
-  String applicationId;
-  num expiration;
-  num startInstant;
+  String? applicationId;
+  num? expiration;
+  num? startInstant;
 
   TwoFactorTrust({this.applicationId, this.expiration, this.startInstant});
 
@@ -8196,9 +8309,9 @@ class TwoFactorTrust {
 
 @JsonSerializable()
 class UIConfiguration {
-  String headerColor;
-  String logoURL;
-  String menuFontColor;
+  String? headerColor;
+  String? logoURL;
+  String? menuFontColor;
 
   UIConfiguration({this.headerColor, this.logoURL, this.menuFontColor});
 
@@ -8209,9 +8322,9 @@ class UIConfiguration {
 
 @JsonSerializable()
 class UniqueUsernameConfiguration extends Enableable {
-  num numberOfDigits;
-  char separator;
-  UniqueUsernameStrategy strategy;
+  num? numberOfDigits;
+  String? separator;
+  UniqueUsernameStrategy? strategy;
 
   UniqueUsernameConfiguration(
       {this.numberOfDigits, this.separator, this.strategy});
@@ -8242,27 +8355,27 @@ enum UnverifiedBehavior {
 /// @author Seth Musselman
 @JsonSerializable()
 class User extends SecureIdentity {
-  bool active;
-  String birthDate;
-  String cleanSpeakId;
-  Map<String, dynamic> data;
-  String email;
-  num expiry;
-  String firstName;
-  String fullName;
-  String imageUrl;
-  num insertInstant;
-  String lastName;
-  num lastUpdateInstant;
-  List<GroupMember> memberships;
-  String middleName;
-  String mobilePhone;
-  String parentEmail;
-  List<String> preferredLanguages;
-  List<UserRegistration> registrations;
-  String tenantId;
-  String timezone;
-  UserTwoFactorConfiguration twoFactor;
+  bool? active;
+  String? birthDate;
+  String? cleanSpeakId;
+  Map<String, dynamic>? data;
+  String? email;
+  num? expiry;
+  String? firstName;
+  String? fullName;
+  String? imageUrl;
+  num? insertInstant;
+  String? lastName;
+  num? lastUpdateInstant;
+  List<GroupMember>? memberships;
+  String? middleName;
+  String? mobilePhone;
+  String? parentEmail;
+  List<String>? preferredLanguages;
+  List<UserRegistration>? registrations;
+  String? tenantId;
+  String? timezone;
+  UserTwoFactorConfiguration? twoFactor;
 
   User(
       {this.active,
@@ -8296,24 +8409,24 @@ class User extends SecureIdentity {
 /// @author Brian Pontarelli
 @JsonSerializable()
 class UserAction {
-  bool active;
-  String cancelEmailTemplateId;
-  String endEmailTemplateId;
-  String id;
-  bool includeEmailInEventJSON;
-  num insertInstant;
-  num lastUpdateInstant;
-  Map<String, String> localizedNames;
-  String modifyEmailTemplateId;
-  String name;
-  List<UserActionOption> options;
-  bool preventLogin;
-  bool sendEndEvent;
-  String startEmailTemplateId;
-  bool temporal;
-  TransactionType transactionType;
-  bool userEmailingEnabled;
-  bool userNotificationsEnabled;
+  bool? active;
+  String? cancelEmailTemplateId;
+  String? endEmailTemplateId;
+  String? id;
+  bool? includeEmailInEventJSON;
+  num? insertInstant;
+  num? lastUpdateInstant;
+  Map<String, String>? localizedNames;
+  String? modifyEmailTemplateId;
+  String? name;
+  List<UserActionOption>? options;
+  bool? preventLogin;
+  bool? sendEndEvent;
+  String? startEmailTemplateId;
+  bool? temporal;
+  TransactionType? transactionType;
+  bool? userEmailingEnabled;
+  bool? userNotificationsEnabled;
 
   UserAction(
       {this.active,
@@ -8345,24 +8458,24 @@ class UserAction {
 /// @author Brian Pontarelli
 @JsonSerializable()
 class UserActionEvent extends BaseEvent {
-  String action;
-  String actioneeUserId;
-  String actionerUserId;
-  String actionId;
-  List<String> applicationIds;
-  String comment;
-  Email email;
-  bool emailedUser;
-  num expiry;
-  String localizedAction;
-  String localizedDuration;
-  String localizedOption;
-  String localizedReason;
-  bool notifyUser;
-  String option;
-  UserActionPhase phase;
-  String reason;
-  String reasonCode;
+  String? action;
+  String? actioneeUserId;
+  String? actionerUserId;
+  String? actionId;
+  List<String>? applicationIds;
+  String? comment;
+  Email? email;
+  bool? emailedUser;
+  num? expiry;
+  String? localizedAction;
+  String? localizedDuration;
+  String? localizedOption;
+  String? localizedReason;
+  bool? notifyUser;
+  String? option;
+  UserActionPhase? phase;
+  String? reason;
+  String? reasonCode;
 
   UserActionEvent(
       {this.action,
@@ -8394,25 +8507,25 @@ class UserActionEvent extends BaseEvent {
 /// @author Brian Pontarelli
 @JsonSerializable()
 class UserActionLog {
-  String actioneeUserId;
-  String actionerUserId;
-  List<String> applicationIds;
-  String comment;
-  bool emailUserOnEnd;
-  bool endEventSent;
-  num expiry;
-  LogHistory history;
-  String id;
-  num insertInstant;
-  String localizedName;
-  String localizedOption;
-  String localizedReason;
-  String name;
-  bool notifyUserOnEnd;
-  String option;
-  String reason;
-  String reasonCode;
-  String userActionId;
+  String? actioneeUserId;
+  String? actionerUserId;
+  List<String>? applicationIds;
+  String? comment;
+  bool? emailUserOnEnd;
+  bool? endEventSent;
+  num? expiry;
+  LogHistory? history;
+  String? id;
+  num? insertInstant;
+  String? localizedName;
+  String? localizedOption;
+  String? localizedReason;
+  String? name;
+  bool? notifyUserOnEnd;
+  String? option;
+  String? reason;
+  String? reasonCode;
+  String? userActionId;
 
   UserActionLog(
       {this.actioneeUserId,
@@ -8445,8 +8558,8 @@ class UserActionLog {
 /// @author Brian Pontarelli
 @JsonSerializable()
 class UserActionOption {
-  Map<String, String> localizedNames;
-  String name;
+  Map<String, String>? localizedNames;
+  String? name;
 
   UserActionOption({this.localizedNames, this.name});
 
@@ -8474,12 +8587,12 @@ enum UserActionPhase {
 /// @author Brian Pontarelli
 @JsonSerializable()
 class UserActionReason {
-  String code;
-  String id;
-  num insertInstant;
-  num lastUpdateInstant;
-  Map<String, String> localizedTexts;
-  String text;
+  String? code;
+  String? id;
+  num? insertInstant;
+  num? lastUpdateInstant;
+  Map<String, String>? localizedTexts;
+  String? text;
 
   UserActionReason(
       {this.code,
@@ -8499,7 +8612,7 @@ class UserActionReason {
 /// @author Brian Pontarelli
 @JsonSerializable()
 class UserActionReasonRequest {
-  UserActionReason userActionReason;
+  UserActionReason? userActionReason;
 
   UserActionReasonRequest({this.userActionReason});
 
@@ -8513,8 +8626,8 @@ class UserActionReasonRequest {
 /// @author Brian Pontarelli
 @JsonSerializable()
 class UserActionReasonResponse {
-  UserActionReason userActionReason;
-  List<UserActionReason> userActionReasons;
+  UserActionReason? userActionReason;
+  List<UserActionReason>? userActionReasons;
 
   UserActionReasonResponse({this.userActionReason, this.userActionReasons});
 
@@ -8528,7 +8641,7 @@ class UserActionReasonResponse {
 /// @author Brian Pontarelli
 @JsonSerializable()
 class UserActionRequest {
-  UserAction userAction;
+  UserAction? userAction;
 
   UserActionRequest({this.userAction});
 
@@ -8542,8 +8655,8 @@ class UserActionRequest {
 /// @author Brian Pontarelli
 @JsonSerializable()
 class UserActionResponse {
-  UserAction userAction;
-  List<UserAction> userActions;
+  UserAction? userAction;
+  List<UserAction>? userActions;
 
   UserActionResponse({this.userAction, this.userActions});
 
@@ -8557,7 +8670,7 @@ class UserActionResponse {
 /// @author Brian Pontarelli
 @JsonSerializable()
 class UserBulkCreateEvent extends BaseEvent {
-  List<User> users;
+  List<User>? users;
 
   UserBulkCreateEvent({this.users});
 
@@ -8571,11 +8684,11 @@ class UserBulkCreateEvent extends BaseEvent {
 /// @author Brian Pontarelli
 @JsonSerializable()
 class UserComment {
-  String comment;
-  String commenterId;
-  String id;
-  num insertInstant;
-  String userId;
+  String? comment;
+  String? commenterId;
+  String? id;
+  num? insertInstant;
+  String? userId;
 
   UserComment(
       {this.comment,
@@ -8592,7 +8705,7 @@ class UserComment {
 /// @author Seth Musselman
 @JsonSerializable()
 class UserCommentRequest {
-  UserComment userComment;
+  UserComment? userComment;
 
   UserCommentRequest({this.userComment});
 
@@ -8606,8 +8719,8 @@ class UserCommentRequest {
 /// @author Seth Musselman
 @JsonSerializable()
 class UserCommentResponse {
-  UserComment userComment;
-  List<UserComment> userComments;
+  UserComment? userComment;
+  List<UserComment>? userComments;
 
   UserCommentResponse({this.userComment, this.userComments});
 
@@ -8621,16 +8734,16 @@ class UserCommentResponse {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class UserConsent {
-  Consent consent;
-  String consentId;
-  Map<String, dynamic> data;
-  String giverUserId;
-  String id;
-  num insertInstant;
-  num lastUpdateInstant;
-  ConsentStatus status;
-  String userId;
-  List<String> values;
+  Consent? consent;
+  String? consentId;
+  Map<String, dynamic>? data;
+  String? giverUserId;
+  String? id;
+  num? insertInstant;
+  num? lastUpdateInstant;
+  ConsentStatus? status;
+  String? userId;
+  List<String>? values;
 
   UserConsent(
       {this.consent,
@@ -8654,7 +8767,7 @@ class UserConsent {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class UserConsentRequest {
-  UserConsent userConsent;
+  UserConsent? userConsent;
 
   UserConsentRequest({this.userConsent});
 
@@ -8668,8 +8781,8 @@ class UserConsentRequest {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class UserConsentResponse {
-  UserConsent userConsent;
-  List<UserConsent> userConsents;
+  UserConsent? userConsent;
+  List<UserConsent>? userConsents;
 
   UserConsentResponse({this.userConsent, this.userConsents});
 
@@ -8685,7 +8798,7 @@ class UserConsentResponse {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class UserCreateCompleteEvent extends BaseEvent {
-  User user;
+  User? user;
 
   UserCreateCompleteEvent({this.user});
 
@@ -8699,7 +8812,7 @@ class UserCreateCompleteEvent extends BaseEvent {
 /// @author Brian Pontarelli
 @JsonSerializable()
 class UserCreateEvent extends BaseEvent {
-  User user;
+  User? user;
 
   UserCreateEvent({this.user});
 
@@ -8713,7 +8826,7 @@ class UserCreateEvent extends BaseEvent {
 /// @author Brian Pontarelli
 @JsonSerializable()
 class UserDeactivateEvent extends BaseEvent {
-  User user;
+  User? user;
 
   UserDeactivateEvent({this.user});
 
@@ -8730,7 +8843,7 @@ class UserDeactivateEvent extends BaseEvent {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class UserDeleteCompleteEvent extends BaseEvent {
-  User user;
+  User? user;
 
   UserDeleteCompleteEvent({this.user});
 
@@ -8745,7 +8858,7 @@ class UserDeleteCompleteEvent extends BaseEvent {
 /// @author Brian Pontarelli
 @JsonSerializable()
 class UserDeleteEvent extends BaseEvent {
-  User user;
+  User? user;
 
   UserDeleteEvent({this.user});
 
@@ -8759,11 +8872,11 @@ class UserDeleteEvent extends BaseEvent {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class UserDeleteRequest extends BaseEventRequest {
-  bool dryRun;
-  bool hardDelete;
-  String query;
-  String queryString;
-  List<String> userIds;
+  bool? dryRun;
+  bool? hardDelete;
+  String? query;
+  String? queryString;
+  List<String>? userIds;
 
   UserDeleteRequest(
       {this.dryRun,
@@ -8782,10 +8895,10 @@ class UserDeleteRequest extends BaseEventRequest {
 /// @author Trevor Smith
 @JsonSerializable()
 class UserDeleteResponse {
-  bool dryRun;
-  bool hardDelete;
-  num total;
-  List<String> userIds;
+  bool? dryRun;
+  bool? hardDelete;
+  num? total;
+  List<String>? userIds;
 
   UserDeleteResponse({this.dryRun, this.hardDelete, this.total, this.userIds});
 
@@ -8799,7 +8912,7 @@ class UserDeleteResponse {
 /// @author Brian Pontarelli
 @JsonSerializable()
 class UserDeleteSingleRequest extends BaseEventRequest {
-  bool hardDelete;
+  bool? hardDelete;
 
   UserDeleteSingleRequest({this.hardDelete});
 
@@ -8813,8 +8926,8 @@ class UserDeleteSingleRequest extends BaseEventRequest {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class UserEmailUpdateEvent extends BaseEvent {
-  String previousEmail;
-  User user;
+  String? previousEmail;
+  User? user;
 
   UserEmailUpdateEvent({this.previousEmail, this.user});
 
@@ -8828,7 +8941,7 @@ class UserEmailUpdateEvent extends BaseEvent {
 /// @author Trevor Smith
 @JsonSerializable()
 class UserEmailVerifiedEvent extends BaseEvent {
-  User user;
+  User? user;
 
   UserEmailVerifiedEvent({this.user});
 
@@ -8842,8 +8955,8 @@ class UserEmailVerifiedEvent extends BaseEvent {
 /// @author Rob Davis
 @JsonSerializable()
 class UserIdentityProviderLinkEvent extends BaseEvent {
-  IdentityProviderLink identityProviderLink;
-  User user;
+  IdentityProviderLink? identityProviderLink;
+  User? user;
 
   UserIdentityProviderLinkEvent({this.identityProviderLink, this.user});
 
@@ -8857,8 +8970,8 @@ class UserIdentityProviderLinkEvent extends BaseEvent {
 /// @author Rob Davis
 @JsonSerializable()
 class UserIdentityProviderUnlinkEvent extends BaseEvent {
-  IdentityProviderLink identityProviderLink;
-  User user;
+  IdentityProviderLink? identityProviderLink;
+  User? user;
 
   UserIdentityProviderUnlinkEvent({this.identityProviderLink, this.user});
 
@@ -8873,10 +8986,10 @@ class UserIdentityProviderUnlinkEvent extends BaseEvent {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class UserLoginFailedEvent extends BaseEvent {
-  String applicationId;
-  String authenticationType;
-  String ipAddress;
-  User user;
+  String? applicationId;
+  String? authenticationType;
+  String? ipAddress;
+  User? user;
 
   UserLoginFailedEvent(
       {this.applicationId, this.authenticationType, this.ipAddress, this.user});
@@ -8891,10 +9004,10 @@ class UserLoginFailedEvent extends BaseEvent {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class UserLoginIdDuplicateOnCreateEvent extends BaseEvent {
-  String duplicateEmail;
-  String duplicateUsername;
-  User existing;
-  User user;
+  String? duplicateEmail;
+  String? duplicateUsername;
+  User? existing;
+  User? user;
 
   UserLoginIdDuplicateOnCreateEvent(
       {this.duplicateEmail, this.duplicateUsername, this.existing, this.user});
@@ -8938,13 +9051,13 @@ class UserLoginNewDeviceEvent extends UserLoginSuccessEvent {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class UserLoginSuccessEvent extends BaseEvent {
-  String applicationId;
-  String authenticationType;
-  String connectorId;
-  String identityProviderId;
-  String identityProviderName;
-  String ipAddress;
-  User user;
+  String? applicationId;
+  String? authenticationType;
+  String? connectorId;
+  String? identityProviderId;
+  String? identityProviderName;
+  String? ipAddress;
+  User? user;
 
   UserLoginSuccessEvent(
       {this.applicationId,
@@ -8965,7 +9078,7 @@ class UserLoginSuccessEvent extends BaseEvent {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class UserLoginSuspiciousEvent extends UserLoginSuccessEvent {
-  Set<AuthenticationThreats> threatsDetected;
+  Set<AuthenticationThreats>? threatsDetected;
 
   UserLoginSuspiciousEvent({this.threatsDetected});
 
@@ -8976,7 +9089,7 @@ class UserLoginSuspiciousEvent extends UserLoginSuccessEvent {
 
 @JsonSerializable()
 class UsernameModeration extends Enableable {
-  String applicationId;
+  String? applicationId;
 
   UsernameModeration({this.applicationId});
 
@@ -8990,7 +9103,7 @@ class UsernameModeration extends Enableable {
 /// @author Matthew Altman
 @JsonSerializable()
 class UserPasswordBreachEvent extends BaseEvent {
-  User user;
+  User? user;
 
   UserPasswordBreachEvent({this.user});
 
@@ -9004,7 +9117,7 @@ class UserPasswordBreachEvent extends BaseEvent {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class UserPasswordResetSendEvent extends BaseEvent {
-  User user;
+  User? user;
 
   UserPasswordResetSendEvent({this.user});
 
@@ -9018,7 +9131,7 @@ class UserPasswordResetSendEvent extends BaseEvent {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class UserPasswordResetStartEvent extends BaseEvent {
-  User user;
+  User? user;
 
   UserPasswordResetStartEvent({this.user});
 
@@ -9032,7 +9145,7 @@ class UserPasswordResetStartEvent extends BaseEvent {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class UserPasswordResetSuccessEvent extends BaseEvent {
-  User user;
+  User? user;
 
   UserPasswordResetSuccessEvent({this.user});
 
@@ -9046,7 +9159,7 @@ class UserPasswordResetSuccessEvent extends BaseEvent {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class UserPasswordUpdateEvent extends BaseEvent {
-  User user;
+  User? user;
 
   UserPasswordUpdateEvent({this.user});
 
@@ -9060,7 +9173,7 @@ class UserPasswordUpdateEvent extends BaseEvent {
 /// @author Brian Pontarelli
 @JsonSerializable()
 class UserReactivateEvent extends BaseEvent {
-  User user;
+  User? user;
 
   UserReactivateEvent({this.user});
 
@@ -9074,21 +9187,21 @@ class UserReactivateEvent extends BaseEvent {
 /// @author Brian Pontarelli
 @JsonSerializable()
 class UserRegistration {
-  String applicationId;
-  String authenticationToken;
-  String cleanSpeakId;
-  Map<String, dynamic> data;
-  String id;
-  num insertInstant;
-  num lastLoginInstant;
-  num lastUpdateInstant;
-  List<String> preferredLanguages;
-  Set<String> roles;
-  String timezone;
-  Map<String, String> tokens;
-  String username;
-  ContentStatus usernameStatus;
-  bool verified;
+  String? applicationId;
+  String? authenticationToken;
+  String? cleanSpeakId;
+  Map<String, dynamic>? data;
+  String? id;
+  num? insertInstant;
+  num? lastLoginInstant;
+  num? lastUpdateInstant;
+  List<String>? preferredLanguages;
+  Set<String>? roles;
+  String? timezone;
+  Map<String, String>? tokens;
+  String? username;
+  ContentStatus? usernameStatus;
+  bool? verified;
 
   UserRegistration(
       {this.applicationId,
@@ -9120,9 +9233,9 @@ class UserRegistration {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class UserRegistrationCreateCompleteEvent extends BaseEvent {
-  String applicationId;
-  UserRegistration registration;
-  User user;
+  String? applicationId;
+  UserRegistration? registration;
+  User? user;
 
   UserRegistrationCreateCompleteEvent(
       {this.applicationId, this.registration, this.user});
@@ -9139,9 +9252,9 @@ class UserRegistrationCreateCompleteEvent extends BaseEvent {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class UserRegistrationCreateEvent extends BaseEvent {
-  String applicationId;
-  UserRegistration registration;
-  User user;
+  String? applicationId;
+  UserRegistration? registration;
+  User? user;
 
   UserRegistrationCreateEvent(
       {this.applicationId, this.registration, this.user});
@@ -9158,9 +9271,9 @@ class UserRegistrationCreateEvent extends BaseEvent {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class UserRegistrationDeleteCompleteEvent extends BaseEvent {
-  String applicationId;
-  UserRegistration registration;
-  User user;
+  String? applicationId;
+  UserRegistration? registration;
+  User? user;
 
   UserRegistrationDeleteCompleteEvent(
       {this.applicationId, this.registration, this.user});
@@ -9177,9 +9290,9 @@ class UserRegistrationDeleteCompleteEvent extends BaseEvent {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class UserRegistrationDeleteEvent extends BaseEvent {
-  String applicationId;
-  UserRegistration registration;
-  User user;
+  String? applicationId;
+  UserRegistration? registration;
+  User? user;
 
   UserRegistrationDeleteEvent(
       {this.applicationId, this.registration, this.user});
@@ -9196,10 +9309,10 @@ class UserRegistrationDeleteEvent extends BaseEvent {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class UserRegistrationUpdateCompleteEvent extends BaseEvent {
-  String applicationId;
-  UserRegistration original;
-  UserRegistration registration;
-  User user;
+  String? applicationId;
+  UserRegistration? original;
+  UserRegistration? registration;
+  User? user;
 
   UserRegistrationUpdateCompleteEvent(
       {this.applicationId, this.original, this.registration, this.user});
@@ -9216,10 +9329,10 @@ class UserRegistrationUpdateCompleteEvent extends BaseEvent {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class UserRegistrationUpdateEvent extends BaseEvent {
-  String applicationId;
-  UserRegistration original;
-  UserRegistration registration;
-  User user;
+  String? applicationId;
+  UserRegistration? original;
+  UserRegistration? registration;
+  User? user;
 
   UserRegistrationUpdateEvent(
       {this.applicationId, this.original, this.registration, this.user});
@@ -9234,9 +9347,9 @@ class UserRegistrationUpdateEvent extends BaseEvent {
 /// @author Trevor Smith
 @JsonSerializable()
 class UserRegistrationVerifiedEvent extends BaseEvent {
-  String applicationId;
-  UserRegistration registration;
-  User user;
+  String? applicationId;
+  UserRegistration? registration;
+  User? user;
 
   UserRegistrationVerifiedEvent(
       {this.applicationId, this.registration, this.user});
@@ -9251,11 +9364,11 @@ class UserRegistrationVerifiedEvent extends BaseEvent {
 /// @author Brian Pontarelli
 @JsonSerializable()
 class UserRequest extends BaseEventRequest {
-  String applicationId;
-  bool disableDomainBlock;
-  bool sendSetPasswordEmail;
-  bool skipVerification;
-  User user;
+  String? applicationId;
+  bool? disableDomainBlock;
+  bool? sendSetPasswordEmail;
+  bool? skipVerification;
+  User? user;
 
   UserRequest(
       {this.applicationId,
@@ -9274,18 +9387,19 @@ class UserRequest extends BaseEventRequest {
 /// @author Brian Pontarelli
 @JsonSerializable()
 class UserResponse {
-  String emailVerificationId;
-  Map<String, String> registrationVerificationIds;
-  String token;
-  num tokenExpirationInstant;
-  User user;
+  String? emailVerificationId;
+  Map<String, String>? registrationVerificationIds;
+  String? token;
+  num? tokenExpirationInstant;
+  User? user;
 
-  UserResponse(
-      {this.emailVerificationId,
-      this.registrationVerificationIds,
-      this.token,
-      this.tokenExpirationInstant,
-      this.user});
+  UserResponse({
+    this.emailVerificationId,
+    this.registrationVerificationIds,
+    this.token,
+    this.tokenExpirationInstant,
+    this.user,
+  });
 
   factory UserResponse.fromJson(Map<String, dynamic> json) =>
       _$UserResponseFromJson(json);
@@ -9319,8 +9433,8 @@ enum UserState {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class UserTwoFactorConfiguration {
-  List<TwoFactorMethod> methods;
-  List<String> recoveryCodes;
+  List<TwoFactorMethod>? methods;
+  List<String>? recoveryCodes;
 
   UserTwoFactorConfiguration({this.methods, this.recoveryCodes});
 
@@ -9334,8 +9448,8 @@ class UserTwoFactorConfiguration {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class UserTwoFactorMethodAddEvent extends BaseEvent {
-  TwoFactorMethod method;
-  User user;
+  TwoFactorMethod? method;
+  User? user;
 
   UserTwoFactorMethodAddEvent({this.method, this.user});
 
@@ -9349,8 +9463,8 @@ class UserTwoFactorMethodAddEvent extends BaseEvent {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class UserTwoFactorMethodRemoveEvent extends BaseEvent {
-  TwoFactorMethod method;
-  User user;
+  TwoFactorMethod? method;
+  User? user;
 
   UserTwoFactorMethodRemoveEvent({this.method, this.user});
 
@@ -9364,8 +9478,8 @@ class UserTwoFactorMethodRemoveEvent extends BaseEvent {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class UserUpdateCompleteEvent extends BaseEvent {
-  User original;
-  User user;
+  User? original;
+  User? user;
 
   UserUpdateCompleteEvent({this.original, this.user});
 
@@ -9379,8 +9493,8 @@ class UserUpdateCompleteEvent extends BaseEvent {
 /// @author Brian Pontarelli
 @JsonSerializable()
 class UserUpdateEvent extends BaseEvent {
-  User original;
-  User user;
+  User? original;
+  User? user;
 
   UserUpdateEvent({this.original, this.user});
 
@@ -9405,7 +9519,7 @@ enum UserVerificationRequirement {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class ValidateResponse {
-  JWT jwt;
+  JWT? jwt;
 
   ValidateResponse({this.jwt});
 
@@ -9425,9 +9539,9 @@ enum VerificationStrategy {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class VerifyEmailRequest extends BaseEventRequest {
-  String oneTimeCode;
-  String userId;
-  String verificationId;
+  String? oneTimeCode;
+  String? userId;
+  String? verificationId;
 
   VerifyEmailRequest({this.oneTimeCode, this.userId, this.verificationId});
 
@@ -9439,8 +9553,8 @@ class VerifyEmailRequest extends BaseEventRequest {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class VerifyEmailResponse {
-  String oneTimeCode;
-  String verificationId;
+  String? oneTimeCode;
+  String? verificationId;
 
   VerifyEmailResponse({this.oneTimeCode, this.verificationId});
 
@@ -9452,8 +9566,8 @@ class VerifyEmailResponse {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class VerifyRegistrationRequest extends BaseEventRequest {
-  String oneTimeCode;
-  String verificationId;
+  String? oneTimeCode;
+  String? verificationId;
 
   VerifyRegistrationRequest({this.oneTimeCode, this.verificationId});
 
@@ -9465,8 +9579,8 @@ class VerifyRegistrationRequest extends BaseEventRequest {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class VerifyRegistrationResponse {
-  String oneTimeCode;
-  String verificationId;
+  String? oneTimeCode;
+  String? verificationId;
 
   VerifyRegistrationResponse({this.oneTimeCode, this.verificationId});
 
@@ -9478,7 +9592,7 @@ class VerifyRegistrationResponse {
 /// @author Daniel DeGroff
 @JsonSerializable()
 class VersionResponse {
-  String version;
+  String? version;
 
   VersionResponse({this.version});
 
@@ -9492,7 +9606,7 @@ class VersionResponse {
 /// @author Spencer Witt
 @JsonSerializable()
 class WebAuthnAssertResponse {
-  WebAuthnCredential credential;
+  WebAuthnCredential? credential;
 
   WebAuthnAssertResponse({this.credential});
 
@@ -9506,10 +9620,10 @@ class WebAuthnAssertResponse {
 /// @author Spencer Witt
 @JsonSerializable()
 class WebAuthnAuthenticatorAuthenticationResponse {
-  String authenticatorData;
-  String clientDataJSON;
-  String signature;
-  String userHandle;
+  String? authenticatorData;
+  String? clientDataJSON;
+  String? signature;
+  String? userHandle;
 
   WebAuthnAuthenticatorAuthenticationResponse(
       {this.authenticatorData,
@@ -9529,8 +9643,8 @@ class WebAuthnAuthenticatorAuthenticationResponse {
 /// @author Spencer Witt
 @JsonSerializable()
 class WebAuthnAuthenticatorRegistrationResponse {
-  String attestationObject;
-  String clientDataJSON;
+  String? attestationObject;
+  String? clientDataJSON;
 
   WebAuthnAuthenticatorRegistrationResponse(
       {this.attestationObject, this.clientDataJSON});
@@ -9547,24 +9661,24 @@ class WebAuthnAuthenticatorRegistrationResponse {
 /// @author Spencer Witt
 @JsonSerializable()
 class WebAuthnCredential {
-  CoseAlgorithmIdentifier algorithm;
-  AttestationType attestationType;
-  bool authenticatorSupportsUserVerification;
-  String credentialId;
-  Map<String, dynamic> data;
-  bool discoverable;
-  String displayName;
-  String id;
-  num insertInstant;
-  num lastUseInstant;
-  String name;
-  String publicKey;
-  String relyingPartyId;
-  num signCount;
-  String tenantId;
-  List<String> transports;
-  String userAgent;
-  String userId;
+  CoseAlgorithmIdentifier? algorithm;
+  AttestationType? attestationType;
+  bool? authenticatorSupportsUserVerification;
+  String? credentialId;
+  Map<String, dynamic>? data;
+  bool? discoverable;
+  String? displayName;
+  String? id;
+  num? insertInstant;
+  num? lastUseInstant;
+  String? name;
+  String? publicKey;
+  String? relyingPartyId;
+  num? signCount;
+  String? tenantId;
+  List<String>? transports;
+  String? userAgent;
+  String? userId;
 
   WebAuthnCredential(
       {this.algorithm,
@@ -9596,8 +9710,8 @@ class WebAuthnCredential {
 /// @author Spencer Witt
 @JsonSerializable()
 class WebAuthnCredentialImportRequest {
-  List<WebAuthnCredential> credentials;
-  bool validateDbConstraints;
+  List<WebAuthnCredential>? credentials;
+  bool? validateDbConstraints;
 
   WebAuthnCredentialImportRequest(
       {this.credentials, this.validateDbConstraints});
@@ -9613,8 +9727,8 @@ class WebAuthnCredentialImportRequest {
 /// @author Spencer Witt
 @JsonSerializable()
 class WebAuthnCredentialResponse {
-  WebAuthnCredential credential;
-  List<WebAuthnCredential> credentials;
+  WebAuthnCredential? credential;
+  List<WebAuthnCredential>? credentials;
 
   WebAuthnCredentialResponse({this.credential, this.credentials});
 
@@ -9628,7 +9742,7 @@ class WebAuthnCredentialResponse {
 /// @author Spencer Witt
 @JsonSerializable()
 class WebAuthnExtensionsClientOutputs {
-  CredentialPropertiesOutput credProps;
+  CredentialPropertiesOutput? credProps;
 
   WebAuthnExtensionsClientOutputs({this.credProps});
 
@@ -9643,10 +9757,10 @@ class WebAuthnExtensionsClientOutputs {
 /// @author Spencer Witt
 @JsonSerializable()
 class WebAuthnLoginRequest extends BaseLoginRequest {
-  WebAuthnPublicKeyAuthenticationRequest credential;
-  String origin;
-  String rpId;
-  String twoFactorTrustId;
+  WebAuthnPublicKeyAuthenticationRequest? credential;
+  String? origin;
+  String? rpId;
+  String? twoFactorTrustId;
 
   WebAuthnLoginRequest(
       {this.credential, this.origin, this.rpId, this.twoFactorTrustId});
@@ -9661,11 +9775,11 @@ class WebAuthnLoginRequest extends BaseLoginRequest {
 /// @author Spencer Witt
 @JsonSerializable()
 class WebAuthnPublicKeyAuthenticationRequest {
-  WebAuthnExtensionsClientOutputs clientExtensionResults;
-  String id;
-  WebAuthnAuthenticatorAuthenticationResponse response;
-  String rpId;
-  String type;
+  WebAuthnExtensionsClientOutputs? clientExtensionResults;
+  String? id;
+  WebAuthnAuthenticatorAuthenticationResponse? response;
+  String? rpId;
+  String? type;
 
   WebAuthnPublicKeyAuthenticationRequest(
       {this.clientExtensionResults,
@@ -9686,12 +9800,12 @@ class WebAuthnPublicKeyAuthenticationRequest {
 /// @author Spencer Witt
 @JsonSerializable()
 class WebAuthnPublicKeyRegistrationRequest {
-  WebAuthnExtensionsClientOutputs clientExtensionResults;
-  String id;
-  WebAuthnAuthenticatorRegistrationResponse response;
-  String rpId;
-  List<String> transports;
-  String type;
+  WebAuthnExtensionsClientOutputs? clientExtensionResults;
+  String? id;
+  WebAuthnAuthenticatorRegistrationResponse? response;
+  String? rpId;
+  List<String>? transports;
+  String? type;
 
   WebAuthnPublicKeyRegistrationRequest(
       {this.clientExtensionResults,
@@ -9713,10 +9827,10 @@ class WebAuthnPublicKeyRegistrationRequest {
 /// @author Spencer Witt
 @JsonSerializable()
 class WebAuthnRegisterCompleteRequest {
-  WebAuthnPublicKeyRegistrationRequest credential;
-  String origin;
-  String rpId;
-  String userId;
+  WebAuthnPublicKeyRegistrationRequest? credential;
+  String? origin;
+  String? rpId;
+  String? userId;
 
   WebAuthnRegisterCompleteRequest(
       {this.credential, this.origin, this.rpId, this.userId});
@@ -9732,7 +9846,7 @@ class WebAuthnRegisterCompleteRequest {
 /// @author Spencer Witt
 @JsonSerializable()
 class WebAuthnRegisterCompleteResponse {
-  WebAuthnCredential credential;
+  WebAuthnCredential? credential;
 
   WebAuthnRegisterCompleteResponse({this.credential});
 
@@ -9748,11 +9862,11 @@ class WebAuthnRegisterCompleteResponse {
 /// @author Spencer Witt
 @JsonSerializable()
 class WebAuthnRegisterStartRequest {
-  String displayName;
-  String name;
-  String userAgent;
-  String userId;
-  WebAuthnWorkflow workflow;
+  String? displayName;
+  String? name;
+  String? userAgent;
+  String? userId;
+  WebAuthnWorkflow? workflow;
 
   WebAuthnRegisterStartRequest(
       {this.displayName,
@@ -9771,7 +9885,7 @@ class WebAuthnRegisterStartRequest {
 /// @author Spencer Witt
 @JsonSerializable()
 class WebAuthnRegisterStartResponse {
-  PublicKeyCredentialCreationOptions options;
+  PublicKeyCredentialCreationOptions? options;
 
   WebAuthnRegisterStartResponse({this.options});
 
@@ -9785,7 +9899,7 @@ class WebAuthnRegisterStartResponse {
 /// @author Spencer Witt
 @JsonSerializable()
 class WebAuthnRegistrationExtensionOptions {
-  bool credProps;
+  bool? credProps;
 
   WebAuthnRegistrationExtensionOptions({this.credProps});
 
@@ -9801,12 +9915,12 @@ class WebAuthnRegistrationExtensionOptions {
 /// @author Spencer Witt
 @JsonSerializable()
 class WebAuthnStartRequest {
-  String applicationId;
-  String credentialId;
-  String loginId;
-  Map<String, dynamic> state;
-  String userId;
-  WebAuthnWorkflow workflow;
+  String? applicationId;
+  String? credentialId;
+  String? loginId;
+  Map<String, dynamic>? state;
+  String? userId;
+  WebAuthnWorkflow? workflow;
 
   WebAuthnStartRequest(
       {this.applicationId,
@@ -9826,7 +9940,7 @@ class WebAuthnStartRequest {
 /// @author Spencer Witt
 @JsonSerializable()
 class WebAuthnStartResponse {
-  PublicKeyCredentialRequestOptions options;
+  PublicKeyCredentialRequestOptions? options;
 
   WebAuthnStartResponse({this.options});
 
@@ -9853,21 +9967,21 @@ enum WebAuthnWorkflow {
 /// @author Brian Pontarelli
 @JsonSerializable()
 class Webhook {
-  num connectTimeout;
-  Map<String, dynamic> data;
-  String description;
-  Map<EventType, bool> eventsEnabled;
-  bool global;
-  Map<String, String> headers;
-  String httpAuthenticationPassword;
-  String httpAuthenticationUsername;
-  String id;
-  num insertInstant;
-  num lastUpdateInstant;
-  num readTimeout;
-  String sslCertificate;
-  List<String> tenantIds;
-  String url;
+  num? connectTimeout;
+  Map<String, dynamic>? data;
+  String? description;
+  Map<EventType, bool>? eventsEnabled;
+  bool? global;
+  Map<String, String>? headers;
+  String? httpAuthenticationPassword;
+  String? httpAuthenticationUsername;
+  String? id;
+  num? insertInstant;
+  num? lastUpdateInstant;
+  num? readTimeout;
+  String? sslCertificate;
+  List<String>? tenantIds;
+  String? url;
 
   Webhook(
       {this.connectTimeout,
@@ -9896,7 +10010,7 @@ class Webhook {
 /// @author Brian Pontarelli
 @JsonSerializable()
 class WebhookRequest {
-  Webhook webhook;
+  Webhook? webhook;
 
   WebhookRequest({this.webhook});
 
@@ -9910,8 +10024,8 @@ class WebhookRequest {
 /// @author Brian Pontarelli
 @JsonSerializable()
 class WebhookResponse {
-  Webhook webhook;
-  List<Webhook> webhooks;
+  Webhook? webhook;
+  List<Webhook>? webhooks;
 
   WebhookResponse({this.webhook, this.webhooks});
 
@@ -9924,10 +10038,10 @@ class WebhookResponse {
 @JsonSerializable()
 class XboxApplicationConfiguration
     extends BaseIdentityProviderApplicationConfiguration {
-  String buttonText;
-  String client_id;
-  String client_secret;
-  String scope;
+  String? buttonText;
+  String? client_id;
+  String? client_secret;
+  String? scope;
 
   XboxApplicationConfiguration(
       {this.buttonText, this.client_id, this.client_secret, this.scope});
@@ -9943,10 +10057,10 @@ class XboxApplicationConfiguration
 @JsonSerializable()
 class XboxIdentityProvider
     extends BaseIdentityProvider<XboxApplicationConfiguration> {
-  String buttonText;
-  String client_id;
-  String client_secret;
-  String scope;
+  String? buttonText;
+  String? client_id;
+  String? client_secret;
+  String? scope;
 
   XboxIdentityProvider(
       {this.buttonText, this.client_id, this.client_secret, this.scope});

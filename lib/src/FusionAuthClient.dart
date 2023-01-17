@@ -14,11 +14,12 @@
 * language governing permissions and limitations under the License.
 */
 
+import 'dart:convert';
 import 'dart:io';
 import 'FusionAuthRESTClient.dart';
 import 'FusionAuthDomain.dart';
 
-typedef RESTClientFactory = FusionAuthRESTClient
+typedef RESTClientFactory = FusionAuthRESTClient<ReturnType, ErrorReturnType>
     Function<ReturnType, ErrorReturnType>(String host, HttpClient httpClient);
 
 FusionAuthRESTClient<ReturnType, ErrorReturnType>
@@ -28,10 +29,10 @@ FusionAuthRESTClient<ReturnType, ErrorReturnType>
 }
 
 class FusionAuthClient {
-  HttpClientCredentials credentials;
+  HttpClientCredentials? credentials;
   String apiKey;
   String host;
-  String tenantId;
+  String? tenantId;
   RESTClientFactory fusionAuthRESTClientFactory =
       DefaultFusionAuthRESTClientFactory;
 
@@ -1754,7 +1755,9 @@ class FusionAuthClient {
         .withFormData(body)
         .withMethod('POST')
         .withResponseHandler(defaultResponseHandlerBuilder(
-            (d) => Map<String, dynamic>.fromJson(d)))
+            (d) => jsonDecode(d) //Map<String, dynamic>.fromJson(d)
+
+            ))
         .go();
   }
 
@@ -1849,12 +1852,12 @@ class FusionAuthClient {
   /// @param {String} refreshToken (Optional) The refresh_token as a request parameter instead of coming in via a cookie.
   ///    If provided this takes precedence over the cookie.
   /// @returns {Promise<ClientResponse<void>>}
-  Future<ClientResponse<void, void>> logout(bool global, String refreshToken) {
+  Future<ClientResponse<void, void>> logout(bool global, String? refreshToken) {
     return _startAnonymous<void, void>()
         .withHeader('Content-Type', 'text/plain')
         .withUri('/api/logout')
         .withParameter('global', global)
-        .withParameter('refreshToken', refreshToken)
+        .withParameter('refreshToken', refreshToken, skipNulls: true)
         .withMethod('POST')
         .go();
   }
@@ -5159,19 +5162,19 @@ class FusionAuthClient {
 
   final HttpClient _httpClient = HttpClient();
 
-  FusionAuthRESTClient _start<RT, ERT>() {
+  FusionAuthRESTClient<RT, ERT> _start<RT, ERT>() {
     return _startAnonymous<RT, ERT>().withAuthorization(apiKey);
   }
 
-  FusionAuthRESTClient _startAnonymous<RT, ERT>() {
+  FusionAuthRESTClient<RT, ERT> _startAnonymous<RT, ERT>() {
     var client = fusionAuthRESTClientFactory<RT, ERT>(host, _httpClient);
 
     if (tenantId != null) {
-      client.withHeader('X-FusionAuth-TenantId', tenantId);
+      client.withHeader('X-FusionAuth-TenantId', tenantId!);
     }
 
     if (credentials != null) {
-      client.withCredentials(credentials);
+      client.withCredentials(credentials!);
     }
 
     return client;
